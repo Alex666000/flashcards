@@ -1,32 +1,41 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button } from '@/shared/ui/button/button'
+import { Button, ButtonVariant } from './button'
 
 const meta = {
   // не обязательный параметр
   argTypes: {
     // prop
     variant: {
-      // настраиваем наши контроли
+      // настраиваем наши контроли - чтобы визуально в интерфейсе сторибука кликать выбирать
       control: { type: 'radio' },
-      options: ['primary', 'secondary', 'tertiary', 'link'],
+      // опции пропа variant
+      options: ButtonVariant,
     },
   },
+  // компонент который покажем
   component: Button,
+  // все истории и контроли видим в одном файле
   tags: ['autodocs'],
-  title: 'Components/Button',
+  // название компонента и где он находится
+  title: 'shared/ui/button',
+  // если satisfies горит красным обнови вебшторм
 } satisfies Meta<typeof Button>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
+// Истории:
 export const Primary: Story = {
+  // пропсы компонента - для более сложных компонент делается через функцию render()
   args: {
     children: 'Primary Button',
     disabled: false,
     variant: 'primary',
   },
 }
+
+Primary.storyName = 'Primary Button'
 
 export const Secondary: Story = {
   args: {
@@ -44,9 +53,10 @@ export const Tertiary: Story = {
 }
 export const Link: Story = {
   args: {
-    children: 'Tertiary Button',
-    disabled: false,
-    variant: 'link',
+    // взяли пропсы Primary - и переопределили 2 пропса со своими значениями
+    ...Primary.args,
+    children: 'Full width Button',
+    fullWidth: true,
   },
 }
 
@@ -58,3 +68,22 @@ export const FullWidth: Story = {
     variant: 'primary',
   },
 }
+
+export const AsLink: Story = {
+  args: {
+    // Тут любой компонент или тэг
+    as: 'a', // ссылка
+    children: 'Link that looks like a button',
+    href: 'https://google.com',
+    variant: 'primary',
+  },
+}
+// export const AsLink: StoryObj<typeof Button<'a'>> = {
+//   args: {
+//     // Тут любой компонент или тэг
+//     as: 'a', // ссылка
+//     children: 'Link that looks like a button',
+//     href: 'https://google.com',
+//     variant: 'primary',
+//   },
+// }
