@@ -1,19 +1,36 @@
+.button {
+    all: unset; // зануляем все стили кнопки дефолтные
+
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 28px;
+
+    &:focus-visible {
+        // когда кнопка выделена добавляем обертку рамку в 2рх
+        outline: 2px solid var(--color-info-700);
+    }
+}
+
 .primary {
-  background-color: red;
+    background-color: red;
 }
 
 .secondary {
-  background-color: green;
+    background-color: green;
 }
 
 .tertiary {
-  background-color: blue;
+    background-color: blue;
 }
 
 .link {
-  background-color: yellow;
+    background-color: yellow;
 }
 
 .fullWidth {
-  width: 100%;
+    width: 100%;
 }

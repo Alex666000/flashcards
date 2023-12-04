@@ -3,7 +3,7 @@ import { Button } from '@/shared/ui/button'
 export function App() {
   return (
     <div>
-      <Button as={'a'} href={'https://google.com'}>
+      <Button as={'button'} variant={'primary'}>
         Hello
       </Button>
     </div>
