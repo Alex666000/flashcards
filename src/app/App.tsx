@@ -1,13 +1,13 @@
-import { Button } from '@/shared/ui/button'
+import Button from '../shared/ui/button/button';
 
 export function App() {
-  return (
-    <div>
-      <Button as={'button'} variant={'primary'}>
-        Hello
-      </Button>
-    </div>
-  )
+    return (
+        <div>
+            <Button as={'button'} fullWidth variant={'secondary'}>
+                Hello
+            </Button>
+        </div>
+    );
 }
 
 /*
