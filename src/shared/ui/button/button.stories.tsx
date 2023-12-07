@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button, ButtonVariant } from './button';
+import { Button, ButtonVariant } from '@/shared/ui/button/button';
 
 const meta = {
     // не обязательный параметр
@@ -81,6 +81,16 @@ export const AsLink: Story = {
         variant: 'primary',
     },
 };
+
+export const PrimaryWithIcon: Story = {
+    args: {
+        children: (
+            <>
+                </>
+        ),
+    },
+};
+
 // export const AsLink: StoryObj<typeof Button<'a'>> = {
 //   args: {
 //     // Тут любой компонент или тэг
