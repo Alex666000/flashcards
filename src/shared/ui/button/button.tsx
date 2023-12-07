@@ -1,4 +1,11 @@
-import { ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef } from 'react';
+import {
+    ComponentPropsWithoutRef,
+    ElementRef,
+    ElementType,
+    ForwardedRef,
+    ReactNode,
+    forwardRef,
+} from 'react';
 
 import { clsx } from 'clsx';
 
@@ -8,12 +15,13 @@ export const ButtonVariant = ['primary', 'secondary', 'tertiary', 'link'] as con
 
 export type ButtonProps<T extends ElementType = 'button'> = {
     as?: T; // Тут любой компонент или тэг
+    children: ReactNode;
     className?: string;
     fullWidth?: boolean;
     variant?: (typeof ButtonVariant)[number];
 } & ComponentPropsWithoutRef<T>;
 
-const Button = <T extends ElementType = 'button'>(
+const ButtonPolymorph = <T extends ElementType = 'button'>(
     props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>,
     ref: ForwardedRef<any>,
 ) => {
@@ -24,7 +32,13 @@ const Button = <T extends ElementType = 'button'>(
     return <Component className={ButtonClassName} ref={ref} {...rest} />;
 };
 
-export default forwardRef(Button);
+// Первый параметр props - потом ref
+export const Button = forwardRef(ButtonPolymorph) as <T extends ElementType = 'button'>(
+    props: ButtonProps<T> &
+        Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>> & {
+            ref?: ForwardedRef<ElementRef<T>>;
+        },
+) => ReturnType<typeof ButtonPolymorph>;
 
 /*
 - as const применяется к массиву строк ['primary', 'secondary', 'tertiary', 'link'] и означает,

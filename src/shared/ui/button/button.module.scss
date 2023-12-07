@@ -2,35 +2,125 @@
     all: unset; // зануляем все стили кнопки дефолтные
 
     cursor: pointer;
+    user-select: none;
 
     display: inline-flex;
+    gap: 5px; // расстояние от иконки до текста кнопки
     align-items: center;
     justify-content: center;
 
     padding: 6px 28px;
 
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-m);
+    text-align: center;
+    text-decoration: none;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+
+    transition: all 0.2s ease-in-out;
+
     &:focus-visible {
         // когда кнопка выделена добавляем обертку рамку в 2рх
         outline: 2px solid var(--color-info-700);
     }
+
+    &:disabled {
+        cursor: not-allowed; // для данного элемента запрещено использование указателя (курсора) когда кнопка задизейблена
+    }
 }
 
+// Основная кнопка
 .primary {
-    background-color: red;
+    color: var(--color-light-100);
+    background-color: var(--color-accent-500);
+    box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+
+    &:hover {
+        background-color: var(--color-accent-300);
+    }
+
+    &:active {
+        background-color: var(--color-accent-700);
+    }
+
+    &:disabled {
+        color: var(--color-light-900);
+        background-color: var(--color-accent-900);
+    }
 }
 
+// Второстепенная кнопка
 .secondary {
-    background-color: green;
+    color: var(--color-light-100);
+    background-color: var(--color-dark-300);
+    box-shadow: 0 4px 4px 0 rgb(77 86 96 / 13%);
+
+    &:hover {
+        background-color: var(--color-dark-100);
+    }
+
+    &:active {
+        background-color: var(--color-dark-500);
+    }
+
+    &:disabled {
+        color: var(--color-light-900);
+        background-color: var(--color-dark-300);
+    }
 }
 
+// Третичная кнопка - серая
 .tertiary {
-    background-color: blue;
+    padding: 0.5rem 2.8rem;
+    color: var(--color-accent-500);
+    border: 1px solid var(--color-accent-500);
+
+    &:hover {
+        background-color: var(--color-dark-500);
+        border: 1px solid var(--color-accent-700);
+    }
+
+    &:active {
+        background-color: var(--color-accent-900);
+        border: 1px solid var(--color-accent-700);
+    }
+
+    &:disabled {
+        color: var(--color-accent-900);
+        background-color: transparent;
+        border: 1px solid var(--color-accent-900);
+    }
 }
 
+// Ссылка-кнопка
 .link {
-    background-color: yellow;
+    padding: 0.6rem 0;
+    font-size: var(--font-size-m);
+    color: var(--color-accent-500);
+
+    &:hover {
+        color: var(--color-accent-300);
+    }
+
+    &:active {
+        color: var(--color-accent-700);
+    }
+
+    &:focus-visible {
+        border-radius: 16rem;
+    }
+
+    &:disabled {
+        color: var(--color-accent-900);
+    }
 }
 
+// Кнопка на всю ширину
 .fullWidth {
     width: 100%;
+    padding: 0.6rem 0;
 }

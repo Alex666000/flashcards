@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button, ButtonVariant } from '@/shared/ui/button/button';
+import { LogoutIcon } from '../../assets/icons/index';
+import { Button, ButtonVariant } from './button';
 
 const meta = {
     // не обязательный параметр
@@ -84,19 +85,26 @@ export const AsLink: Story = {
 
 export const PrimaryWithIcon: Story = {
     args: {
+        // добавили пропс иконку
         children: (
             <>
-                </>
+                <LogoutIcon size={1.6} />
+                Primary Button
+            </>
         ),
+        disabled: false,
     },
 };
 
-// export const AsLink: StoryObj<typeof Button<'a'>> = {
-//   args: {
-//     // Тут любой компонент или тэг
-//     as: 'a', // ссылка
-//     children: 'Link that looks like a button',
-//     href: 'https://google.com',
-//     variant: 'primary',
-//   },
-// }
+export const SecondaryWithIcon: Story = {
+    args: {
+        children: (
+            <>
+                <LogoutIcon size={1.6} />
+                Secondary Button
+            </>
+        ),
+        disabled: false,
+        variant: 'secondary',
+    },
+};
