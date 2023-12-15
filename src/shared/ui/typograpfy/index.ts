@@ -1,2 +1,2 @@
 export * from './typography'
-export type { TypographyVariant } from './types'
+export type { VariantUnionType } from './types'

@@ -11,9 +11,9 @@
 
     padding: 6px 28px;
 
-    font-size: var(--font-size-s);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-m);
+    font-size: var(--font-size-s-14px);
+    font-weight: var(--font-weight-bold-700);
+    line-height: var(--line-height-m-24px);
     text-align: center;
     text-decoration: none;
 
@@ -99,7 +99,7 @@
 // Ссылка-кнопка
 .link {
     padding: 0.6rem 0;
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-m-16px);
     color: var(--color-accent-500);
 
     &:hover {

@@ -11,7 +11,7 @@ import { clsx } from 'clsx'
 
 import s from './typography.module.scss'
 
-import { VariantUnionType } from './types'
+import { VariantUnionType } from '.'
 
 // types
 export type TypographyProps<T extends ElementType> = {
