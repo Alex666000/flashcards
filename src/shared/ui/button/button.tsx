@@ -1,4 +1,11 @@
-import { ComponentPropsWithoutRef, ElementRef, ElementType, ForwardedRef, forwardRef } from 'react'
+import {
+    ComponentPropsWithoutRef,
+    ElementRef,
+    ElementType,
+    ForwardedRef,
+    ReactNode,
+    forwardRef,
+} from 'react'
 
 import { clsx } from 'clsx'
 
@@ -9,6 +16,7 @@ export const ButtonVariant = ['primary', 'secondary', 'tertiary', 'link'] as con
 // types
 export type ButtonProps<T extends ElementType = 'button'> = {
     as?: T // Любой компонент или тэг
+    children?: ReactNode
     className?: string
     fullWidth?: boolean
     variant?: (typeof ButtonVariant)[number]

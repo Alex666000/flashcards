@@ -1,6 +1,7 @@
-export type TypographyVariantType =
+export type VariantUnionType =
     | 'body1'
     | 'body2'
+    | 'caption'
     | 'error'
     | 'h1'
     | 'h2'
@@ -9,6 +10,5 @@ export type TypographyVariantType =
     | 'link1'
     | 'link2'
     | 'overline'
-    | 'span'
     | 'subtitle1'
     | 'subtitle2'
