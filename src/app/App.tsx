@@ -8,9 +8,7 @@ export function App() {
             <Button as={'button'} variant={'primary'}>
                 <LogoutIcon /> Hello
             </Button>
-            <Typography as={'h5'} variant={'body2'}>
-                Типография текст
-            </Typography>
+            <Typography as={'h5'}>Типография текст</Typography>
         </div>
     )
 }

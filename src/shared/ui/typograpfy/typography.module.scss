@@ -46,7 +46,7 @@
 .body2 {
     margin: 0;
 
-    font-size: var(font-size-s-14px);
+    font-size: var(--font-size-s-14px);
     font-weight: var(--font-weight-regular-400);
     line-height: var(--line-height-m-24px);
     color: var(--color-light-100);
@@ -64,7 +64,7 @@
 .subtitle2 {
     margin: 0;
 
-    font-size: var(font-size-s-14px);
+    font-size: var(--font-size-s-14px);
     font-weight: var(--font-weight-bold-700);
     line-height: var(--line-height-m-24px);
     color: var(--color-light-100);
