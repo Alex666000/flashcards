@@ -1,12 +1,12 @@
-import { HTMLProps, ReactNode, SVGProps } from 'react';
+import { HTMLProps, ReactNode, SVGProps } from 'react'
 
 export type IconProps = {
-    color?: string;
-    size?: number;
-    svgProps?: SVGProps<SVGSVGElement>;
-} & Omit<HTMLProps<HTMLSpanElement>, 'color' | 'size'>;
+    color?: string
+    size?: number
+    svgProps?: SVGProps<SVGSVGElement>
+} & Omit<HTMLProps<HTMLSpanElement>, 'color' | 'size'>
 
-type IconWrapperProps = { icon: ReactNode } & IconProps;
+type IconWrapperProps = { icon: ReactNode } & IconProps
 
 export const IconWrapper = ({
     color: colorProp,
@@ -14,8 +14,8 @@ export const IconWrapper = ({
     size: sizeProp,
     ...restProps
 }: IconWrapperProps) => {
-    const color = colorProp ? colorProp : 'currentColor'; // цвет иконки
-    const size = sizeProp ? `${sizeProp}rem` : '1.2rem'; // размер иконки: высота и ширина
+    const color = colorProp ? colorProp : 'currentColor' // цвет иконки
+    const size = sizeProp ? `${sizeProp}rem` : '1.2rem' // размер иконки: высота и ширина
 
     return (
         <span
@@ -32,5 +32,5 @@ export const IconWrapper = ({
         >
             {icon}
         </span>
-    );
-};
+    )
+}

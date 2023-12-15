@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { LogoutIcon } from '../../assets/icons/index';
-import { Button, ButtonVariant } from './button';
+import { LogoutIcon } from '../../assets/icons/index'
+import { Button, ButtonVariant } from './button'
 
 const meta = {
     // не обязательный параметр
@@ -24,10 +24,10 @@ const meta = {
     // название компонента и где он находится
     title: 'shared/ui/button',
     // если satisfies горит красным обнови вебшторм
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 // Истории:
 export const Primary: Story = {
@@ -37,9 +37,9 @@ export const Primary: Story = {
         disabled: false,
         variant: 'primary',
     },
-};
+}
 
-Primary.storyName = 'Primary Button';
+Primary.storyName = 'Primary Button'
 
 export const Secondary: Story = {
     args: {
@@ -47,14 +47,14 @@ export const Secondary: Story = {
         disabled: false,
         variant: 'secondary',
     },
-};
+}
 export const Tertiary: Story = {
     args: {
         children: 'Tertiary Button',
         disabled: false,
         variant: 'tertiary',
     },
-};
+}
 export const Link: Story = {
     args: {
         // взяли пропсы Primary - и переопределили 2 пропса со своими значениями
@@ -62,7 +62,7 @@ export const Link: Story = {
         children: 'Full width Button',
         fullWidth: true,
     },
-};
+}
 
 export const FullWidth: Story = {
     args: {
@@ -71,7 +71,7 @@ export const FullWidth: Story = {
         fullWidth: true,
         variant: 'primary',
     },
-};
+}
 
 export const AsLink: Story = {
     args: {
@@ -81,7 +81,7 @@ export const AsLink: Story = {
         href: 'https://google.com',
         variant: 'primary',
     },
-};
+}
 
 export const PrimaryWithIcon: Story = {
     args: {
@@ -94,7 +94,7 @@ export const PrimaryWithIcon: Story = {
         ),
         disabled: false,
     },
-};
+}
 
 export const SecondaryWithIcon: Story = {
     args: {
@@ -107,4 +107,4 @@ export const SecondaryWithIcon: Story = {
         disabled: false,
         variant: 'secondary',
     },
-};
+}

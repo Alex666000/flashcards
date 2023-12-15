@@ -1,44 +1,38 @@
-import {
-    ComponentPropsWithoutRef,
-    ElementRef,
-    ElementType,
-    ForwardedRef,
-    ReactNode,
-    forwardRef,
-} from 'react';
+import { ComponentPropsWithoutRef, ElementRef, ElementType, ForwardedRef, forwardRef } from 'react'
 
-import { clsx } from 'clsx';
+import { clsx } from 'clsx'
 
-import s from './button.module.scss';
+import s from './button.module.scss'
 
-export const ButtonVariant = ['primary', 'secondary', 'tertiary', 'link'] as const;
+export const ButtonVariant = ['primary', 'secondary', 'tertiary', 'link'] as const
 
+// types
 export type ButtonProps<T extends ElementType = 'button'> = {
-    as?: T; // Тут любой компонент или тэг
-    children: ReactNode;
-    className?: string;
-    fullWidth?: boolean;
-    variant?: (typeof ButtonVariant)[number];
-} & ComponentPropsWithoutRef<T>;
+    as?: T // Любой компонент или тэг
+    className?: string
+    fullWidth?: boolean
+    variant?: (typeof ButtonVariant)[number]
+} & ComponentPropsWithoutRef<T>
 
+// Polymorph component
 const ButtonPolymorph = <T extends ElementType = 'button'>(
     props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>,
-    ref: ForwardedRef<any>,
+    ref: ForwardedRef<any>
 ) => {
-    const { as: Component = 'button', className, fullWidth, variant = 'primary', ...rest } = props;
+    const { as: Component = 'button', className, fullWidth, variant = 'primary', ...rest } = props
 
-    const ButtonClassName = clsx(clsx(s.button, s[variant], fullWidth && s.fullWidth, className));
+    const ButtonClassName = clsx(s.button, s[variant], fullWidth && s.fullWidth, className)
 
-    return <Component className={ButtonClassName} ref={ref} {...rest} />;
-};
+    return <Component className={ButtonClassName} ref={ref} {...rest} />
+}
 
 // Первый параметр props - потом ref
 export const Button = forwardRef(ButtonPolymorph) as <T extends ElementType = 'button'>(
     props: ButtonProps<T> &
         Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>> & {
-            ref?: ForwardedRef<ElementRef<T>>;
-        },
-) => ReturnType<typeof ButtonPolymorph>;
+            ref?: ForwardedRef<ElementRef<T>>
+        }
+) => ReturnType<typeof ButtonPolymorph>
 
 /*
 - as const применяется к массиву строк ['primary', 'secondary', 'tertiary', 'link'] и означает,
