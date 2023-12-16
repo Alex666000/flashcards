@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { LogoutIcon } from '../../assets/icons/index'
+import { LogoutIcon } from '@/shared/assets/icons'
+
 import { Button, ButtonVariant } from './button'
 
 const meta = {
@@ -55,6 +56,23 @@ export const Tertiary: Story = {
         variant: 'tertiary',
     },
 }
+
+export const Clear: Story = {
+    args: {
+        children: 'Clear Button',
+        disabled: false,
+        variant: 'clear',
+    },
+}
+
+export const Outline: Story = {
+    args: {
+        children: 'Outline Button',
+        disabled: false,
+        variant: 'outline',
+    },
+}
+
 export const Link: Story = {
     args: {
         // взяли пропсы Primary - и переопределили 2 пропса со своими значениями
