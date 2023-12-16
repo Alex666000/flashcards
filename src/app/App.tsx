@@ -1,10 +1,11 @@
-import { Button } from '@/shared/ui/button'
+import { Card } from '@/shared/ui/card'
 
 export function App() {
     return (
         <div>
-            {/*<Typography>Типография текст</Typography>*/}
-            <Button>Add</Button>
+            <Card border={'standard'} padding={'24'} variant={'normal'}>
+                Hello
+            </Card>
         </div>
     )
 }

@@ -41,6 +41,7 @@ const ButtonPolymorph = <T extends ElementType = 'button'>(
 ) => {
     const {
         as: Component = 'button',
+        children,
         className,
         color = 'normal',
         fullWidth,
@@ -55,9 +56,13 @@ const ButtonPolymorph = <T extends ElementType = 'button'>(
     }
 
     // additional классы - не по условию, а просто пропсы с разными значениями
-    const buttonClasses = [className, cls[variant], cls[size], cls[color]]
+    const additionalClasses = [className, cls[variant], cls[size], cls[color]]
 
-    return <Component className={classNames(cls.button, mods, buttonClasses)} ref={ref} {...rest} />
+    return (
+        <Component className={classNames(cls.button, mods, additionalClasses)} ref={ref} {...rest}>
+            {children}
+        </Component>
+    )
 }
 
 // Первый параметр props - потом ref

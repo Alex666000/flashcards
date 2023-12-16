@@ -1,0 +1,67 @@
+.card {
+    display: inline-flex;
+    padding: 24px;
+}
+
+.withoutPaddings {
+    padding: 0;
+}
+
+.normal {
+    background-color: var(--color-dark-700);
+    border: 1px solid var(--color-dark-300);
+    border-radius: 2px;
+    box-shadow:
+        1px 1px 2px rgb(0 0 0 / 10%),
+        -1px -1px 2px rgb(0 0 0 / 10%);
+}
+
+.light {
+    background-color: var(--color-dark-300);
+    border: 1px solid var(--color-dark-100);
+    border-radius: 2px;
+}
+
+.outlined {
+    background: none;
+    border: 1px solid var(--color-dark-300);
+}
+
+// С более квадратными полями - слегка закруглены
+.standard {
+    border-radius: 12px;
+}
+
+// Среднее
+.partial {
+    border-radius: 20px;
+}
+
+// С более закругленными
+.round {
+    border-radius: 40px;
+}
+
+.padding_0 {
+    padding: 0;
+}
+
+.padding_8 {
+    padding: 8px;
+}
+
+.padding_16 {
+    padding: 16px;
+}
+
+.padding_24 {
+    padding: 24px;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.fullWidth {
+    width: 100%;
+}

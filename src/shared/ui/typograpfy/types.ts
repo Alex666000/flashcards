@@ -1,4 +1,4 @@
-export type VariantUnionType =
+export type TextVarint =
     | 'body1'
     | 'body2'
     | 'caption'
