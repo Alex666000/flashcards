@@ -13,11 +13,12 @@ import cls from './card.module.scss'
 
 export type CardVariant = 'light' | 'normal' | 'outlined'
 export type CardBorder = 'partial' | 'round' | 'standard'
-export type CardPadding = '0' | '8' | '16' | '24'
+export type CardPadding = '0' | '8' | '12' | '16' | '24'
 
 const mapPaddingToClass: Record<CardPadding, string> = {
     '0': 'padding_0',
     '8': 'padding_8',
+    '12': 'padding_12',
     '16': 'padding_16',
     '24': 'padding_24',
 }
@@ -77,4 +78,4 @@ export const Card = forwardRef(CardPolymorph) as <T extends ElementType = 'div'>
         Omit<ComponentPropsWithoutRef<T>, keyof CardProps<T>> & {
             ref?: ForwardedRef<ElementRef<T>>
         }
-) => ReturnType<typeof Polymorph>
+) => ReturnType<typeof CardPolymorph>
