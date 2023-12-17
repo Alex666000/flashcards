@@ -1,22 +1,19 @@
-import { HTMLAttributes, ReactNode, memo } from 'react'
+import {
+    ComponentPropsWithoutRef,
+    ElementRef,
+    ElementType,
+    ForwardedRef,
+    ReactNode,
+    forwardRef,
+} from 'react'
 
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 import cls from './card.module.scss'
 
 export type CardVariant = 'light' | 'normal' | 'outlined'
-export type CardPadding = '0' | '8' | '16' | '24'
 export type CardBorder = 'partial' | 'round' | 'standard'
-
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
-    border?: CardBorder
-    children: ReactNode
-    className?: string
-    fullHeight?: boolean
-    fullWidth?: boolean
-    padding?: CardPadding
-    variant?: CardVariant
-}
+export type CardPadding = '0' | '8' | '16' | '24'
 
 const mapPaddingToClass: Record<CardPadding, string> = {
     '0': 'padding_0',
@@ -25,8 +22,25 @@ const mapPaddingToClass: Record<CardPadding, string> = {
     '24': 'padding_24',
 }
 
-export const Card = memo((props: CardProps) => {
+// props types
+export type CardProps<T extends ElementType = 'div'> = {
+    as?: T // Любой компонент или тэг
+    border?: CardBorder
+    children: ReactNode
+    className?: string
+    fullHeight?: boolean
+    fullWidth?: boolean
+    padding?: CardPadding
+    variant?: CardVariant
+} & ComponentPropsWithoutRef<T>
+
+// Polymorph component
+const CardPolymorph = <T extends ElementType = 'div'>(
+    props: CardProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof CardProps<T>>,
+    ref: ForwardedRef<any>
+) => {
     const {
+        as: Component = 'div',
         border = 'standard',
         children,
         className,
@@ -34,13 +48,13 @@ export const Card = memo((props: CardProps) => {
         fullWidth,
         padding = '8',
         variant = 'normal',
-        ...otherProps
+        ...rest
     } = props
 
     const paddingClass = mapPaddingToClass[padding]
 
     return (
-        <div
+        <Component
             className={classNames(
                 cls.card,
                 {
@@ -49,9 +63,18 @@ export const Card = memo((props: CardProps) => {
                 },
                 [className, cls[variant], cls[paddingClass], cls[border]]
             )}
-            {...otherProps}
+            ref={ref}
+            {...rest}
         >
             {children}
-        </div>
+        </Component>
     )
-})
+}
+
+// Первый параметр props - потом ref
+export const Card = forwardRef(CardPolymorph) as <T extends ElementType = 'div'>(
+    props: CardProps<T> &
+        Omit<ComponentPropsWithoutRef<T>, keyof CardProps<T>> & {
+            ref?: ForwardedRef<ElementRef<T>>
+        }
+) => ReturnType<typeof Polymorph>
