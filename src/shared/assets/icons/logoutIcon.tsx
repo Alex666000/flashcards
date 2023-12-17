@@ -1,4 +1,4 @@
-import { IconProps, IconWrapper } from '@/shared/assets/icons/IconWrapper'
+import { IconProps, IconWrapper } from '@/shared/assets/icons/iconWrapper'
 
 export const LogoutIcon = (allProps: IconProps) => {
     const { svgProps: props, ...restProps } = allProps
