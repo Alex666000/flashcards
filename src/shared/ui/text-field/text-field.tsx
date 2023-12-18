@@ -7,7 +7,7 @@ import {
     useState,
 } from 'react'
 
-import { ClosedEyeIcon, OpenEyeIcon } from '@/shared/assets/icons'
+import { ClosedEyeIcon, OpenEyeIcon } from '@/shared/assets/icons/componentsIcons'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Typography } from '@/shared/ui/typograpfy'
 

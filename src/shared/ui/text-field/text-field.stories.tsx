@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
-import { SearchIcon } from '@/shared/assets/icons'
 import { action } from '@storybook/addon-actions'
 
+import { SearchIcon } from '../../assets/otherIcons'
 import { TextField, TextFieldProps } from './index'
 
 const meta: Meta<typeof TextField> = {
