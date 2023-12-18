@@ -106,7 +106,7 @@ export const PrimaryWithIcon: Story = {
         // добавили пропс иконку
         children: (
             <>
-                <LogoutIcon size={1.6} />
+                <LogoutIcon />
                 Primary Button
             </>
         ),
@@ -118,7 +118,7 @@ export const SecondaryWithIcon: Story = {
     args: {
         children: (
             <>
-                <LogoutIcon size={1.6} />
+                <LogoutIcon />
                 Secondary Button
             </>
         ),

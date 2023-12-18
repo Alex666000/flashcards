@@ -1,0 +1,160 @@
+.root {
+    position: relative;
+    width: 100%;
+
+    input[type='search']::-webkit-search-cancel-button,
+    input[type='search']::-webkit-search-decoration {
+        display: none;
+    }
+
+    .label {
+        color: var(--color-dark-100);
+    }
+
+    .inputWrapper {
+        position: relative;
+
+        overflow: hidden;
+        display: flex;
+        flex-flow: row nowrap;
+        flex-wrap: nowrap;
+        gap: 0;
+        align-items: center;
+        justify-content: flex-start;
+
+        height: 3.6rem;
+
+        border-radius: 2px;
+
+        .input {
+            width: 100%;
+            height: 100%;
+            padding: 0 1.2rem;
+
+            font-size: var(--font-size-m-16px);
+            font-weight: var(--font-weight-regular-400);
+            line-height: var(--line-height-m-24px);
+            color: var(--color-dark-100);
+
+            background-color: transparent;
+            border: 1px solid var(--color-dark-300);
+            border-radius: 2px;
+            outline: none;
+
+            &.isLeftIcon {
+                padding-left: 4rem;
+            }
+
+            &.isRightIcon {
+                padding-right: 4rem;
+            }
+
+            &:disabled {
+                color: var(--color-dark-300);
+                border: 1px solid var(--color-dark-300);
+            }
+
+            &:disabled::placeholder {
+                color: var(--color-dark-300);
+            }
+        }
+
+        &:hover .input {
+            background: var(--color-dark-700);
+            border: 1px solid var(--color-dark-100);
+        }
+
+        &.error .input {
+            border: 1px solid var(--color-danger-300);
+        }
+
+        &.error .input,
+        &.error .input::placeholder {
+            color: var(--color-danger-300);
+        }
+
+        &:focus-visible .input,
+        &:focus-within .input {
+            border: 1px solid var(--color-info-700);
+            outline: 1px solid var(--color-info-700);
+        }
+
+        &.active:focus-visible .input,
+        &.active:focus-within .input {
+            color: var(--color-light-100);
+            border: 1px solid var(--color-light-100);
+        }
+
+        &.disabled:focus-visible .input,
+        &.disabled:focus-within .input {
+            border: 1px solid var(--color-dark-300);
+        }
+
+        &.disabled:hover .input {
+            color: var(--color-dark-300);
+            background-color: transparent;
+            border: 1px solid var(--color-dark-300);
+        }
+
+        &:focus-visible {
+            outline: none;
+        }
+
+        .leftIcon {
+            cursor: pointer;
+
+            position: absolute;
+            top: 50%;
+            left: 1.2rem;
+            transform: translateY(-50%);
+
+            display: flex;
+            flex-flow: row nowrap;
+            flex-wrap: nowrap;
+            gap: 0;
+            align-items: center;
+            justify-content: flex-start;
+
+            width: 2rem;
+            height: 2rem;
+
+            color: var(--color-dark-100);
+
+            .rightIcon {
+                cursor: pointer;
+
+                position: absolute;
+                top: 50%;
+                right: 1.2rem;
+                transform: translateY(-50%);
+
+                display: flex;
+                flex-flow: row nowrap;
+                flex-wrap: nowrap;
+                gap: 0;
+                align-items: center;
+                justify-content: flex-start;
+
+                width: 2rem;
+                height: 2rem;
+
+                color: var(--color-dark-100);
+            }
+
+            &.disabled .leftIcon,
+            &.disabled .rightIcon {
+                cursor: auto;
+                color: var(--color-dark-300);
+            }
+
+            &.active:focus-within .leftIcon,
+            &.active:focus-within .rightIcon {
+                color: var(--color-light-100);
+            }
+        }
+
+        .disabledText {
+            color: var(--color-dark-300);
+        }
+    }
+}

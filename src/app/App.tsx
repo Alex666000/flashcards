@@ -1,11 +1,9 @@
-import { Card } from '@/shared/ui/card'
+import { Checkbox } from '@/shared/ui/checkbox/checkbox'
 
 export function App() {
     return (
         <div>
-            <Card border={'standard'} padding={'24'} variant={'normal'}>
-                Hello
-            </Card>
+            <Checkbox checked />
         </div>
     )
 }
