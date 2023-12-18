@@ -1,2 +1,5 @@
-export { default as CheckIcon } from './check'
+export { default as CheckIcon } from './checkIcon'
+export { default as ClosedEyeIcon } from './closedEyeIcon'
 export { default as LogoutIcon } from './logout'
+export { default as OpenEyeIcon } from './openEyeIcon'
+export { default as SearchIcon } from './searchIcon'
