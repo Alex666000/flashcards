@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-import Check from '@/shared/assets/icons/otherIcons/check'
+import { CheckIcon } from '@/shared/assets/icons/componentsIcons/CheckIcon'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Typography } from '@/shared/ui/typograpfy'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
@@ -64,7 +64,7 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
                                         className={classes.indicator}
                                         forceMount
                                     >
-                                        <Check />
+                                        <CheckIcon size={1} />
                                     </RadixCheckbox.Indicator>
                                 )}
                             </RadixCheckbox.Root>
