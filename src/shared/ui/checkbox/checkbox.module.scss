@@ -1,0 +1,101 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.checkboxWrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-wrap: nowrap;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    &:hover:not(.disabled) {
+        background-color: var(--color-dark-500);
+    }
+
+    &:hover:active:not(.disabled) {
+        background-color: var(--color-dark-100);
+    }
+
+    &.left {
+        margin-left: -0.9rem;
+    }
+}
+
+.label {
+    cursor: pointer;
+
+    display: flex;
+    flex-flow: row nowrap;
+    flex-wrap: nowrap;
+    gap: 2px;
+    align-items: center;
+    justify-content: flex-start;
+
+    &.disabled {
+        cursor: initial;
+        color: var(--color-dark-100);
+    }
+}
+
+.root {
+    cursor: pointer;
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+
+    background-color: transparent;
+    border-radius: 2px;
+
+    &:not([data-state='checked']) {
+        border: 2px solid var(--color-light-900);
+    }
+
+    &[data-state='checked'] {
+        background-color: var(--color-dark-900);
+    }
+
+    &[data-disabled] {
+        pointer-events: none;
+        cursor: initial;
+        border: 2px solid var(--color-dark-100);
+    }
+
+    &:hover:active([data-state='checked']) {
+        background-color: var(--color-dark-100);
+    }
+
+    &:hover:active:not([data-disabled]) {
+        background-color: var(--color-dark-900);
+        border: 2px solid var(--color-light-100);
+    }
+
+    &:hover:active:not([data-state='checked'], [data-disabled]) {
+        background-color: var(--color-dark-100);
+    }
+
+    &[data-state='checked'][data-disabled] {
+        background-color: var(--color-light-700);
+    }
+}
+
+.indicator {
+    width: 18px;
+    height: 18px;
+}
+
+/*
+- За черный сзади квадрат отвечает root класс и indicator
+ */

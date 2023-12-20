@@ -1,11 +1,17 @@
-import { Card } from '@/shared/ui/card'
+import { LogoutIcon } from '@/shared/assets/icons/componentsIcons'
+import { Button } from '@/shared/ui/button'
+import { Checkbox } from '@/shared/ui/checkbox/checkbox'
+import { TextField } from '@/shared/ui/text-field'
 
 export function App() {
     return (
         <div>
-            <Card border={'standard'} padding={'24'} variant={'normal'}>
-                Hello
-            </Card>
+            <Button>
+                <LogoutIcon size={6} />
+                ffffffff
+            </Button>
+            <Checkbox checked />
+            <TextField />
         </div>
     )
 }
