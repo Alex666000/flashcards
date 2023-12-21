@@ -97,7 +97,7 @@ const getAdornments = (position: 'end' | 'start' = 'start') => ({
 
 const options = Object.keys(getAdornments())
 
-export const Default: Story = {
+export const Primary: Story = {
     argTypes: {
         endAdornment: {
             mapping: getAdornments('end'),
@@ -114,32 +114,31 @@ export const Default: Story = {
 export const Disabled: Story = {
     args: {
         disabled: true,
-        label: 'Disabled input',
         placeholder: 'Disabled Input',
         type: 'text',
     },
 }
 
 export const Error: Story = {
-    argTypes: Default.argTypes,
+    argTypes: Primary.argTypes,
     args: {
-        ...Default.args,
+        ...Primary.args,
         error: true,
     },
 }
 
 export const StartAdornment: Story = {
-    argTypes: Default.argTypes,
-    args: { ...Default.args, startAdornment: 'search icon' },
+    argTypes: Primary.argTypes,
+    args: { ...Primary.args, startAdornment: 'search icon' },
 }
 
 export const EndAdornment: Story = {
-    argTypes: Default.argTypes,
-    args: { ...Default.args, endAdornment: 'eye icon' },
+    argTypes: Primary.argTypes,
+    args: { ...Primary.args, endAdornment: 'eye icon' },
 }
 
 export const BothAdornments: Story = {
-    argTypes: Default.argTypes,
+    argTypes: Primary.argTypes,
     args: {
         ...StartAdornment.args,
         ...EndAdornment.args,

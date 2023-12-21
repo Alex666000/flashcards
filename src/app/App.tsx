@@ -1,5 +1,6 @@
 import { Card } from '@/shared/ui/card/card'
 import { Input } from '@/shared/ui/input'
+import { TextField } from '@/shared/ui/text-field/text-field'
 import { Typography } from '@/shared/ui/typography'
 
 export function App() {
@@ -9,6 +10,7 @@ export function App() {
             <Typography>dd</Typography>
             <br />
             <Input />
+            <TextField />
         </div>
     )
 }
