@@ -15,7 +15,7 @@ export const IconWrapper = ({
     ...restProps
 }: IconWrapperProps) => {
     const color = colorProp ? colorProp : 'currentColor'
-    const size = sizeProp ? `${sizeProp}rem` : '2.4rem'
+    const size = sizeProp ? `${sizeProp}rem` : '2.4rem' // 2.4rem × 16px = 38.4px
 
     return (
         <span
@@ -34,3 +34,7 @@ export const IconWrapper = ({
         </span>
     )
 }
+
+/*
+- 1rem; // 16 px
+ */

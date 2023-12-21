@@ -1,6 +1,11 @@
-import { IconProps, IconWrapper } from 'src/shared/assets/IconWrapper'
+import { memo } from 'react'
 
-export const SearchIcon = (allProps: IconProps) => {
+import {
+    IconProps,
+    IconWrapper,
+} from '@/shared/assets/icons/componentsIcons/IconWrapper/IconWrapper'
+
+export const SearchIcon = memo((allProps: IconProps) => {
     const { svgProps: props, ...restProps } = allProps
 
     return (
@@ -25,4 +30,4 @@ export const SearchIcon = (allProps: IconProps) => {
             {...restProps}
         />
     )
-}
+})

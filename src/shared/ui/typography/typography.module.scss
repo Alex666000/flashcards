@@ -1,0 +1,83 @@
+@use '../../../app/styles/helpers' as *;
+@use '../../../app/styles/mixins' as *;
+
+.large {
+    @include typography(xxl, bold); // 26 px bold line-height: 1.38;
+
+    line-height: 1.38;
+}
+
+.h1 {
+    @include typography($size: xl, $weight: bold, $line-height: xl) // 20 px bold 1.8
+;
+}
+
+.h2 {
+    @include typography($size: l, $weight: bold, $line-height: s);
+}
+
+.h3 {
+    @include typography($weight: bold);
+}
+
+.body1 {
+    @include typography;
+}
+
+.subtitle1 {
+    @include typography($weight: bold);
+}
+
+.body2 {
+    @include typography($size: s, $line-height: l);
+}
+
+.subtitle2 {
+    @include typography($size: s, $weight: bold, $line-height: l);
+}
+
+.caption {
+    @include typography($size: xs, $line-height: s);
+}
+
+.overline {
+    @include typography($size: xs, $weight: bold, $line-height: s);
+}
+
+.error {
+    margin: 0;
+
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-m);
+    color: var(--color-danger-300);
+}
+
+// Шаблон - его подключаем к ссылкам - чтобы не дублировать код
+%link-shared {
+    cursor: pointer;
+    color: var(--color-accent-500);
+    text-decoration: underline;
+
+    &:hover {
+        color: var(--color-accent-300);
+    }
+}
+
+.link1 {
+    // Наследуем шаблон выше - его стили, убрали дублирование
+    @extend %link-shared;
+
+    @include typography($size: s, $line-height: l);
+}
+
+.link2 {
+    @extend %link-shared;
+
+    @include typography($size: xs, $line-height: s);
+}
+
+/*
+- css -- приоритетнее переменных scss и миксины не хророшо лучше стили писать полностью - можно шаблоны оставить
+- @use -- лучше чем import
+ */

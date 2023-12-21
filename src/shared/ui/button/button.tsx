@@ -23,6 +23,8 @@ export const ButtonVariant = [
 export type ButtonSize = 'l' | 'm' | 'xl'
 export type ButtonColor = 'error' | 'normal' | 'success'
 
+type InferType<T> = T extends ElementType<infer U> ? U : never
+
 // props types
 export type ButtonProps<T extends ElementType = 'button'> = {
     as?: T // Любой компонент или тэг
@@ -37,7 +39,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
 // Polymorph component
 const ButtonPolymorph = <T extends ElementType = 'button'>(
     props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>,
-    ref: ForwardedRef<any>
+    ref: ForwardedRef<InferType<T>>
 ) => {
     const {
         as: Component = 'button',

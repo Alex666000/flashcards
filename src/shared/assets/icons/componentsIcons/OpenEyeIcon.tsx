@@ -1,9 +1,11 @@
+import { memo } from 'react'
+
 import {
     IconProps,
     IconWrapper,
 } from '@/shared/assets/icons/componentsIcons/IconWrapper/IconWrapper'
 
-export const OpenEyeIcon = (allProps: IconProps) => {
+export const OpenEyeIcon = memo((allProps: IconProps) => {
     const { svgProps: props, ...restProps } = allProps
 
     return (
@@ -34,4 +36,4 @@ export const OpenEyeIcon = (allProps: IconProps) => {
             {...restProps}
         />
     )
-}
+})

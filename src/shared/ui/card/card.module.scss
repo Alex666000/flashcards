@@ -1,71 +1,67 @@
-.card {
+.box {
     display: inline-flex;
-    padding: 24px;
-}
 
-.withoutPaddings {
-    padding: 0;
-}
+    color: var(--color-light-100);
 
-.normal {
     background-color: var(--color-dark-700);
-    border: 1px solid var(--color-dark-300);
-    border-radius: 2px;
-    box-shadow:
-        1px 1px 2px rgb(0 0 0 / 10%),
-        -1px -1px 2px rgb(0 0 0 / 10%);
-}
-
-.light {
-    background-color: var(--color-dark-300);
-    border: 1px solid var(--color-dark-100);
-    border-radius: 2px;
-}
-
-.outlined {
-    background: none;
-    border: 1px solid var(--color-dark-300);
-}
-
-// С более квадратными полями - слегка закруглены
-.standard {
+    border: 1px solid var(--color-dark-900);
     border-radius: 12px;
-}
 
-// Среднее
-.partial {
-    border-radius: 20px;
-}
-
-// С более закругленными
-.round {
-    border-radius: 40px;
-}
-
-.padding_0 {
-    padding: 0;
-}
-
-.padding_8 {
-    padding: 8px;
-}
-
-.padding_12 {
-    padding: 12px;
-}
-
-.padding_16 {
-    padding: 16px;
-}
-
-.padding_24 {
-    padding: 24px;
-}
-
-.fullHeight {
-    height: 100%;
+    &.info {
+        background-color: var(--color-info-300);
+        border-color: var(--color-info-500);
+    }
 }
 
 .fullWidth {
     width: 100%;
+}
+
+.title {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+
+    margin: 0;
+    padding: 7px 24px 5px;
+
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    line-height: var(--line-height-m);
+
+    background-color: #d9d7d8;
+
+    @media screen and (width <= 768px) {
+        padding: 6px 12px;
+    }
+}
+
+.content {
+    padding: 18px 24px;
+    font-size: var(--font-size-m);
+    line-height: var(--line-height-m);
+
+    .info & {
+        padding: 6px 24px;
+    }
+
+    @media screen and (width <= 768px) {
+        padding: 19px 12px 17px;
+    }
+}
+
+.gap_0 {
+    padding: 0;
+}
+
+.gap_8 {
+    padding: 8px !important;
+}
+
+.gap_16 {
+    padding: 16px !important;
+}
+
+.gap_24 {
+    padding: 24px !important;
 }

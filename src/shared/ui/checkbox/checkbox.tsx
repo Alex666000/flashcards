@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { CheckIcon } from '@/shared/assets/icons/componentsIcons/CheckIcon'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { Typography } from '@/shared/ui/typograpfy'
+import { Typography } from '@/shared/ui/typography'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import * as RadixLabel from '@radix-ui/react-label'
 

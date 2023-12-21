@@ -1,17 +1,14 @@
-import { LogoutIcon } from '@/shared/assets/icons/componentsIcons'
-import { Button } from '@/shared/ui/button'
-import { Checkbox } from '@/shared/ui/checkbox/checkbox'
-import { TextField } from '@/shared/ui/text-field'
+import { Card } from '@/shared/ui/card/card'
+import { Input } from '@/shared/ui/input'
+import { Typography } from '@/shared/ui/typography'
 
 export function App() {
     return (
         <div>
-            <Button>
-                <LogoutIcon size={6} />
-                ffffffff
-            </Button>
-            <Checkbox checked />
-            <TextField />
+            <Card padding={'16'}>ddd</Card>
+            <Typography>dd</Typography>
+            <br />
+            <Input />
         </div>
     )
 }

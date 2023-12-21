@@ -1,0 +1,40 @@
+@use 'sass:math';
+
+/**
+ * Функция для вычисления значения в единицах em.
+ *
+ * @param {number} $number - Входное число, которое нужно конвертировать.
+ * @param {number} $rootFontSize - Базовый размер шрифта (по умолчанию 16px).
+ * @returns {string} Значение в единицах em.
+ *
+ * @example
+ * // Пример использования em
+ * const fontSizeInEm = em(24);
+ */
+@function em($number, $rootFontSize: 16) {
+    $temp: math.round(math.div($number, $rootFontSize) * 1000);
+
+    @return math.div($temp, 1000) + em;
+}
+
+/**
+ * Функция для вычисления значения в единицах rem.
+ *
+ * @param {number} $number - Входное число, которое нужно конвертировать.
+ * @param {number} $rootFontSize - Базовый размер шрифта (по умолчанию 16).
+ * @returns {string} Значение в единицах rem.
+ *
+ * @example
+ * // Пример использования rem
+ * const fontSizeInRem = rem(24);
+ */
+@function rem($number, $rootFontSize: 16) {
+    $temp: math.round(math.div($number, $rootFontSize) * 1000);
+
+    @return math.div($temp, 1000) + rem;
+}
+
+/*
+- Этот код на языке Sass используется для создания функций
+преобразования значений из пикселей в единицы измерения em и rem
+ */

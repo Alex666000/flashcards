@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Card } from '.'
-import { Typography } from '../typograpfy/typography'
+import { CSSProperties } from 'react'
+
+import { Card } from '@/shared/ui/card/card'
 
 const meta: Meta<typeof Card> = {
     component: Card,
@@ -12,8 +13,15 @@ const meta: Meta<typeof Card> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const contentStyles: CSSProperties = { fontSize: '24px', textAlign: 'center' }
+
 export const Default: Story = {
     args: {
-        children: <Typography variant={'large'}>Card</Typography>,
+        children: <div style={contentStyles}>Card</div>,
+        style: {
+            height: '300px',
+            padding: '24px',
+            width: '300px',
+        },
     },
 }
