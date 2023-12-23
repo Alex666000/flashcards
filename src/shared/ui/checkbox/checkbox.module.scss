@@ -9,12 +9,9 @@ button {
 
 .label {
     cursor: pointer;
-
     display: flex;
     gap: 2px;
     align-items: center;
-
-    margin-left: em(8);
 
     &.disabled {
         cursor: initial;
