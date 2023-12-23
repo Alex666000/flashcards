@@ -1,18 +1,5 @@
-import { Card } from '@/shared/ui/card/card'
-import { Input } from '@/shared/ui/input'
-import { TextField } from '@/shared/ui/text-field/text-field'
-import { Typography } from '@/shared/ui/typography'
-
 export function App() {
-    return (
-        <div>
-            <Card padding={'16'}>ddd</Card>
-            <Typography>dd</Typography>
-            <br />
-            <Input />
-            <TextField />
-        </div>
-    )
+    return <div></div>
 }
 
 /*

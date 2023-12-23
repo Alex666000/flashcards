@@ -35,9 +35,7 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
         } = props
 
         const classes = {
-            checkboxWrapper: classNames(s.checkboxWrapper, { [s.disabled]: disabled }, [
-                s[position],
-            ]),
+            buttonWrapper: classNames(s.checkboxWrapper, { [s.disabled]: disabled }, [s[position]]),
             container: classNames(s.container, {}, [className]),
             indicator: s.indicator,
             label: classNames(s.label, { [s.disabled]: disabled }, [className]),
@@ -48,7 +46,7 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
             <div className={classes.container}>
                 <RadixLabel.Root asChild>
                     <Typography as={'label'} className={classes.label} variant={'h2'}>
-                        <div className={classes.checkboxWrapper}>
+                        <div className={classes.buttonWrapper}>
                             <RadixCheckbox.Root
                                 checked={checked}
                                 className={classes.root}

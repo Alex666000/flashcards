@@ -7,6 +7,8 @@ import {
     forwardRef,
 } from 'react'
 
+import { InferType } from '@/shared/types/infer-element-type'
+
 import cls from './button.module.scss'
 
 import { Mods, classNames } from '../../lib/classNames/classNames'
@@ -22,8 +24,6 @@ export const ButtonVariant = [
 
 export type ButtonSize = 'l' | 'm' | 'xl'
 export type ButtonColor = 'error' | 'normal' | 'success'
-
-type InferType<T> = T extends ElementType<infer U> ? U : never
 
 // props types
 export type ButtonProps<T extends ElementType = 'button'> = {
