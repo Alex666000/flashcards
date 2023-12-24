@@ -1,5 +1,11 @@
+import { LoginForm } from '@/features/auth/login-form/login-form'
+
 export function App() {
-    return <div></div>
+    return (
+        <div>
+            <LoginForm />
+        </div>
+    )
 }
 
 /*

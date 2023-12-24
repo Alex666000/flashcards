@@ -1,4 +1,4 @@
-import { ComponentProps, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ComponentProps, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import { ClosedEyeIcon, OpenEyeIcon } from '@/shared/assets/icons/componentsIcons'
 import { clsx } from 'clsx'
@@ -37,7 +37,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
         const finalType = getFinalType(type, showPassword)
 
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
             onChange?.(e)
             onValueChange?.(e.target.value)
         }

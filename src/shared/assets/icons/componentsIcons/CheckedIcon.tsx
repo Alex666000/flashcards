@@ -5,7 +5,7 @@ import {
     IconWrapper,
 } from '@/shared/assets/icons/componentsIcons/IconWrapper/IconWrapper'
 
-export const CheckIcon = memo((allProps: IconProps) => {
+export const CheckedIcon = memo((allProps: IconProps) => {
     const { svgProps: props, ...restProps } = allProps
 
     return (
