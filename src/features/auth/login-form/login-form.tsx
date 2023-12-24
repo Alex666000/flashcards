@@ -18,8 +18,11 @@ const loginSchema = z.object({
 })
 
 type FormValues = z.infer<typeof loginSchema>
+type Props = {
+    onSubmit: (data: FormValues) => void
+}
 
-export const LoginForm = () => {
+export const LoginForm = ({ onSubmit }: Props) => {
     const {
         control,
         formState: { errors },
@@ -29,9 +32,9 @@ export const LoginForm = () => {
         resolver: zodResolver(loginSchema),
     })
 
-    const onSubmit = (data: FormValues) => {
-        console.log({ data })
-    }
+    // const onSubmit = (data: FormValues) => {
+    //     console.log({ data })
+    // }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
