@@ -4,17 +4,16 @@ import { Checkbox } from '@/shared/ui/checkbox/checkbox'
 
 import { CheckboxProps } from '../checkbox/checkbox'
 
-export type Props<T extends FieldValues> = UseControllerProps<T> &
-    Omit<CheckboxProps, 'checked' | 'id' | 'onChange' | 'value'> & {
-        // убираем дублирующиеся пропсы
-        label?: string
-    }
+export type Props<T extends FieldValues> = Omit<
+    UseControllerProps<T>,
+    'defaultValue' | 'disabled' | 'rules'
+> &
+    Omit<CheckboxProps, 'checked' | 'id' | 'onValueChange'>
 
 export const ControlledCheckbox = <T extends FieldValues>({
     control,
-    defaultValue,
+    disabled,
     name,
-    rules,
     shouldUnregister,
     ...checkboxProps
 }: Props<T>) => {
@@ -22,11 +21,17 @@ export const ControlledCheckbox = <T extends FieldValues>({
         field: { onChange, value },
     } = useController({
         control,
-        defaultValue,
+        disabled,
         name,
-        rules,
         shouldUnregister,
     })
 
-    return <Checkbox checked={value} onValueChange={onChange} {...checkboxProps} />
+    return (
+        <Checkbox checked={value} disabled={disabled} onValueChange={onChange} {...checkboxProps} />
+    )
 }
+
+/*
+- Omit - убираем дублирующиеся пропсы: чтобы они не дуюлировались в UseControllerProps и CheckboxProps
+а были один раз например чтобы disabled дважды не встретился
+ */

@@ -81,6 +81,10 @@ button {
     &:hover:not(.disabled) .root:not([data-state='checked']) {
         background-color: var(--color-dark-500);
     }
+
+    &.left {
+        margin-left: -9px;
+    }
 }
 
 /*

@@ -9,18 +9,36 @@ import { clsx } from 'clsx'
 import s from './checkbox.module.scss'
 
 export type CheckboxProps = {
-    checked: boolean
+    checked?: boolean
+    className?: string
     disabled?: boolean
+    id?: string
     label?: string
     onValueChange?: (checked: boolean) => void
+    position?: 'left'
+    required?: boolean
 } & Omit<ComponentPropsWithoutRef<typeof CheckboxRadix.Root>, 'checked' | 'onCheckedChange'>
 
 export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxProps>(
     (props, ref) => {
-        const { checked, disabled, label, onValueChange, ...rest } = props
+        const {
+            checked,
+            className,
+            disabled,
+            id,
+            label,
+            onValueChange,
+            position,
+            required,
+            ...rest
+        } = props
 
         const classNames = {
-            buttonWrapper: clsx(s.buttonWrapper, disabled && s.disabled),
+            buttonWrapper: clsx(
+                s.buttonWrapper,
+                disabled && s.disabled,
+                position === 'left' && s.left
+            ),
             container: s.container,
             label: clsx(s.label, disabled && s.disabled),
             root: s.root,
@@ -29,14 +47,16 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
         return (
             <div className={classNames.container}>
                 <Label.Root asChild>
-                    <Typography as={'label'} className={classNames.label}>
+                    <Typography as={'label'} className={classNames.label} variant={'body2'}>
                         <div className={classNames.buttonWrapper}>
                             <CheckboxRadix.Root
                                 checked={checked}
                                 className={classNames.root}
                                 disabled={disabled}
+                                id={id}
                                 onCheckedChange={onValueChange}
                                 ref={ref}
+                                required={required}
                                 {...rest}
                             >
                                 {checked && (
@@ -53,3 +73,8 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
         )
     }
 )
+
+/*
+<Typography as={'label'} className={classNames.label} variant={'body2'}> -- это значит:
+- element: label, с классом body2
+ */
