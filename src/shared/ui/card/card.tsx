@@ -1,4 +1,13 @@
-import { ComponentProps, FC, ReactNode, memo } from 'react'
+import {
+    ComponentPropsWithoutRef,
+    ElementRef,
+    ElementType,
+    ForwardedRef,
+    ReactNode,
+    forwardRef,
+} from 'react'
+
+import { InferType } from '@/shared/types/infer-element-type'
 
 import s from './card.module.scss'
 
@@ -14,14 +23,16 @@ const mapPaddingToClass: Record<CardPadding, string> = {
     '24': 'gap_24',
 }
 
-type CommonProps = {
+type OwnProps<T extends ElementType> = {
+    as?: T // Любой компонент или тэг
     border?: CardBorder
     children: ReactNode
+    className?: string
     contentClassName?: string
     fullWidth?: boolean
     max?: boolean
     padding?: CardPadding
-} & ComponentProps<'div'>
+}
 
 type ConditionalProps =
     | {
@@ -35,10 +46,18 @@ type ConditionalProps =
           variant?: 'info'
       }
 
-export type CardProps = CommonProps & ConditionalProps
+// props types
+export type CardProps<T extends ElementType> = OwnProps<T> &
+    ConditionalProps &
+    Omit<ComponentPropsWithoutRef<T>, keyof OwnProps<T>>
 
-export const Card: FC<CardProps> = memo(
-    ({
+// Polymorph component
+export const CardPolymorph = <T extends ElementType = 'div'>(
+    props: CardProps<T>,
+    ref: ForwardedRef<InferType<T>>
+) => {
+    const {
+        as: Component = 'div',
         border = 'normal',
         children,
         className,
@@ -48,31 +67,38 @@ export const Card: FC<CardProps> = memo(
         padding = '8',
         title,
         variant = 'primary',
-        ...rest
-    }) => {
-        const isInfo = variant === 'info'
-        const paddingClass = mapPaddingToClass[padding]
+        ...cardProps
+    } = props
+    const isInfo = variant === 'info'
+    const paddingClass = mapPaddingToClass[padding]
 
-        const classes = {
-            box: classNames(s.box, { [s.fullWidth]: fullWidth, [s.info]: isInfo }, [
-                className,
-                s[paddingClass],
-            ]),
-            content: classNames(s.content, {}, [className, contentClassName]),
-            icon: s.icon,
-            title: s.title,
-        }
-
-        return (
-            <div className={classes.box} {...rest}>
-                {title && (
-                    <h3 className={classes.title}>
-                        {iconComponent}
-                        {title}
-                    </h3>
-                )}
-                <div className={classes.content}>{children}</div>
-            </div>
-        )
+    const classes = {
+        box: classNames(s.box, { [s.fullWidth]: fullWidth, [s.info]: isInfo }, [
+            className,
+            s[paddingClass],
+        ]),
+        content: classNames(s.content, {}, [className, contentClassName]),
+        icon: s.icon,
+        title: s.title,
     }
-)
+
+    return (
+        <Component className={classes.box} ref={ref} {...cardProps}>
+            {title && (
+                <h3 className={classes.title}>
+                    {iconComponent}
+                    {title}
+                </h3>
+            )}
+            <div className={classes.content}>{children}</div>
+        </Component>
+    )
+}
+
+// Первый параметр props - потом ref
+export const Card = forwardRef(CardPolymorph) as <T extends ElementType = 'button'>(
+    props: CardProps<T> &
+        Omit<ComponentPropsWithoutRef<T>, keyof CardProps<T>> & {
+            ref?: ForwardedRef<ElementRef<T>>
+        }
+) => ReturnType<typeof CardPolymorph>

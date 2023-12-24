@@ -17,11 +17,15 @@ const contentStyles: CSSProperties = { fontSize: '24px', textAlign: 'center' }
 
 export const Default: Story = {
     args: {
-        children: <div style={contentStyles}>Card</div>,
-        style: {
-            height: '300px',
-            padding: '24px',
-            width: '300px',
-        },
+        children: <div style={contentStyles}>This is a Card</div>,
+        // style: {
+        //     height: '300px',
+        //     padding: '24px',
+        //     width: '300px',
+        // },
     },
 }
+
+/*
+- закоментрили тк в сторисах лучше стили не менять
+ */

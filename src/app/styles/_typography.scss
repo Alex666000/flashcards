@@ -3,12 +3,12 @@
     --font-family-primary: 'Roboto', sans-serif;
 
     // line heights
-    --line-height-xs: 1;
-    --line-height-s: 1.33;
-    --line-height-m: 1.5;
-    --line-height-l: 1.71;
-    --line-height-xl: 1.8;
-    --line-height-xxl: 2.25;
+    --line-height-xs: 1rem; // 16px
+    --line-height-s: 1.33rem;
+    --line-height-m: 1.5rem;
+    --line-height-l: 1.71rem;
+    --line-height-xl: 1.8rem;
+    --line-height-xxl: 2.25rem;
 
     // font sizes (размер текста)
     --font-size-xs: 0.75rem; // 12 px
@@ -22,3 +22,10 @@
     --font-weight-regular: 400;
     --font-weight-bold: 700;
 }
+
+/*
+- Единица rem соответствует значению свойства font-size корневого элемента <html>.
+Если rem добавляется непосредственно к font-size для <html> или стиль для <html>
+не задан, тогда 1rem принимается равным исходному значению font-size.
+В браузерах по умолчанию 1rem = 16px.
+ */
