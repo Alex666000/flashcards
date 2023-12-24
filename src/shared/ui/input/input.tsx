@@ -37,9 +37,9 @@ export const Input = forwardRef<ElementRef<'input'>, InputProps>((props, ref) =>
         endAdornment,
         error,
         label,
+        onChange,
         onEnter,
         onKeyDown,
-        onValueChange,
         onValueChange,
         startAdornment,
         type,
@@ -71,7 +71,7 @@ export const Input = forwardRef<ElementRef<'input'>, InputProps>((props, ref) =>
             <input
                 className={cls.input}
                 disabled={disabled}
-                onValueChange={handleChange}
+                onChange={handleChange}
                 ref={ref}
                 {...restProps}
             />
