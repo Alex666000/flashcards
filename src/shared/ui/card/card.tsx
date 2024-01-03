@@ -34,6 +34,7 @@ type OwnProps<T extends ElementType> = {
     padding?: CardPadding
 }
 
+// Для иконок в карточке
 type ConditionalProps =
     | {
           iconComponent?: ReactNode

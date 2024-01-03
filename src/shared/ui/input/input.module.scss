@@ -16,7 +16,7 @@
 
     &:focus-within {
         border-color: var(--color-light-100);
-        outline: none;
+        outline-color: transparent;
     }
 
     &Error {
@@ -61,7 +61,7 @@
     }
 
     &:focus {
-        outline: none;
+        outline-color: transparent;
     }
 
     &Error::placeholder {

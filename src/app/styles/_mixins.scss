@@ -40,9 +40,10 @@
     }
 }
 
-// Code used to reset user-agent styles applied to input with auto inserted credentials
-// Mixin must be used inside a ruleset, not at the top level of the stylesheet.
-// It also produces &Disabled classname for use in the components classes
+// Код, используемый для сброса стилей пользовательского агента, примененных к вводу с автоматически
+// вставленными учетными данными.
+// Миксин должен использоваться внутри набора правил, а не на верхнем уровне таблицы стилей.
+// Он также создает имя класса &Disabled для использования в классах компонентов
 @mixin reset-input-autofill(
     $bg-color,
     $text-color,
@@ -74,8 +75,8 @@
 
 $all-form-items: container, title, form, field, input, caption, button, hint, link;
 
-// To extend or overwrite the mixin styles,
-// use @extend at-rule with the appropriate placeholder-selector under the mixin invocation
+// Чтобы расширить или перезаписать стили миксина,
+// используйте @extend at-rule с соответствующим placeholder-selector под вызовом миксина
 @mixin form-card($isFlex: true, $items: ()) {
     %container {
         @include card-container($isFlex, $justify: null, $direction: column);

@@ -11,7 +11,7 @@ import {
 
 import cn from 'classnames'
 
-import s from './IconButton.module.scss'
+import s from './Icon-button.module.scss'
 
 type Props = {
     icon: ReactNode

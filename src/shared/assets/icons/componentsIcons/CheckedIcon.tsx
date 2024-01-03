@@ -1,11 +1,12 @@
-import { memo } from 'react'
+import { Ref, forwardRef, memo } from 'react'
 
+import { ChevronUpIcon } from '@/shared/assets/icons/componentsIcons/ChevronUpIcon'
 import {
     IconProps,
     IconWrapper,
 } from '@/shared/assets/icons/componentsIcons/IconWrapper/IconWrapper'
 
-export const CheckedIcon = memo((allProps: IconProps) => {
+export const CheckedIcon = (allProps: IconProps, ref: Ref<SVGSVGElement>) => {
     const { svgProps: props, ...restProps } = allProps
 
     return (
@@ -14,6 +15,7 @@ export const CheckedIcon = memo((allProps: IconProps) => {
                 <svg
                     fill={'none'}
                     height={'100%'}
+                    ref={ref}
                     viewBox={'0 0 18 18'}
                     width={'100%'}
                     xmlns={'http://www.w3.org/2000/svg'}
@@ -30,4 +32,9 @@ export const CheckedIcon = memo((allProps: IconProps) => {
             {...restProps}
         />
     )
-})
+}
+
+const ForwardRef = forwardRef(ChevronUpIcon)
+const Memo = memo(ForwardRef)
+
+export default Memo

@@ -31,6 +31,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 // Истории:
+// type Story - чтобы правильно подсвечивалась типизация аргументов
 export const Primary: Story = {
     // пропсы компонента - для более сложных компонент делается через функцию render()
     args: {
@@ -100,6 +101,17 @@ export const AsLink: Story = {
         variant: 'primary',
     },
 }
+/*
+- Проверка типов у сторибука:
+ */
+// export const AsLink: StoryObj<typeof Button<'a'>> = {
+//     args: {
+//         as: 'a',
+//         children: 'Link that looks like a button',
+//         href: 'https://google.com',
+//         variant: 'primary',
+//     },
+// }
 
 export const PrimaryWithIcon: Story = {
     args: {

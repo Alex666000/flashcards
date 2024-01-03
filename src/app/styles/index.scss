@@ -7,5 +7,11 @@ body {
     font-family: var(--font-family-primary);
     line-height: var(--line-height-m);
     color: var(--color-light-100);
+
+    // Цвет фона - тема - приложения
     background-color: var(--color-dark-900);
 }
+
+/*
+- index.scss точка входа для стилей приложения
+ */

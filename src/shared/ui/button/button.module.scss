@@ -29,7 +29,8 @@
     }
 
     &:disabled {
-        cursor: not-allowed; // для данного элемента запрещено использование указателя (курсора) когда кнопка задизейблена
+        cursor: not-allowed; // для данного элемента запрещено использование указателя (курсора)
+        // когда кнопка задизейблена
     }
 }
 
@@ -38,7 +39,7 @@
     padding: 0;
     background: none;
     border: none;
-    outline: none;
+    outline-color: transparent;
 }
 
 // Кнопка с рамкой но без заднего фона
@@ -61,6 +62,7 @@
     }
 }
 
+// Размеры кнопки
 .m {
     font-size: var(--font-size-m);
 }
@@ -153,8 +155,21 @@
         color: var(--color-accent-700);
     }
 
+    &:focus {
+        border-radius: 130px;
+        outline: 2px solid var(--color-info-700);
+    }
+
     &:focus-visible {
         border-radius: 16rem;
+    }
+
+    &:visited {
+        color: var(--color-accent-700);
+        text-decoration: none;
+        background-color: transparent;
+        outline-color: transparent; // Для людей с проблемами со зрением -- outline: none - никогда не писать,
+        // а писать outline-color: transparent; соблюдать правила "prefers-reduced-motion"
     }
 
     &:disabled {
@@ -168,3 +183,8 @@
     width: 100%;
     padding: 0.6rem 0;
 }
+
+/*
+- "prefers-reduced-motion" -- для людей с эпилепсией или когда человеку становится плохо на анимации == тошнит
+и они отключают анимации в винде..
+ */
