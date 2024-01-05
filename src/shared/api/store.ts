@@ -1,4 +1,4 @@
-import { decksApi } from '@/entities/Decks/services/decks-api'
+import { decksApi } from '@/entities/Decks/services/base-api'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
