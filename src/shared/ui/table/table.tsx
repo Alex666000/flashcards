@@ -5,6 +5,8 @@ import { clsx } from 'clsx'
 
 import s from './table.module.scss'
 
+// - Radix - ужен для того чтобы делать компоненты которые тяжело стилизовать вручную
+// Таблица - кастомный не Радикс компонент, кастомный
 export const Table = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
     ({ className, ...rest }, ref) => {
         const classNames = {
@@ -27,6 +29,7 @@ export const TableBody = forwardRef<ElementRef<'tbody'>, ComponentPropsWithoutRe
     }
 )
 
+// строка по горизонтали
 export const TableRow = forwardRef<ElementRef<'tr'>, ComponentPropsWithoutRef<'tr'>>(
     ({ ...rest }, ref) => {
         return <tr {...rest} ref={ref} />
@@ -48,7 +51,7 @@ export const TableHeadCell = forwardRef<ElementRef<'th'>, ComponentPropsWithoutR
     }
 )
 
-// Сюда выводится информация из таблицы в своих рядах
+// Ячейка - Сюда выводится информация из таблицы в своих рядах
 export const TableCell = forwardRef<ElementRef<'td'>, ComponentPropsWithoutRef<'td'>>(
     ({ className, ...rest }, ref) => {
         const classNames = {

@@ -1,51 +1,78 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useCreateDeckMutation, useGetDecksQuery } from '@/entities/Decks/services/decks-api'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/entities/Decks/api/decks-api'
 import { Button } from '@/shared/ui/button'
-import { Table, TableBody, TableCell, TableHeadCell, TableRow } from '@/shared/ui/table'
+import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/shared/ui/table'
+import { Typography } from '@/shared/ui/typography'
 import { nanoid } from '@reduxjs/toolkit'
 
 export const Decks = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+
     // сделали запрос на сервер и в result лежат данные
-    const { data, error, isLoading } = useGetDecksQuery({ itemsPerPage: 3, name: 'w' })
+    // data: это -- когда данные приходя они сами записываются в редакс и передаются нам в наш data объект
+    // isLoading - первая загрузка когда нет данных,
+    // isFetching - последующие загрузки используются при инвалидации - isFetching -- когда по тэгам обновляются данные
+    const { data, error, isLoading } = useGetDecksQuery({
+        currentPage: currentPage, // Параметр запроса
+        itemsPerPage: 4, // Параметры запроса - 4 колоды на странице
+    })
+
     // console.log(data)
 
-    const [createDeck, { isLoading: isCreateLoading }] = useCreateDeckMutation()
+    const [createDeck, { data: newDeckData, isLoading: isCreateLoading }] = useCreateDeckMutation()
+
+    console.log(newDeckData)
 
     if (isLoading || isCreateLoading) {
-        return <h1>Loading...</h1>
+        return <Typography variant={'h1'}>Loading...</Typography>
     }
 
     if (error) {
         const err = error as any
 
-        return <h1>{err.data.message}</h1>
+        return <Typography variant={'h1'}>{err.data.message}</Typography>
     }
 
     const onCreateDeckClick = () => {
         createDeck({ name: 'title 👌' + nanoid() })
     }
 
+    const changeDeskPageHandler = (page: number) => {
+        setCurrentPage(page)
+    }
+
     return (
         <div>
+            {/* При клике на To News - перекинет на стр. '/news' */}
             <Link to={'/news'}>To News</Link>
             <hr />
             <Button onClick={onCreateDeckClick}>Create Deck</Button>
+            <hr />
+            <h1 style={{ color: 'green' }}>{currentPage}</h1>
+            <Button onClick={() => changeDeskPageHandler(1)}>1</Button>
+            <Button onClick={() => changeDeskPageHandler(2)}>2</Button>
+            <Button onClick={() => changeDeskPageHandler(3)}>3</Button>
             <Table>
-                <TableBody>
+                <TableHead>
                     <TableRow>
                         <TableHeadCell>Name</TableHeadCell>
                         <TableHeadCell>Cards</TableHeadCell>
                         <TableHeadCell>Last Updated</TableHeadCell>
                         <TableHeadCell>Created by</TableHeadCell>
                     </TableRow>
+                </TableHead>
+                <TableBody>
                     {data?.items.map((deck) => {
                         return (
                             <TableRow key={deck.id}>
-                                <TableCell>{deck.name}</TableCell>
-                                <TableCell>{deck.cardsCount}</TableCell>
-                                <TableCell>{deck.updated}</TableCell>
-                                <TableCell>{deck.author.name}</TableCell>
+                                <TableCell>{deck?.name}</TableCell>
+                                <TableCell>{deck?.cardsCount}</TableCell>
+                                <TableCell>
+                                    {new Date(deck?.updated).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>{deck?.author?.name}</TableCell>
                             </TableRow>
                         )
                     })}

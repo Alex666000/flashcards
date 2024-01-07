@@ -3,12 +3,43 @@ export type GetDecksResponse = {
     maxCardsCount: number
     pagination: GetDecksResponsePagination
 }
+export interface GetDeckById {
+    cardsCount: number
+    cover?: any
+    created: string
+    id: string
+    isBlocked?: any
+    isDeleted?: any
+    isPrivate: boolean
+    name: string
+    shots: number
+    updated: string
+    userId: string
+}
 
 export type GetDecksResponsePagination = {
     currentPage: number
     itemsPerPage: number
     totalItems: number
     totalPages: number
+}
+export interface CreateDeckResponse {
+    author: CreateDeckAuthor
+    cardsCount: number
+    cover?: any
+    created: string
+    id: string
+    isBlocked?: boolean
+    isDeleted?: boolean
+    isPrivate: boolean
+    name: string
+    shots: number
+    updated: string
+    userId: string
+}
+export interface CreateDeckAuthor {
+    id: string
+    name: string
 }
 
 export type GetDecksResponseItemsAuthor = {
