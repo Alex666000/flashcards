@@ -15,6 +15,7 @@ export const Decks = () => {
     // isLoading - первая загрузка когда нет данных,
     // isFetching - последующие загрузки используются при инвалидации - isFetching -- когда по тэгам обновляются данные
     const { data, error, isLoading } = useGetDecksQuery({
+        // для переключения страниц передаем из стейта для пагинации
         currentPage: currentPage, // Параметр запроса
         itemsPerPage: 3, // Параметры запроса - 4 колоды на странице
     })
@@ -39,21 +40,15 @@ export const Decks = () => {
         createDeck({ name: 'title 👌' + nanoid() })
     }
 
-    const changeDeskPageHandler = (page: number) => {
-        setCurrentPage(page)
-    }
-
     return (
         <div>
             {/* При клике на To News - перекинет на стр. '/news' */}
             <Link to={'/news'}>To News</Link>
             <hr />
             <Button onClick={onCreateDeckClick}>Create Deck</Button>
-            <hr />
-            <h1 style={{ color: 'green' }}>{currentPage}</h1>
-            <Button onClick={() => changeDeskPageHandler(1)}>1</Button>
-            <Button onClick={() => changeDeskPageHandler(2)}>2</Button>
-            <Button onClick={() => changeDeskPageHandler(3)}>3</Button>
+            <Typography style={{ color: 'green' }} variant={'h2'}>
+                Current page: {data?.pagination?.currentPage}
+            </Typography>
             <Table>
                 <TableHead>
                     <TableRow>
@@ -78,8 +73,19 @@ export const Decks = () => {
                     })}
                 </TableBody>
             </Table>
+            {createArray(1, data?.pagination?.totalPages ?? 0).map((i) => {
+                return (
+                    <Button key={i} onClick={() => setCurrentPage(i)}>
+                        {i}
+                    </Button>
+                )
+            })}
         </div>
     )
+}
+
+const createArray = (startNumber: number, length: number) => {
+    return Array.from({ length }, (_, index) => startNumber + index)
 }
 
 /*

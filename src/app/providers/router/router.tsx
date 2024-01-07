@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom'
 
 import { Decks } from '@/entities'
-import { Deck } from '@/entities/DetailDeck/ui/Deck'
-import { News } from '@/entities/News/ui/News'
+import { Deck } from '@/entities/decks/ui/deck-detail/deck'
+import { News } from '@/entities/news/ui/news'
 
 // Но можно константу не писать как удобнее тебе
 const PATH = {
@@ -28,8 +28,8 @@ const publicRoutes: RouteObject[] = [
 // Массив зазищенных роутов
 const privateRoutes: RouteObject[] = [
     {
-        element: <Decks />, // Есть много: Decks
-        path: '/', // На пустом слеше отрисуй <Decks />
+        element: <Decks />, // Есть много: decks
+        path: '/', // На пустом слеше отрисуй <decks />
     },
     {
         element: <Deck />, // А есть один детальный просмотр одной конкрентно колоды по её id: Deck

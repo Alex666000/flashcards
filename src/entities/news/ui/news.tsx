@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 
-import { useLazyGetDecksQuery } from '@/entities/Decks/api/decks-api'
+import { useLazyGetDecksQuery } from '@/entities/decks/api/decks-api'
 import { Button } from '@/shared/ui/button'
 
 export const News = () => {
-    // const { data } = useGetDecksQuery({}) -- запрашиваем данные такие же как и в компоненте Decks
+    // const { data } = useGetDecksQuery({}) -- запрашиваем данные такие же как и в компоненте decks
 
     // 1 параметр: getDecks - функция которую сможем дергать
     const [getDecks, { data }] = useLazyGetDecksQuery() // если хотим по клику на кнопку получать данные

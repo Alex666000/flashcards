@@ -2,7 +2,6 @@ import {
     CreateDeckArgs,
     CreateDeckResponse,
     GetDeckById,
-    GetDeckByIdArgs,
     GetDecksArgs,
     GetDecksResponse,
 } from '@/entities/Decks/model/types/decks-api.types'
@@ -13,20 +12,21 @@ const decksApi = baseApi.injectEndpoints({
     endpoints: (builder) => {
         return {
             // 1 параметр возвращаемое значение
+            // возвращать нам бэкенд на создание не будет ничего " 201 - Created"
             createDeck: builder.mutation<CreateDeckResponse, CreateDeckArgs>({
                 invalidatesTags: ['Deck'],
                 query: (arg) => {
                     return {
                         body: arg,
-                        method: 'POST',
+                        method: 'POST', // в мутациях (изменение данных на сервере) обязательно указываем метод
                         url: `v1/decks`,
                     }
                 },
             }),
             // УРИ ПАРАМЕТРЫ: запрашиваем одну конкретную колоду по её id ури параметру - достанем его на ui useParams() из урла
             // void - не может быть так как id внутри GetDeckByIdArgs - обязательный параметр
-            getDeckById: builder.query<GetDeckById, GetDeckByIdArgs>({
-                query: ({ id }) => {
+            getDeckById: builder.query<GetDeckById, string>({
+                query: (id) => {
                     return {
                         url: `v1/decks/${id}`,
                     }
@@ -54,7 +54,7 @@ const decksApi = baseApi.injectEndpoints({
 
 // Делаем запрос за данными: формируется хуки автоматически по названию эндпоинта
 // Хуки дергаем на Ui они вернут данные которые мы отрисуем - useEffect() не нужен на UI где в тулките мы диспатчили бы санку - а тут
-// об этом не думаем, в Decks и News вызываем хук, и он проверит при вызове хука: есть ли у него валидные закешированные данные - если они не протухли он их
+// об этом не думаем, в decks и News вызываем хук, и он проверит при вызове хука: есть ли у него валидные закешированные данные - если они не протухли он их
 // достанет из кеша, если протухли данные сделает запрос - в каждом компоненте data берется из кеша который хранится на сервере а не в глобальном стейте
 export const {
     useCreateDeckMutation,

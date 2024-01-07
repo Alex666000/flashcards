@@ -1,2 +1,2 @@
-export { Decks } from './Decks/ui/Decks/Decks'
-export { News } from './News/ui/News'
+export { News } from '@/entities/news/ui/news'
+export { Decks } from 'src/entities/decks/ui/decks/decks'

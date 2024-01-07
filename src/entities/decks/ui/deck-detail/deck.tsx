@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom'
 import { useGetDeckByIdQuery } from '@/entities/Decks/api/decks-api'
 import { Typography } from '@/shared/ui/typography'
 
-// Одна колода:
+// Deck - одна колода:
 export const Deck = () => {
     const { deckId } = useParams() // Достали из урла
 
-    // запрос за одной колодой
+    // запрос за одной конкретной детальной колодой
     const { data, error, isLoading } = useGetDeckByIdQuery(deckId ?? '') // тут пишем параметры только для GET запросов
 
     // console.log(data)
