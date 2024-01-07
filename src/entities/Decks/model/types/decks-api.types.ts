@@ -3,6 +3,7 @@ export type GetDecksResponse = {
     maxCardsCount: number
     pagination: GetDecksResponsePagination
 }
+
 export interface GetDeckById {
     cardsCount: number
     cover?: any
@@ -23,6 +24,7 @@ export type GetDecksResponsePagination = {
     totalItems: number
     totalPages: number
 }
+
 export interface CreateDeckResponse {
     author: CreateDeckAuthor
     cardsCount: number
@@ -37,6 +39,7 @@ export interface CreateDeckResponse {
     updated: string
     userId: string
 }
+
 export interface CreateDeckAuthor {
     id: string
     name: string
@@ -62,19 +65,24 @@ export type GetDecksResponseItems = {
     userId: string
 }
 
-// types for parameters
+// types передаваемых квери параметров (https://api.flashcards.andrii.es/v1/decks?orderBy=name-desc&currentPage=2)
+// Квери параметры: ?orderBy=name-desc&currentPage=2 -- после знака ? пара ключ=значение&ключ=значение и тд.
 export type GetDecksArgs = {
-    authorId: string
-    currentPage: number
+    authorId: string // переключаться между моими карточками и всеми
+    currentPage: number // текущая страница - тк возвращаются пагинированные запросы - по дефолту приходит 1 стр.на ней 10 элементов на странице
     itemsPerPage: number
-    maxCardsCount: number
-    minCardsCount: number
-    name: string
-    orderBy: string
+    maxCardsCount: number //  например хотим найти все колоды у которых больше 5 карточек, например от 5-10 то передаем: minCardsCount = 5, maxCardsCount=10
+    minCardsCount: number //  например хотим найти все колоды у которых меньше 5 карточек
+    name: string // поиск среди колод нужную
+    orderBy: string // порядок сортировки
 }
 
 export type CreateDeckArgs = {
     cover?: string
     isPrivate?: null | string
     name: null | string
+}
+
+export type GetDeckByIdArgs = {
+    id: string
 }

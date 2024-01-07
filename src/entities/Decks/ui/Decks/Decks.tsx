@@ -16,7 +16,7 @@ export const Decks = () => {
     // isFetching - последующие загрузки используются при инвалидации - isFetching -- когда по тэгам обновляются данные
     const { data, error, isLoading } = useGetDecksQuery({
         currentPage: currentPage, // Параметр запроса
-        itemsPerPage: 4, // Параметры запроса - 4 колоды на странице
+        itemsPerPage: 3, // Параметры запроса - 4 колоды на странице
     })
 
     // console.log(data)

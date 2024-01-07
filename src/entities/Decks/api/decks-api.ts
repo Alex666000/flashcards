@@ -2,6 +2,7 @@ import {
     CreateDeckArgs,
     CreateDeckResponse,
     GetDeckById,
+    GetDeckByIdArgs,
     GetDecksArgs,
     GetDecksResponse,
 } from '@/entities/Decks/model/types/decks-api.types'
@@ -22,11 +23,17 @@ const decksApi = baseApi.injectEndpoints({
                     }
                 },
             }),
-            // запрашиваем одну конкретную колоду по её id ури параметру - достанем его на ui useParams() из урла
-            getDeckById: builder.query<GetDeckById, string>({
-                query: (id) => `v1/decks/${id}`,
+            // УРИ ПАРАМЕТРЫ: запрашиваем одну конкретную колоду по её id ури параметру - достанем его на ui useParams() из урла
+            // void - не может быть так как id внутри GetDeckByIdArgs - обязательный параметр
+            getDeckById: builder.query<GetDeckById, GetDeckByIdArgs>({
+                query: ({ id }) => {
+                    return {
+                        url: `v1/decks/${id}`,
+                    }
+                },
             }),
             // либо квери запросы либо мутации: принимает возвращаемое значение сервером или аргумент
+            // void - когда могут быть не обязательные параметры значит что может не быть никаких параметров  чтобы на UI при вызове хука не ругался ТС
             getDecks: builder.query<GetDecksResponse, Partial<GetDecksArgs> | void>({
                 // 2 - потом когда делаем get запрос мы пишем providesTags и указываем этот тэг
                 // это говорит о том что если данные меняются перевызови этот get запрос: getDecks
@@ -37,7 +44,7 @@ const decksApi = baseApi.injectEndpoints({
                 query: (arg) => ({
                     // возвращаем объект
                     method: 'GET', // в get запросах явно можно не писать эту строку, а в мутациях надо обязательно название метода писать
-                    params: arg ?? {}, // если null или undefined то выведет {}
+                    params: arg ?? {}, // "оператор нулевого слияния": если null или undefined то выведет {} -- пропустит false или ' '
                     url: `v1/decks`,
                 }),
             }),
@@ -46,6 +53,9 @@ const decksApi = baseApi.injectEndpoints({
 })
 
 // Делаем запрос за данными: формируется хуки автоматически по названию эндпоинта
+// Хуки дергаем на Ui они вернут данные которые мы отрисуем - useEffect() не нужен на UI где в тулките мы диспатчили бы санку - а тут
+// об этом не думаем, в Decks и News вызываем хук, и он проверит при вызове хука: есть ли у него валидные закешированные данные - если они не протухли он их
+// достанет из кеша, если протухли данные сделает запрос - в каждом компоненте data берется из кеша который хранится на сервере а не в глобальном стейте
 export const {
     useCreateDeckMutation,
     useGetDeckByIdQuery,
