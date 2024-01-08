@@ -12,7 +12,6 @@ import { News } from '@/entities/news/ui/news'
 
 // Но можно константу не писать как удобнее тебе
 const PATH = {
-    deckId: '/:deckId',
     login: '/login',
     news: '/news',
 } as const
@@ -33,7 +32,7 @@ const privateRoutes: RouteObject[] = [
     },
     {
         element: <Deck />, // А есть один детальный просмотр одной конкрентно колоды по её id: Deck
-        path: PATH.deckId,
+        path: '/:deckId',
     },
     {
         element: <News />,

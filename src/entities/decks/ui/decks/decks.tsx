@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useCreateDeckMutation, useGetDecksQuery } from '@/entities/Decks/api/decks-api'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/entities/decks/api/decks-api'
 import { Button } from '@/shared/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/shared/ui/table'
 import { Typography } from '@/shared/ui/typography'
@@ -9,7 +9,6 @@ import { nanoid } from '@reduxjs/toolkit'
 
 export const Decks = () => {
     const [currentPage, setCurrentPage] = useState(1)
-
     // сделали запрос на сервер и в result лежат данные
     // data: это -- когда данные приходя они сами записываются в редакс и передаются нам в наш data объект
     // isLoading - первая загрузка когда нет данных,
@@ -22,11 +21,14 @@ export const Decks = () => {
 
     // console.log(data)
 
-    const [createDeck, { data: newDeckData, isLoading: isCreateLoading }] = useCreateDeckMutation()
+    // 1 - параметр createDeck - функция которую дергаем чтобы сделать запрос на сервер
+    // 2 параметр вся информация
+    const [createDeck, { data: newDeckData, isLoading: isCreateDeckLoading }] =
+        useCreateDeckMutation()
 
     console.log(newDeckData)
 
-    if (isLoading || isCreateLoading) {
+    if (isLoading || isCreateDeckLoading) {
         return <Typography variant={'h1'}>Loading...</Typography>
     }
 
@@ -45,7 +47,9 @@ export const Decks = () => {
             {/* При клике на To News - перекинет на стр. '/news' */}
             <Link to={'/news'}>To News</Link>
             <hr />
-            <Button onClick={onCreateDeckClick}>Create Deck</Button>
+            <Button disabled={isCreateDeckLoading} onClick={onCreateDeckClick}>
+                Create new Deck
+            </Button>
             <Typography style={{ color: 'green' }} variant={'h2'}>
                 Current page: {data?.pagination?.currentPage}
             </Typography>

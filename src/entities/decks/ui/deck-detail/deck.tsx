@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 
-import { useGetDeckByIdQuery } from '@/entities/Decks/api/decks-api'
+import { useGetDeckByIdQuery } from '@/entities/decks/api/decks-api'
 import { Typography } from '@/shared/ui/typography'
 
 // Deck - одна колода:
