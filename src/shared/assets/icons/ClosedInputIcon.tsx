@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-export const CheckedIcon = (props: SVGProps<SVGSVGElement>) => (
+export const ClosedInputIcon = (props: SVGProps<SVGSVGElement>) => (
     <svg height={16} width={16} xmlns={'http://www.w3.org/2000/svg'} {...props}>
         <g>
             <path

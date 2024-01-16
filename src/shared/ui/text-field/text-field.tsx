@@ -1,6 +1,5 @@
 import {
     ChangeEvent,
-    ComponentProps,
     ComponentPropsWithoutRef,
     KeyboardEvent,
     ReactNode,
@@ -32,13 +31,15 @@ export type TextFieldProps = {
     value?: string
 } & Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'value'>
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+// НЕ УДАЛЯТЬ КОММЕНТ ПЕРЕД forwardRef - без него ломается tree shaking
+export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldProps>(
     (
         {
             className,
             disabled,
             endIcon,
             errorMessage,
+            id,
             label,
             onChange,
             onClearFieldClick,
@@ -56,14 +57,18 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     ) => {
         const [showPassword, setShowPassword] = useState(false)
 
-        const isSearchType = type === 'search'
         const isPasswordType = type === 'password'
 
         const inputId = useGetId(id) + '-input'
         const inputType = isPasswordType && showPassword ? 'text' : type
 
         const showError = !!errorMessage && errorMessage.length > 0
-        const showClearButton = onClearFieldClick && value?.length! > 0
+        // крестик справа в инпуте при фокусе
+        const isShowClearButton = onClearFieldClick && value?.length! > 0
+
+        if (search) {
+            startIcon = <SearchIcon color={'var(--color-text-secondary)'} />
+        }
 
         function handleChange(e: ChangeEvent<HTMLInputElement>) {
             onChange?.(e)
@@ -92,33 +97,43 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         }
 
         const classNames = {
+            clearButton: s.clearButton,
             endIcon: s.endIcon,
             error: clsx(s.error),
-            field: clsx(s.field, !!errorMessage && s.error, search && s.hasLeadingIcon, className),
-            fieldContainer: clsx(s.fieldContainer),
-            label: clsx(s.label, className),
+            field: clsx(
+                s.field,
+                !!errorMessage && s.error,
+                search && s.hasLeadingIcon,
+                !!startIcon && s.isLeftIcon,
+                !!endIcon && s.isRightIcon,
+                className
+            ),
+            fieldContainer: clsx(
+                s.fieldContainer,
+                !!value && s.active,
+                disabled && s.disabled,
+                !!errorMessage && s.error
+            ),
+            label: clsx(s.label, disabled && s.disabledText, className),
             leadingIcon: s.leadingIcon,
             root: clsx(s.root, className),
             startIcon: s.startIcon,
         }
 
-        startIcon = startIcon ?? (isSearchType && <SearchIcon />)
-        endIcon = endIcon && !isPasswordType && !showClearButton
+        const dataIconStart = startIcon ? 'start' : ''
+        const dataIconEnd = endIcon || isShowClearButton ? 'end' : ''
+        const dataIcon = dataIconStart + dataIconEnd
 
         return (
             <div aria-disabled={disabled} className={classNames.root}>
-                {label && <Label htmlFor={inputId} label={label} />}
+                {label && <Label className={classNames.label} htmlFor={inputId} label={label} />}
                 <div className={classNames.fieldContainer}>
-                    {!!startIcon && (
-                        <label className={classNames.startIcon} htmlFor={inputId}>
-                            {startIcon}
-                        </label>
-                    )}
-
+                    {!!startIcon && <span className={classNames.startIcon}>{startIcon}</span>}
                     {search && <SearchIcon className={classNames.leadingIcon} />}
                     <input
                         aria-invalid={showError}
                         className={classNames.field}
+                        data-icon={dataIcon}
                         disabled={disabled}
                         id={inputId}
                         onChange={handleChange}
@@ -138,9 +153,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                             {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
                         </button>
                     )}
-                    {showClearButton && !isPasswordType && (
+                    {isShowClearButton && !isPasswordType && (
                         <button
-                            className={classNames.endIcon}
+                            className={classNames.clearButton}
                             disabled={disabled}
                             onClick={handleClearClick}
                             type={'button'}

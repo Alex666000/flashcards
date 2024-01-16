@@ -41,7 +41,12 @@ export const Decks = () => {
             {/*<Typography variant={'body2'}>Card name</Typography>*/}
             {/*<TextField onChange={(e) => setCardName(e.target.value)} value={cardName} />*/}
 
-            <TextField onChange={(e) => setValue(e.target.value)} type={'search'} />
+            <TextField
+                label={'hello'}
+                onChange={(e) => setValue(e.target.value)}
+                search
+                type={'search'}
+            />
 
             {/*<Typography style={{ color: 'green' }} variant={'h2'}>*/}
             {/*    Current page: {data?.pagination?.currentPage}*/}
