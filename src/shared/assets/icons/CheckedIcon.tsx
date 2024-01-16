@@ -1,13 +1,9 @@
 import { Ref, forwardRef, memo } from 'react'
 
+import { IconProps, IconWrapper } from '@/shared/assets/icons/IconWrapper/IconWrapper'
 import { ChevronUpIcon } from '@/shared/assets/icons/componentsIcons/ChevronUpIcon'
-import {
-    IconProps,
-    IconWrapper,
-} from '@/shared/assets/icons/componentsIcons/IconWrapper/IconWrapper'
 
-export const CheckedIcon = (allProps: IconProps, ref: Ref<SVGSVGElement>) => {
-    const { svgProps: props, ...restProps } = allProps
+export const CheckedIcon = (props: , ref: Ref<SVGSVGElement>) => {
 
     return (
         <IconWrapper
