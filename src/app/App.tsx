@@ -1,7 +1,4 @@
-import { Provider } from 'react-redux'
-
 import { Router } from '@/app/providers/router/router'
-import { store } from '@/shared/api/store'
 
 // const user = {
 //     email: 'bogdanov777000@mail.ru',
@@ -10,11 +7,7 @@ import { store } from '@/shared/api/store'
 // }
 
 export function App() {
-    return (
-        <Provider store={store}>
-            <Router />
-        </Provider>
-    )
+    return <Router />
 }
 
 /*

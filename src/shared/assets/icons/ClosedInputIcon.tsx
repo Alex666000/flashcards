@@ -1,7 +1,7 @@
-import { Ref, SVGProps, forwardRef, memo } from 'react'
+import { SVGProps } from 'react'
 
-export const ClosedInputIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-    <svg height={16} ref={ref} width={16} xmlns={'http://www.w3.org/2000/svg'} {...props}>
+export const CheckedIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg height={16} width={16} xmlns={'http://www.w3.org/2000/svg'} {...props}>
         <g>
             <path
                 d={
@@ -17,8 +17,3 @@ export const ClosedInputIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGE
         </defs>
     </svg>
 )
-
-const ForwardRef = forwardRef(ClosedInputIcon)
-const Memo = memo(ForwardRef)
-
-export default Memo

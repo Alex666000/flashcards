@@ -57,9 +57,10 @@ function PrivateRoutes() {
     // Для защиты авторизации - вместо true false реальные данные будем вставлять..
     // Если user залогинен его пропускаем на наши роуты
     // в дальнеишем true меняем этот флаг получаем из хука РТК и на основе хука будем решать вернуть приватный путь или нет
-    const isAuthenticated = true
 
-    return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+    const isAuth = true
+
+    return isAuth ? <Outlet /> : <Navigate to={'/login'} />
 }
 
 /*

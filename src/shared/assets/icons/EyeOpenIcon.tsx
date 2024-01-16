@@ -1,10 +1,9 @@
-import { Ref, SVGProps, forwardRef, memo } from 'react'
+import { SVGProps } from 'react'
 
-export const Eye = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+export const EyeOpenIcon = (props: SVGProps<SVGSVGElement>) => (
     <svg
         fill={'#fff'}
         height={24}
-        ref={ref}
         viewBox={'0 0 24 24'}
         width={24}
         xmlns={'http://www.w3.org/2000/svg'}
@@ -31,8 +30,3 @@ export const Eye = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => 
         </defs>
     </svg>
 )
-
-const ForwardRef = forwardRef(Eye)
-const Memo = memo(ForwardRef)
-
-export default Memo

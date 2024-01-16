@@ -50,7 +50,7 @@ const ButtonPolymorph = <T extends ElementType = 'button'>(
         fullWidth,
         size = 'm',
         variant = 'primary',
-        ...buttonProps
+        ...buttonRestProps
     } = props
 
     // props-классы по условию - когда Boolean
@@ -65,7 +65,7 @@ const ButtonPolymorph = <T extends ElementType = 'button'>(
         <Component
             className={classNames(cls.button, mods, additionalClasses)}
             ref={ref}
-            {...buttonProps}
+            {...buttonRestProps}
         >
             {children}
         </Component>

@@ -1,36 +1,21 @@
-import { Ref, forwardRef, memo } from 'react'
+import { SVGProps } from 'react'
 
-import { IconProps, IconWrapper } from '@/shared/assets/icons/IconWrapper/IconWrapper'
-import { ChevronUpIcon } from '@/shared/assets/icons/componentsIcons/ChevronUpIcon'
-
-export const CheckedIcon = (props: , ref: Ref<SVGSVGElement>) => {
-
+export const CheckedIcon = (props: SVGProps<SVGSVGElement>) => {
     return (
-        <IconWrapper
-            icon={
-                <svg
-                    fill={'none'}
-                    height={'100%'}
-                    ref={ref}
-                    viewBox={'0 0 18 18'}
-                    width={'100%'}
-                    xmlns={'http://www.w3.org/2000/svg'}
-                    {...props}
-                >
-                    <path
-                        d={
-                            'M16 0H2a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V2a2 2 0 00-2-2zM7 14L2 9l1.41-1.41L7 11.17l7.59-7.59L16 5l-9 9z'
-                        }
-                        fill={'currentColor'}
-                    />
-                </svg>
-            }
-            {...restProps}
-        />
+        <svg
+            fill={'none'}
+            height={'100%'}
+            viewBox={'0 0 18 18'}
+            width={'100%'}
+            xmlns={'http://www.w3.org/2000/svg'}
+            {...props}
+        >
+            <path
+                d={
+                    'M16 0H2a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V2a2 2 0 00-2-2zM7 14L2 9l1.41-1.41L7 11.17l7.59-7.59L16 5l-9 9z'
+                }
+                fill={'currentColor'}
+            />
+        </svg>
     )
 }
-
-const ForwardRef = forwardRef(ChevronUpIcon)
-const Memo = memo(ForwardRef)
-
-export default Memo
