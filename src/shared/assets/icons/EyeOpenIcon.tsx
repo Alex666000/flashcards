@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-export const EyeOpenIcon = (props: SVGProps<SVGSVGElement>) => (
+export const OpenEyeIcon = (props: SVGProps<SVGSVGElement>) => (
     <svg
         fill={'#fff'}
         height={24}
