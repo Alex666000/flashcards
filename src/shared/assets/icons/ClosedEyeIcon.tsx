@@ -1,6 +1,6 @@
-import { SVGProps } from 'react'
+import { SVGProps, memo } from 'react'
 
-export const ClosedEyeIcon = (props: SVGProps<SVGSVGElement>) => (
+export const EyeClosed = (props: SVGProps<SVGSVGElement>) => (
     <svg fill={'none'} height={24} width={24} xmlns={'http://www.w3.org/2000/svg'} {...props}>
         <g fill={'#fff'}>
             <path
@@ -21,3 +21,6 @@ export const ClosedEyeIcon = (props: SVGProps<SVGSVGElement>) => (
         </defs>
     </svg>
 )
+const Memo = memo(EyeClosed)
+
+export { Memo as ReactComponent }
