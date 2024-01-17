@@ -8,10 +8,10 @@ import {
 } from 'react'
 
 import { ClearButtonIcon } from '@/shared/assets/icons/ClearButtonIcon'
-import { EyeClosedIcon } from '@/shared/assets/icons/EyeClosedIcon'
+import { ClosedEyeIcon } from '@/shared/assets/icons/ClosedEyeIcon'
 import { EyeOpenIcon } from '@/shared/assets/icons/EyeOpenIcon'
 import { SearchIcon } from '@/shared/assets/icons/SearchIcon'
-import { Label } from '@/shared/ui/label'
+import { Label } from '@/shared/ui/label/label'
 import { useGetId } from '@/shared/ui/text-field/useGetId'
 import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
@@ -63,6 +63,7 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
         const inputType = isPasswordType && showPassword ? 'text' : type
 
         const showError = !!errorMessage && errorMessage.length > 0
+
         // крестик справа в инпуте при фокусе
         const isShowClearButton = onClearFieldClick && value?.length! > 0
 
@@ -128,7 +129,6 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
             <div aria-disabled={disabled} className={classNames.root}>
                 {label && <Label className={classNames.label} htmlFor={inputId} label={label} />}
                 <div className={classNames.fieldContainer}>
-                    {!!startIcon && <span className={classNames.startIcon}>{startIcon}</span>}
                     {search && <SearchIcon className={classNames.leadingIcon} />}
                     <input
                         aria-invalid={showError}
@@ -150,7 +150,7 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
                             onClick={toggleShowPassword}
                             type={'button'}
                         >
-                            {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+                            {showPassword ? <EyeOpenIcon /> : <ClosedEyeIcon />}
                         </button>
                     )}
                     {isShowClearButton && !isPasswordType && (
@@ -163,9 +163,8 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
                             <ClearButtonIcon />
                         </button>
                     )}
-                    {endIcon && <span className={classNames.endIcon}>{endIcon}</span>}
+                    {!!endIcon && <span className={classNames.endIcon}>{endIcon}</span>}
                 </div>
-
                 <Typography className={classNames.error} variant={'error'}>
                     {errorMessage}
                 </Typography>

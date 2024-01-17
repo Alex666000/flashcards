@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
 
-import * as LabelRadixUI from '@radix-ui/react-label'
+import * as LabelRadix from '@radix-ui/react-label'
 import { clsx } from 'clsx'
 
 import s from './label.module.scss'
@@ -15,9 +15,9 @@ export const Label: FC<LabelProps> = ({ children, className, label, ...rest }) =
     }
 
     return (
-        <LabelRadixUI.Root {...rest}>
+        <LabelRadix.Root {...rest}>
             {label && <div className={classNames.label}>{label}</div>}
             {children}
-        </LabelRadixUI.Root>
+        </LabelRadix.Root>
     )
 }

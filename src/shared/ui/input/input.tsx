@@ -3,15 +3,15 @@ import { ComponentProps, KeyboardEvent, ReactNode, forwardRef, useState } from '
 import { ClosedEyeIcon } from '@/shared/assets/icons/ClosedEyeIcon'
 import { EyeOpenIcon } from '@/shared/assets/icons/EyeOpenIcon'
 import { SearchIcon } from '@/shared/assets/icons/SearchIcon'
-import { Label } from '@/shared/ui/label'
+import { Label } from '@/shared/ui/label/label'
 import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
 
-import s from './text-field.module.scss'
+import s from './input.module.scss'
 
 import { useGetId } from './useGetId'
 
-export type TextFieldProps = {
+export type InputProps = {
     endIcon?: ReactNode
     errorMessage?: string
     label?: ReactNode
@@ -26,7 +26,7 @@ export type TextFieldProps = {
 } & ComponentProps<'input'>
 
 // НЕ УДАЛЯТЬ КОММЕНТ ПЕРЕД forwardRef - без него ломается tree shaking
-export const TextField_1 = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldProps>(
+export const Input = /* @__PURE__ */ forwardRef<HTMLInputElement, InputProps>(
     (
         {
             className,

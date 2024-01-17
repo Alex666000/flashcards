@@ -23,7 +23,7 @@
 
         background: transparent;
         border: 1px solid var(--color-dark-300);
-        outline: 0;
+        outline-color: transparent;
 
         transition: border-color 0.2s;
 
@@ -48,11 +48,6 @@
         &.hasLeadingIcon {
             padding-left: 41px;
         }
-    }
-
-    .label {
-        margin-bottom: 1px;
-        color: var(--color-dark-100);
     }
 
     .leadingIcon {

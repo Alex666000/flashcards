@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useCreateDeckMutation, useGetDecksQuery } from '@/entities/decks/api/decks-api'
-import { TextField } from '@/shared/ui/text-field'
+import { Card } from '@/shared/ui/card/card'
 import { Typography } from '@/shared/ui/typography'
 
 export const Decks = () => {
@@ -36,18 +36,10 @@ export const Decks = () => {
 
     return (
         <div>
+            <Card iconComponent={} />
             {/*<Link to={'/news'}>To News</Link>*/}
             {/*<hr />*/}
             {/*<Typography variant={'body2'}>Card name</Typography>*/}
-            {/*<TextField onChange={(e) => setCardName(e.target.value)} value={cardName} />*/}
-
-            <TextField
-                label={'hello'}
-                onChange={(e) => setValue(e.target.value)}
-                search
-                type={'search'}
-            />
-
             {/*<Typography style={{ color: 'green' }} variant={'h2'}>*/}
             {/*    Current page: {data?.pagination?.currentPage}*/}
             {/*</Typography>*/}

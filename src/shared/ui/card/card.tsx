@@ -23,38 +23,23 @@ const mapPaddingToClass: Record<CardPadding, string> = {
     '24': 'gap_24',
 }
 
-type OwnProps<T extends ElementType> = {
+type Props<T extends ElementType> = {
     as?: T // Любой компонент или тэг
     border?: CardBorder
-    children: ReactNode
+    children?: ReactNode
     className?: string
     contentClassName?: string
     fullWidth?: boolean
+    iconComponent?: ReactNode
     max?: boolean
     padding?: CardPadding
+    title?: string
+    variant?: 'info' | 'primary'
 }
-
-// Для иконок в карточке
-type ConditionalProps =
-    | {
-          iconComponent?: ReactNode
-          title?: string
-          variant?: 'primary'
-      }
-    | {
-          iconComponent?: never
-          title?: never
-          variant?: 'info'
-      }
-
-// props types
-export type CardProps<T extends ElementType> = OwnProps<T> &
-    ConditionalProps &
-    Omit<ComponentPropsWithoutRef<T>, keyof OwnProps<T>>
 
 // Polymorph component
 export const CardPolymorph = <T extends ElementType = 'div'>(
-    props: CardProps<T>,
+    props: Props<T>,
     ref: ForwardedRef<InferType<T>>
 ) => {
     const {
@@ -68,7 +53,7 @@ export const CardPolymorph = <T extends ElementType = 'div'>(
         padding = '8',
         title,
         variant = 'primary',
-        ...cardProps
+        ...rest
     } = props
     const isInfo = variant === 'info'
     const paddingClass = mapPaddingToClass[padding]
@@ -84,22 +69,24 @@ export const CardPolymorph = <T extends ElementType = 'div'>(
     }
 
     return (
-        <Component className={classes.box} ref={ref} {...cardProps}>
+        <Component className={classes.box} ref={ref} {...rest}>
             {title && (
                 <h3 className={classes.title}>
                     {iconComponent}
                     {title}
                 </h3>
             )}
-            <div className={classes.content}>{children}</div>
+            <div className={classes.content} ref={ref}>
+                {children}
+            </div>
         </Component>
     )
 }
 
 // Первый параметр props - потом ref
 export const Card = forwardRef(CardPolymorph) as <T extends ElementType = 'button'>(
-    props: CardProps<T> &
-        Omit<ComponentPropsWithoutRef<T>, keyof CardProps<T>> & {
+    props: Props<T> &
+        Omit<ComponentPropsWithoutRef<T>, keyof Props<T>> & {
             ref?: ForwardedRef<ElementRef<T>>
         }
 ) => ReturnType<typeof CardPolymorph>
