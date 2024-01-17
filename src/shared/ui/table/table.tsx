@@ -5,20 +5,24 @@ import { clsx } from 'clsx'
 
 import s from './table.module.scss'
 
-// - Radix - ужен для того чтобы делать компоненты которые тяжело стилизовать вручную
-// Таблица - кастомный не Радикс компонент, кастомный
+// Таблица - кастомный -- не Радикс компонент
 export const Table = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
     ({ className, ...rest }, ref) => {
-        const classNames = {
-            table: clsx(className, s.table),
-        }
-
-        return <table className={classNames.table} {...rest} ref={ref} />
+        return <table className={clsx(s.table, className)} {...rest} ref={ref} />
     }
 )
+
+// Шапка таблицы
 export const TableHead = forwardRef<ElementRef<'thead'>, ComponentPropsWithoutRef<'thead'>>(
     ({ ...rest }, ref) => {
         return <thead {...rest} ref={ref} />
+    }
+)
+
+// Ряды - колонки
+export const TableRow = forwardRef<ElementRef<'tr'>, ComponentPropsWithoutRef<'tr'>>(
+    ({ ...rest }, ref) => {
+        return <tr {...rest} ref={ref} />
     }
 )
 
@@ -29,36 +33,21 @@ export const TableBody = forwardRef<ElementRef<'tbody'>, ComponentPropsWithoutRe
     }
 )
 
-// строка по горизонтали
-export const TableRow = forwardRef<ElementRef<'tr'>, ComponentPropsWithoutRef<'tr'>>(
-    ({ ...rest }, ref) => {
-        return <tr {...rest} ref={ref} />
-    }
-)
-
-// Заголовки в рядах
+// Названия рядов (колонок)
 export const TableHeadCell = forwardRef<ElementRef<'th'>, ComponentPropsWithoutRef<'th'>>(
     ({ children, className, ...rest }, ref) => {
-        const classNames = {
-            headCell: clsx(className, s.headCell),
-        }
-
         return (
-            <th className={classNames.headCell} {...rest} ref={ref}>
+            <th className={clsx(className, s.headCell)} {...rest} ref={ref}>
                 <span>{children}</span>
             </th>
         )
     }
 )
 
-// Ячейка - Сюда выводится информация из таблицы в своих рядах
+// Ячейка в строках - Сюда выводится информация из таблицы в своих рядах
 export const TableCell = forwardRef<ElementRef<'td'>, ComponentPropsWithoutRef<'td'>>(
     ({ className, ...rest }, ref) => {
-        const classNames = {
-            cell: clsx(className, s.tableCell),
-        }
-
-        return <td className={classNames.cell} {...rest} ref={ref} />
+        return <td className={clsx(className, s.tableCell)} {...rest} ref={ref} />
     }
 )
 
@@ -67,13 +56,9 @@ export const TableEmpty: FC<ComponentProps<'div'> & { mb?: string; mt?: string }
     mb,
     mt = '89px',
 }) => {
-    const classNames = {
-        empty: clsx(className, s.empty),
-    }
-
     return (
         <Typography
-            className={classNames.empty}
+            className={clsx(className, s.empty)}
             style={{ marginBottom: mb, marginTop: mt }}
             variant={'h2'}
         >
@@ -135,3 +120,30 @@ export const TableHeader: FC<
         </TableHead>
     )
 }
+
+/*
+ <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableHeadCell>Name</TableHeadCell>
+                        <TableHeadCell>Cards</TableHeadCell>
+                        <TableHeadCell>Last Updated</TableHeadCell>
+                        <TableHeadCell>Created by</TableHeadCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {data?.items.map((deck) => {
+                        return (
+                            <TableRow key={deck.id}>
+                                <TableCell>{deck?.name}</TableCell>
+                                <TableCell>{deck?.cardsCount}</TableCell>
+                                <TableCell>
+                                    {new Date(deck?.updated).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>{deck?.author?.name}</TableCell>
+                            </TableRow>
+                        )
+                    })}
+                </TableBody>
+            </Table>
+ */

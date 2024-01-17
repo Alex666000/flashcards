@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useCreateDeckMutation, useGetDecksQuery } from '@/entities/decks/api/decks-api'
-import { Card } from '@/shared/ui/card/card'
+import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/shared/ui/table'
 import { Typography } from '@/shared/ui/typography'
 
 export const Decks = () => {
@@ -36,37 +36,36 @@ export const Decks = () => {
 
     return (
         <div>
-            <Card iconComponent={} />
             {/*<Link to={'/news'}>To News</Link>*/}
             {/*<hr />*/}
             {/*<Typography variant={'body2'}>Card name</Typography>*/}
             {/*<Typography style={{ color: 'green' }} variant={'h2'}>*/}
             {/*    Current page: {data?.pagination?.currentPage}*/}
             {/*</Typography>*/}
-            {/*<Table>*/}
-            {/*    <TableHead>*/}
-            {/*        <TableRow>*/}
-            {/*            <TableHeadCell>Name</TableHeadCell>*/}
-            {/*            <TableHeadCell>Cards</TableHeadCell>*/}
-            {/*            <TableHeadCell>Last Updated</TableHeadCell>*/}
-            {/*            <TableHeadCell>Created by</TableHeadCell>*/}
-            {/*        </TableRow>*/}
-            {/*    </TableHead>*/}
-            {/*    <TableBody>*/}
-            {/*        {data?.items.map((deck) => {*/}
-            {/*            return (*/}
-            {/*                <TableRow key={deck.id}>*/}
-            {/*                    <TableCell>{deck?.name}</TableCell>*/}
-            {/*                    <TableCell>{deck?.cardsCount}</TableCell>*/}
-            {/*                    <TableCell>*/}
-            {/*                        {new Date(deck?.updated).toLocaleDateString()}*/}
-            {/*                    </TableCell>*/}
-            {/*                    <TableCell>{deck?.author?.name}</TableCell>*/}
-            {/*                </TableRow>*/}
-            {/*            )*/}
-            {/*        })}*/}
-            {/*    </TableBody>*/}
-            {/*</Table>*/}
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableHeadCell>Name</TableHeadCell>
+                        <TableHeadCell>Cards</TableHeadCell>
+                        <TableHeadCell>Last Updated</TableHeadCell>
+                        <TableHeadCell>Created by</TableHeadCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {data?.items.map((deck) => {
+                        return (
+                            <TableRow key={deck.id}>
+                                <TableCell>{deck?.name}</TableCell>
+                                <TableCell>{deck?.cardsCount}</TableCell>
+                                <TableCell>
+                                    {new Date(deck?.updated).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>{deck?.author?.name}</TableCell>
+                            </TableRow>
+                        )
+                    })}
+                </TableBody>
+            </Table>
             {/*{createArray(1, data?.pagination?.totalPages ?? 0).map((i) => {*/}
             {/*    return (*/}
             {/*        <Button key={i} onClick={() => setCurrentPage(i)}>*/}
