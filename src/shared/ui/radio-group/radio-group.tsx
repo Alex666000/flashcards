@@ -42,3 +42,8 @@ export const RadioGroup: FC<RadioGroupProps> = ({ errorMessage, options, ...rest
         </RadioGr.Root>
     )
 }
+
+/*
+- RadioGr.Item - каждая кнопка радио-группы
+- RadioGr.Indicator - индикатор (кружок) для выбранной радиокнопки
+ */

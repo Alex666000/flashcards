@@ -70,3 +70,7 @@ export const TypographyRender = <T extends ElementType = 'p'>(
 export const Typography = forwardRef(TypographyRender) as <T extends ElementType = 'p'>(
     props: TypographyProps<T> & { ref?: Ref<ElementRef<T>> }
 ) => ReactElement
+
+/*
+- <Typography className={classes.label} variant={'body2'}> -- body2 - основной текст проекта
+ */

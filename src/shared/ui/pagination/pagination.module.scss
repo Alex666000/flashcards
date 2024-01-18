@@ -1,9 +1,12 @@
 @import '../../../app/styles/mixins';
 
 .root {
-    @include flex(row, 24px, 24px, center);
-
-    flex-wrap: wrap;
+    // @include flex(row, 24px, 24px, center);
+    display: flex;
+    flex-direction: row;
+    gap: 24px 24px;
+    align-items: center;
+    justify-content: flex-start;
 
     .dots {
         display: grid;
@@ -16,10 +19,20 @@
     }
 
     .selectBlock {
-        @include flex(row, 0, 12px, center);
+        // @include flex(row, 0, 12px, center);
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        align-items: center;
+        justify-content: flex-start;
     }
 }
 
 .buttons {
-    @include flex(row, 0, 12px, center);
+    // @include flex(row, 0, 12px, center);
+    display: flex;
+    flex-direction: row;
+    gap: 0 12px;
+    align-items: center;
+    justify-content: flex-start;
 }

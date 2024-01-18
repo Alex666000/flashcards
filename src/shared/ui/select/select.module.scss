@@ -15,9 +15,14 @@
 }
 
 .trigger {
-    @include flex(row, 0, 12px, center, space-between);
-
     cursor: pointer;
+
+    // @include flex(row, 0, 12px, center, space-between);
+    display: flex;
+    flex-direction: row;
+    gap: 0 12px;
+    align-items: center;
+    justify-content: space-between;
 
     width: 100%;
     padding: 0.37rem 0.75rem;

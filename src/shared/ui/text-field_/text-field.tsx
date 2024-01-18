@@ -37,11 +37,12 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
         }
 
         return (
-            <div className={classes.root}>
+            <div aria-disabled={rest.disabled} className={classes.root}>
                 <Typography as={'label'} className={classes.label} variant={'body2'}>
                     {label}
                     <div className={s.container}>
                         <input
+                            aria-invalid={!!errorMessage && errorMessage.length > 0}
                             className={classes.input}
                             ref={ref}
                             type={isPasswordType ? finalType : 'text'}
