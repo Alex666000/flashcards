@@ -27,6 +27,9 @@ export const NavigationBlock: FC<Props> = ({ currentPage, onPageChange, paginati
             >
                 {'❮'}
             </NavigateButton>
+
+            {/*данный участок кода отвечает за создание компонентов "КНОПОК СТРАНИЦ И МНОГОТОЧИЯ"*/}
+            {/*НАВИГАЦИИ, а также за обработку событий клика по этим кнопкам*/}
             {paginationRange.map((btn, index) => {
                 const onPageClick = (btn: number) => () => {
                     onPageChange(btn)

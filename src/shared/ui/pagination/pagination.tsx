@@ -14,7 +14,7 @@ export type PaginationProps = {
     onPageChange: (newPage: number) => void // Колбэк при изменении страницы
     onPageSizeChange: (newPageSize: number) => void // Колбэк при изменении размера страницы: newPageSize
     pageSize: number // Размер страницы (количество элементов на странице)
-    siblingCount?: number // Количество "соседних" кнопок для отображения в пагинации
+    siblingCount?: number // количество "соседних" страниц, которые отображаются в пагинации вокруг текущей страницы
     totalCount?: number // Общее количество элементов
 }
 /**
@@ -32,7 +32,7 @@ export const Pagination: FC<PaginationProps> = memo(
         siblingCount,
         totalCount = 10,
     }) => {
-        // usePagination - для генерации массива, страниц пагинации на экране
+        // usePagination - для генерации массива, кол-ва страниц пагинации на экране
         const paginationRange = usePagination({
             currentPage,
             pageSize,
@@ -46,7 +46,7 @@ export const Pagination: FC<PaginationProps> = memo(
 
         return (
             <div className={clsx(s.root, className)}>
-                {/* блок с кнопками навигации */}
+                {/* блок с кнопками навигации влево и вправо */}
                 <NavigationBlock
                     currentPage={currentPage}
                     onPageChange={onPageChange}
