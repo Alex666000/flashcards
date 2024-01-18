@@ -1,8 +1,8 @@
 import { ComponentProps, KeyboardEvent, ReactNode, forwardRef, useState } from 'react'
 
-import { ClosedEyeIcon } from '@/shared/assets/icons/ClosedEyeIcon'
-import { EyeOpenIcon } from '@/shared/assets/icons/EyeOpenIcon'
-import { SearchIcon } from '@/shared/assets/icons/SearchIcon'
+import { ClosedEyeIcon } from '@/shared/assets/icons/closed-eyeIcon'
+import { OpenedEyeIcon } from '@/shared/assets/icons/openedEyeIcon'
+import { SearchIcon } from '@/shared/assets/icons/searchIcon'
 import { Label } from '@/shared/ui/label/label'
 import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
@@ -116,7 +116,7 @@ export const Input = /* @__PURE__ */ forwardRef<HTMLInputElement, InputProps>(
                             onClick={toggleShowPassword}
                             type={'button'}
                         >
-                            {showPassword ? <EyeOpenIcon /> : <ClosedEyeIcon />}
+                            {showPassword ? <OpenedEyeIcon /> : <ClosedEyeIcon />}
                         </button>
                     )}
                     {isShowClearButton && !isPasswordType && (

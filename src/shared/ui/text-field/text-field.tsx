@@ -7,10 +7,7 @@ import {
     useState,
 } from 'react'
 
-import { ClearButtonIcon } from '@/shared/assets/icons/ClearButtonIcon'
-import { ClosedEyeIcon } from '@/shared/assets/icons/ClosedEyeIcon'
-import { EyeOpenIcon } from '@/shared/assets/icons/EyeOpenIcon'
-import { SearchIcon } from '@/shared/assets/icons/SearchIcon'
+import { ClosedEyeIcon, OpenedEyeIcon, SearchIcon } from '@/shared/assets'
 import { Label } from '@/shared/ui/label/label'
 import { useGetId } from '@/shared/ui/text-field/useGetId'
 import { Typography } from '@/shared/ui/typography'
@@ -150,7 +147,7 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
                             onClick={toggleShowPassword}
                             type={'button'}
                         >
-                            {showPassword ? <EyeOpenIcon /> : <ClosedEyeIcon />}
+                            {showPassword ? <OpenedEyeIcon /> : <ClosedEyeIcon />}
                         </button>
                     )}
                     {isShowClearButton && !isPasswordType && (
@@ -159,9 +156,7 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
                             disabled={disabled}
                             onClick={handleClearClick}
                             type={'button'}
-                        >
-                            <ClearButtonIcon />
-                        </button>
+                        ></button>
                     )}
                     {!!endIcon && <span className={classNames.endIcon}>{endIcon}</span>}
                 </div>

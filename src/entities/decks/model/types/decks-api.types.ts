@@ -68,12 +68,12 @@ export type GetDecksResponseItems = {
 // types передаваемых квери параметров (https://api.flashcards.andrii.es/v1/decks?orderBy=name-desc&currentPage=2)
 // Квери параметры: ?orderBy=name-desc&currentPage=2 -- после знака ? пара ключ=значение&ключ=значение и тд.
 export type GetDecksArgs = {
-    authorId: string // переключаться между моими карточками и всеми
-    currentPage: number // текущая страница - тк возвращаются пагинированные запросы - по дефолту приходит 1 стр.на ней 10 элементов на странице
-    itemsPerPage: number
+    authorId: string // переключаться между моими карточками и всеми чужими
+    currentPage: number // текущая страница - тк возвращаются пагинированные запросы - по дефолту приходит 1 стр. на ней 10 элементов на странице
+    itemsPerPage: number // предназначен для указания количества элементов (колод) на одной странице при пагинации
     maxCardsCount: number //  например хотим найти все колоды у которых больше 5 карточек, например от 5-10 то передаем: minCardsCount = 5, maxCardsCount=10
     minCardsCount: number //  например хотим найти все колоды у которых меньше 5 карточек
-    name: string // поиск среди колод нужную
+    name: string // поиск среди колод нужную по имени
     orderBy: string // порядок сортировки
 }
 

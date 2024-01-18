@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { useCreateDeckMutation, useGetDecksQuery } from '@/entities/decks/api/decks-api'
+import { Button } from '@/shared/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/shared/ui/table'
+import { TextField, TextField_1 } from '@/shared/ui/text-field_'
 import { Typography } from '@/shared/ui/typography'
 
 export const Decks = () => {
@@ -36,12 +39,13 @@ export const Decks = () => {
 
     return (
         <div>
-            {/*<Link to={'/news'}>To News</Link>*/}
-            {/*<hr />*/}
-            {/*<Typography variant={'body2'}>Card name</Typography>*/}
-            {/*<Typography style={{ color: 'green' }} variant={'h2'}>*/}
-            {/*    Current page: {data?.pagination?.currentPage}*/}
-            {/*</Typography>*/}
+            <Link to={'/news'}>To News</Link>
+            <hr />
+            <Typography variant={'body2'}>Card name</Typography>
+            <Typography style={{ color: 'green' }} variant={'h2'}>
+                Current page: {data?.pagination?.currentPage}
+            </Typography>
+            <TextField type={'password'} />
             <Table>
                 <TableHead>
                     <TableRow>
@@ -66,17 +70,18 @@ export const Decks = () => {
                     })}
                 </TableBody>
             </Table>
-            {/*{createArray(1, data?.pagination?.totalPages ?? 0).map((i) => {*/}
-            {/*    return (*/}
-            {/*        <Button key={i} onClick={() => setCurrentPage(i)}>*/}
-            {/*            {i}*/}
-            {/*        </Button>*/}
-            {/*    )*/}
-            {/*})}*/}
+            {createArray(1, data?.pagination?.totalPages ?? 0).map((i) => {
+                return (
+                    <Button key={i} onClick={() => setCurrentPage(i)}>
+                        {i}
+                    </Button>
+                )
+            })}
         </div>
     )
 }
 
+// Функция для пагинации
 const createArray = (startNumber: number, length: number) => {
     return Array.from({ length }, (_, index) => startNumber + index)
 }

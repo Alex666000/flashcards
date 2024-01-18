@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-import CheckedIcon from '@/shared/assets/icons/CheckedIcon'
+import { CheckedIcon } from '@/shared/assets'
 import * as CheckboxRadix from '@radix-ui/react-checkbox'
 import * as LabelRadix from '@radix-ui/react-label'
 import { clsx } from 'clsx'
@@ -15,14 +15,23 @@ export type CheckboxProps = {
     id?: string
     label?: string
     onChange?: (checked: boolean) => void
-    position?: 'left'
+    position?: 'default' | 'left'
     required?: boolean
 } & Omit<ComponentPropsWithoutRef<typeof CheckboxRadix.Root>, 'checked' | 'onCheckedChange'>
 
 export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxProps>(
     (props, ref) => {
-        const { checked, className, disabled, id, label, onChange, position, required, ...rest } =
-            props
+        const {
+            checked,
+            className,
+            disabled,
+            id,
+            label,
+            onChange,
+            position = 'left',
+            required,
+            ...rest
+        } = props
 
         const classNames = {
             buttonWrapper: clsx(
