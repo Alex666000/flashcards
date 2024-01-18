@@ -1,7 +1,7 @@
 import { LogoutIcon } from '@/shared/assets/icons/componentsIcons'
 import { AvatarIcon } from '@/shared/assets/icons/componentsIcons/AvatarIcon'
+import { DropdownMenu } from '@/shared/ui/dropdown/dropdown'
 import { DropdownItem } from '@/shared/ui/dropdown/dropdown-item'
-import { DropdownMenu } from '@/shared/ui/dropdown/dropdown-menu'
 import { DropdownSeparator } from '@/shared/ui/dropdown/dropdown-separator'
 import { Typography } from '@/shared/ui/typography'
 

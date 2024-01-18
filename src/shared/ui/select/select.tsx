@@ -1,16 +1,20 @@
 import { FC, ReactNode } from 'react'
 
 import { Icon } from '@/shared/ui/icon/icon'
-import { Option } from '@/shared/ui/radio-group'
 import { Typography } from '@/shared/ui/typography'
 import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
 import s from './select.module.scss'
 
+export type Option = {
+    label: string
+    value: string
+}
+
 export type SelectPropsType = {
     className?: string
-    defaultValue?: any
+    defaultValue?: string
     disabled?: boolean
     label?: string
     onValueChange?: (value: any) => void

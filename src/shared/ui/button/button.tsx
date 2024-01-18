@@ -22,17 +22,14 @@ export const ButtonVariant = [
     'outline',
 ] as const
 
-export type ButtonSize = 'l' | 'm' | 'xl'
-export type ButtonColor = 'error' | 'normal' | 'success'
-
 // props types
 export type ButtonProps<T extends ElementType = 'button'> = {
     as?: T // Любой компонент или тэг какой хотим отрисовать
     children?: ReactNode
     className?: string
-    color?: ButtonColor
+    color?: 'error' | 'normal' | 'success'
     fullWidth?: boolean
-    size?: ButtonSize
+    size?: 'l' | 'm' | 'xl'
     variant?: (typeof ButtonVariant)[number]
 } & ComponentPropsWithoutRef<T>
 

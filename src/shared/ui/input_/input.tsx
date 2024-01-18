@@ -125,7 +125,7 @@ export const Input = /* @__PURE__ */ forwardRef<HTMLInputElement, InputProps>(
                             onClick={handleClearClick}
                             type={'button'}
                         >
-                            {<ClosedEyeIcon color={'var(--color-border-input-active)'} />}
+                            {<ClosedEyeIcon color={'var(--color-border-input_-active)'} />}
                         </button>
                     )}
                     {!!endIcon && <span className={classNames.iconEnd}>{endIcon}</span>}

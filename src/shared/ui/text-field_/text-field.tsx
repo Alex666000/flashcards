@@ -17,16 +17,19 @@ type PropsType = TextFieldProps & Omit<ComponentPropsWithoutRef<'input'>, keyof 
 
 export const TextField = forwardRef<HTMLInputElement, PropsType>(
     ({ className, clearField, errorMessage, label, type = 'text', ...rest }, ref) => {
+        // Локальное состояние для отображения пароля
         const [showPassword, setShowPassword] = useState(false)
 
+        // Проверка типа поля на пароль и поиск
         const isPasswordType = type === 'password'
-
         const isSearchType = type === 'search'
 
+        // Отображение кнопки очистки для поля поиска
         const displayClearButton = isSearchType && clearField && rest.value
-
+        // Определение окончательного типа в зависимости от отображения пароля
         const finalType = getFinalType(type, showPassword)
 
+        // Обработчик клика для отображения/скрытия пароля
         const passwordHandler = () => setShowPassword((prev) => !prev)
 
         const classes = {
@@ -87,7 +90,11 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
         )
     }
 )
-
+/**
+ * getFinalType принимает тип поля ('password', 'search', 'text') и флаг showPassword, указывающий,
+ * нужно ли отображать пароль. В зависимости от этих параметров,
+ * функция возвращает окончательный тип поля для использования в компоненте input
+ */
 function getFinalType(type: TextFieldProps['type'], showPassword: boolean) {
     if (type === 'password' && !showPassword) {
         return 'password'

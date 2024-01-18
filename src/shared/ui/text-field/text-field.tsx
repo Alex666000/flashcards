@@ -56,7 +56,7 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
 
         const isPasswordType = type === 'password'
 
-        const inputId = useGetId(id) + '-input'
+        const inputId = useGetId(id) + '-input_'
         const inputType = isPasswordType && showPassword ? 'text' : type
 
         const showError = !!errorMessage && errorMessage.length > 0
