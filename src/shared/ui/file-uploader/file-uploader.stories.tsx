@@ -1,43 +1,42 @@
+import { Button } from '@/shared/ui/button'
+import { FileUploader } from '@/shared/ui/file-uploader/file-uploader'
+import { Icon } from '@/shared/ui/icon/icon'
+import { IconButton } from '@/shared/ui/icon-button'
 import { Meta } from '@storybook/react'
 
-import { Button } from '@/components/ui/button'
-import { FileUploader } from '@/components/ui/file-uploader/file-uploader.tsx'
-import { Icon } from '@/components/ui/icon/icon.tsx'
-import { IconButton } from '@/components/ui/icon-button'
-
 const meta = {
-  title: 'Components/FileUploader',
-  component: FileUploader,
-  tags: ['autodocs'],
+    component: FileUploader,
+    tags: ['autodocs'],
+    title: 'Components/FileUploader',
 } satisfies Meta<typeof FileUploader>
 
 export default meta
 
 export const DefaultModeButton = {
-  render: () => {
-    return <FileUploader name="file" onChange={() => {}} />
-  },
+    render: () => {
+        return <FileUploader name={'file'} onChange={() => {}} />
+    },
 }
 
 export const FullWidthButton = {
-  render: () => {
-    return (
-      <FileUploader name="file" onChange={() => {}} as={Button} fullWidth>
-        Choose File
-      </FileUploader>
-    )
-  },
+    render: () => {
+        return (
+            <FileUploader as={Button} fullWidth name={'file'} onChange={() => {}}>
+                Choose File
+            </FileUploader>
+        )
+    },
 }
 
 export const IconButtonUploader = {
-  render: () => {
-    return (
-      <FileUploader
-        name="file"
-        icon={<Icon name="more" width={20} height={20} />}
-        onChange={() => {}}
-        as={IconButton}
-      />
-    )
-  },
+    render: () => {
+        return (
+            <FileUploader
+                as={IconButton}
+                icon={<Icon height={20} name={'more'} width={20} />}
+                name={'file'}
+                onChange={() => {}}
+            />
+        )
+    },
 }

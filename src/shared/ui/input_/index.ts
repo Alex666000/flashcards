@@ -1,2 +1,2 @@
-export * from './text-field'
+export * from './input'
 export { useGetId } from './useGetId'

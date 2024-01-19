@@ -2,8 +2,9 @@ import { Avatar } from '@/shared/ui/avatar'
 import { DropDownItem } from '@/shared/ui/drop-down_'
 import { DropDown, DropDownItemWithIcon } from '@/shared/ui/dropdown'
 import { Icon } from '@/shared/ui/icon/icon'
-import { ProfileInfo } from '@/widgets/header/profile-info'
 import { Meta } from '@storybook/react'
+
+import { ProfileInfo } from '../../../widgets/profile-info'
 
 const meta = {
     component: DropDown,

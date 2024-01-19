@@ -1,1 +1,5 @@
 export * from './pagination'
+export { NavigateButton } from './navigate-button/navigate-button'
+export { NavigationBlock } from './navigation-block/navigation-block'
+export { PageSizeSelect } from './page-size-select/page-size-select'
+export { usePagination } from './usePagination'

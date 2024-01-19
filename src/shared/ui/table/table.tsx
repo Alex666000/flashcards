@@ -1,125 +1,59 @@
-import { ComponentProps, ComponentPropsWithoutRef, ElementRef, FC, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, FC, forwardRef } from 'react'
 
-import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
 
 import s from './table.module.scss'
 
 // Таблица - кастомный -- не Радикс компонент
-export const Table = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
+export const Root = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
     ({ className, ...rest }, ref) => {
-        return <table className={clsx(s.table, className)} {...rest} ref={ref} />
+        return <table className={clsx(s.root, className)} {...rest} ref={ref} />
     }
 )
-
 // Шапка таблицы
-export const TableHead = forwardRef<ElementRef<'thead'>, ComponentPropsWithoutRef<'thead'>>(
-    ({ ...rest }, ref) => {
-        return <thead {...rest} ref={ref} />
+export const Head = forwardRef<ElementRef<'thead'>, ComponentPropsWithoutRef<'thead'>>(
+    ({ className, ...rest }, ref) => {
+        return <thead className={clsx(s.head, className)} {...rest} ref={ref} />
     }
 )
-
-// Ряды - колонки
-export const TableRow = forwardRef<ElementRef<'tr'>, ComponentPropsWithoutRef<'tr'>>(
-    ({ ...rest }, ref) => {
-        return <tr {...rest} ref={ref} />
-    }
-)
-
-// Основная инфа таблицы - data по которым мапинся...
-export const TableBody = forwardRef<ElementRef<'tbody'>, ComponentPropsWithoutRef<'tbody'>>(
-    ({ ...rest }, ref) => {
-        return <tbody {...rest} ref={ref} />
-    }
-)
-
 // Названия рядов (колонок)
-export const TableHeadCell = forwardRef<ElementRef<'th'>, ComponentPropsWithoutRef<'th'>>(
+export const HeadCell = forwardRef<ElementRef<'th'>, ComponentPropsWithoutRef<'th'>>(
     ({ children, className, ...rest }, ref) => {
         return (
-            <th className={clsx(className, s.headCell)} {...rest} ref={ref}>
+            <th className={clsx(s.headCell, className)} {...rest} ref={ref}>
                 <span>{children}</span>
             </th>
         )
     }
 )
-
-// Ячейка в строках - Сюда выводится информация из таблицы в своих рядах
-export const TableCell = forwardRef<ElementRef<'td'>, ComponentPropsWithoutRef<'td'>>(
+// Основная инфа таблицы - data по которым мапинся...
+export const Body = forwardRef<ElementRef<'tbody'>, ComponentPropsWithoutRef<'tbody'>>(
     ({ className, ...rest }, ref) => {
-        return <td className={clsx(className, s.tableCell)} {...rest} ref={ref} />
+        return <tbody className={clsx(s.body, className)} {...rest} ref={ref} />
+    }
+)
+// Ряды - колонки
+export const Row = forwardRef<ElementRef<'tr'>, ComponentPropsWithoutRef<'tr'>>(
+    ({ className, ...rest }, ref) => {
+        return <tr className={clsx(s.row, className)} {...rest} ref={ref} />
+    }
+)
+// Ячейка в строках - Сюда выводится информация из таблицы в своих рядах
+export const Cell = forwardRef<ElementRef<'td'>, ComponentPropsWithoutRef<'td'>>(
+    ({ className, ...rest }, ref) => {
+        const classes = clsx(s.cell, className)
+
+        return <td className={classes} {...rest} ref={ref} />
     }
 )
 
-export const TableEmpty: FC<ComponentProps<'div'> & { mb?: string; mt?: string }> = ({
-    className,
-    mb,
-    mt = '89px',
-}) => {
-    return (
-        <Typography
-            className={clsx(className, s.empty)}
-            style={{ marginBottom: mb, marginTop: mt }}
-            variant={'h2'}
-        >
-            Пока тут еще нет данных! :(
-        </Typography>
-    )
+const Empty: FC<ComponentPropsWithoutRef<'div'>> = ({ className, ...rest }) => {
+    const classes = clsx(s.empty, className)
+
+    return <div className={classes} {...rest} />
 }
-export type Column = {
-    key: string
-    sortable?: boolean
-    title: string
-}
-export type Sort = {
-    direction: 'asc' | 'desc'
-    key: string
-} | null
 
-export const TableHeader: FC<
-    Omit<
-        ComponentPropsWithoutRef<'thead'> & {
-            columns: Column[]
-            onSort?: (sort: Sort) => void
-            sort?: Sort
-        },
-        'children'
-    >
-> = ({ columns, onSort, sort, ...restProps }) => {
-    const handleSort = (key: string, sortable?: boolean) => () => {
-        if (!onSort || !sortable) {
-            return
-        }
-
-        if (sort?.key !== key) {
-            return onSort({ direction: 'asc', key })
-        }
-
-        if (sort.direction === 'desc') {
-            return onSort(null)
-        }
-
-        return onSort({
-            direction: sort?.direction === 'asc' ? 'desc' : 'asc',
-            key,
-        })
-    }
-
-    return (
-        <TableHead {...restProps}>
-            <TableRow>
-                {columns.map(({ key, sortable = true, title }) => (
-                    <TableHeadCell key={key} onClick={handleSort(key, sortable)}>
-                        {title}
-                        {sort && sort.key === key && (
-                            <span>{sort.direction === 'asc' ? '▲' : '▼'}</span>
-                        )}
-                    </TableHeadCell>
-                ))}
-            </TableRow>
-        </TableHead>
-    )
-}
+export const Table = { Body, Cell, Empty, Head, HeadCell, Root, Row }
 
 /*
  <Table>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { useCreateDeckMutation, useGetDecksQuery } from '@/entities/decks/api/decks-api'
 import { Button } from '@/shared/ui/button'
-import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/shared/ui/table'
+import { Body, Cell, Head, HeadCell, Row, Table } from '@/shared/ui/table'
 import { TextField, TextField_1 } from '@/shared/ui/text-field_'
 import { Typography } from '@/shared/ui/typography'
 
@@ -47,28 +47,26 @@ export const Decks = () => {
             </Typography>
             <TextField type={'password'} />
             <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableHeadCell>Name</TableHeadCell>
-                        <TableHeadCell>Cards</TableHeadCell>
-                        <TableHeadCell>Last Updated</TableHeadCell>
-                        <TableHeadCell>Created by</TableHeadCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
+                <Head>
+                    <Row>
+                        <HeadCell>Name</HeadCell>
+                        <HeadCell>Cards</HeadCell>
+                        <HeadCell>Last Updated</HeadCell>
+                        <HeadCell>Created by</HeadCell>
+                    </Row>
+                </Head>
+                <Body>
                     {data?.items.map((deck) => {
                         return (
-                            <TableRow key={deck.id}>
-                                <TableCell>{deck?.name}</TableCell>
-                                <TableCell>{deck?.cardsCount}</TableCell>
-                                <TableCell>
-                                    {new Date(deck?.updated).toLocaleDateString()}
-                                </TableCell>
-                                <TableCell>{deck?.author?.name}</TableCell>
-                            </TableRow>
+                            <Row key={deck.id}>
+                                <Cell>{deck?.name}</Cell>
+                                <Cell>{deck?.cardsCount}</Cell>
+                                <Cell>{new Date(deck?.updated).toLocaleDateString()}</Cell>
+                                <Cell>{deck?.author?.name}</Cell>
+                            </Row>
                         )
                     })}
-                </TableBody>
+                </Body>
             </Table>
             {createArray(1, data?.pagination?.totalPages ?? 0).map((i) => {
                 return (

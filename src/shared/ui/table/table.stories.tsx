@@ -1,130 +1,172 @@
+import type { Meta, StoryObj } from '@storybook/react'
+
+import { CSSProperties } from 'react'
+
+import { Button } from '@/shared/ui/button'
 import { Typography } from '@/shared/ui/typography'
-import { Meta } from '@storybook/react'
 
-import { Table, TableBody, TableCell, TableEmpty, TableHead, TableHeadCell, TableRow } from './'
+import { Table } from './'
 
-export default {
-    component: Table,
+const meta = {
+    component: Table.Root,
+    tags: ['autodocs'],
     title: 'Components/Table',
-} as Meta<typeof Table>
+} satisfies Meta<typeof Table.Root>
 
-export const Default = {
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
     args: {
         children: (
             <>
-                <TableHead>
-                    <TableRow>
-                        <TableHeadCell>Название</TableHeadCell>
-                        <TableHeadCell align={'center'}>Описание</TableHeadCell>
-                        <TableHeadCell>Ссылка</TableHeadCell>
-                        <TableHeadCell>Тип</TableHeadCell>
-                        <TableHeadCell>Вид</TableHeadCell>
-                        <TableHeadCell />
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow>
-                        <TableCell>Web Basic</TableCell>
-                        <TableCell>
+                <Table.Head>
+                    <Table.Row>
+                        <Table.HeadCell>№</Table.HeadCell>
+                        <Table.HeadCell>Description</Table.HeadCell>
+                        <Table.HeadCell>Link</Table.HeadCell>
+                        <Table.HeadCell>Type</Table.HeadCell>
+                        <Table.HeadCell>Date</Table.HeadCell>
+                        <Table.HeadCell />
+                    </Table.Row>
+                </Table.Head>
+                <Table.Body>
+                    <Table.Row>
+                        <Table.Cell>1</Table.Cell>
+                        <Table.Cell>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                             tempor incididunt ut sed do eiusmod tempoei usmodr sit amet, consectetur
                             adipiscing elit, sed do...
-                        </TableCell>
-                        <TableCell>
+                        </Table.Cell>
+                        <Table.Cell>
                             <Typography
                                 as={'a'}
-                                href={'https://it-incubator.io/'}
+                                href={'https://react.dev/'}
                                 target={'_blank'}
                                 variant={'link1'}
                             >
-                                Какая-то ссылка кудато на какой-то источник с информациейо ссылка
-                                кудато на какой-то источник
+                                Docs
                             </Typography>
-                        </TableCell>
-                        <TableCell>Основной</TableCell>
-                        <TableCell>Читать</TableCell>
-                        <TableCell>🦎</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>Web Basic</TableCell>
-                        <TableCell>
+                        </Table.Cell>
+                        <Table.Cell>Frontend</Table.Cell>
+                        <Table.Cell>29.08.2023</Table.Cell>
+                        <Table.Cell> 🚀</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.Cell>2</Table.Cell>
+                        <Table.Cell>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                             tempor incididunt ut sed do eiusmod tempoei usmodr sit amet, consectetur
                             adipiscing elit, sed do...
-                        </TableCell>
-                        <TableCell>
-                            Какая-то ссылка кудато на какой-то источник с информациейо ссылка кудато
-                            на какой-то источник
-                        </TableCell>
-                        <TableCell>Основной</TableCell>
-                        <TableCell>Читать</TableCell>
-                        <TableCell>✨</TableCell>
-                    </TableRow>
-                </TableBody>
+                        </Table.Cell>
+                        <Table.Cell>
+                            <Typography
+                                as={'a'}
+                                href={'https://react.dev/'}
+                                target={'_blank'}
+                                variant={'link1'}
+                            >
+                                Docs
+                            </Typography>
+                        </Table.Cell>
+                        <Table.Cell>Frontend</Table.Cell>
+                        <Table.Cell>29.08.2023</Table.Cell>
+                        <Table.Cell>👨🏼‍💻</Table.Cell>
+                    </Table.Row>
+                </Table.Body>
             </>
         ),
     },
 }
 
+const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor'
+
 const data = [
     {
-        category: 'Основной',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        date: '30.08.2023',
+        description: description,
         id: '01',
-        link: 'Какая-то ссылка кудато на какой-то источник с информациейо ссылка кудато на какой-то',
-        title: 'Web Basic',
-        type: 'Читать',
+        link: {
+            path: 'https://react.dev/',
+            title: 'React Docs',
+        },
+        number: 1,
+        type: 'Frontend',
     },
     {
-        category: 'Основной',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        date: '30.08.2023',
+        description: description,
         id: '02',
-        link: 'Какая-то ссылка куда-то',
-        title: 'Web Basic',
-        type: 'Читать',
+        link: {
+            path: 'https://nodejs.org/en/docs',
+            title: 'NodeJS Docs',
+        },
+        number: 2,
+        type: 'Backend',
     },
     {
-        category: 'Основной',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        date: '30.08.2023',
+        description: description,
         id: '03',
-        link: 'Какая-то ссылка кудато на какой-то источник с информациейо ссылка кудато на какой-то. Какая-то ссылка кудато на какой-то источник с информациейо ссылка куда-то на какой-то',
-        title: 'Web Basic',
-        type: 'Читать',
+        link: {
+            path: 'https://git-scm.com/doc',
+            title: 'Git Docs',
+        },
+        number: 3,
+        type: 'Devops',
     },
 ]
 
-export const WithMapMethod = {
+export const MappedTable: Story = {
     args: {
         children: (
             <>
-                <TableHead>
-                    <TableRow>
-                        <TableHeadCell>Название</TableHeadCell>
-                        <TableHeadCell align={'center'}>Описание</TableHeadCell>
-                        <TableHeadCell>Ссылка</TableHeadCell>
-                        <TableHeadCell>Тип</TableHeadCell>
-                        <TableHeadCell>Вид</TableHeadCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((item) => (
-                        <TableRow key={item.id}>
-                            <TableCell>{item.title}</TableCell>
-                            <TableCell>{item.description}</TableCell>
-                            <TableCell>{item.link}</TableCell>
-                            <TableCell>{item.category}</TableCell>
-                            <TableCell>{item.type}</TableCell>
-                        </TableRow>
+                <Table.Head>
+                    <Table.HeadCell>№</Table.HeadCell>
+                    <Table.HeadCell>Description</Table.HeadCell>
+                    <Table.HeadCell>Link</Table.HeadCell>
+                    <Table.HeadCell>Type</Table.HeadCell>
+                    <Table.HeadCell>Date</Table.HeadCell>
+                </Table.Head>
+                <Table.Body>
+                    {data.map((el) => (
+                        <Table.Row key={el.id}>
+                            <Table.Cell>{el.number}</Table.Cell>
+                            <Table.Cell>{el.description}</Table.Cell>
+                            <Table.Cell>
+                                <Typography
+                                    as={'a'}
+                                    href={el.link.path}
+                                    target={'_blank'}
+                                    variant={'link1'}
+                                >
+                                    {el.link.title}
+                                </Typography>
+                            </Table.Cell>
+                            <Table.Cell>{el.type}</Table.Cell>
+                            <Table.Cell>{el.date}</Table.Cell>
+                        </Table.Row>
                     ))}
-                </TableBody>
+                </Table.Body>
             </>
         ),
     },
 }
 
 export const Empty = {
-    render: () => <TableEmpty />,
+    render: () => {
+        const styles: CSSProperties = {
+            color: 'var(--color-dark-100)',
+            marginBottom: '15px',
+        }
+
+        return (
+            <Table.Empty>
+                <Typography style={styles} variant={'body1'}>
+                    This pack is empty. Click add new card to fill this pack
+                </Typography>
+                <Button>Add New Card</Button>
+            </Table.Empty>
+        )
+    },
 }
