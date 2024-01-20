@@ -1,18 +1,23 @@
 import { StrictMode } from 'react'
-import { Provider } from 'react-redux'
 
 import { App } from '@/app/App'
-import { store } from '@/app/store/store'
+import { ErrorBoundary } from '@/app/providers/error-boundary'
+import { StoreProvider } from '@/app/providers/store'
 import { createRoot } from 'react-dom/client'
 
+// подключаем шрифты и стили в Проект
 import './app/styles/index.scss'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-    <StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </StrictMode>
+    <StoreProvider>
+        <ErrorBoundary>
+            {/*<ForceUpdateProvider>*/}
+            <StrictMode>
+                <App />
+            </StrictMode>
+            {/*</ForceUpdateProvider>*/}
+        </ErrorBoundary>
+    </StoreProvider>
 )

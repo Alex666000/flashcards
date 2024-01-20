@@ -1,31 +1,37 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CSSProperties } from 'react'
+import { Button } from '@/shared/ui/button'
+import { Typography } from '@/shared/ui/typography'
 
-import { Card } from '@/shared/ui/card/card'
+import { TextField } from '../text-field_'
+import { Card } from './'
 
-const meta: Meta<typeof Card> = {
+const meta = {
     component: Card,
     tags: ['autodocs'],
-    title: 'shared/ui/card',
-}
+    title: 'Components/Card',
+} satisfies Meta<typeof Card>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const contentStyles: CSSProperties = { fontSize: '24px', textAlign: 'center' }
-
 export const Default: Story = {
     args: {
-        children: <div style={contentStyles}>This is a Card</div>,
-        // style: {
-        //     height: '300px',
-        //     padding: '24px',
-        //     width: '300px',
-        // },
+        children: <div style={{ height: '100px' }}></div>,
     },
 }
 
-/*
-- закоментрили тк в сторисах лучше стили не менять
- */
+export const ExampleWithContent: Story = {
+    args: {
+        children: (
+            <>
+                <Typography variant={'large'}>Card</Typography>
+                <TextField label={'Uncontrolled text field'} />
+                <TextField label={'Uncontrolled search'} type={'search'} />
+                <Button as={'a'} href={'https://google.com'} variant={'link'}>
+                    Google
+                </Button>
+            </>
+        ),
+    },
+}

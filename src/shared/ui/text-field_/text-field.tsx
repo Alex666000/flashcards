@@ -10,7 +10,7 @@ export type TextFieldProps = {
     clearField?: () => void
     errorMessage?: string
     label?: string
-    type?: 'password' | 'search' | 'text'
+    type?: 'email' | 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
 type PropsType = TextFieldProps & Omit<ComponentPropsWithoutRef<'input'>, keyof TextFieldProps>

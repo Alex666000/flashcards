@@ -45,7 +45,7 @@ export const elementsMap: Record<TypographyVariant, string> = {
 }
 
 type OwnProps<T extends ElementType> = {
-    as?: T
+    as?: T // ПРИМЕР: Текст будет ссылкой: <Typography as={Link} to={ROUTES.profile} variant="subtitle1" className={s.name}>Привет!</Typography>
     children?: ReactNode
     className?: string
     variant?: TypographyVariant

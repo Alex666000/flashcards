@@ -4,7 +4,9 @@
 
 // Стили с темой приложения
 body {
-    font-family: var(--font-family-primary);
+    font-family: var(
+        --font-family-primary
+    ); // через var мы используем переменную которая объявлена в др.файле
     line-height: var(--line-height-m);
     color: var(--color-light-100);
 
@@ -14,4 +16,7 @@ body {
 
 /*
 - index.scss точка входа для стилей приложения
+- через var, например: var(--font-family-primary) - мы используем переменную которая объявлена в др.файле через 2 тире вот так:
+--line-height-xs: 1rem;
+
  */

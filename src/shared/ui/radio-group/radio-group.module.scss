@@ -1,6 +1,6 @@
 @import '../../../app/styles/mixins';
 
-.root {
+.header {
     @include flex(column, 12px);
 
     .error {

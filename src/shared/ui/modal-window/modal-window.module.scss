@@ -7,7 +7,7 @@
     background-color: rgb(0 0 0 / 50%);
 }
 
-.root {
+.header {
     @include flex(column, 0, 0, stretch, center);
     @include container(530px);
 

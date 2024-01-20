@@ -1,12 +1,12 @@
 .button {
     all: unset; // зануляем все стили кнопки дефолтные
 
-    cursor: pointer;
+    cursor: pointer; // пальчик..
     user-select: none; // может ли текст (внутри кнопки..) быть выделен курсором мыши или другими средствами выделения текста.
 
     display: inline-flex;
-    gap: 5px; // расстояние от иконки до текста кнопки
-    align-items: center;
+    gap: 5px; // расстояние от иконки до текста кнопки - отступ между flex элементами
+    align-items: center; // выравнивание flex элементов по вертикали
     justify-content: center;
 
     padding: 6px 28px;
@@ -31,6 +31,7 @@
 
     &:disabled {
         cursor: not-allowed; // запрещено использование указателя (курсора)
+        opacity: 0.5;
     }
 }
 
@@ -51,7 +52,10 @@
     }
 
     &:disabled {
+        cursor: not-allowed; // запрещено использование указателя (курсора)
+
         color: var(--color-light-900);
+
         opacity: 0.5;
         background-color: var(--color-accent-900);
         box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
@@ -80,6 +84,7 @@
     }
 
     &:disabled {
+        cursor: not-allowed; // запрещено использование указателя (курсора)
         color: var(--color-light-900);
         opacity: 0.5;
         background-color: var(--color-dark-300);
@@ -110,7 +115,10 @@
     }
 
     &:disabled {
+        cursor: not-allowed; // запрещено использование указателя (курсора)
+
         color: var(--color-accent-900);
+
         opacity: 0.5;
         background-color: transparent;
         border: 1px solid var(--color-accent-900);
@@ -157,6 +165,7 @@
     }
 
     &:disabled {
+        cursor: not-allowed; // запрещено использование указателя (курсора)
         color: var(--color-accent-900);
         opacity: 0.5;
     }
@@ -173,7 +182,7 @@
     padding: 0;
     background: none;
     border: none;
-    outline-color: transparent;
+    outline-color: transparent; //  для установки цвета контурной обводки, и значение transparent означает, что цвет контурной обводки будет прозрачным (без цвета).
 }
 
 // Кнопка с рамкой но без заднего фона
@@ -190,6 +199,7 @@
     }
 
     &:disabled {
+        cursor: not-allowed; // запрещено использование указателя (курсора)
         color: var(--color-light-900);
         opacity: 0.5;
         background-color: var(--color-accent-900);

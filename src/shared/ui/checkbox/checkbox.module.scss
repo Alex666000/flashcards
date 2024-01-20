@@ -15,7 +15,7 @@
     }
 }
 
-.root {
+.header {
     cursor: pointer;
 
     display: flex;
@@ -67,7 +67,7 @@
 
     &:focus-within, // псевдокласс, который применяет стили к элементу,когда любой его потомок (например, вложенный элемент) получает фокус
         // не имеет атрибута data-state со значением 'checked' когда он находится в состоянии :focus-within
-    .root:not([data-state='checked']):focus-within {
+    .header:not([data-state='checked']):focus-within {
         background-color: var(--color-dark-100);
     }
 
@@ -75,7 +75,7 @@
         background-color: var(--color-dark-500);
     }
 
-    &:hover:not(.disabled) .root:not([data-state='checked']) {
+    &:hover:not(.disabled) .header:not([data-state='checked']) {
         background-color: var(--color-dark-500);
     }
 

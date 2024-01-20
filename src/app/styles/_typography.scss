@@ -2,7 +2,7 @@
 :root {
     --font-family-primary: 'Roboto', sans-serif;
 
-    // line heights
+    // line heights - 2 тире, например: --line-height-xs: 1rem; --> это объявление переменной - используем ее в др.файле через var
     --line-height-xs: 1rem; // 16px
     --line-height-s: 1.33rem;
     --line-height-m: 1.5rem; // 24px

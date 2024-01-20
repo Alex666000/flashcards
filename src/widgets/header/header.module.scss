@@ -1,0 +1,124 @@
+.header {
+    position: fixed; // фиксированная шапка - Хедер
+    z-index: 100;
+
+    // прижали хедер к верху экрана на всю ширину
+    top: 0;
+    right: 0;
+    left: 0;
+
+    // ширину хедера не ограничиваем - значит на весь экран
+    min-height: 65px;
+
+    background-color: var(--color-dark-700);
+    border-bottom: 1px solid var(--color-dark-500);
+
+    .container {
+        // контейнер - ограничиваем хедер по размерам контента
+        display: flex;
+        flex-direction: row; // по дефолту
+        gap: 0 0; // по дефолту отступ между элементами flex контейнера
+        align-items: center; // выравнивание flex элементов по вертикали
+        justify-content: space-between; // раскидываем эл.по разным сторонам экрана
+
+        // Стили контейнера элементов контента:
+        max-width: 1010px;
+        height: 100%; // 100% от родетельского класса .header === min-height: 65px;
+        margin: 0 auto; // выровняли по середине экрана элементы
+        padding-inline: 12px; // отспуп элемента от соседнего контента в горизонтальном напрвлении
+
+        .link {
+            transform: translateX(-4px);
+
+            display: grid;
+            place-items: center; // центрирует содержимое сетки как по вертикали, так и по горизонтали.
+
+            width: 124px; // ширина и высота элемента
+            height: 46px;
+
+            border-radius: 23px;
+
+            // Устанавливает невидимую рамку толщиной 2 пикселя вокруг элемента
+            // Это может быть видимым, например, при фокусе
+            outline: 2px solid transparent;
+
+            // Добавляет плавный переход (анимацию) при изменении свойств элемента,
+            // в данном случае, при :hover.
+            // Начальное положение (состояние) элемента от нуля -- до 1 - при :hover
+            transition: 0.3s;
+
+            // стили, применяемые при наведении на элемент
+            &:hover {
+                /**
+                Добавляет тень с использованием фильтра CSS
+                -------------------------------------------
+                0 0: Смещение тени по горизонтали и вертикали. В данном случае, тень смещается на 0 пикселей как по горизонтали, так и по вертикали.
+                4px: Размер размытия тени. В данном случае, тень будет размыта на 4 пикселя.
+                var(--color-accent-500): Цвет тени. Здесь используется переменная --color-accent-500, предположительно, определенная в вашей цветовой палитре. Тень будет иметь цвет акцента с индексом 500 в вашей цветовой схеме
+                */
+                filter: drop-shadow(0 0 4px var(--color-accent-500));
+            }
+
+            // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
+            &:focus-visible {
+                outline: 2px solid var(--color-info-700);
+            }
+
+            .logo {
+                cursor: pointer;
+            }
+        }
+
+        .user {
+            display: flex;
+            flex-direction: row;
+            gap: 0 14px;
+            align-items: center;
+            justify-content: flex-start;
+
+            .name {
+                text-decoration: none; // для удаления стандартного подчеркивания текста, для ссылок.
+                border-bottom: 2px dashed var(--color-light-100);
+                outline-color: transparent; //  для установки цвета обводки, и значение transparent означает, что цвет обводки будет прозрачным (без цвета).
+                transition: 0.3s;
+
+                &:hover {
+                    color: var(--color-accent-100);
+                    border-bottom-color: var(--color-accent-100);
+                }
+
+                &:active {
+                    color: var(--color-accent-300);
+                    border-bottom-color: var(--color-accent-300);
+                }
+
+                &:focus-visible {
+                    color: var(--color-info-300);
+                    border-bottom-color: var(--color-info-300);
+                }
+            }
+
+            .dropdownButton {
+                all: unset; // зануляем все стили кнопки дефолтные
+
+                cursor: pointer;
+
+                width: 48px;
+                height: 48px;
+
+                border-radius: 50%;
+                outline: 2px solid transparent;
+
+                transition: 0.3s;
+
+                &:hover {
+                    filter: drop-shadow(0 0 6px var(--color-accent-100));
+                }
+
+                &:focus-visible {
+                    outline: 2px solid var(--color-info-700);
+                }
+            }
+        }
+    }
+}

@@ -138,3 +138,11 @@ export const SecondaryWithIcon: Story = {
         variant: 'secondary',
     },
 }
+
+export const Disabled: Story = {
+    args: {
+        children: 'Tertiary Button',
+        disabled: true,
+        variant: 'primary',
+    },
+}

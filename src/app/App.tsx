@@ -1,4 +1,4 @@
-import { Router } from '@/app/providers/router/router'
+import { Router } from '@/app/providers/router/router-config'
 
 // const user = {
 //     email: 'bogdanov777000@mail.ru',
@@ -7,6 +7,7 @@ import { Router } from '@/app/providers/router/router'
 // }
 
 export function App() {
+    // Внутри всего Арр отрисовываем страницы проекта
     return <Router />
 }
 

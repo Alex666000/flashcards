@@ -9,7 +9,7 @@ import {
 
 import { InferType } from '@/shared/types/infer-element-type'
 
-import cls from './button.module.scss'
+import s from './button.module.scss'
 
 import { Mods, classNames } from '../../lib/classNames/classNames'
 
@@ -28,6 +28,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
     children?: ReactNode
     className?: string
     color?: 'error' | 'normal' | 'success'
+    disabled?: boolean // В момент загрузки чтоб дизеиблить кнопку
     fullWidth?: boolean
     size?: 'l' | 'm' | 'xl'
     variant?: (typeof ButtonVariant)[number]
@@ -40,27 +41,30 @@ const ButtonPolymorph = <T extends ElementType = 'button'>(
 ) => {
     const {
         // as: Component = "button": переименовали as в Component и ниже отрисовываем в jsx
+        // Например - кнопка как ссылка: <Button as={Link} to={ROUTES.signIn}>Sign in</Button>
         as: Component = 'button',
         children,
         className,
         color = 'normal',
+        disabled,
         fullWidth,
         size = 'm',
         variant = 'primary',
         ...buttonRestProps
     } = props
 
-    // props-классы по условию - когда Boolean
+    // props-классы по условию - когда Boolean - если fullWidth=true тогда применится класс s.fullWidth
     const mods: Mods = {
-        [cls.fullWidth]: fullWidth,
+        [s.fullWidth]: fullWidth,
     }
 
     // additional классы - не по условию, а просто пропсы с разными значениями
-    const additionalClasses = [className, cls[variant], cls[size], cls[color]]
+    const additionalClasses = [className, s[variant], s[size], s[color]]
 
     return (
         <Component
-            className={classNames(cls.button, mods, additionalClasses)}
+            className={classNames(s.button, mods, additionalClasses)}
+            disabled={disabled}
             ref={ref}
             {...buttonRestProps}
         >
