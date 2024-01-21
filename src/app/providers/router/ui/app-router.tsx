@@ -8,6 +8,9 @@ import { ErrorPage } from '@/pages/error-page/ui/error-page'
 import { PATH } from '@/shared/common/constants'
 import { InitLoading } from '@/shared/ui/init-loading'
 
+/**
+ * AppRouter - отрисовывает все пути проекта
+ */
 export const AppRouter = () => {
     return (
         <Suspense fallback={<InitLoading />}>
@@ -22,7 +25,7 @@ export const AppRouter = () => {
                 <Route element={<Navigate to={PATH.ERROR} />} path={'*'} />
 
                 <Route element={<PrivateRoute />}>
-                    <Route element={<Decks />} index path={'/'} />
+                    <Route element={<Decks />} index path={PATH.MAIN} />
                     <Route element={<Decks />} path={PATH.DECKS} />
                     {/*<Route element={<Profile />} path={PATH.PROFILE} />*/}
                     {/*<Route element={<Cards />} path={PATH.PACKS + PATH.CARDS + PATH.ID} />*/}
@@ -34,7 +37,7 @@ export const AppRouter = () => {
 }
 
 /*
-- реэкспорт значит напрямую из папки паблика заимпортит: import { SingInPage, SingUpPage } from '@/pages'
+- reexport - значит напрямую из папки паблика заимпортит: import { SingInPage, SingUpPage } from '@/pages'
 - делаем пути асинхронными компоненты с Suspense (показать крутилку пока компонент не загрузился)
 + lazy импорт страниц в слое pages
  */
