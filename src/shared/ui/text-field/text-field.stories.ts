@@ -29,7 +29,7 @@ export const Password: Story = {
 export const Error: Story = {
     args: {
         errorMessage: 'Error message',
-        label: 'Input with error',
+        label: 'Input with error-page',
         value: 'Wrong value',
     },
 }

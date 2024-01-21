@@ -1,4 +1,7 @@
-import { Router } from '@/app/providers/router/router-config'
+import { Layout } from '@/shared/layout'
+import { Toast } from '@/shared/ui/toast'
+
+import { AppRouter } from './providers/router'
 
 // const user = {
 //     email: 'bogdanov777000@mail.ru',
@@ -8,9 +11,14 @@ import { Router } from '@/app/providers/router/router-config'
 
 export function App() {
     // Внутри всего Арр отрисовываем страницы проекта
-    return <Router />
+    return (
+        <>
+            <Layout />
+            <AppRouter />
+            <Toast />
+        </>
+    )
 }
 
-/*
-
+/* - <AppRouter /> отрисует все страницы
  */

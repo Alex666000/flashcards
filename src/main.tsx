@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 
-import { App } from '@/app/App'
 import { ErrorBoundary } from '@/app/providers/error-boundary'
 import { StoreProvider } from '@/app/providers/store'
 import { createRoot } from 'react-dom/client'
@@ -10,14 +10,20 @@ import './app/styles/index.scss'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 
+import { App } from './app/App'
+import { Toast } from './shared/ui/toast'
+
 createRoot(document.getElementById('root') as HTMLElement).render(
-    <StoreProvider>
-        <ErrorBoundary>
-            {/*<ForceUpdateProvider>*/}
-            <StrictMode>
-                <App />
-            </StrictMode>
-            {/*</ForceUpdateProvider>*/}
-        </ErrorBoundary>
-    </StoreProvider>
+    <BrowserRouter>
+        <StoreProvider>
+            <ErrorBoundary>
+                {/*<ForceUpdateProvider>*/}
+                <StrictMode>
+                    <Toast />
+                    <App />
+                </StrictMode>
+                {/*</ForceUpdateProvider>*/}
+            </ErrorBoundary>
+        </StoreProvider>
+    </BrowserRouter>
 )

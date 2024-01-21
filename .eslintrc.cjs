@@ -7,7 +7,7 @@ module.exports = {
         'react-hooks/rules-of-hooks': 'off',
         'no-console': 'off',
         'import/namespace': 'off',
-        // 'no-trailing-spaces': 'error',
+        // 'no-trailing-spaces': 'error-page',
       },
     },
   ],

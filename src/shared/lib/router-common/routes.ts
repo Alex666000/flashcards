@@ -5,6 +5,7 @@ export const ROUTES = {
     createNewPassword: '/create-new-password',
     decks: '/decks',
     learn: '/learn',
+    notFound: '/not-found',
     profile: '/profile',
     recoverPassword: '/recover-password',
     rest: '/*',

@@ -46,7 +46,7 @@ export const DisabledGroup: Story = {
 
 export const GroupWithError: Story = {
     args: {
-        errorMessage: 'Some error occurred',
+        errorMessage: 'Some error-page occurred',
         options: baseData,
         value: '1',
     },

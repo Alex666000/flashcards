@@ -72,7 +72,7 @@ export const Search = {
 
 export const TextWithError: Story = {
     args: {
-        errorMessage: 'Some error occurred',
+        errorMessage: 'Some error-page occurred',
         label: 'Error example text field',
         placeholder: 'Placeholder',
     },
