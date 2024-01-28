@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 /**
+ * Toast - уведомления, всплывашка
  * autoClose={4000}: время через которое уведомление автоматически закроется.
  * position={'top-center'}: Место на экране, где будут отображаться уведомления. В данном случае, уведомления будут появляться в верхней части центра.
  * theme={'colored'}: Устанавливает тему для уведомлений.

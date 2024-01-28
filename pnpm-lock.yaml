@@ -116,10 +116,10 @@ devDependencies:
     specifier: ^20.10.2
     version: 20.11.5
   '@types/react':
-    specifier: ^18.2.37
+    specifier: ^18.2.48
     version: 18.2.48
   '@types/react-dom':
-    specifier: ^18.2.15
+    specifier: ^18.2.18
     version: 18.2.18
   '@vitejs/plugin-react':
     specifier: ^4.2.0

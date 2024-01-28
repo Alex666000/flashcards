@@ -11,7 +11,7 @@ export const PrivateRoute = () => {
     // const isAuthenticated = !!data && !('success' in data)
 
     // if (isLoading) {
-    //     return <InitLoading />
+    //     return <Loader />
     // }
     const auth = true
 

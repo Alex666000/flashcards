@@ -6,7 +6,8 @@ import { SingInPage, SingUpPage } from '@/pages'
 import { Decks } from '@/pages/decks-page/ui/decks'
 import { ErrorPage } from '@/pages/error-page/ui/error-page'
 import { PATH } from '@/shared/common/constants'
-import { InitLoading } from '@/shared/ui/init-loading'
+
+import { InitLoading } from '../../../../shared/ui/loaders-components/loader'
 
 /**
  * AppRouter - отрисовывает все пути проекта
@@ -15,8 +16,8 @@ export const AppRouter = () => {
     return (
         <Suspense fallback={<InitLoading />}>
             <Routes>
-                <Route element={<SingInPage />} path={PATH.LOGIN} />
-                <Route element={<SingUpPage />} path={PATH.REGISTRATION} />
+                <Route element={<SingInPage />} path={PATH.SING_IN} />
+                <Route element={<SingUpPage />} path={PATH.SING_UP} />
                 {/*<Route element={<ForgotPasswordPage />} path={PATH.PASSWORD_RECOVERY} />*/}
                 {/*<Route element={<CheckEmailPage />} path={PATH.CHECK_EMAIL} />*/}
                 {/*<Route element={<NewPasswordPage />} path={PATH.NEW_PASSWORD} />*/}
@@ -37,7 +38,10 @@ export const AppRouter = () => {
 }
 
 /*
-- reexport - значит напрямую из папки паблика заимпортит: import { SingInPage, SingUpPage } from '@/pages'
+- SING_IN - логинизация, SING_UP - регистрация
+- re-export - значит напрямую из папки паблика заимпортит: import { SingInPage, SingUpPage } from '@/pages'
 - делаем пути асинхронными компоненты с Suspense (показать крутилку пока компонент не загрузился)
 + lazy импорт страниц в слое pages
+- в Suspense оборачивает роуты для lazy loading code-spliting, асинхронной подгрузки страниц по мере
+необходимости
  */

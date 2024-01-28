@@ -5,12 +5,12 @@ export const PATH = {
     ERROR: '/404',
     ID: '/:id',
     LEARN: '/learn',
-    LOGIN: '/login',
     MAIN: '/',
     NEW_PASSWORD: '/new-password/:token',
     PASSWORD_RECOVERY: '/password-recovery',
     PROFILE: '/profile',
-    REGISTRATION: '/registration',
+    SING_IN: '/sign-in',
+    SING_UP: '/sign-up',
     VERIFY: '/confirm-email/:code',
 } as const
 

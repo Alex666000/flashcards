@@ -1,11 +1,10 @@
+import { Loader } from '@/shared/ui/loaders-components'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { InitLoading } from './'
-
 const meta = {
-    component: InitLoading,
+    component: Loader,
     title: 'Components/Initialization Loading',
-} satisfies Meta<typeof InitLoading>
+} satisfies Meta<typeof Loader>
 
 export default meta
 
