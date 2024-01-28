@@ -1,20 +1,20 @@
 import { Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { PrivateRoute } from '@/app/providers/router'
 import { SingInPage, SingUpPage } from '@/pages'
 import { Decks } from '@/pages/decks-page/ui/decks'
 import { ErrorPage } from '@/pages/error-page/ui/error-page'
 import { PATH } from '@/shared/common/constants'
+import { Loader } from '@/shared/ui/loaders-components'
 
-import { InitLoading } from '../../../../shared/ui/loaders-components/loader'
+import { PrivateRoute } from './private-route'
 
 /**
  * AppRouter - отрисовывает все пути проекта
  */
 export const AppRouter = () => {
     return (
-        <Suspense fallback={<InitLoading />}>
+        <Suspense fallback={<Loader />}>
             <Routes>
                 <Route element={<SingInPage />} path={PATH.SING_IN} />
                 <Route element={<SingUpPage />} path={PATH.SING_UP} />

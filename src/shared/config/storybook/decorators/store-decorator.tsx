@@ -1,4 +1,4 @@
-import { StoreProvider } from '@/app/providers/store'
+import { StoreProvider } from '@/app/providers'
 import { StateSchema } from '@/app/providers/store/state-schema'
 import { baseApi } from '@/shared/api/base-api'
 import { configureStore } from '@reduxjs/toolkit'

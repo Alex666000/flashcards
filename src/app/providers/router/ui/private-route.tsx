@@ -15,5 +15,5 @@ export const PrivateRoute = () => {
     // }
     const auth = true
 
-    return auth ? <Outlet /> : <Navigate to={PATH.LOGIN} />
+    return auth ? <Outlet /> : <Navigate to={PATH.SING_IN} />
 }

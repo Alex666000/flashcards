@@ -1,7 +1,7 @@
 import { Layout } from '@/shared/layout'
 import { Toast } from '@/shared/ui/toast'
 
-import { AppRouter } from './providers/router'
+import { AppRouter } from './providers/index'
 
 // const user = {
 //     email: 'bogdanov777000@mail.ru',
