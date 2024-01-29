@@ -1,0 +1,50 @@
+.container {
+    box-sizing: content-box;
+    max-width: 420px;
+    margin: 0 auto;
+    padding-inline: 12px;
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px 0;
+        align-items: center;
+        justify-content: flex-start; // всё равно, что padding-left и padding-right
+
+        .form {
+            align-self: stretch; // элемент будет растягиваться по всей доступной высоте контейнера.
+
+            .linkContainer {
+                text-align: right;
+
+                a {
+                    text-decoration: none; // для удаления стандартного подчеркивания текста, для ссылок.
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+
+                    &:active {
+                        color: var(--color-light-700);
+                    }
+                }
+            }
+        }
+
+        .register {
+            display: flex;
+            flex-direction: column;
+            gap: 7px 0;
+            align-items: center;
+            justify-content: flex-start;
+
+            .signUp {
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
