@@ -1,10 +1,12 @@
 .form {
-  .email,
-  .password {
-    margin-bottom: 24px;
-  }
+    align-self: stretch; // элемент будет растягиваться по всей доступной высоте контейнера.
 
-  .button {
-    margin-top: 60px;
-  }
+    .email,
+    .password {
+        margin-bottom: 24px;
+    }
+
+    .button {
+        margin-top: 60px;
+    }
 }

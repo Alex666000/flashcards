@@ -8,7 +8,7 @@ export const ROUTES = {
     main: '/',
     new_password: '/new-password/:token',
     profile: '/profile',
-    recover_password: '/recover-password',
+    recoverPassword: '/recover-password',
     signIn: '/sign-in',
     singUp: '/sign-up',
     verify: '/confirm-email/:code',

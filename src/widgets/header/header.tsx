@@ -5,60 +5,89 @@ import { loadingSelector } from '@/features/loading/model/selectors/loading-sele
 import { Logo } from '@/shared/assets'
 import { ROUTES } from '@/shared/common/constants'
 import { AppContainer } from '@/shared/ui/app-container'
+import { Avatar } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
+import { DropDown, DropDownItem, DropDownItemWithIcon } from '@/shared/ui/drop-down_'
+import { Icon } from '@/shared/ui/icon'
 import { LeanerProgress } from '@/shared/ui/loaders-components'
 import { Typography } from '@/shared/ui/typography'
+import { ProfileInfo } from '@/widgets/profile-info'
 
 import s from './header.module.scss'
 
 type Props = {
     data?: any
+    logout?: () => void
 }
 
-export const Header = ({ data = false }: Props) => {
+export const Header = ({ data = false, logout }: Props) => {
     const queryInProgress = useAppSelector(loadingSelector) // видим "Линеар-прогресс"
 
-    // const navigate = useNavigate()
-    //
-    // const toProfile = () => {
-    //     navigate(ROUTES.profile)
-    // }
+    const navigate = useNavigate()
+
+    const toProfile = () => {
+        navigate(ROUTES.profile)
+    }
 
     return (
         <header className={s.header}>
-            <AppContainer>
+            <div className={'container'}>
                 {/*  Линеар-прогресс  */}
                 {queryInProgress && <LeanerProgress />}
                 <div className={s.header_inner}>
-                    <Link className={s.logo} to={ROUTES.decks}>
-                        <Logo className={s.logo_icon} />
+                    <Link className={s.link} to={ROUTES.decks}>
+                        <Logo className={s.icon} />
                     </Link>
-                    {data ? (
-                        <nav className={s.menu}>
-                            <ul className={s.menu_list}>
-                                <li className={s.menu_list_item}>
-                                    <Link className={s.menu_list_link} to={'/'}>
-                                        <Typography>Александр</Typography>
-                                    </Link>
-                                </li>
-                                <li className={s.menu_list_item}>
-                                    <Link className={s.menu_list_link} to={'/'}>
-                                        Dropdown с Аватаркой
-                                    </Link>
-                                </li>
-                            </ul>
-                        </nav>
-                    ) : (
-                        <Button as={Link} to={ROUTES.signIn}>
-                            Sign In
-                        </Button>
-                    )}
+                    {/*{data ? (*/}
+                    {/*    <div className={s.user}>*/}
+                    {/*        <Typography*/}
+                    {/*            as={Link}*/}
+                    {/*            className={s.name}*/}
+                    {/*            to={ROUTES.profile}*/}
+                    {/*            variant={'subtitle1'}*/}
+                    {/*        >*/}
+                    {/*            {data.name || data.email}*/}
+                    {/*        </Typography>*/}
+                    {/*        <DropDown*/}
+                    {/*            trigger={*/}
+                    {/*                <button className={s.dropdownButton}>*/}
+                    {/*                    <Avatar*/}
+                    {/*                        image={data.avatar}*/}
+                    {/*                        size={48}*/}
+                    {/*                        userName={data.name || data.email}*/}
+                    {/*                    />*/}
+                    {/*                </button>*/}
+                    {/*            }*/}
+                    {/*        >*/}
+                    {/*            <DropDownItem>*/}
+                    {/*                <ProfileInfo {...data} />*/}
+                    {/*            </DropDownItem>*/}
+                    {/*            <DropDownItemWithIcon*/}
+                    {/*                icon={<Icon name={'user'} />}*/}
+                    {/*                onSelect={toProfile}*/}
+                    {/*                text={'Profile'}*/}
+                    {/*            />*/}
+                    {/*            <DropDownItemWithIcon*/}
+                    {/*                icon={<Icon name={'logout'} />}*/}
+                    {/*                onSelect={logout}*/}
+                    {/*                text={'Sign out'}*/}
+                    {/*            />*/}
+                    {/*        </DropDown>*/}
+                    {/*    </div>*/}
+                    {/*) : (*/}
+                    {/*    <Button as={Link} to={ROUTES.signIn}>*/}
+                    {/*        Sign In*/}
+                    {/*    </Button>*/}
+                    {/*)}*/}
+                    <Button as={Link} to={ROUTES.signIn}>
+                        Sign In
+                    </Button>
                 </div>
-            </AppContainer>
+            </div>
         </header>
     )
 }
-
+// Правила вертски: название секции - контеинер приложения - свой контейнер - контент блока - остальные стили
 /*
 - По макету см: если я не авторизован то увижу Header просто с логотипом и кнопкой Sing In,
 а если залогинен увижу Header внутри которого Аватарка и имя пользователя

@@ -20,62 +20,35 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        padding-top: 12px;
         padding-bottom: 12px;
-    }
 
-    .menu_list {
-        display: flex;
+        .link {
+            transform: translateX(-4px);
 
-        .menu_list_item + .menu_list_item {
-            margin-left: 14px;
-        }
+            display: grid;
+            place-items: center;
 
-        .menu_list_link {
-            font-size: var(--font-size-m); // 16px
-            font-weight: var(--font-weight-bold); // 700
-            word-wrap: break-word;
-        }
-    }
+            width: 124px;
+            height: 46px;
 
-    .logo {
-        transform: translateX(-4px);
+            border-radius: 23px;
+            outline: 2px solid transparent;
 
-        display: grid;
-        place-items: center; // центрирует содержимое сетки как по вертикали, так и по горизонтали.
+            transition: 0.3s;
 
-        width: 124px; // ширина и высота элемента
-        height: 46px;
+            &:hover {
+                filter: drop-shadow(0 0 4px var(--color-accent-500));
+            }
 
-        border-radius: 23px;
+            &:focus-visible {
+                outline: 2px solid var(--color-info-700);
+            }
 
-        // Устанавливает невидимую рамку толщиной 2 пикселя вокруг элемента
-        // Это может быть видимым, например, при фокусе
-        outline: 2px solid transparent;
-
-        // Добавляет плавный переход (анимацию) при изменении свойств элемента,
-        // в данном случае, при :hover.
-        // Начальное положение (состояние) элемента от нуля -- до 1 - при :hover
-        transition: 0.3s;
-
-        // стили, применяемые при наведении на элемент
-        &:hover {
-            /**
-            Добавляет тень с использованием фильтра CSS
-            -------------------------------------------
-            0 0: Смещение тени по горизонтали и вертикали. В данном случае, тень смещается на 0 пикселей как по горизонтали, так и по вертикали.
-            4px: Размер размытия тени. В данном случае, тень будет размыта на 4 пикселя.
-            var(--color-accent-500): Цвет тени. Здесь используется переменная --color-accent-500, предположительно, определенная в вашей цветовой палитре. Тень будет иметь цвет акцента с индексом 500 в вашей цветовой схеме
-            */
-            filter: drop-shadow(0 0 4px var(--color-accent-500));
-        }
-
-        // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
-        &:focus-visible {
-            outline: 2px solid var(--color-info-700);
-        }
-
-        .header_logo {
-            cursor: pointer;
+            .icon {
+                cursor: pointer;
+            }
         }
     }
 
@@ -87,9 +60,9 @@
         justify-content: flex-start;
 
         .name {
-            text-decoration: none; // для удаления стандартного подчеркивания текста, для ссылок.
+            text-decoration: none;
             border-bottom: 2px dashed var(--color-light-100);
-            outline-color: transparent; //  для установки цвета обводки, и значение transparent означает, что цвет обводки будет прозрачным (без цвета).
+            outline: none;
             transition: 0.3s;
 
             &:hover {
@@ -109,7 +82,7 @@
         }
 
         .dropdownButton {
-            all: unset; // зануляем все стили кнопки дефолтные
+            all: unset;
 
             cursor: pointer;
 

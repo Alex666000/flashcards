@@ -27,31 +27,40 @@ const SingInPage = ({}: Props) => {
     // if (me && !('success' in me)) return <Navigate to={ROUTES.packs} />
 
     return (
-        <AppContainer>
-            <Card className={s.singInForm_container}>
-                <section className={s.singInForm_section}>
-                    {/* Форма логинизации: */}
-                    <Typography as={'h2'} variant={'large'}>
-                        Sign In
-                    </Typography>
-                    <SignInForm className={s.singInForm} onSubmit={loginHandler}>
-                        <div className={s.form_link}>
-                            {/* children формы: */}
-                            <Typography as={Link} to={ROUTES.recover_password} variant={'body2'}>
-                                Forgot Password?
-                            </Typography>
+        <section className={s.singInForm}>
+            <div className={'container'}>
+                <div className={s.form_container}>
+                    <Card>
+                        <div className={s.content}>
+                            <SignInForm onSubmit={loginHandler}>
+                                <div className={s.link_container}>
+                                    <Typography
+                                        as={Link}
+                                        to={ROUTES.recoverPassword}
+                                        variant={'body2'}
+                                    >
+                                        Forgot Password?
+                                    </Typography>
+                                </div>
+                            </SignInForm>
+                            <div className={s.register_buttonAsLink}>
+                                <Typography variant={'body2'}>
+                                    Don&apos;t have an account?
+                                </Typography>
+                                <Button
+                                    as={Link}
+                                    className={s.signUp}
+                                    to={ROUTES.singUp}
+                                    variant={'link'}
+                                >
+                                    Sign Up
+                                </Button>
+                            </div>
                         </div>
-                    </SignInForm>
-                    {/* Кнопка регистрации: */}
-                    <div className={s.register_buttonAsLink}>
-                        <Typography variant={'body2'}>Don&apos;t have an account?</Typography>
-                        <Button as={Link} className={s.signUp} to={ROUTES.signIn} variant={'link'}>
-                            Sign Up
-                        </Button>
-                    </div>
-                </section>
-            </Card>
-        </AppContainer>
+                    </Card>
+                </div>
+            </div>
+        </section>
     )
 }
 

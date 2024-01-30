@@ -1,48 +1,44 @@
-.singInForm_container {
+.form_container {
     max-width: 420px;
-    margin: auto 0;
+    margin: 96px auto 0; // сверху-снизу-96, а по горизонтали выравниваем
     padding: 0 12px;
 
-    .singInForm_section {
+    .content {
         display: flex;
         flex-direction: column;
         gap: 20px 0;
         align-items: center;
         justify-content: flex-start; // всё равно, что padding-left и padding-right
+    }
 
-        .singInForm {
-            align-self: stretch; // элемент будет растягиваться по всей доступной высоте контейнера.
+    .link_container {
+        text-align: right;
 
-            .form_link {
-                text-align: right;
+        a {
+            text-decoration: none; // для удаления стандартного подчеркивания текста, для ссылок.
 
-                a {
-                    text-decoration: none; // для удаления стандартного подчеркивания текста, для ссылок.
+            &:hover {
+                text-decoration: underline;
+            }
 
-                    &:hover {
-                        text-decoration: underline;
-                    }
-
-                    &:active {
-                        color: var(--color-light-700);
-                    }
-                }
+            &:active {
+                color: var(--color-light-700);
             }
         }
+    }
 
-        .register_buttonAsLink {
-            display: flex;
-            flex-direction: column;
-            gap: 7px 0;
-            align-items: center;
-            justify-content: flex-start;
+    .register_buttonAsLink {
+        display: flex;
+        flex-direction: column;
+        gap: 7px 0;
+        align-items: center;
+        justify-content: flex-start;
 
-            .signUp {
-                text-decoration: none;
+        .signUp {
+            text-decoration: none;
 
-                &:hover {
-                    text-decoration: underline;
-                }
+            &:hover {
+                text-decoration: underline;
             }
         }
     }
