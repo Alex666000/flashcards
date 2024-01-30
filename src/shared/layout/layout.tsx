@@ -16,10 +16,14 @@ export const Layout = () => {
     return (
         <>
             {/* <Header отрисуется всегда /> */}
-            <Header />
+            <Header data={false} />
             {/* В Outlet - пойдет все дочернее содержимое - в промежуток между хедером и футером*/}
             <Outlet />
             {/* <Footer /> */}
         </>
     )
 }
+
+/*
+- Outlet - всегда оборачиваем в контейнер для контента всего проекта div className={s.outlet_content}
+ */

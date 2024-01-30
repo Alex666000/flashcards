@@ -4,4 +4,5 @@ export const loadingSelector = (state: RootState): boolean => state.loading.quer
 
 /*
 - Второй параметр всегда подключаем в store - в configureStore()
+- Третий параметр это свойство в initialState слайса редюсера
  */

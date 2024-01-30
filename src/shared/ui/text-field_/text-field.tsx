@@ -41,15 +41,15 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
                 errorMessage && s.error
             ),
             label: clsx(s.label, rest.disabled && s.disabled),
-            root: clsx(s.root, className),
             searchIcon: clsx(s.searchIcon, rest.disabled && s.disabledIcon),
+            textField: clsx(s.textField, className),
         }
 
         return (
-            <div aria-disabled={rest.disabled} className={classes.root}>
+            <div aria-disabled={rest.disabled} className={classes.textField}>
                 <Typography as={'label'} className={classes.label} variant={'body2'}>
                     {label}
-                    <div className={s.container}>
+                    <div className={s.textField_container}>
                         <input
                             aria-invalid={!!errorMessage && errorMessage.length > 0}
                             className={classes.input}

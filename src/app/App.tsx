@@ -10,16 +10,14 @@ import { AppRouter } from './providers/index'
 // }
 
 export function App() {
-    // Внутри всего Арр отрисовываем страницы проекта
+    // Внутри всего Арр отрисовываем страницы проекта: <AppRouter />
     return (
         <>
             <Layout />
             <AppRouter />
-            <Toast />
         </>
     )
 }
 
 /* - <AppRouter /> отрисует все страницы проекта - назвать как угодно можем
-- Toast - всплавышка уведомление
  */

@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { PATH } from '@/shared/common/constants'
+import { ROUTES } from '@/shared/common/constants'
 
 /**
  * Тут всегда достаём data me() запроса
@@ -13,7 +13,12 @@ export const PrivateRoute = () => {
     // if (isLoading) {
     //     return <Loader />
     // }
-    const auth = true
 
-    return auth ? <Outlet /> : <Navigate to={PATH.SING_IN} />
+    const auth = false
+
+    return auth ? <Outlet /> : <Navigate to={ROUTES.signIn} />
 }
+
+/*
+- если const auth = false, то увижу форму Логинизации
+ */

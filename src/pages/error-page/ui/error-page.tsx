@@ -1,5 +1,5 @@
 import { Error_404 as Error_404Icon } from '@/shared/assets/icons/error-404'
-import { PATH } from '@/shared/common/constants'
+import { ROUTES } from '@/shared/common/constants'
 import { Button } from '@/shared/ui/button'
 import { Typography } from '@/shared/ui/typography'
 
@@ -10,7 +10,7 @@ export const ErrorPage = () => {
         <div className={s.root}>
             <Error_404Icon />
             <Typography variant={'body1'}>Sorry! Page not found!</Typography>
-            <Button as={'a'} href={PATH.DECKS}>
+            <Button as={'a'} href={ROUTES.decks}>
                 Back to home page
             </Button>
         </div>

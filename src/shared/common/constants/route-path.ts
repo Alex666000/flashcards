@@ -1,17 +1,17 @@
-export const PATH = {
-    CARDS: '/cards',
-    CHECK_EMAIL: '/check-email',
-    DECKS: '/decks',
-    ERROR: '/404',
-    ID: '/:id',
-    LEARN: '/learn',
-    MAIN: '/',
-    NEW_PASSWORD: '/new-password/:token',
-    PASSWORD_RECOVERY: '/password-recovery',
-    PROFILE: '/profile',
-    SING_IN: '/sign-in',
-    SING_UP: '/sign-up',
-    VERIFY: '/confirm-email/:code',
+export const ROUTES = {
+    cards: '/cards',
+    check_email: '/check-email',
+    decks: '/decks',
+    error: '/404',
+    id: '/:id',
+    learn: '/learn',
+    main: '/',
+    new_password: '/new-password/:token',
+    profile: '/profile',
+    recover_password: '/recover-password',
+    signIn: '/sign-in',
+    singUp: '/sign-up',
+    verify: '/confirm-email/:code',
 } as const
 
 /*

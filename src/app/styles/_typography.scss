@@ -4,19 +4,19 @@
 
     // line heights - 2 тире, например: --line-height-xs: 1rem; --> это объявление переменной - используем ее в др.файле через var
     --line-height-xs: 1rem; // 16px
-    --line-height-s: 1.33rem;
-    --line-height-m: 1.5rem; // 24px
-    --line-height-l: 1.71rem;
-    --line-height-xl: 1.8rem;
-    --line-height-xxl: 2.25rem;
+    --line-height-s: 21.28px; // 1.33rem
+    --line-height-m: 24px; // 1.5rem
+    --line-height-l: 27.36px; // 1.71rem
+    --line-height-xl: 28.8px; // 1.8rem
+    --line-height-xxl: 36px; // 2.25rem
 
     // font sizes (размер текста)
-    --font-size-xs: 0.75rem; // 12 px
-    --font-size-s: 0.875rem; // 14 px
-    --font-size-m: 1rem; // 16 px
-    --font-size-l: 1.125rem; // 18 px
-    --font-size-xl: 1.25rem; // 20 px
-    --font-size-xxl: 1.625rem; // 26 px
+    --font-size-xs: 12px; // 0.75rem
+    --font-size-s: 14px; // 0.875rem
+    --font-size-m: 16px; // 1rem
+    --font-size-l: 18px; // 1.125rem
+    --font-size-xl: 20px; // 1.25rem
+    --font-size-xxl: 26px; // 1.625rem
 
     // font weights - дефолтные
     --font-weight-regular: 400;

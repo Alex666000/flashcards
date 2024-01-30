@@ -4,7 +4,8 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { SingInPage, SingUpPage } from '@/pages'
 import { Decks } from '@/pages/decks-page/ui/decks'
 import { ErrorPage } from '@/pages/error-page/ui/error-page'
-import { PATH } from '@/shared/common/constants'
+import { ROUTES } from '@/shared/common/constants'
+import { Layout } from '@/shared/layout'
 import { Loader } from '@/shared/ui/loaders-components'
 
 import { PrivateRoute } from './private-route'
@@ -14,23 +15,29 @@ import { PrivateRoute } from './private-route'
  */
 export const AppRouter = () => {
     return (
+        // Loader или LeanerProgress в Suspense
         <Suspense fallback={<Loader />}>
             <Routes>
-                <Route element={<SingInPage />} path={PATH.SING_IN} />
-                <Route element={<SingUpPage />} path={PATH.SING_UP} />
-                {/*<Route element={<ForgotPasswordPage />} path={PATH.PASSWORD_RECOVERY} />*/}
-                {/*<Route element={<CheckEmailPage />} path={PATH.CHECK_EMAIL} />*/}
-                {/*<Route element={<NewPasswordPage />} path={PATH.NEW_PASSWORD} />*/}
-                <Route element={<ErrorPage />} path={PATH.ERROR} />
-                {/*<Route element={<VerifyMail />} path={PATH.VERIFY} />*/}
-                <Route element={<Navigate to={PATH.ERROR} />} path={'*'} />
+                {/* ------------------------------------------------------- */}
+                {/* Публичные пути */}
+                <Route element={<SingInPage />} path={ROUTES.signIn} />
+                <Route element={<SingUpPage />} path={ROUTES.singUp} />
+                {/*<Route element={<ForgotPasswordPage />} path={ROUTES.PASSWORD_RECOVERY} />*/}
+                {/*<Route element={<CheckEmailPage />} path={ROUTES.CHECK_EMAIL} />*/}
+                {/*<Route element={<NewPasswordPage />} path={ROUTES.NEW_PASSWORD} />*/}
+                <Route element={<ErrorPage />} path={ROUTES.error} />
+                {/*<Route element={<VerifyMail />} path={ROUTES.VERIFY} />*/}
+                <Route element={<Navigate to={ROUTES.error} />} path={'*'} />
 
+                {/*------------------------------------------------------- */}
+                {/* Приватные пути */}
                 <Route element={<PrivateRoute />}>
-                    <Route element={<Decks />} index path={PATH.MAIN} />
-                    <Route element={<Decks />} path={PATH.DECKS} />
-                    {/*<Route element={<Profile />} path={PATH.PROFILE} />*/}
-                    {/*<Route element={<Cards />} path={PATH.PACKS + PATH.CARDS + PATH.ID} />*/}
-                    {/*<Route element={<Learn />} path={PATH.LEARN + PATH.ID} />*/}
+                    {/* вложенные пути в PrivateRoute */}
+                    <Route element={<Decks />} index path={ROUTES.main} />
+                    <Route element={<Decks />} path={ROUTES.decks} />
+                    {/*<Route element={<Profile />} path={ROUTES.PROFILE} />*/}
+                    {/*<Route element={<Cards />} path={ROUTES.DECKS + ROUTES.CARDS + ROUTES.ID} />*/}
+                    {/*<Route element={<Learn />} path={ROUTES.LEARN + ROUTES.ID} />*/}
                 </Route>
             </Routes>
         </Suspense>
@@ -38,10 +45,11 @@ export const AppRouter = () => {
 }
 
 /*
+- Layout - макет всего проекта - тут из Header и Аутлета - всего остального
 - SING_IN - логинизация, SING_UP - регистрация
-- re-export - значит напрямую из папки паблика заимпортит: import { SingInPage, SingUpPage } from '@/pages'
-- делаем пути асинхронными компоненты с Suspense (показать крутилку пока компонент не загрузился)
-+ lazy импорт страниц в слое pages
-- в Suspense оборачивает роуты для lazy loading code-spliting, асинхронной подгрузки страниц по мере
-необходимости
+- re-export - значит напрямую из папки паблик апи заимпортит: import { SingInPage, SingUpPage }
+from '@/pages'
+- делаем пути асинхронными компоненты с Suspense (показать крутилку пока компонент не загрузился) +
+lazy импорт страниц в слое pages
+- в Suspense оборачивает роуты для lazy loading, асинхронной подгрузки страниц по мере необходимости
  */

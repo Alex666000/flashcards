@@ -18,8 +18,8 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         <Provider store={store}>
             <ErrorBoundary>
                 {/*<ForceUpdateProvider>*/}
+                <Toast />
                 <StrictMode>
-                    <Toast />
                     <App />
                 </StrictMode>
                 {/*</ForceUpdateProvider>*/}
@@ -27,3 +27,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         </Provider>
     </BrowserRouter>
 )
+
+/*
+- Toast - всплавышка уведомление
+ */

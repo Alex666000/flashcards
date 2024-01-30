@@ -1,66 +1,123 @@
-@use '../../../app/styles/helpers' as *;
-@use './../../../app/styles/mixins-other' as *;
+// @mixin typography($fontSize, $lineHeight, $fontWeight) {
+//    margin: 0;
+//    font-size: $fontSize;
+//    font-weight: $fontWeight;
+//    line-height: $lineHeight;
+//    color: var(--color-light-100);
+// }
 
 .large {
-    @include typography(xxl, bold);
+    margin: 0;
 
-    line-height: 1.38;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 27.36px;
+    color: var(--color-light-100);
 }
 
 .h1 {
-    @include typography($size: xl, $weight: bold, $line-height: xl); // 20 px bold 1.8
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 27.36px;
+    color: var(--color-light-100);
 }
 
 .h2 {
-    @include typography($size: l, $weight: bold, $line-height: s);
+    margin: 0;
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--color-light-100);
 }
 
 .h3 {
-    @include typography($weight: bold);
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--color-light-100);
 }
 
 .body1 {
-    @include typography;
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--color-light-100);
 }
 
 .subtitle1 {
-    @include typography($weight: bold);
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--color-light-100);
 }
 
 .body2 {
-    @include typography($size: s, $line-height: l);
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--color-light-100);
 }
 
 .subtitle2 {
-    @include typography($size: s, $weight: bold, $line-height: l);
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--color-light-100);
 }
 
 .caption {
-    @include typography($size: xs, $line-height: s);
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 21.28px;
+    color: var(--color-light-100);
 }
 
 .overline {
-    @include typography($size: xs, $weight: bold, $line-height: s);
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 21.28px;
+    color: var(--color-light-100);
 }
 
-%link-shared {
+.link1,
+.link1:visited {
     cursor: pointer;
-    color: var(--color-accent-500);
+
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--color-info-500);
     text-decoration: underline;
-
-    &:hover {
-        color: var(--color-accent-300);
-    }
 }
 
-.link1 {
-    @extend %link-shared;
+.link2,
+.link1:visited {
+    cursor: pointer;
 
-    @include typography($size: s, $line-height: l);
-}
+    margin: 0;
 
-.link2 {
-    @extend %link-shared;
-
-    @include typography($size: xs, $line-height: s);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 21.28px;
+    color: var(--color-info-500);
+    text-decoration: underline;
 }

@@ -7,10 +7,27 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
+// Звездочка - любой тэг - inherit: наследуем от родителя
+// (смотрим наверх например внутри ody будет header он наследуется от бади..)
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+    box-sizing: inherit;
+}
+
+/* Обнуляем внутренние падинги только у тех у кого есть класс
+- если им клас не пропишем обнуляться не будет */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
 }
 
 input,
@@ -26,19 +43,84 @@ option {
     color: inherit;
 }
 
-a:visited {
-    color: inherit;
-}
-
-body {
-    box-sizing: border-box;
+// Отменяем внешний отступ
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
     margin: 0;
-    padding: 0;
-
-    font-family: var(--font-family-primary), sans-serif; // Шрифт проекта
-    font-size: var(--font-size-m);
-    line-height: var(--line-height-m);
-    color: var(--color-light-100); // Стандатный цвет текста проекта
-
-    background-color: var(--color-dark-900); // Темный фон всего проекта
 }
+
+// Убираем маркет "точку"
+ul {
+    list-style: none;
+}
+
+/* чтобы у картинки скролла не было при уменьшении экрана */
+img {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+// Стили с темой приложения по дефолту в проекте - самые частые:
+body {
+    min-height: 100vh;
+
+    font-family: Roboto, sans-serif; // Основной шрифт проекта
+    font-size: 14px;
+    font-weight: 400; // жирность шрифта по умолчанию
+
+    // текст будет отображаться обычным образом, без наклона (курсива).
+    font-style: normal;
+    line-height: 24px;
+
+    // частый цвет текста проекта
+    color: var(--color-light-100);
+
+    // Цвет фона - тема - приложения
+    background-color: var(--color-dark-900);
+}
+
+// Контейнер всего приложения, чтобы не вертеть головой влево далеко-вправо...
+// + создали для удобства ui-kit AppContainer в shared слое
+// контейнер нельзя родетелям делать у вешать ему display: flex
+// у него стандартные стили
+.container {
+    max-width: 1024px; // добавляем к ширине padding - 12рх: 1100 рх ширина + 12рх т.к у нас border-box стоит
+    margin: 0 auto;
+    padding: 0 12px;
+}
+
+/*
+- index.scss точка входа для стилей приложения
+- через var, например: var(--font-family-primary) - мы используем переменную которая объявлена в др.файле через 2 тире вот так:
+--line-height-xs: 1rem;
+_______________________________________________________________________________________________________________________________
+ */
+
+/**
+Можно называть переменные для удобства как в материал:
+- primary- для основных элементов интерфейса.
+- secondary- для вторичных элементов интерфейса.
+- error- для элементов, о которых пользователь должен быть осведомлен.
+- warning- за потенциально опасные действия или важные сообщения.
+- info- для выделения нейтральной информации.
+success- для индикации успешного завершения действия, инициированного пользователем.
+ */

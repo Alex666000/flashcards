@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { ROUTES } from '@/shared/lib/router-common/routes'
+import { ROUTES } from '@/shared/common/constants'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'

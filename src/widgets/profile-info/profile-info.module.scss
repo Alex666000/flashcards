@@ -1,6 +1,6 @@
 @import '@/app/styles/mixins';
 
-.content {
+.outlett_content {
     @include flex(row, 0, 12px, center);
 
     padding: 12px 0;

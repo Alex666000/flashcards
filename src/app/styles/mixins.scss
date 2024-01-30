@@ -73,7 +73,6 @@
 }
 
 @mixin container($width, $padding-inline: 12px) {
-    box-sizing: content-box;
     max-width: $width;
     margin: 0 auto;
     padding-inline: $padding-inline;

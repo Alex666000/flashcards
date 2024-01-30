@@ -1,11 +1,11 @@
 .singUpPage {
-    .container {
+    .header_container {
         max-width: 420px;
         margin: 0 auto; // центрируем контейнер
         padding-inline: 12px;
     }
 
-    .content {
+    .outlett_content {
         display: flex;
         flex-direction: column;
         gap: 20px 0;
