@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 
-import s from '@/shared/ui/dropdown/dropdown.module.scss'
+import s from '@/shared/ui/dropdown_my/dropdown.module.scss'
 
 // Раздилитель
 export const DropdownSeparator = forwardRef<

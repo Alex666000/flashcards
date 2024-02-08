@@ -12,12 +12,12 @@ import { PrivateRoute } from './private-route'
 /**
  * AppRouter - отрисовывает все пути проекта
  */
+
 export const AppRouter = () => {
   return (
     // Loader или LeanerProgress в Suspense
     <Suspense fallback={<Loader />}>
       <Routes>
-        {/* ------------------------------------------------------- */}
         {/* Общедоступные-публичные пути */}
         <Route element={<SingInPage />} path={ROUTES.signIn} />
         <Route element={<SingUpPage />} path={ROUTES.singUp} />
@@ -27,14 +27,13 @@ export const AppRouter = () => {
         <Route element={<ErrorPage />} path={ROUTES.error} />
         {/*<Route element={<VerifyMail />} path={ROUTES.VERIFY} />*/}
         <Route element={<Navigate to={ROUTES.error} />} path={'*'} />
-
         {/*------------------------------------------------------- */}
         {/* Приватные пути */}
         <Route element={<PrivateRoute />}>
           {/* вложенные пути в PrivateRoute */}
-          <Route element={<Decks />} index path={ROUTES.main} />
+          <Route element={<Decks />} index path={'/'} />
           <Route element={<Decks />} path={ROUTES.decks} />
-          {/*<Route element={<Profile />} path={ROUTES.PROFILE} />*/}
+          {/*<Route element={<Profile />} path={ROUTES.profile} />*/}
           {/*<Route element={<Cards />} path={ROUTES.DECKS + ROUTES.CARDS + ROUTES.ID} />*/}
           {/*<Route element={<Learn />} path={ROUTES.LEARN + ROUTES.ID} />*/}
         </Route>

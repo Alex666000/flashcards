@@ -1,4 +1,4 @@
-// getMe()
+// getMe() + userData
 export type UserResponse = {
   avatar: string
   created: string
@@ -20,10 +20,10 @@ export type LoginResponse = {
   accessToken: string
 }
 
-//
 export type UpdateProfileFormData = FormData
 
-export type SignUpArgs = Omit<LoginArgs, 'rememberMe'>
+// register args
+export type SignUpArgs = Omit<LoginArgs, 'rememberMe'> & { name?: string }
 
 export type RecoverPasswordRequest = {
   email: string

@@ -1,0 +1,44 @@
+.card {
+  width: 100%;
+  max-width: 420px;
+  margin: 36px auto;
+  padding: 2.05rem 2.25rem 1.2rem;
+
+  text-align: center;
+
+  .title {
+    margin-bottom: 27px;
+    text-align: center;
+  }
+
+  .form {
+    div {
+      text-align: left;
+    }
+
+    div + div {
+      margin-top: 10px;
+    }
+  }
+
+  .button {
+    margin-top: 2.5rem;
+  }
+
+  .subtitle {
+    margin-top: 1.25rem;
+    color: var(--color-light-900);
+  }
+
+  .link {
+    margin: auto;
+
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-m);
+    color: var(--color-accent-500);
+    text-decoration: underline;
+    white-space: pre-line;
+  }
+}

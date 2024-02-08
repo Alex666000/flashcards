@@ -60,10 +60,13 @@ export const DropDownItem: FC<DropDownItemProps> = ({
   disabled,
   onSelect,
 }) => {
-  const classes = clsx(s.item, className)
-
   return (
-    <DropdownMenuRadix.Item asChild className={classes} disabled={disabled} onSelect={onSelect}>
+    <DropdownMenuRadix.Item
+      asChild
+      className={clsx(s.item, className)}
+      disabled={disabled}
+      onSelect={onSelect}
+    >
       {children}
     </DropdownMenuRadix.Item>
   )
@@ -83,12 +86,10 @@ export const DropDownItemWithIcon: FC<DropdownItemWithIconProps> = ({
   text,
   ...rest
 }) => {
-  const classes = clsx(s.item, className)
-
   return (
     <DropdownMenuRadix.Item
       asChild
-      className={classes}
+      className={clsx(s.item, className)}
       disabled={disabled}
       onClick={(event) => event.stopPropagation()}
       onSelect={onSelect}

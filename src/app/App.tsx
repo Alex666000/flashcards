@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import { Layout } from '@/shared/layout'
 
 import { AppRouter } from './providers/index'
@@ -8,14 +10,14 @@ import { AppRouter } from './providers/index'
 //     userName: 'Sasha',
 // }
 
-export function App() {
+export const App = memo(() => {
   return (
     <>
       <Layout />
       <AppRouter />
     </>
   )
-}
+})
 
 /*
 - Внутри всего Арр отрисовываем страницы проекта: <AppRouter />

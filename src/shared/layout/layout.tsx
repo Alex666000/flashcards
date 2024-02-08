@@ -1,5 +1,11 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
+import { useAppDispatch, useAppSelector } from '@/app/providers'
+import { useLogoutMutation, useMeQuery, util } from '@/features/auth/api/auth.api'
+import { loadingSelector } from '@/features/loading/model/selectors/loading-selector'
+import { ROUTES } from '@/shared/common/constants'
+// eslint-disable-next-line import/namespace
 import { Header } from '@/widgets/header/header'
 
 /** Layout - убираем дублирующиеся слой - например Header, одинаковый на всех страницах,
@@ -13,14 +19,49 @@ import { Header } from '@/widgets/header/header'
  чтобы его не дублировать делаем Layout -- каркас всего приложения
  */
 export const Layout = () => {
-  // const { data, isLoading } = useMeQuery()
+  /* Для определения загрузилось или нет? */
+  // const loadingStatus = useAppSelector(loadingSelector) см. quiz
 
-  // console.log({ data })
+  const status = useAppSelector((state) => state.appReducer.status)
+
+  const { data } = useMeQuery() // авторизован ли я?
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const [logout] = useLogoutMutation()
+
+  const handleLogout = () => {
+    logout()
+      .unwrap()
+      .then(() => {
+        dispatch(util?.resetApiState())
+        navigate(ROUTES.signIn)
+      })
+      .catch((error) => {
+        toast(error)
+      })
+  }
+
+  const redirectToProfile = () => {
+    navigate(ROUTES.profile)
+  }
+
+  const redirectToSingIn = () => {
+    navigate(ROUTES.signIn)
+  }
 
   return (
     <>
       {/* <Header отрисуется всегда /> */}
-      <Header data={false} />
+      <Header
+        avatar={data?.avatar}
+        email={data?.email}
+        isAuth={!!data}
+        isLoading={status}
+        name={data?.name}
+        onProfileClick={redirectToProfile}
+        onSignIn={redirectToSingIn}
+        onSignOut={handleLogout}
+      />
       {/* В Outlet - пойдет все дочернее содержимое - в промежуток между хедером и футером*/}
       <Outlet />
       {/* <Footer /> */}

@@ -1,52 +1,65 @@
-import { useForm } from 'react-hook-form'
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
 
+import { LoginArgs } from '@/features/auth'
+import { ROUTES } from '@/shared/common/constants'
 import { Button } from '@/shared/ui/button'
-import { ControlledCheckbox } from '@/shared/ui/controlled'
-import { TextField } from '@/shared/ui/text-field/text-field'
-import { DevTool } from '@hookform/devtools'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { Card } from '@/shared/ui/card'
+import { ControlledCheckbox, ControlledTextField } from '@/shared/ui/controlled'
+import { Typography } from '@/shared/ui/typography'
 
-const emailSchema = z.string().trim().email('Please enter a valid email')
+import s from './login-form.module.scss'
 
-// То что в loginSchema прокидываем в name
-const loginSchema = z.object({
-  acceptTerms: z.boolean().optional(),
-  email: emailSchema,
-  password: z.string().min(3),
-  rememberMe: z.boolean().optional(),
-})
+import { useLoginForm } from './use-login-form'
 
-type FormValues = z.infer<typeof loginSchema>
-type Props = {
-  onSubmit: (data: FormValues) => void
+type PropsType = {
+  onSubmitHandler: (data: LoginArgs) => void
 }
 
-export const LoginForm = ({ onSubmit }: Props) => {
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
-  })
-
-  // const onSubmit = (data: FormValues) => {
-  //     console.log({ data })
-  // }
+export const LoginForm: FC<PropsType> = ({ onSubmitHandler }) => {
+  const { control, handleSubmit } = useLoginForm()
+  const onSubmit = handleSubmit((data) => onSubmitHandler(data))
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <DevTool control={control} />
-      <TextField {...register('email')} errorMessage={errors.email?.message} label={'email'} />
-      <TextField
-        {...register('password')}
-        errorMessage={errors.password?.message}
-        label={'password'}
-      />
-      <ControlledCheckbox control={control} label={'remember me'} name={'rememberMe'} />
-      <Button type={'submit'}>Submit</Button>
-    </form>
+    <Card className={s.card}>
+      <Typography as={'h1'} className={s.title} variant={'large'}>
+        Sign In
+      </Typography>
+      <form onSubmit={onSubmit}>
+        <div className={s.form}>
+          <ControlledTextField control={control} label={'Email'} name={'email'} />
+          <ControlledTextField
+            control={control}
+            label={'Password'}
+            name={'password'}
+            type={'password'}
+          />
+          <ControlledCheckbox
+            className={s.checkbox}
+            control={control}
+            label={'Remember me'}
+            name={'rememberMe'}
+          />
+        </div>
+        <Typography
+          as={'a'}
+          className={s.recoverPasswordLink}
+          href={ROUTES.recoverPassword}
+          variant={'body2'}
+        >
+          Forgot Password?
+        </Typography>
+        <Button className={s.button} fullWidth type={'submit'}>
+          <Typography variant={'subtitle2'}>Sign In</Typography>
+        </Button>
+        <Typography className={s.caption} variant={'body2'}>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          Don't have an account?
+        </Typography>
+        <Typography as={Link} className={s.signUpLink} to={ROUTES.singUp} variant={'link1'}>
+          Sign Up
+        </Typography>
+      </form>
+    </Card>
   )
 }

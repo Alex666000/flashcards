@@ -1,9 +1,10 @@
 import { ElementRef, forwardRef } from 'react'
 
-import { Avatar } from '@/shared/ui/avatar'
 import { Typography } from '@/shared/ui/typography'
 
 import s from './profile-info.module.scss'
+
+import { Avatar } from '../../shared/ui/avatar_'
 
 export type ProfileInfoProps = Pick<UserResponse, 'avatar' | 'email' | 'name'>
 

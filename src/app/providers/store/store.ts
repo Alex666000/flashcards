@@ -1,5 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
+import { appReducer } from '@/app/model/slice/app.slice'
 import { authAPI } from '@/features/auth/api/auth.api'
 import { loadingReducer } from '@/features/loading/model/slice/loading.slice'
 import { flashCardsAPI } from '@/shared/api/flash-cards.api'
@@ -10,7 +11,8 @@ export const store = configureStore({
   // апишка всего проекта
   middleware: (gDM) => gDM().concat(flashCardsAPI.middleware),
   reducer: {
-    // частные апишки
+    appReducer,
+    // RTK редюсеры
     [authAPI.reducerPath]: authAPI.reducer,
     // обычные редюсеры для внутреннего стейта
     loading: loadingReducer,

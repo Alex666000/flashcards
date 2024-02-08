@@ -1,95 +1,96 @@
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useAppSelector } from '@/app/providers'
-import { loadingSelector } from '@/features/loading/model/selectors/loading-selector'
-import { Logo } from '@/shared/assets'
+import { StatusType } from '@/app/model/slice/app.slice'
+import { MainLogo } from '@/shared/assets/icons/sutarday-icons/Incubator-logo'
+import { LogOutIcon } from '@/shared/assets/icons/sutarday-icons/LogOutIcon'
+import { Person } from '@/shared/assets/icons/sutarday-icons/Person'
 import { ROUTES } from '@/shared/common/constants'
 import { AppContainer } from '@/shared/ui/app-container'
-import { Avatar } from '@/shared/ui/avatar'
+import { Avatar } from '@/shared/ui/avatar-s'
 import { Button } from '@/shared/ui/button'
-import { DropDown, DropDownItem, DropDownItemWithIcon } from '@/shared/ui/drop-down_'
-import { Icon } from '@/shared/ui/icon'
+import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/shared/ui/dropdown-s'
 import { LeanerProgress } from '@/shared/ui/loaders-components'
 import { Typography } from '@/shared/ui/typography'
-import { ProfileInfo } from '@/widgets/profile-info'
 
-import s from './header.module.scss'
+import styles from './header.module.scss'
 
 type Props = {
-  data?: any
-  logout?: () => void
+  avatar?: string
+  email?: string
+  isAuth: boolean
+  isLoading: StatusType
+  name?: string
+  onProfileClick: () => void
+  onSignIn?: () => void
+  onSignOut: () => void
 }
 
-export const Header = ({ data = false, logout }: Props) => {
-  const queryInProgress = useAppSelector(loadingSelector) // видим "Линеар-прогресс"
-
+export const Header = ({
+  avatar = '',
+  email = 'NoNameEmail@.com',
+  isAuth,
+  isLoading = 'idle',
+  name = 'NoName',
+  onProfileClick,
+  onSignIn,
+  onSignOut,
+}: Props) => {
   const navigate = useNavigate()
 
-  const toProfile = () => {
-    navigate(ROUTES.profile)
-  }
-
   return (
-    <header className={s.header}>
-      <div className={'container'}>
-        {/*  Линеар-прогресс  */}
-        {queryInProgress && <LeanerProgress />}
-        <div className={s.header_inner}>
-          <Link className={s.link} to={ROUTES.decks}>
-            <Logo className={s.icon} />
-          </Link>
-          {/*{data ? (*/}
-          {/*    <div className={s.user}>*/}
-          {/*        <Typography*/}
-          {/*            as={Link}*/}
-          {/*            className={s.name}*/}
-          {/*            to={ROUTES.profile}*/}
-          {/*            variant={'subtitle1'}*/}
-          {/*        >*/}
-          {/*            {data.name || data.email}*/}
-          {/*        </Typography>*/}
-          {/*        <DropDown*/}
-          {/*            trigger={*/}
-          {/*                <button className={s.dropdownButton}>*/}
-          {/*                    <Avatar*/}
-          {/*                        image={data.avatar}*/}
-          {/*                        size={48}*/}
-          {/*                        userName={data.name || data.email}*/}
-          {/*                    />*/}
-          {/*                </button>*/}
-          {/*            }*/}
-          {/*        >*/}
-          {/*            <DropDownItem>*/}
-          {/*                <ProfileInfo {...data} />*/}
-          {/*            </DropDownItem>*/}
-          {/*            <DropDownItemWithIcon*/}
-          {/*                icon={<Icon name={'user'} />}*/}
-          {/*                onSelect={toProfile}*/}
-          {/*                text={'Profile'}*/}
-          {/*            />*/}
-          {/*            <DropDownItemWithIcon*/}
-          {/*                icon={<Icon name={'logout'} />}*/}
-          {/*                onSelect={logout}*/}
-          {/*                text={'Sign out'}*/}
-          {/*            />*/}
-          {/*        </DropDown>*/}
-          {/*    </div>*/}
-          {/*) : (*/}
-          {/*    <Button as={Link} to={ROUTES.signIn}>*/}
-          {/*        Sign In*/}
-          {/*    </Button>*/}
-          {/*)}*/}
-          <Button as={Link} to={ROUTES.signIn}>
-            Sign In
+    <div className={styles.header}>
+      <AppContainer className={styles.container}>
+        <div className={styles.logo}>
+          <Button as={Link} to={ROUTES.decks} variant={'link'}>
+            <MainLogo />
           </Button>
         </div>
-      </div>
-    </header>
+        <div className={styles.rightItem}>
+          {!isAuth ? (
+            <div className={styles.button}>
+              <Button onClick={onSignIn} variant={'primary'}>
+                Sign In
+              </Button>
+            </div>
+          ) : (
+            <div className={styles.userTrigger}>
+              <Typography className={styles.userName} variant={'subtitle1'}>
+                {name}
+              </Typography>
+              <Dropdown
+                trigger={
+                  <button>
+                    <Avatar name={name} photo={avatar} />
+                  </button>
+                }
+              >
+                <DropdownItem onSelect={() => navigate(ROUTES.profile)}>
+                  <div className={styles.userInfoContainer}>
+                    <Avatar name={name} photo={avatar} />
+                    <div className={styles.userDetails}>
+                      <Typography variant={'subtitle2'}>{name}</Typography>
+                      <Typography className={styles.userEmail} variant={'caption'}>
+                        {email}
+                      </Typography>
+                    </div>
+                  </div>
+                </DropdownItem>
+                <DropdownItemWithIcon
+                  icon={<Person />}
+                  onSelect={onProfileClick}
+                  text={'Profile'}
+                />
+                <DropdownItemWithIcon
+                  icon={<LogOutIcon />}
+                  onSelect={onSignOut}
+                  text={'Sign out'}
+                />
+              </Dropdown>
+            </div>
+          )}
+        </div>
+      </AppContainer>
+      {isLoading === 'loading' ? <LeanerProgress /> : ''}
+    </div>
   )
 }
-// Правила вертски: название секции - контеинер приложения - свой контейнер - контент блока - остальные стили
-/*
-- По макету см: если я не авторизован то увижу Header просто с логотипом и кнопкой Sing In,
-а если залогинен увижу Header внутри которого Аватарка и имя пользователя
-- Header отрисуем в Лайауте и там передадим авторизационные данные из me() запроса в РТК
- */

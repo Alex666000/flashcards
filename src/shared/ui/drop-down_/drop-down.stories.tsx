@@ -1,8 +1,8 @@
-import { Avatar } from '@/shared/ui/avatar'
 import { Icon } from '@/shared/ui/icon'
 import { ProfileInfo } from '@/widgets/profile-info'
 import { Meta } from '@storybook/react'
 
+import { Avatar } from '../avatar_'
 import { DropDown, DropDownItem, DropDownItemWithIcon } from './'
 
 const meta = {

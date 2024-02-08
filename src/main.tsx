@@ -19,7 +19,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <ErrorBoundary>
         {/*<ForceUpdateProvider>*/}
         <Toast />
-        <App />
+        <StrictMode>
+          <App />
+        </StrictMode>
         {/*</ForceUpdateProvider>*/}
       </ErrorBoundary>
     </Provider>

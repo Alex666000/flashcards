@@ -1,10 +1,10 @@
-import { Avatar } from '@/shared/ui/avatar'
+import { DropDown, DropDownItemWithIcon } from ''
 import { DropDownItem } from '@/shared/ui/drop-down_'
-import { DropDown, DropDownItemWithIcon } from '@/shared/ui/dropdown'
 import { Icon } from '@/shared/ui/icon/icon'
 import { Meta } from '@storybook/react'
 
 import { ProfileInfo } from '../../../widgets/profile-info'
+import { Avatar } from '../avatar_'
 
 const meta = {
   component: DropDown,

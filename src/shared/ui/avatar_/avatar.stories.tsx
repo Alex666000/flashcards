@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useEffect, useState } from 'react'
 
-import { Avatar } from '@/shared/ui/avatar/avatar'
+import { Avatar } from '@/shared/ui/avatar_/avatar'
 
 const meta = {
   argTypes: {},

@@ -5,7 +5,6 @@ export const ROUTES = {
   error: '/404',
   id: '/:id',
   learn: '/learn',
-  main: '/',
   new_password: '/new-password/:token',
   profile: '/profile',
   recoverPassword: '/recover-password',

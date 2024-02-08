@@ -1,11 +1,11 @@
 import { ComponentPropsWithoutRef, ElementRef, FC, ReactNode, forwardRef } from 'react'
 
-import { DropDownItemProps } from '@/shared/ui/dropdown/dropdown-item'
+import { DropDownItemProps } from '@/shared/ui/dropdown_my/dropdown-item'
 import { Typography } from '@/shared/ui/typography'
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 import clsx from 'clsx'
 
-import s from '@/shared/ui/dropdown/dropdown.module.scss'
+import s from '@/shared/ui/dropdown_my/dropdown.module.scss'
 
 export type Props = Omit<DropDownItemProps, 'children'> & {
   icon: ReactNode
