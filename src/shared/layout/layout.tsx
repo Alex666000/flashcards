@@ -13,15 +13,19 @@ import { Header } from '@/widgets/header/header'
  чтобы его не дублировать делаем Layout -- каркас всего приложения
  */
 export const Layout = () => {
-    return (
-        <>
-            {/* <Header отрисуется всегда /> */}
-            <Header data={false} />
-            {/* В Outlet - пойдет все дочернее содержимое - в промежуток между хедером и футером*/}
-            <Outlet />
-            {/* <Footer /> */}
-        </>
-    )
+  // const { data, isLoading } = useMeQuery()
+
+  // console.log({ data })
+
+  return (
+    <>
+      {/* <Header отрисуется всегда /> */}
+      <Header data={false} />
+      {/* В Outlet - пойдет все дочернее содержимое - в промежуток между хедером и футером*/}
+      <Outlet />
+      {/* <Footer /> */}
+    </>
+  )
 }
 
 /*

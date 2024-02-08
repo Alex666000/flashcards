@@ -17,17 +17,17 @@ import 'react-toastify/dist/ReactToastify.css'
  * rtl: Если true, то уведомления будут отображаться справа налево (для языков справа налево).
  */
 export const Toast = () => (
-    <ToastContainer
-        autoClose={5000}
-        closeOnClick
-        containerId={'common'}
-        draggable
-        hideProgressBar={false}
-        newestOnTop={false}
-        pauseOnFocusLoss
-        pauseOnHover
-        position={'bottom-left'}
-        rtl={false}
-        theme={'dark'}
-    />
+  <ToastContainer
+    autoClose={5000}
+    closeOnClick
+    containerId={'common'}
+    draggable
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnFocusLoss
+    pauseOnHover
+    position={'bottom-left'}
+    rtl={false}
+    theme={'dark'}
+  />
 )

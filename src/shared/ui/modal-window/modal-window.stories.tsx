@@ -1,16 +1,15 @@
 import { CSSProperties, useState } from 'react'
 
+import { Button } from '@/shared/ui/button'
 import { Meta } from '@storybook/react'
 
+import { TextField } from '../text-field_'
 import { ModalWindow } from './'
 
-import { Button } from '@/components/ui/button'
-import { TextField } from '../text-field_'
-
 const meta = {
-  title: 'Components/Modal Window',
   component: ModalWindow,
   tags: ['autodocs'],
+  title: 'Components/Modal Window',
 } satisfies Meta<typeof ModalWindow>
 
 export default meta
@@ -28,10 +27,10 @@ export const ExampleWithForm = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open</Button>
-        <ModalWindow open={open} setOpen={setOpen} title="Dialog title">
+        <ModalWindow open={open} setOpen={setOpen} title={'Dialog title'}>
           <div style={container}>
-            <TextField label="Title" />
-            <TextField label="Key words" />
+            <TextField label={'Title'} />
+            <TextField label={'Key words'} />
             <Button style={{ alignSelf: 'flex-end', marginTop: '12px' }}>Send</Button>
           </div>
         </ModalWindow>

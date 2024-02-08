@@ -1,15 +1,15 @@
+import type { Meta, StoryObj } from '@storybook/react'
+
 import { useState } from 'react'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import { Table } from '@/shared/ui/table'
 
 import { Sort, TableHeader } from './'
 
-import { Table } from '@/components/ui/table'
-
 const meta = {
-  title: 'Components/Table Header',
   component: Table.Root,
   tags: ['autodocs'],
+  title: 'Components/Table Header',
 } satisfies Meta<typeof Table.Root>
 
 export default meta
@@ -36,34 +36,34 @@ const columns = [
 
 const data = [
   {
-    title: 'Project A',
     cardsCount: 10,
-    updated: '2023-07-07',
     createdBy: 'John Doe',
-  },
-  {
-    title: 'Project B',
-    cardsCount: 5,
-    updated: '2023-07-06',
-    createdBy: 'Jane Smith',
-  },
-  {
-    title: 'Project C',
-    cardsCount: 8,
-    updated: '2023-07-05',
-    createdBy: 'Alice Johnson',
-  },
-  {
-    title: 'Project D',
-    cardsCount: 3,
+    title: 'Project A',
     updated: '2023-07-07',
-    createdBy: 'Bob Anderson',
   },
   {
-    title: 'Project E',
+    cardsCount: 5,
+    createdBy: 'Jane Smith',
+    title: 'Project B',
+    updated: '2023-07-06',
+  },
+  {
+    cardsCount: 8,
+    createdBy: 'Alice Johnson',
+    title: 'Project C',
+    updated: '2023-07-05',
+  },
+  {
+    cardsCount: 3,
+    createdBy: 'Bob Anderson',
+    title: 'Project D',
+    updated: '2023-07-07',
+  },
+  {
     cardsCount: 12,
-    updated: '2023-07-04',
     createdBy: 'Emma Davis',
+    title: 'Project E',
+    updated: '2023-07-04',
   },
 ]
 
@@ -73,9 +73,9 @@ export const Default: Story = {
 
     return (
       <Table.Root>
-        <TableHeader columns={columns} sort={sort} onSort={setSort} />
+        <TableHeader columns={columns} onSort={setSort} sort={sort} />
         <Table.Body>
-          {data.map(item => (
+          {data.map((item) => (
             <Table.Row key={item.title}>
               <Table.Cell>{item.title}</Table.Cell>
               <Table.Cell>{item.cardsCount}</Table.Cell>

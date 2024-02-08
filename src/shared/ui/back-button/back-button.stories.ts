@@ -5,10 +5,10 @@ import { BrowserRouterDecorator } from '@/shared/config/storybook/decorators/bro
 import { BackButton } from './'
 
 const meta = {
-    component: BackButton,
-    decorators: [BrowserRouterDecorator],
-    tags: ['autodocs'],
-    title: 'Components/Back Button',
+  component: BackButton,
+  decorators: [BrowserRouterDecorator],
+  tags: ['autodocs'],
+  title: 'Components/Back Button',
 } satisfies Meta<typeof BackButton>
 
 export default meta

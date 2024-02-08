@@ -1,7 +1,7 @@
 module.exports = {
     ...require('@it-incubator/prettier-config'),
     //override settings here
-    "tabWidth": 4,
+    "tabWidth": 2,
     "bracketSpacing": true,
     "arrowParens": "always"
 }

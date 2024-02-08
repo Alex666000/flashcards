@@ -1,15 +1,14 @@
+import { Avatar } from '@/shared/ui/avatar'
+import { Icon } from '@/shared/ui/icon'
+import { ProfileInfo } from '@/widgets/profile-info'
 import { Meta } from '@storybook/react'
 
 import { DropDown, DropDownItem, DropDownItemWithIcon } from './'
 
-import { ProfileInfo } from '@/components/header/profile-info'
-import { Avatar } from '@/components/ui/avatar'
-import { Icon } from '@/components/ui/icon/icon.tsx'
-
 const meta = {
-  title: 'Components/Drop-down Menu',
   component: DropDown,
   tags: ['autodocs'],
+  title: 'Components/Drop-down Menu',
 } satisfies Meta<typeof DropDown>
 
 export default meta
@@ -22,12 +21,20 @@ export const Default = {
         <div>
           <DropDown>
             <>
-              <DropDownItemWithIcon icon={<Icon name="play" />} text="Learn" onSelect={() => {}} />
-              <DropDownItemWithIcon icon={<Icon name="edit" />} text="Edit" onSelect={() => {}} />
               <DropDownItemWithIcon
-                icon={<Icon name="trash-bin" />}
-                text="Delete"
+                icon={<Icon name={'play'} />}
                 onSelect={() => {}}
+                text={'Learn'}
+              />
+              <DropDownItemWithIcon
+                icon={<Icon name={'edit'} />}
+                onSelect={() => {}}
+                text={'Edit'}
+              />
+              <DropDownItemWithIcon
+                icon={<Icon name={'trash-bin'} />}
+                onSelect={() => {}}
+                text={'Delete'}
               />
             </>
           </DropDown>
@@ -40,9 +47,9 @@ export const Default = {
 export const WithProfile = {
   render: () => {
     const userData = {
-      name: 'Aleksei',
-      email: 'frontend-dev@gmail.com',
       avatar: '',
+      email: 'frontend-dev@gmail.com',
+      name: 'Aleksei',
     }
 
     return (
@@ -60,14 +67,14 @@ export const WithProfile = {
               <ProfileInfo {...userData} />
             </DropDownItem>
             <DropDownItemWithIcon
-              icon={<Icon name="user" />}
-              text="My profile"
+              icon={<Icon name={'user'} />}
               onSelect={() => {}}
+              text={'My profile'}
             />
             <DropDownItemWithIcon
-              icon={<Icon name="logout" />}
-              text="Sign out"
+              icon={<Icon name={'logout'} />}
               onSelect={() => {}}
+              text={'Sign out'}
             />
           </DropDown>
         </div>

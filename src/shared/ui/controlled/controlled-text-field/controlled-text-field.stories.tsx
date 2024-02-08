@@ -1,17 +1,16 @@
-import { CSSProperties } from 'react'
-
-import { DevTool } from '@hookform/devtools'
 import type { Meta, StoryObj } from '@storybook/react'
+
+import { CSSProperties } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ControlledTextField } from './'
-
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
+import { Button } from '@/shared/ui/button'
+import { ControlledTextField } from '@/shared/ui/controlled'
+import { Typography } from '@/shared/ui/typography'
+import { DevTool } from '@hookform/devtools'
 
 const meta = {
-  title: 'Components/Controlled/Text Field',
   component: ControlledTextField,
+  title: 'Components/Controlled/Text Field',
 } satisfies Meta<typeof ControlledTextField>
 
 export default meta
@@ -23,6 +22,7 @@ type FormValues = {
 }
 
 export const ExampleWithForm: Story = {
+  args: {} as any,
   render: () => {
     const { control, handleSubmit } = useForm<FormValues>()
 
@@ -33,19 +33,18 @@ export const ExampleWithForm: Story = {
     const styles: CSSProperties = {
       display: 'flex',
       flexDirection: 'column',
-      rowGap: '20px',
       maxWidth: '400px',
+      rowGap: '20px',
     }
 
     return (
       <form onSubmit={handleSubmit(onSubmit)} style={styles}>
         <DevTool control={control} />
         <Typography>Form With Controlled Text Fields</Typography>
-        <ControlledTextField name="firstName" control={control} label={'First Name'} />
-        <ControlledTextField name="lastName" control={control} label={'Last Name'} />
+        <ControlledTextField control={control} label={'First Name'} name={'firstName'} />
+        <ControlledTextField control={control} label={'Last Name'} name={'lastName'} />
         <Button style={{ marginTop: '24px' }}>Send</Button>
       </form>
     )
   },
-  args: {} as any,
 }

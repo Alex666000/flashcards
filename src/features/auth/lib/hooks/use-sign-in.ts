@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form'
 
-import { emailSchema, stringSchema } from '@/shared/common/form-validate-zod-schemas/zod-schema'
+import { emailSchema, passwordSchema } from '@/shared/common/form-validate-zod-schemas/zod-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 // Определение схемы валидации для полей формы: Zod
 const loginSchema = z.object({
-    email: emailSchema,
-    password: stringSchema,
-    rememberMe: z.boolean(),
+  email: emailSchema,
+  password: passwordSchema,
+  rememberMe: z.boolean().optional(),
 })
 
 export type SignInFormProps = z.infer<typeof loginSchema>
@@ -21,12 +21,12 @@ export type SignInFormProps = z.infer<typeof loginSchema>
  и валидацией формы входа в систему.
  */
 export const useSignIn = () => {
-    return useForm<SignInFormProps>({
-        defaultValues: {
-            email: '',
-            password: '',
-            rememberMe: false,
-        },
-        resolver: zodResolver(loginSchema),
-    })
+  return useForm<SignInFormProps>({
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
+    resolver: zodResolver(loginSchema),
+  })
 }

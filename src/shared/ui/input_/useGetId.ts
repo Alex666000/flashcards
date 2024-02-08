@@ -9,7 +9,7 @@ import { useId } from 'react'
  * @returns {string} The ID from component props or a generated unique ID.
  */
 export const useGetId = (idFromComponentProps?: string) => {
-    const generatedId = useId()
+  const generatedId = useId()
 
-    return idFromComponentProps || generatedId
+  return idFromComponentProps || generatedId
 }

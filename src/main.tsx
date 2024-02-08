@@ -14,18 +14,16 @@ import { ErrorBoundary, store } from './app/providers/index'
 import { Toast } from './shared/ui/toast'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <ErrorBoundary>
-                {/*<ForceUpdateProvider>*/}
-                <Toast />
-                <StrictMode>
-                    <App />
-                </StrictMode>
-                {/*</ForceUpdateProvider>*/}
-            </ErrorBoundary>
-        </Provider>
-    </BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
+      <ErrorBoundary>
+        {/*<ForceUpdateProvider>*/}
+        <Toast />
+        <App />
+        {/*</ForceUpdateProvider>*/}
+      </ErrorBoundary>
+    </Provider>
+  </BrowserRouter>
 )
 
 /*

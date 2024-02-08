@@ -1,1 +1,1 @@
-export { QueryLoading } from './query-loading.tsx'
+export { QueryLoading } from './query-loading'

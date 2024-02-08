@@ -6,13 +6,13 @@ import { Typography } from '@/shared/ui/typography'
 import s from './error-page.module.scss'
 
 export const ErrorPage = () => {
-    return (
-        <div className={s.root}>
-            <Error_404Icon />
-            <Typography variant={'body1'}>Sorry! Page not found!</Typography>
-            <Button as={'a'} href={ROUTES.decks}>
-                Back to home page
-            </Button>
-        </div>
-    )
+  return (
+    <div className={s.root}>
+      <Error_404Icon />
+      <Typography variant={'body1'}>Sorry! Page not found!</Typography>
+      <Button as={'a'} href={ROUTES.decks}>
+        Back to home page
+      </Button>
+    </div>
+  )
 }

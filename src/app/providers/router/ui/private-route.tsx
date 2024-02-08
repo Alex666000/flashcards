@@ -7,16 +7,16 @@ import { ROUTES } from '@/shared/common/constants'
  * с помощью него определяем попадём на приватные маршруты или публичные
  */
 export const PrivateRoute = () => {
-    // const { data, isLoading } = useGetMeQuery()
-    // const isAuthenticated = !!data && !('success' in data)
+  // const { data, isLoading } = useGetMeQuery()
+  // const isAuthenticated = !!data && !('success' in data)
 
-    // if (isLoading) {
-    //     return <Loader />
-    // }
+  // if (isLoading) {
+  //     return <Loader />
+  // }
 
-    const auth = false
+  const auth = false
 
-    return auth ? <Outlet /> : <Navigate to={ROUTES.signIn} />
+  return auth ? <Outlet /> : <Navigate to={ROUTES.signIn} />
 }
 
 /*

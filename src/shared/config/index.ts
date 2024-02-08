@@ -1,1 +1,1 @@
-export { StoreDecorator } from './storybook/decorators/store-decorator'
+export { BrowserRouterDecorator } from './storybook/decorators/browser-router-decorator'

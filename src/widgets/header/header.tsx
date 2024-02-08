@@ -16,76 +16,76 @@ import { ProfileInfo } from '@/widgets/profile-info'
 import s from './header.module.scss'
 
 type Props = {
-    data?: any
-    logout?: () => void
+  data?: any
+  logout?: () => void
 }
 
 export const Header = ({ data = false, logout }: Props) => {
-    const queryInProgress = useAppSelector(loadingSelector) // видим "Линеар-прогресс"
+  const queryInProgress = useAppSelector(loadingSelector) // видим "Линеар-прогресс"
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const toProfile = () => {
-        navigate(ROUTES.profile)
-    }
+  const toProfile = () => {
+    navigate(ROUTES.profile)
+  }
 
-    return (
-        <header className={s.header}>
-            <div className={'container'}>
-                {/*  Линеар-прогресс  */}
-                {queryInProgress && <LeanerProgress />}
-                <div className={s.header_inner}>
-                    <Link className={s.link} to={ROUTES.decks}>
-                        <Logo className={s.icon} />
-                    </Link>
-                    {/*{data ? (*/}
-                    {/*    <div className={s.user}>*/}
-                    {/*        <Typography*/}
-                    {/*            as={Link}*/}
-                    {/*            className={s.name}*/}
-                    {/*            to={ROUTES.profile}*/}
-                    {/*            variant={'subtitle1'}*/}
-                    {/*        >*/}
-                    {/*            {data.name || data.email}*/}
-                    {/*        </Typography>*/}
-                    {/*        <DropDown*/}
-                    {/*            trigger={*/}
-                    {/*                <button className={s.dropdownButton}>*/}
-                    {/*                    <Avatar*/}
-                    {/*                        image={data.avatar}*/}
-                    {/*                        size={48}*/}
-                    {/*                        userName={data.name || data.email}*/}
-                    {/*                    />*/}
-                    {/*                </button>*/}
-                    {/*            }*/}
-                    {/*        >*/}
-                    {/*            <DropDownItem>*/}
-                    {/*                <ProfileInfo {...data} />*/}
-                    {/*            </DropDownItem>*/}
-                    {/*            <DropDownItemWithIcon*/}
-                    {/*                icon={<Icon name={'user'} />}*/}
-                    {/*                onSelect={toProfile}*/}
-                    {/*                text={'Profile'}*/}
-                    {/*            />*/}
-                    {/*            <DropDownItemWithIcon*/}
-                    {/*                icon={<Icon name={'logout'} />}*/}
-                    {/*                onSelect={logout}*/}
-                    {/*                text={'Sign out'}*/}
-                    {/*            />*/}
-                    {/*        </DropDown>*/}
-                    {/*    </div>*/}
-                    {/*) : (*/}
-                    {/*    <Button as={Link} to={ROUTES.signIn}>*/}
-                    {/*        Sign In*/}
-                    {/*    </Button>*/}
-                    {/*)}*/}
-                    <Button as={Link} to={ROUTES.signIn}>
-                        Sign In
-                    </Button>
-                </div>
-            </div>
-        </header>
-    )
+  return (
+    <header className={s.header}>
+      <div className={'container'}>
+        {/*  Линеар-прогресс  */}
+        {queryInProgress && <LeanerProgress />}
+        <div className={s.header_inner}>
+          <Link className={s.link} to={ROUTES.decks}>
+            <Logo className={s.icon} />
+          </Link>
+          {/*{data ? (*/}
+          {/*    <div className={s.user}>*/}
+          {/*        <Typography*/}
+          {/*            as={Link}*/}
+          {/*            className={s.name}*/}
+          {/*            to={ROUTES.profile}*/}
+          {/*            variant={'subtitle1'}*/}
+          {/*        >*/}
+          {/*            {data.name || data.email}*/}
+          {/*        </Typography>*/}
+          {/*        <DropDown*/}
+          {/*            trigger={*/}
+          {/*                <button className={s.dropdownButton}>*/}
+          {/*                    <Avatar*/}
+          {/*                        image={data.avatar}*/}
+          {/*                        size={48}*/}
+          {/*                        userName={data.name || data.email}*/}
+          {/*                    />*/}
+          {/*                </button>*/}
+          {/*            }*/}
+          {/*        >*/}
+          {/*            <DropDownItem>*/}
+          {/*                <ProfileInfo {...data} />*/}
+          {/*            </DropDownItem>*/}
+          {/*            <DropDownItemWithIcon*/}
+          {/*                icon={<Icon name={'user'} />}*/}
+          {/*                onSelect={toProfile}*/}
+          {/*                text={'Profile'}*/}
+          {/*            />*/}
+          {/*            <DropDownItemWithIcon*/}
+          {/*                icon={<Icon name={'logout'} />}*/}
+          {/*                onSelect={logout}*/}
+          {/*                text={'Sign out'}*/}
+          {/*            />*/}
+          {/*        </DropDown>*/}
+          {/*    </div>*/}
+          {/*) : (*/}
+          {/*    <Button as={Link} to={ROUTES.signIn}>*/}
+          {/*        Sign In*/}
+          {/*    </Button>*/}
+          {/*)}*/}
+          <Button as={Link} to={ROUTES.signIn}>
+            Sign In
+          </Button>
+        </div>
+      </div>
+    </header>
+  )
 }
 // Правила вертски: название секции - контеинер приложения - свой контейнер - контент блока - остальные стили
 /*

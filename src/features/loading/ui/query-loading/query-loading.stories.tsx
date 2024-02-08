@@ -3,8 +3,8 @@ import { Meta, StoryObj } from '@storybook/react'
 import { QueryLoading } from './'
 
 const meta = {
-  title: 'Components/Query Loading',
   component: QueryLoading,
+  title: 'Components/Query Loading',
 } satisfies Meta<typeof QueryLoading>
 
 export default meta

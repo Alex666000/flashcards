@@ -1,1 +1,3 @@
-export { QueryLoading } from './leaner-progress.tsx'
+import { QueryLoading } from '@/features/loading/ui'
+
+export { QueryLoading }

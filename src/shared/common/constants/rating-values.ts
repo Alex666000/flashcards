@@ -1,4 +1,4 @@
 export type RatingValuesType = {
-    label: string
-    value: string
+  label: string
+  value: string
 }

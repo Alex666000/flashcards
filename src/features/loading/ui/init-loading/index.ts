@@ -1,1 +1,1 @@
-export { InitLoading } from './init-loading.tsx'
+export { InitLoading } from './init-loading'

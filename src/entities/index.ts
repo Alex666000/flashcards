@@ -1,2 +1,2 @@
 // реэкспорт
-export { Decks } from './decks/ui/decks'
+export { Decks } from '@/pages/decks-page/ui/decks'

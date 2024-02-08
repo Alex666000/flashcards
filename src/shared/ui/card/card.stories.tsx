@@ -7,31 +7,31 @@ import { TextField } from '../text-field_'
 import { Card } from './'
 
 const meta = {
-    component: Card,
-    tags: ['autodocs'],
-    title: 'Components/Card',
+  component: Card,
+  tags: ['autodocs'],
+  title: 'Components/Card',
 } satisfies Meta<typeof Card>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-    args: {
-        children: <div style={{ height: '100px' }}></div>,
-    },
+  args: {
+    children: <div style={{ height: '100px' }}></div>,
+  },
 }
 
 export const ExampleWithContent: Story = {
-    args: {
-        children: (
-            <>
-                <Typography variant={'large'}>Card</Typography>
-                <TextField label={'Uncontrolled text field'} />
-                <TextField label={'Uncontrolled search'} type={'search'} />
-                <Button as={'a'} href={'https://google.com'} variant={'link'}>
-                    Google
-                </Button>
-            </>
-        ),
-    },
+  args: {
+    children: (
+      <>
+        <Typography variant={'large'}>Card</Typography>
+        <TextField label={'Uncontrolled text field'} />
+        <TextField label={'Uncontrolled search'} type={'search'} />
+        <Button as={'a'} href={'https://google.com'} variant={'link'}>
+          Google
+        </Button>
+      </>
+    ),
+  },
 }

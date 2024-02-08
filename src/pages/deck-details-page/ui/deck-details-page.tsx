@@ -1,5 +1,5 @@
 const DeckDetailsPage = () => {
-    return <div>DeckDetailsPage</div>
+  return <div>DeckDetailsPage</div>
 }
 
 export default DeckDetailsPage

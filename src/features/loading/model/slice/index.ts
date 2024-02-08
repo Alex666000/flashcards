@@ -1,1 +1,1 @@
-export * from './loading.slice.ts'
+export * from './loading.slice'

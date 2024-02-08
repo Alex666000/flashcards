@@ -1,5 +1,4 @@
 import { Layout } from '@/shared/layout'
-import { Toast } from '@/shared/ui/toast'
 
 import { AppRouter } from './providers/index'
 
@@ -10,14 +9,15 @@ import { AppRouter } from './providers/index'
 // }
 
 export function App() {
-    // Внутри всего Арр отрисовываем страницы проекта: <AppRouter />
-    return (
-        <>
-            <Layout />
-            <AppRouter />
-        </>
-    )
+  return (
+    <>
+      <Layout />
+      <AppRouter />
+    </>
+  )
 }
 
-/* - <AppRouter /> отрисует все страницы проекта - назвать как угодно можем
+/*
+- Внутри всего Арр отрисовываем страницы проекта: <AppRouter />
+- <AppRouter /> отрисует все страницы проекта - назвать как угодно можем
  */

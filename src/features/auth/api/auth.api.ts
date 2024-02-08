@@ -1,13 +1,21 @@
-import { LoginArgs, LoginResponse } from '@/features/auth/api/types'
-import { baseAPI } from '@/shared/api/base-a-p-i'
+import { LoginArgs, LoginResponse, UserResponse } from '@/features/auth/api/types'
+import { flashCardsAPI } from '@/shared/api/flash-cards.api'
 
-const authAPI = baseAPI.injectEndpoints({
+export const authAPI = flashCardsAPI.injectEndpoints({
   endpoints: (builder) => ({
-    // getMe: builder.query<UserResponse, void>({
+    login: builder.mutation<LoginResponse, LoginArgs>({
+      invalidatesTags: ['me'],
+      query: (data) => ({
+        body: data,
+        method: 'POST',
+        url: '/v1/auth/login',
+      }),
+    }),
+    // me: builder.query<UserResponse, void>({
     //   extraOptions: {
     //     maxRetries: 0, //  максимальное количество попыток повторных запросов в случае возникновения ошибки
     //   },
-    //   providesTags: ['Me'],
+    //   providesTags: ['me'],
     //   query: () => {
     //     return {
     //       method: 'GET',
@@ -16,14 +24,6 @@ const authAPI = baseAPI.injectEndpoints({
     //     }
     //   },
     // }),
-    login: builder.mutation<LoginResponse, LoginArgs>({
-      invalidatesTags: ['Me'],
-      query: (data) => ({
-        body: data,
-        method: 'POST',
-        url: '/v1/auth/login',
-      }),
-    }),
   }),
 })
 

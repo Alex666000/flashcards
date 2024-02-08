@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Rating } from '@/components/ui/rating'
+import { Rating } from './rating'
 
 const meta = {
-  title: 'Components/Rating',
   component: Rating,
   tags: ['autodocs'],
+  title: 'Components/Rating',
 } satisfies Meta<typeof Rating>
 
 export default meta

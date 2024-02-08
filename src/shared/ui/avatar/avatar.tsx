@@ -6,11 +6,11 @@ import { clsx } from 'clsx'
 import s from './avatar.module.scss'
 
 type Props = {
-    className?: string
-    image?: string
-    size?: number
-    style?: CSSProperties
-    userName: string
+  className?: string
+  image?: string
+  size?: number
+  style?: CSSProperties
+  userName: string
 }
 
 /**
@@ -25,31 +25,27 @@ type Props = {
  оно отображается с помощью AvatarRadix.Image. В противном случае, используются AvatarRadix.Fallback для отображения инициалов.
  */
 export const Avatar = forwardRef<any, Props>(
-    ({ className, image, size = 36, style, userName }, ref) => {
-        const classes = clsx(s.avatar, className)
+  ({ className, image, size = 36, style, userName }, ref) => {
+    const classes = clsx(s.avatar, className)
 
-        const initials = userName
-            .split(' ')
-            .map((word) => word[0].toUpperCase())
-            .join(' ')
+    const initials = userName
+      .split(' ')
+      .map((word) => word[0].toUpperCase())
+      .join(' ')
 
-        const styles: CSSProperties = {
-            height: size,
-            width: size,
-            ...(style || {}),
-        }
-
-        return (
-            <div className={classes} style={styles}>
-                <AvatarRadix.Root ref={ref}>
-                    <AvatarRadix.Image alt={'User Avatar'} className={s.image} src={image} />
-                    {!image && (
-                        <AvatarRadix.Fallback className={s.fallback}>
-                            {initials}
-                        </AvatarRadix.Fallback>
-                    )}
-                </AvatarRadix.Root>
-            </div>
-        )
+    const styles: CSSProperties = {
+      height: size,
+      width: size,
+      ...(style || {}),
     }
+
+    return (
+      <div className={classes} style={styles}>
+        <AvatarRadix.Root ref={ref}>
+          <AvatarRadix.Image alt={'User Avatar'} className={s.image} src={image} />
+          {!image && <AvatarRadix.Fallback className={s.fallback}>{initials}</AvatarRadix.Fallback>}
+        </AvatarRadix.Root>
+      </div>
+    )
+  }
 )
