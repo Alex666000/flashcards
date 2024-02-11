@@ -4,6 +4,7 @@
  * @param {() => Promise<any>} logic - Функция, содержащая логику для успешного выполнения запроса. Для блока try.
  * @returns {Promise<void>} - Ничего не возвращает
  */
+
 import { errorToastNotification } from '@/shared/common/utils/error-toast-notification'
 
 export const requestHandler = async (logic: () => Promise<any>): Promise<void> => {

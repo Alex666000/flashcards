@@ -1,11 +1,11 @@
 import { z } from 'zod'
 
-export const emailSchema = z.string().trim().nonempty('Enter email').email('Invalid email address')
+export const emailSchema = z.string().nonempty('Required').email()
 
-export const passwordSchema = z
+export const stringSchema = z
   .string()
   .trim()
-  .nonempty('Enter password')
+  .nonempty('Required')
   .min(3, 'The name must be at least 3 characters')
 
 export const fileSchema = z
