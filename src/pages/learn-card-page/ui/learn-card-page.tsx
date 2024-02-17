@@ -10,7 +10,7 @@ import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
 
-import s from './learn-card-page.module.scss'
+import s from 'src/pages/learn-card-page/ui/learn-card-page.module.scss'
 
 const LearnCardPage = () => {
   const [rateMode, setRateMode] = useState(false)

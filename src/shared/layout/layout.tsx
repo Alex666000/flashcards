@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
-import { useLogoutMutation, useMeQuery, util } from '@/features/auth/api/auth.api'
+import { useLogoutMutation, useMeQuery, util } from '@/features/auth/rtk-api/auth.api'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
 import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'

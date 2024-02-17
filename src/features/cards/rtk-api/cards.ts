@@ -1,44 +1,48 @@
-import { errorNotification } from '@/common/utils'
 import {
-  CardsParams,
-  CardResponse,
-  CardsResponse,
   CardRateRequest,
+  CardResponse,
+  CardsParams,
+  CardsResponse,
   RandomCardRequest,
-} from '@/features/cards/services/types.ts'
-import { baseAPI } from '@/services/base-api.ts'
+} from '@/features/cards/rtk-api/types'
+import { flashCardsAPI } from '@/shared/api/flash-cards.api'
+import { errorNotification } from '@/shared/lib/utils/error-notification'
 
-const cardsAPI = baseAPI.injectEndpoints({
-  endpoints: builder => ({
-    getCards: builder.query<CardsResponse, { id: string; params: CardsParams }>({
-      query: ({ id, params }) => ({
-        url: `v1/decks/${id}/cards`,
-        method: 'GET',
-        params: params ?? {},
+const cardsAPI = flashCardsAPI.injectEndpoints({
+  endpoints: (builder) => ({
+    createCard: builder.mutation<CardResponse, { data: FormData; deckId: string }>({
+      invalidatesTags: ['cards'],
+      query: ({ data, deckId }) => ({
+        body: data,
+        method: 'POST',
+        url: `v1/decks/${deckId}/cards`,
       }),
-      providesTags: ['Cards'],
     }),
     deleteCard: builder.mutation<void, { id: string }>({
+      invalidatesTags: ['cards'],
       query: ({ id }) => ({
-        url: `v1/cards/${id}`,
-        method: 'DELETE',
         body: { id },
+        method: 'DELETE',
+        url: `v1/cards/${id}`,
       }),
-      invalidatesTags: ['Cards'],
+    }),
+    getCards: builder.query<CardsResponse, { id: string; params: CardsParams }>({
+      providesTags: ['cards'],
+      query: ({ id, params }) => ({
+        method: 'GET',
+        params: params ?? {},
+        url: `v1/decks/${id}/cards`,
+      }),
     }),
     getRandomCard: builder.query<CardResponse, RandomCardRequest>({
       query: ({ id, previousCardId }) => ({
-        url: `v1/decks/${id}/learn`,
         method: 'GET',
         params: { previousCardId },
+        url: `v1/decks/${id}/learn`,
       }),
     }),
     rateCard: builder.mutation<CardResponse, CardRateRequest>({
-      query: ({ packId, ...rest }) => ({
-        url: `v1/decks/${packId}/learn`,
-        method: 'POST',
-        body: rest,
-      }),
+      invalidatesTags: ['cards'],
       async onQueryStarted({ packId }, { dispatch, queryFulfilled }) {
         try {
           const { data: newCard } = await queryFulfilled
@@ -52,32 +56,28 @@ const cardsAPI = baseAPI.injectEndpoints({
           errorNotification(error)
         }
       },
-      invalidatesTags: ['Cards'],
-    }),
-    createCard: builder.mutation<CardResponse, { packId: string; data: FormData }>({
-      query: ({ packId, data }) => ({
-        url: `v1/decks/${packId}/cards`,
+      query: ({ packId, ...rest }) => ({
+        body: rest,
         method: 'POST',
-        body: data,
+        url: `v1/decks/${packId}/learn`,
       }),
-      invalidatesTags: ['Cards'],
     }),
     updateCard: builder.mutation<CardResponse, { cardId: string; data: FormData }>({
+      invalidatesTags: ['cards'],
       query: ({ cardId, data }) => ({
-        url: `v1/cards/${cardId}`,
-        method: 'PATCH',
         body: data,
+        method: 'PATCH',
+        url: `v1/cards/${cardId}`,
       }),
-      invalidatesTags: ['Cards'],
     }),
   }),
 })
 
 export const {
-  useGetCardsQuery,
+  useCreateCardMutation,
   useDeleteCardMutation,
+  useGetCardsQuery,
   useGetRandomCardQuery,
   useRateCardMutation,
-  useCreateCardMutation,
   useUpdateCardMutation,
 } = cardsAPI

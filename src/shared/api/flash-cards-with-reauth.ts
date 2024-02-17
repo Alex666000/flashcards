@@ -11,7 +11,7 @@ const baseQuery = fetchBaseQuery({
 
 const mutex = new Mutex()
 
-export const baseQueryWithReauth: BaseQueryFn<
+export const flashCardsWithReauth: BaseQueryFn<
   FetchArgs | string,
   unknown,
   FetchBaseQueryError

@@ -181,4 +181,4 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElem
 const ForwardRef = forwardRef(SvgComponent)
 const Memo = memo(ForwardRef)
 
-export { Memo as CheckEmailImage }
+export { Memo as CheckEmailImageIcon }

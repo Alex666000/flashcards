@@ -1,4 +1,4 @@
 import { RootState } from '@/app/providers'
 
-export const packCurrentPageSelector = (state: RootState): number =>
-  state.pack.pagination.currentPage
+export const deckCurrentPageSelector = (state: RootState): number =>
+  state.deck.pagination.currentPage

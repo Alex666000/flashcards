@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useRecoverPasswordMutation } from '@/features/auth/api/auth.api'
+import { useRecoverPasswordMutation } from '@/features/auth/rtk-api/auth.api'
 import { ForgotPasswordForm } from '@/features/auth/ui/forgot-password/forgot-password'
 import { ForgotPasswordFormType } from '@/features/auth/ui/forgot-password/use-forgot-password'
 import { htmlCodeResetPassword } from '@/shared/lib/constants/html-mail-reset-password'

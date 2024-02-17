@@ -10,7 +10,7 @@ type Props = {
   onEditHandler: (value: boolean) => void
 }
 
-export const OwnerPackDropDown: FC<Props> = ({ onDeleteHandler, onEditHandler }) => {
+export const OwnerDeckDropDown: FC<Props> = ({ onDeleteHandler, onEditHandler }) => {
   const navigate = useNavigate()
 
   return (

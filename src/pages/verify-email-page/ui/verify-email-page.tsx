@@ -1,13 +1,13 @@
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { useVerifyMailMutation } from '@/features/auth/rtk-api/auth.api'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Typography } from '@/shared/ui/typography'
 
-import styles from './verify-email-page.module.scss'
+import styles from 'src/pages/verify-email-page/ui/verify-email-page.module.scss'
 
-export const VerifyEmailPage = () => {
+const VerifyEmailPage = () => {
   const { code } = useParams()
   const [verifyMail] = useVerifyMailMutation()
 
@@ -35,3 +35,5 @@ export const VerifyEmailPage = () => {
     </div>
   )
 }
+
+export default memo(VerifyEmailPage)

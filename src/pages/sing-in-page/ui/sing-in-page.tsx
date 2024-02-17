@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { LoginBodyArgs } from '@/features/auth'
-import { useLoginMutation, useMeQuery, util } from '@/features/auth/api/auth.api'
+import { useLoginMutation, useMeQuery, util } from '@/features/auth/rtk-api/auth.api'
 import { LoginForm } from '@/features/forms/login-form/login-form'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
 import { errorNotification } from '@/shared/lib/utils/error-notification'
 
-const SingInPage = memo(() => {
+const SingInPage = () => {
   const navigate = useNavigate()
   const { data: meAuthData, isError } = useMeQuery()
   const [login] = useLoginMutation()
@@ -33,9 +33,9 @@ const SingInPage = memo(() => {
   }
 
   return <LoginForm onLoginFormDataSubmit={handleLoginFormDataSubmit} />
-})
+}
 
-export default SingInPage
+export default memo(SingInPage)
 
 /*
 - Нейминг - пример: когда на событие то так иначе обычно через глагол: createDeck()

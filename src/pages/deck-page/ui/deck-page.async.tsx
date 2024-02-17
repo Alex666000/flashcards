@@ -1,3 +1,3 @@
 import { lazy } from 'react'
 
-export const DeckDetailsPageAsync = lazy(() => import('./deck-details-page'))
+export const DeckPageAsync = lazy(() => import('./deck-page'))

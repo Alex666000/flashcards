@@ -1,27 +1,25 @@
-import { AddMediaIcon } from '@/assets/icons/AddMediaIcon.tsx'
-import { ArrowDownIcon } from '@/assets/icons/ArrowDown.tsx'
-import { ArrowLeft } from '@/assets/icons/ArrowLeft.tsx'
-import { Check } from '@/assets/icons/Check.tsx'
-import { ClosedInputIcon } from '@/assets/icons/CloseInputIcon.tsx'
-import { CloseModal } from '@/assets/icons/CloseModal.tsx'
-import { Edit } from '@/assets/icons/Edit.tsx'
-import { Eye } from '@/assets/icons/Eye.tsx'
-import { EyeClosed } from '@/assets/icons/EyeClosed.tsx'
-import { KeyboardArrowLeft } from '@/assets/icons/KeyboardArrowLeft.tsx'
-import KeyboardArrowRight from '@/assets/icons/KeyboardArrowRight.tsx'
-import { LogOutIcon } from '@/assets/icons/LogOutIcon.tsx'
-import { MailIcon } from '@/assets/icons/MailIcom.tsx'
-import { More } from '@/assets/icons/More.tsx'
-import { Person } from '@/assets/icons/Person.tsx'
-import { SearchIcon } from '@/assets/icons/SearchIcon.tsx'
-import StarEmpty from '@/assets/icons/StarEmpty.tsx'
-import StarFilled from '@/assets/icons/StarFilled.tsx'
-import { Trash } from '@/assets/icons/Trash.tsx'
+import { KeyboardArrowLeft, KeyboardArrowRight, SearchIcon } from '@/shared/assets'
+import { AddMediaIcon } from '@/shared/assets/icons/sutarday-icons/AddMediaIcon'
+import { ArrowDownIcon } from '@/shared/assets/icons/sutarday-icons/ArrowDown'
+import { ArrowLeft } from '@/shared/assets/icons/sutarday-icons/ArrowLeft'
+import { Check } from '@/shared/assets/icons/sutarday-icons/Check'
+import { ClosedInputIcon } from '@/shared/assets/icons/sutarday-icons/CloseInputIcon'
+import { CloseModal } from '@/shared/assets/icons/sutarday-icons/CloseModal'
+import { Edit } from '@/shared/assets/icons/sutarday-icons/Edit'
+import { Eye } from '@/shared/assets/icons/sutarday-icons/Eye'
+import { EyeClosed } from '@/shared/assets/icons/sutarday-icons/EyeClosed'
+import { LogOutIcon } from '@/shared/assets/icons/sutarday-icons/LogOutIcon'
+import { MailIcon } from '@/shared/assets/icons/sutarday-icons/MailIcom'
+import { More } from '@/shared/assets/icons/sutarday-icons/More'
+import { Person } from '@/shared/assets/icons/sutarday-icons/Person'
+import StarEmpty from '@/shared/assets/icons/sutarday-icons/StarEmpty'
+import StarFilled from '@/shared/assets/icons/sutarday-icons/StarFilled'
+import { Trash } from '@/shared/assets/icons/sutarday-icons/Trash'
 
 const meta = {
-  title: 'Icons/General',
   component: ArrowLeft,
   tags: ['autodocs'],
+  title: 'Icons/General',
 }
 
 export default meta

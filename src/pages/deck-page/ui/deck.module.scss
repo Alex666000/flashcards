@@ -1,0 +1,27 @@
+.root {
+  .header {
+    margin-bottom: 36px;
+
+    .cover {
+      height: 100px;
+      margin-bottom: 24px;
+    }
+
+    .top {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 24px;
+
+      .title {
+        display: flex;
+        flex-direction: row;
+        gap: 0 12px;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

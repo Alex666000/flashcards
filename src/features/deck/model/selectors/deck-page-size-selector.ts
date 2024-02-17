@@ -1,3 +1,3 @@
 import { RootState } from '@/app/providers'
 
-export const packPageSizeSelector = (state: RootState): number => state.pack.pagination.pageSize
+export const deckPageSizeSelector = (state: RootState): number => state.deck.pagination.pageSize

@@ -1,13 +1,13 @@
 import { memo, useEffect, useState } from 'react'
 
-import { useMeQuery } from '@/features/auth/api/auth.api'
-import { UserAuthDataResponse } from '@/features/auth/api/auth.types'
+import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
+import { UserAuthDataResponse } from '@/features/auth/rtk-api/auth.types'
 import { useGetDecksQuery } from '@/features/decks/api'
 import { useDecksFilter } from '@/features/decks/lib/hooks/use-decks-filter'
 import { useDecksPagination } from '@/features/decks/lib/hooks/use-decks-pagination'
-import { CardsTable } from '@/features/decks/ui/cards-table/cards-table'
 import { CreateControl } from '@/features/decks/ui/create-control/create-control'
 import { FilterControls } from '@/features/decks/ui/filter-controls/filter-controls'
+import { PacksTable } from '@/features/decks/ui/packs-table/packs-table'
 import { useDebounce } from '@/shared/lib/hooks/use-debounce'
 import { Sort } from '@/shared/lib/types/types'
 import { getSortedString } from '@/shared/lib/utils/get-sorted-string'
@@ -107,7 +107,7 @@ const DecksPage = () => {
           tabValue={tabValue}
         />
         {decks?.data?.items && (
-          <CardsTable authUserId={userId} items={decks.data.items} onSort={setSort} sort={sort} />
+          <PacksTable authUserId={userId} items={decks.data.items} onSort={setSort} sort={sort} />
         )}
         {/* Пагинация */}
         <Pagination

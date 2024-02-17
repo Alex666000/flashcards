@@ -1,3 +1,3 @@
 import { RootState } from '@/app/providers'
 
-export const packSearchNameSelector = (state: RootState): string => state.pack.searchName
+export const deckSearchNameSelector = (state: RootState): string => state.deck.searchName

@@ -1,36 +1,53 @@
 import { useCallback } from 'react'
-
 import { useParams } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '@/common/hooks'
-import {
-  packCurrentPageSelector,
-  packPageSizeSelector,
-  packSearchNameSelector,
-} from '@/features/pack/model/selectors'
-import { packActions } from '@/features/pack/model/slice'
+import { deckCurrentPageSelector } from '@/features/deck/model/selectors/deck-current-page-selector'
+import { deckPageSizeSelector } from '@/features/deck/model/selectors/deck-page-size-selector'
+import { deckSearchNameSelector } from '@/features/deck/model/selectors/deck-search-name-selector'
+import { deckActions } from '@/features/deck/model/slice/pack.sliece'
+import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
+import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
 
-export const usePackData = () => {
-  const currentPage = useAppSelector(packCurrentPageSelector)
-  const pageSize = useAppSelector(packPageSizeSelector)
-  const searchName = useAppSelector(packSearchNameSelector)
+export const useDeckData = () => {
+  const currentPage = useAppSelector(deckCurrentPageSelector)
+  const pageSize = useAppSelector(deckPageSizeSelector)
+  const searchName = useAppSelector(deckSearchNameSelector)
 
+  // для извлечения параметров из URL
+  //  извлекает параметр id из URL
   const { id } = useParams()
-  const packId = id as string
+  const deckId = id as string
 
   const dispatch = useAppDispatch()
 
-  const setCurrentPage = useCallback((newPage: number) => {
-    dispatch(packActions.setCurrentPage({ newPage }))
-  }, [])
+  const setCurrentPage = useCallback(
+    (newPage: number) => {
+      dispatch(deckActions.setCurrentPage({ newPage }))
+    },
+    [dispatch]
+  )
 
-  const setPageSize = useCallback((newPageSize: number) => {
-    dispatch(packActions.setPageSize({ newPageSize }))
-  }, [])
+  const setPageSize = useCallback(
+    (newPageSize: number) => {
+      dispatch(deckActions.setPageSize({ newPageSize }))
+    },
+    [dispatch]
+  )
 
-  const setSearchName = useCallback((newSearchName: string) => {
-    dispatch(packActions.setSearchName({ newSearchName }))
-  }, [])
+  const setSearchName = useCallback(
+    (newSearchName: string) => {
+      dispatch(deckActions.setSearchName({ newSearchName }))
+    },
+    [dispatch]
+  )
 
-  return { packId, currentPage, pageSize, setCurrentPage, setPageSize, searchName, setSearchName }
+  return {
+    currentPage,
+    deckId,
+    pageSize,
+    searchName,
+    setCurrentPage,
+    setPageSize,
+    setSearchName,
+  }
 }

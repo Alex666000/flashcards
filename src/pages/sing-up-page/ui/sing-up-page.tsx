@@ -1,7 +1,8 @@
+import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useSignUpMutation, util } from '@/features/auth/api/auth.api'
+import { useSignUpMutation, util } from '@/features/auth/rtk-api/auth.api'
 import { RegisterForm } from '@/features/forms/register-form/register-form'
 import { RegisterFormData } from '@/features/forms/register-form/use-register-form'
 import { ROUTES } from '@/shared/lib/constants/route-path'
@@ -11,9 +12,9 @@ import { errorNotification } from '@/shared/lib/utils/error-notification'
 const SignUpPage = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [register, { data, isError }] = useSignUpMutation()
+  const [register, { isError }] = useSignUpMutation()
 
-  // " Нейминг: ообработать регистрационные данные отправки"
+  // "Нейминг: "обработать регистрационные данные отправки"
   const handleRegisterFormDataSubmit = async (formData: RegisterFormData) => {
     const registerFormData = {
       email: formData.email,
@@ -33,14 +34,14 @@ const SignUpPage = () => {
     }
   }
 
-  if (data && !isError) {
+  if (!isError) {
     navigate(ROUTES.signIn) // Паттерн: если зарегались редиректим на логинизацию (авторизацию)
   }
 
   return <RegisterForm onRegisterFormDataSubmit={handleRegisterFormDataSubmit} />
 }
 
-export default SignUpPage
+export default memo(SignUpPage)
 
 /*
 Sign Up - регистрация

@@ -7,4 +7,4 @@ export { LogoutIcon } from './icons/logoutIcon'
 export { OpenedEyeIcon } from './icons/openedEyeIcon'
 export { SearchIcon } from './icons/searchIcon'
 // illustrations
-export { Logo } from './illustrations/logo'
+export { LogoIcon } from './illustrations/logo-icon'

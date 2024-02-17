@@ -5,7 +5,7 @@ import {
   SignUpArgs,
   UpdateProfileFormData,
   UserAuthDataResponse,
-} from '@/features/auth/api/auth.types'
+} from '@/features/auth/rtk-api/auth.types'
 import { flashCardsAPI } from '@/shared/api/flash-cards.api'
 
 export const authAPI = flashCardsAPI.injectEndpoints({
@@ -15,6 +15,7 @@ export const authAPI = flashCardsAPI.injectEndpoints({
       query: (bodyData) => ({
         body: bodyData,
         method: 'POST',
+        // названия эндпоинтов ничего не имеют общего с названием страниц моих на фронте!!!
         url: '/v1/auth/login',
       }),
     }),
@@ -47,6 +48,13 @@ export const authAPI = flashCardsAPI.injectEndpoints({
         url: 'v1/auth/recover-password',
       }),
     }),
+    resetPassword: builder.mutation<void, { password: string; token: string }>({
+      query: ({ password, token }) => ({
+        body: { password },
+        method: 'POST',
+        url: `v1/auth/reset-password/${token}`,
+      }),
+    }),
     signUp: builder.mutation<UserAuthDataResponse, SignUpArgs>({
       query: (body) => ({
         body,
@@ -62,6 +70,13 @@ export const authAPI = flashCardsAPI.injectEndpoints({
         url: `v1/auth/me`,
       }),
     }),
+    verifyMail: builder.mutation<unknown, { code: string }>({
+      query: (body: { code: string }) => ({
+        body,
+        method: 'POST',
+        url: `v1/auth/verify-email`,
+      }),
+    }),
   }),
 })
 
@@ -70,7 +85,13 @@ export const {
   useLogoutMutation,
   useMeQuery,
   useRecoverPasswordMutation,
+  useResetPasswordMutation,
   useSignUpMutation,
   useUpdateProfileMutation,
+  useVerifyMailMutation,
   util,
 } = authAPI
+
+/*
+- названия эндпоинтов ничего не имеют общего с названием страниц моих на фронте
+ */

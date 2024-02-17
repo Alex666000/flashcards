@@ -1,5 +1,6 @@
 import { appReducer } from '@/app/model/slice/app.slice'
-import { authAPI } from '@/features/auth/api/auth.api'
+import { authAPI } from '@/features/auth/rtk-api/auth.api'
+import { deckReducer } from '@/features/deck/model/slice/pack.sliece'
 import { decksReducer } from '@/features/decks/model/slice/decks.slice'
 import { loadingReducer } from '@/features/loading/model/slice/loading.slice'
 import { flashCardsAPI } from '@/shared/api/flash-cards.api'
@@ -12,6 +13,7 @@ export const store = configureStore({
   reducer: {
     appReducer, // обычный реюсер
     [authAPI.reducerPath]: authAPI.reducer, // RTK редюсер
+    deck: deckReducer,
     decks: decksReducer, // обычный реюсер
     loading: loadingReducer, // обычный реюсер
   },

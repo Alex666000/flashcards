@@ -6,7 +6,7 @@ import { requestHandler } from '@/shared/lib/utils/request-handler'
 import { ModalWindow } from '@/shared/ui/modal-window'
 
 export type EditDeckModalProps = {
-  cover: null | string
+  cover: null | string // обложка
   id: string
   isPrivate: boolean
   name: string
@@ -14,6 +14,9 @@ export type EditDeckModalProps = {
   setOpen: (value: boolean) => void
 }
 
+/**
+ * Модальное окно для редактирования моей колоды
+ */
 export const EditDeckModal: FC<EditDeckModalProps> = ({
   cover,
   id,
@@ -22,14 +25,19 @@ export const EditDeckModal: FC<EditDeckModalProps> = ({
   open,
   setOpen,
 }) => {
+  //  для предварительного заполнения формы редактирования колоды
   const startValues = {
     cover,
     isPrivate,
     name,
   }
 
+  // для создания мутации editDeck, которая позволяет обновлять информацию о колоде
   const [editDeck] = useUpdateDeckMutation()
 
+  // функция вызывается при отправке формы редактирования колоды. Она выполняет мутацию editDeck,
+  // передавая данные формы и идентификатор колоды.
+  // После успешного выполнения мутации модальное окно закрываетс
   const editDeckHandler = async (data: FormData) => {
     await requestHandler(async () => {
       await editDeck({ data, id }).unwrap()
@@ -38,7 +46,7 @@ export const EditDeckModal: FC<EditDeckModalProps> = ({
   }
 
   return (
-    <ModalWindow open={open} setOpen={setOpen} title={'Edit Pack'}>
+    <ModalWindow open={open} setOpen={setOpen} title={'Edit Deck'}>
       <DeckForm
         defaultValues={startValues}
         onCancel={() => setOpen(false)}

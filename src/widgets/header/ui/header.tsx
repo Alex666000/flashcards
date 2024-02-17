@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { StatusType } from '@/app/model/slice/app.slice'
-import { Logo } from '@/shared/assets'
+import { LogoIcon } from '@/shared/assets'
 import { LogOutIcon } from '@/shared/assets/icons/sutarday-icons/LogOutIcon'
 import { Person } from '@/shared/assets/icons/sutarday-icons/Person'
 import { ROUTES } from '@/shared/lib/constants/route-path'
@@ -42,7 +42,7 @@ export const Header = memo(
       <div className={s.headerBlock}>
         <Container className={s.headerContainer}>
           <Button as={Link} className={s.link} to={ROUTES.decks} variant={'link'}>
-            <Logo className={s.logo} />
+            <LogoIcon className={s.logo} />
           </Button>
           {isAuth ? (
             <div className={s.userNameOrEmail}>

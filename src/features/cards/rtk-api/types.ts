@@ -1,32 +1,32 @@
-import { Pagination } from '@/features/packs/services'
+import { Pagination } from '@/features/decks/api/types'
 
 export type Card = {
+  answer: string
+  answerImg: null | string
+  answerVideo: null | string
+  created: string
+  deckId: string
+  grade: number
   id: string
   question: string
-  answer: string
-  deckId: string
-  questionImg: string | null
-  answerImg: string | null
-  questionVideo: string | null
-  answerVideo: string | null
-  created: string
-  updated: string
+  questionImg: null | string
+  questionVideo: null | string
   shots: number
-  grade: number
+  updated: string
   userId: string
 }
 
 export type CardsResponse = {
-  pagination: Pagination
   items: Card[]
+  pagination: Pagination
 }
 
 export type CardsParams = {
-  question?: string
   answer?: string
-  orderBy?: string
   currentPage?: number
   itemsPerPage?: number
+  orderBy?: string
+  question?: string
 } | void
 
 export type CardResponse = Omit<Card, 'userId'>
@@ -37,7 +37,7 @@ export type RandomCardRequest = {
 }
 
 export type CardRateRequest = {
-  packId: string
   cardId: string
   grade: number
+  packId: string
 }
