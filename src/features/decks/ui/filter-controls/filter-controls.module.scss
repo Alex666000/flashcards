@@ -1,0 +1,32 @@
+.filter {
+  display: flex;
+  flex-direction: row;
+  gap: 24px 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 36px;
+
+  .textField {
+    flex: 0 1 300px;
+
+    @media (width <= 544px) {
+      flex-grow: 1;
+      margin-top: 12px;
+    }
+  }
+
+  .clearButton {
+    flex-shrink: 0;
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      fill: var(--color-light-100);
+    }
+  }
+
+  @media (width <= 800px) {
+    flex-wrap: wrap;
+  }
+}

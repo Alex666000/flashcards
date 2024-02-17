@@ -4,6 +4,7 @@ import { LoginForm } from './login-form'
 
 const meta = {
   argTypes: {
+    // @ts-ignore
     onSubmit: { action: 'submitted' },
   },
   component: LoginForm,

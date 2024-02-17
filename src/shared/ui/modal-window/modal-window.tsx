@@ -31,8 +31,8 @@ export const ModalWindow: FC<Props> = ({ children, open, setOpen, title }) => {
   return (
     <Dialog.Root onOpenChange={setOpen} open={open}>
       <Dialog.Portal>
-        <Dialog.Overlay className={s.overlay} />
-        <div className={s.root}>
+        <Dialog.Overlay className={s.modal_overlay} />
+        <div className={s.modal_root}>
           <Dialog.Content className={s.window} forceMount>
             <Card className={s.card}>
               <div className={s.header}>
@@ -55,8 +55,6 @@ export const ModalWindow: FC<Props> = ({ children, open, setOpen, title }) => {
               closeOnClick
               containerId={'modal'}
               draggable
-              // @ts-ignore
-              enableMultiContainer
               hideProgressBar={false}
               newestOnTop={false}
               pauseOnFocusLoss

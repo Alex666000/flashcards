@@ -12,12 +12,16 @@ export type TextFieldProps = {
   label?: string
   readonly?: boolean
   type?: 'email' | 'password' | 'search' | 'text'
+  value: string
 } & ComponentPropsWithoutRef<'input'>
 
 type PropsType = TextFieldProps & Omit<ComponentPropsWithoutRef<'input'>, keyof TextFieldProps>
 
 export const TextField = forwardRef<HTMLInputElement, PropsType>(
-  ({ className, clearField, errorMessage, label, readonly, type = 'text', ...rest }, ref) => {
+  (
+    { className, clearField, errorMessage, label, readonly, type = 'text', value, ...rest },
+    ref
+  ) => {
     // Локальное состояние для отображения пароля
     const [showPassword, setShowPassword] = useState(false)
 
@@ -26,7 +30,7 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
     const isSearchType = type === 'search'
 
     // Отображение кнопки очистки для поля поиска
-    const displayClearButton = isSearchType && clearField && rest.value
+    const displayClearButton = isSearchType && clearField && value
     // Определение окончательного типа в зависимости от отображения пароля
     const finalType = getFinalType(type, showPassword)
 

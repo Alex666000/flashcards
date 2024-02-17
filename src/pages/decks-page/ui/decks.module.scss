@@ -1,18 +1,23 @@
-@import '@/styles/mixins';
-
-.root {
+.decksPageBlock {
   .header {
-    margin-bottom: 36px;
+    // сверху-снизу-96, а по горизонтали выравниваем
+    margin: 96px auto 36px;
+    padding: 15px;
 
     .top {
-      @include flex(row, 0, 0, center, space-between);
-
-      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
     }
   }
 
   .pagination {
-    @include flex(row, 24px, 24px, center, center);
+    display: flex;
+    flex-direction: row;
+    gap: 24px 24px;
+    align-items: center;
+    justify-content: center;
 
     margin-top: 64px;
   }

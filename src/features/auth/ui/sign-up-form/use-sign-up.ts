@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { emailSchema, passwordSchema } from '@/shared/common/form-validate-zod-schemas/zod-schema'
+import { emailSchema, passwordSchema } from '@/shared/lib/form-validate-zod-schemas/zod-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 

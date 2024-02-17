@@ -1,25 +1,43 @@
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
-import { useSignUpMutation } from '@/features/auth/api/auth.api'
-import { RegisterForm } from '@/features/register-form/register-form'
-import { RegisterFormType } from '@/features/register-form/use-register-form'
-import { ROUTES } from '@/shared/common/constants'
+import { useSignUpMutation, util } from '@/features/auth/api/auth.api'
+import { RegisterForm } from '@/features/forms/register-form/register-form'
+import { RegisterFormData } from '@/features/forms/register-form/use-register-form'
+import { ROUTES } from '@/shared/lib/constants/route-path'
+import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
+import { errorNotification } from '@/shared/lib/utils/error-notification'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
-  const [register, { data }] = useSignUpMutation()
+  const dispatch = useAppDispatch()
+  const [register, { data, isError }] = useSignUpMutation()
 
-  const handleRegister = (data: RegisterFormType) => {
-    const transformData = { email: data.email, name: data.email, password: data.password }
+  // " Нейминг: ообработать регистрационные данные отправки"
+  const handleRegisterFormDataSubmit = async (formData: RegisterFormData) => {
+    const registerFormData = {
+      email: formData.email,
+      name: formData.email,
+      password: formData.password,
+    }
 
-    register(transformData)
+    try {
+      await register(registerFormData)
+        .unwrap()
+        .then(() => {
+          toast.success('You are successfully signed up', { containerId: 'common' })
+          dispatch(util?.resetApiState())
+        })
+    } catch (error) {
+      error ? errorNotification(error) : toast.error('Error register')
+    }
   }
 
-  if (data) {
-    navigate(ROUTES.signIn)
+  if (data && !isError) {
+    navigate(ROUTES.signIn) // Паттерн: если зарегались редиректим на логинизацию (авторизацию)
   }
 
-  return <RegisterForm onSubmitHandler={handleRegister} />
+  return <RegisterForm onRegisterFormDataSubmit={handleRegisterFormDataSubmit} />
 }
 
 export default SignUpPage

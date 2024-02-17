@@ -1,21 +1,32 @@
-@import '@/styles/mixins';
+.profilePage {
+  max-width: 420px;
+  margin: 92px auto;
+  padding: 36px;
 
-.root {
-  @include container(420px);
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 2px;
 
   .content {
-    @include flex(column, 15px, 0, center);
+    display: flex;
+    flex-direction: column;
+    gap: 15px 0;
+    align-items: center;
+    justify-content: flex-start;
 
     .avatarContainer {
       position: relative;
     }
 
     .editImage {
-      @include flex(row, 0, 0, center, center);
-
       position: absolute;
       right: 0;
       bottom: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       padding: 4px;
     }
 
@@ -24,7 +35,9 @@
     }
 
     .userName {
-      @include flex(row, 0, 0, center, center);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .icon {

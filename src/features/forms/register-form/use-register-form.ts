@@ -22,9 +22,9 @@ export const registerSchema = z
     path: ['confirm'],
   })
 
-export type RegisterFormType = z.infer<typeof registerSchema>
+export type RegisterFormData = z.infer<typeof registerSchema>
 export const useRegisterForm = () => {
-  return useForm<RegisterFormType>({
+  return useForm<RegisterFormData>({
     mode: 'onSubmit',
     resolver: zodResolver(registerSchema),
   })

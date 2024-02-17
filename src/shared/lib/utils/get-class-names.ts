@@ -1,5 +1,5 @@
+import { capitalize } from '@/shared/lib/utils/capitalize'
 import { clsx } from 'clsx'
-import { capitalize } from 'src/shared/common/utils/capitalize'
 
 type SlotsMap<T extends string> = Record<T, string>
 type ModifiersMap<T extends string> = Record<T, any>

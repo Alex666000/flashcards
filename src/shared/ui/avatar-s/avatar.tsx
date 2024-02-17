@@ -1,38 +1,40 @@
+import { CSSProperties, forwardRef } from 'react'
+
 import * as AvatarRadix from '@radix-ui/react-avatar'
+import { clsx } from 'clsx'
 
 import s from './avatar.module.scss'
 
-type AvatarPropsType = {
-  name?: string
-  photo?: string
+type Props = {
+  className?: string
+  photoOrImage?: string
   size?: number
+  style?: CSSProperties
+  userName: string
 }
 
-export const Avatar = ({ name = 'Your avatar', photo, size = 36 }: AvatarPropsType) => {
-  const avatar =
-    photo ??
-    'https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80'
+export const Avatar = forwardRef<any, Props>(
+  ({ className, photoOrImage, size = 36, style, userName }, ref) => {
+    const initials = userName
+      ?.split(' ')
+      .map((word) => word[0].toUpperCase())
+      .join(' ')
 
-  function getFirstLetter(name: string | undefined) {
-    return name?.charAt(0).toUpperCase()
+    const styles: CSSProperties = {
+      height: size,
+      width: size,
+      ...(style || {}),
+    }
+
+    return (
+      <div className={clsx(s.avatar, className)} style={styles}>
+        <AvatarRadix.Root ref={ref}>
+          <AvatarRadix.Image alt={'User Avatar'} className={s.image} src={photoOrImage} />
+          {!photoOrImage && (
+            <AvatarRadix.Fallback className={s.fallback}>{initials}</AvatarRadix.Fallback>
+          )}
+        </AvatarRadix.Root>
+      </div>
+    )
   }
-
-  return (
-    <AvatarRadix.Root className={s.avatarRoot}>
-      <AvatarRadix.Image
-        alt={`${name} avatar`}
-        className={s.avatarImage}
-        height={size}
-        src={avatar}
-        title={`${name} avatar`}
-        width={size}
-      />
-      <AvatarRadix.Fallback
-        className={s.avatarFallback}
-        style={{ height: `${size}px`, width: `${size}px` }}
-      >
-        {getFirstLetter(name)}
-      </AvatarRadix.Fallback>
-    </AvatarRadix.Root>
-  )
-}
+)

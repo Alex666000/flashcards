@@ -5,7 +5,7 @@ import { DeckForm } from '@/features/forms/deck-form/deck-form'
 import { requestHandler } from '@/shared/lib/utils/request-handler'
 import { ModalWindow } from '@/shared/ui/modal-window'
 
-export type EditPackModalProps = {
+export type EditDeckModalProps = {
   cover: null | string
   id: string
   isPrivate: boolean
@@ -14,7 +14,7 @@ export type EditPackModalProps = {
   setOpen: (value: boolean) => void
 }
 
-export const EditPackModal: FC<EditPackModalProps> = ({
+export const EditDeckModal: FC<EditDeckModalProps> = ({
   cover,
   id,
   isPrivate,
@@ -28,11 +28,11 @@ export const EditPackModal: FC<EditPackModalProps> = ({
     name,
   }
 
-  const [editPack] = useUpdateDeckMutation()
+  const [editDeck] = useUpdateDeckMutation()
 
   const editDeckHandler = async (data: FormData) => {
     await requestHandler(async () => {
-      await editPack({ data, id }).unwrap()
+      await editDeck({ data, id }).unwrap()
       setOpen(false)
     })
   }

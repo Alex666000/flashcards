@@ -16,10 +16,10 @@ import { clsx } from 'clsx'
 import s from './text-field.module.scss'
 
 export type TextFieldProps = {
+  clearField?: () => void
   endIcon?: ReactNode
   errorMessage?: string
   label?: string
-  onClearFieldClick?: () => void
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
   onValueChange?: (value: string) => void
   search?: boolean
@@ -33,13 +33,13 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
   (
     {
       className,
+      clearField,
       disabled,
       endIcon,
       errorMessage,
       id,
       label,
       onChange,
-      onClearFieldClick,
       onEnter,
       onKeyDown,
       onValueChange,
@@ -62,7 +62,7 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
     const showError = !!errorMessage && errorMessage.length > 0
 
     // крестик справа в инпуте при фокусе
-    const isShowClearButton = onClearFieldClick && value?.length! > 0
+    const isShowClearButton = clearField && value?.length! > 0
 
     if (search) {
       startIcon = <SearchIcon color={'var(--color-text-secondary)'} />
@@ -91,7 +91,7 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
       if (disabled) {
         return
       }
-      onClearFieldClick?.()
+      clearField?.()
     }
 
     const classNames = {

@@ -66,15 +66,15 @@ export const Table = { Body, Cell, Empty, Head, HeadCell, Root, Row }
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data?.items.map((deck) => {
+                    {data?.items.map((deck-form) => {
                         return (
-                            <TableRow key={deck.id}>
-                                <TableCell>{deck?.name}</TableCell>
-                                <TableCell>{deck?.cardsCount}</TableCell>
+                            <TableRow key={deck-form.id}>
+                                <TableCell>{deck-form?.name}</TableCell>
+                                <TableCell>{deck-form?.cardsCount}</TableCell>
                                 <TableCell>
-                                    {new Date(deck?.updated).toLocaleDateString()}
+                                    {new Date(deck-form?.updated).toLocaleDateString()}
                                 </TableCell>
-                                <TableCell>{deck?.author?.name}</TableCell>
+                                <TableCell>{deck-form?.author?.name}</TableCell>
                             </TableRow>
                         )
                     })}

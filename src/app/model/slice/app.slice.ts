@@ -42,17 +42,17 @@ const appSlice = createSlice({
           action.type.endsWith('flashCardsAPI/executeQuery/rejected'),
         (state, action: any) => {
           if (action.type.endsWith('executeMutation/rejected')) {
-            if (action.payload.data) {
-              if (action.payload.data.message) {
-                toast.error(action.payload.data.message)
+            if (action.payload?.data) {
+              if (action.payload?.data?.message) {
+                toast.error(action?.payload?.data?.message)
                 state.status = 'failed'
 
                 return
               }
               toast.error(
-                action.payload.data.errorMessages[0].message ||
-                  action.payload.data.errorMessages[0] ||
-                  action.payload.data.message
+                action.payload?.data?.errorMessages[0].message ||
+                  action.payload.data?.errorMessages[0] ||
+                  action.payload.data?.message
               )
               state.status = 'failed'
             } else {
@@ -61,20 +61,20 @@ const appSlice = createSlice({
 
               return
             }
-          } else if (action.type.endsWith('flashCardsAPI/executeQuery/rejected')) {
-            if (action.payload.data) {
-              if (action.payload.data.statusCode === 401) {
+          } else if (action?.type.endsWith('flashCardsAPI/executeQuery/rejected')) {
+            if (action?.payload?.data) {
+              if (action?.payload?.data?.statusCode === 401) {
                 state.status = 'failed'
 
                 return
               }
-              if (action.payload.data.path.endsWith('me?')) {
+              if (action?.payload?.data?.path.endsWith('me?')) {
                 state.status = 'failed'
 
                 return
               }
-              if (action.payload.data.message) {
-                toast.error(action.payload.data.message)
+              if (action?.payload?.data?.message) {
+                toast.error(action?.payload?.data?.message)
                 state.status = 'failed'
 
                 return
@@ -103,3 +103,8 @@ const appSlice = createSlice({
 })
 
 export const { actions: appActions, reducer: appReducer } = appSlice
+
+/*
+- Селектор достает из инишл стейта значение - особенно при его изменении на новое чтобы в UI
+отрисовать актуальные данные: стейт - подстейт (редюсер) - инишлстейт - свойство + его значение
+ */

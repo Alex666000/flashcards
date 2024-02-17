@@ -7,11 +7,10 @@ import {
   forwardRef,
 } from 'react'
 
+import { Mods, classNames } from '@/shared/lib/classNames-lib/classNames'
 import { InferType } from '@/shared/types/infer-element-type'
 
 import s from './button.module.scss'
-
-import { Mods, classNames } from '../../lib/classNames/classNames'
 
 export const ButtonVariant = [
   'primary',
@@ -92,7 +91,7 @@ export const Button = forwardRef(ButtonPolymorph) as <T extends ElementType = 'b
 clsx:
 - as const применяется к массиву строк ['primary', 'secondary', 'tertiary', 'link'] и означает,
 что каждый элемент этого массива будет иметь конкретный строковый литеральный тип, а не обобщенный тип строки.
-- classNames: для склеивания классов: s - объект, к нему по ключу можем получить доступ: s[variant], вместо вариант какой класс будет, к примеру
+- classNames-lib: для склеивания классов: s - объект, к нему по ключу можем получить доступ: s[variant], вместо вариант какой класс будет, к примеру
 s.primary, если нет класса то пустая строка,
 
 const ButtonClassName = clsx(clsx(s.button, s[variant], fullWidth && s.fullWidth, className)): обязательный главный класс,
@@ -100,6 +99,6 @@ const ButtonClassName = clsx(clsx(s.button, s[variant], fullWidth && s.fullWidth
         [s.fullWidth]: fullWidth,
         [s[variant]]: true,
       })
-1 вариант: импортируем библу - вызываем функцию: const classNames = clsx(s.variant, className, fullWidth && s.fullWidth)
-2 вариант: const classNames = clsx(s.variant, className, { [s.fullWidth]: fullWidth}) -- если значение будет true то класс применится
+1 вариант: импортируем библу - вызываем функцию: const classNames-lib = clsx(s.variant, className, fullWidth && s.fullWidth)
+2 вариант: const classNames-lib = clsx(s.variant, className, { [s.fullWidth]: fullWidth}) -- если значение будет true то класс применится
  */

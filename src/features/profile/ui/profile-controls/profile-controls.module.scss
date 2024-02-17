@@ -1,0 +1,14 @@
+.nickName {
+  display: flex;
+  gap: 0 16px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.icon {
+  fill: #fff;
+}
+
+.email {
+  color: var(--color-dark-100);
+}

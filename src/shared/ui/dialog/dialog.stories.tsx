@@ -12,20 +12,20 @@ const meta = {
 
 export default meta
 
-export const DeletePack = {
+export const DeleteDeck = {
   render: () => {
     const [deleteIsOpen, setDeleteIsOpen] = useState(false)
 
     return (
       <>
         <Dialog
-          buttonText={'Delete Pack'}
-          description={'Do you really want to remove Pack Name? All cards will be deleted.'}
+          buttonText={'Delete Deck'}
+          description={'Do you really want to remove Deck Name? All cards will be deleted.'}
           onConfirm={() => setDeleteIsOpen(false)}
           open={deleteIsOpen}
           setOpen={setDeleteIsOpen}
           splitLines
-          title={'Delete Pack'}
+          title={'Delete Deck'}
         />
         <Button onClick={() => setDeleteIsOpen(true)}>Delete Pack</Button>
       </>

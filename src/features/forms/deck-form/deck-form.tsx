@@ -1,25 +1,31 @@
 import { memo, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { DeckFormType, useDeckForm } from '@/features/forms/deck/use-deck-form'
+import { DeckFormType, useDeckForm } from '@/features/forms/deck-form/use-deck-form'
 import { Button } from '@/shared/ui/button'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui/controlled'
 import { ControlledPreviewFileUploader } from '@/shared/ui/controlled/controlled-preview-file-uploader'
 
-import s from './deck.module.scss'
+import s from './deck-form.module.scss'
 
 type DeckFormDV = {
   cover: null | string
-} & Pick<DeckFormType, 'isPrivate' | 'name'>
+} & Pick<DeckFormType, 'isPrivate' | 'name'> // взять из типа DeckFormType эти свойиства только и всё
 
 type Props = {
-  defaultValues?: DeckFormDV
-  onCancel: () => void
-  onSubmit: (data: FormData) => void
+  defaultValues?: DeckFormDV // Значения по умолчанию для формы (например, если редактируется существующая колода)
+  onCancel: () => void // Колбек для отмены создания или редактирования колоды
+  onSubmit: (deckFormData: FormData) => void // Колбек для отправки данных формы
 }
 
+// DeckForm -- ФОРМА для создания или редактирования колоды
+// на UX - состоит из всего что ниже Create new deck c кнопкой "Х":
 export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
+  // downloaded: Строка с URL изображения обложки, которое было загружено.
+  // Используется для отображения превью загруженного изображения
   const [downloaded, setDownloaded] = useState<null | string>(defaultValues?.cover || null)
+
+  // coverError: Строка с сообщением об ошибке, связанной с загрузкой обложки-cover
   const [coverError, setCoverError] = useState<null | string>(null)
 
   const values: DeckFormType = {
@@ -27,13 +33,19 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
     name: defaultValues?.name || '',
   }
 
+  // Хук для управления состоянием формы. Возвращает объект с методами для контроля значений полей,
+  // валидации, обработки событий и т.д
   const { control, getFieldState, handleSubmit, resetField, setValue, trigger, watch } =
     useDeckForm(values)
 
+  // Переменная fileIsDirty используется для определения того, был ли файл обложки колоды изменен («грязный»)
+  // Она получается из состояния поля обложки с помощью getFieldState('cover').isDirty
   const fileIsDirty = getFieldState('cover').isDirty
 
   const file = watch('cover')
 
+  // Обработчик удаления обложки колоды. Сбрасывает ошибку обложки, устанавливает downloaded в
+  // null и выводит уведомление
   const deleteCoverHandler = () => {
     if (coverError) {
       setCoverError(null)
@@ -43,6 +55,8 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
     setDownloaded(null)
   }
 
+  // Функция, выполняемая при дополнительных действиях с обложкой (например, при успешной загрузке).
+  // Валидирует обложку, обрабатывает ошибки, обновляет downloaded и выводит уведомления
   const extraActions = async () => {
     const success = await trigger('cover')
     const { error } = getFieldState('cover')
@@ -66,6 +80,8 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
     }
   }
 
+  // Обработчик отправки данных формы. Создает объект FormData, добавляет в него данные из формы
+  // и вызывает функцию onSubmit
   const sendHandler = (data: DeckFormType) => {
     const form = new FormData()
 
@@ -82,7 +98,8 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
   }
 
   return (
-    <form className={s.form} onSubmit={handleSubmit(sendHandler)}>
+    <form className={s.deckForm} onSubmit={handleSubmit(sendHandler)}>
+      {/* Картинка + кнопка "Change Cover" -- Компонент для загрузки и предпросмотра изображения обложки */}
       <ControlledPreviewFileUploader
         control={control}
         deleteCoverHandler={deleteCoverHandler}
@@ -92,7 +109,7 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
         preview={downloaded}
       />
       <ControlledTextField control={control} label={'Name Pack'} name={'name'} />
-      <ControlledCheckbox control={control} label={'Private Pack'} name={'isPrivate'} />
+      <ControlledCheckbox control={control} label={'Private Deck'} name={'isPrivate'} />
       <div className={s.controls}>
         <Button onClick={onCancel} type={'button'} variant={'secondary'}>
           Cancel

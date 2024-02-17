@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import { createRoot } from 'react-dom/client'
 
-// подключаем шрифты и стили в Проект
+// подключаем шрифты и стили в проект
 import './app/styles/index.scss'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
@@ -17,12 +17,10 @@ createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <Provider store={store}>
       <ErrorBoundary>
-        {/*<ForceUpdateProvider>*/}
         <Toast />
         <StrictMode>
           <App />
         </StrictMode>
-        {/*</ForceUpdateProvider>*/}
       </ErrorBoundary>
     </Provider>
   </BrowserRouter>
@@ -30,4 +28,5 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 
 /*
 - Toast - всплавышка уведомление
+- оборачивать браузерами и тд лучше всего в main чтобы не было не предвиденных ошибок
  */

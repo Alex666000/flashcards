@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-import { RegisterFormType, useRegisterForm } from '@/features/register-form/use-register-form'
-import { ROUTES } from '@/shared/common/constants'
+import { RegisterFormData, useRegisterForm } from '@/features/forms/register-form/use-register-form'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { ControlledTextField } from '@/shared/ui/controlled'
@@ -10,8 +9,10 @@ import { Typography } from '@/shared/ui/typography'
 
 import s from './register-form.module.scss'
 
+import { ROUTES } from '../../../shared/lib/constants'
+
 type RegisterFormPropsType = {
-  onRegisterFormDataSubmit: (data: RegisterFormType) => void
+  onRegisterFormDataSubmit: (data: RegisterFormData) => void
 }
 
 export const RegisterForm: FC<RegisterFormPropsType> = ({ onRegisterFormDataSubmit }) => {

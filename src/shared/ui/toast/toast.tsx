@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css'
  */
 export const Toast = () => (
   <ToastContainer
-    autoClose={5000}
+    autoClose={4000}
     closeOnClick
     containerId={'common'}
     draggable
@@ -31,3 +31,7 @@ export const Toast = () => (
     theme={'dark'}
   />
 )
+
+/*
+- Toast просто обертка над ToastContainer что с библы...
+ */

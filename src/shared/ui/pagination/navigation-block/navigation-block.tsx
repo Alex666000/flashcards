@@ -9,21 +9,21 @@ import { PaginationProps } from '../pagination'
 type Props = {
   // Массив, представляющий диапазон страниц для отображения
   paginationRange: (number | string)[]
-} & Pick<PaginationProps, 'currentPage' | 'onPageChange'> // onPageChange- Функция обратного вызова при изменении страницы
+} & Pick<PaginationProps, 'currentPage' | 'onSetPageChange'> // onPageChange- Функция обратного вызова при изменении страницы
 
 /**
  * NavigationBlock:
  * Отображает кнопки навигации (предыдущая, следующая) и числовые кнопки страниц.
  * Использует компонент NavigateButton для создания кнопок навигации.
  */
-export const NavigationBlock: FC<Props> = ({ currentPage, onPageChange, paginationRange }) => {
+export const NavigationBlock: FC<Props> = ({ currentPage, onSetPageChange, paginationRange }) => {
   return (
     // кнопки навигации (предыдущая)
     <div className={s.buttons}>
       <NavigateButton
         active={false}
         disabled={currentPage === 1}
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => onSetPageChange(currentPage - 1)}
       >
         {'❮'}
       </NavigateButton>
@@ -32,7 +32,7 @@ export const NavigationBlock: FC<Props> = ({ currentPage, onPageChange, paginati
       {/*НАВИГАЦИИ, а также за обработку событий клика по этим кнопкам*/}
       {paginationRange.map((btn, index) => {
         const onPageClick = (btn: number) => () => {
-          onPageChange(btn)
+          onSetPageChange(btn)
         }
 
         if (typeof btn !== 'number') {
@@ -53,7 +53,7 @@ export const NavigationBlock: FC<Props> = ({ currentPage, onPageChange, paginati
       <NavigateButton
         active={false}
         disabled={currentPage === paginationRange[paginationRange.length - 1]}
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => onSetPageChange(currentPage + 1)}
       >
         {'❯'}
       </NavigateButton>

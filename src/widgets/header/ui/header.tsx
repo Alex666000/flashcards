@@ -22,8 +22,8 @@ type Props = {
   isAuth: boolean
   isLoading: StatusType
   name?: string
-  onLoginClick?: () => void
-  onLogoutClick: () => void
+  onLoginUserClick?: () => void
+  onLogoutUserClick: () => void
   onRedirectToProfileClick: () => void
 }
 
@@ -31,11 +31,11 @@ export const Header = memo(
   ({
     avatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEpWWQrAJpIR6Xy7FhzhCT00vzSmT7xw9S2Q&usqp=CAU',
     email = 'NoNameEmail@.com',
-    isAuth = false,
+    isAuth,
     isLoading = 'idle',
-    name = 'NoName',
-    onLoginClick,
-    onLogoutClick,
+    name = 'Some_Name',
+    onLoginUserClick,
+    onLogoutUserClick,
     onRedirectToProfileClick,
   }: Props) => {
     return (
@@ -69,13 +69,14 @@ export const Header = memo(
                 {/* Item с иконкой слева и текстом справа */}
                 <DropdownItemWithIcon
                   icon={<LogOutIcon />}
-                  onSelect={onLogoutClick}
+                  onSelect={onLogoutUserClick}
+                  // onSetBookBlur={handleSetBookBlur}
                   text={'Sign out'}
                 />
               </Dropdown>
             </div>
           ) : (
-            <Button onClick={onLoginClick} variant={'primary'}>
+            <Button onClick={onLoginUserClick} variant={'primary'}>
               Sign In
             </Button>
           )}

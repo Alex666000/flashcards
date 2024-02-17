@@ -1,7 +1,9 @@
-@import '@/styles/mixins';
-
-.form {
-  @include flex(column, 24px, 0, stretch);
+.deckForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px 0;
+  align-items: stretch;
+  justify-content: flex-start;
 
   .image {
     aspect-ratio: 4/1;
@@ -11,7 +13,11 @@
   }
 
   .imageControls {
-    @include flex(row, 0, 24px, center, space-between);
+    display: flex;
+    flex-direction: row;
+    gap: 0 24px;
+    align-items: center;
+    justify-content: space-between;
 
     button {
       flex-grow: 1;
@@ -23,7 +29,11 @@
   }
 
   .controls {
-    @include flex(row, 0, 0, center, space-between);
+    display: flex;
+    flex-direction: row;
+    gap: 0 0;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 

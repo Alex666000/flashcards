@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { formatTextBr } from '@/shared/common/utils/format-text-br'
+import { formatTextBr } from '@/shared/lib/utils/format-text-br'
 import { Button } from '@/shared/ui/button'
 import { ModalWindow } from '@/shared/ui/modal-window'
 import { Typography } from '@/shared/ui/typography'

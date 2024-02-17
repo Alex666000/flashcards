@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { RegisterForm } from './'
+import { RegisterForm } from './register-form'
 
 const meta = {
   component: RegisterForm,
@@ -14,6 +14,7 @@ export const RegisterFormMain = {
   args: {},
 
   render: () => {
+    // @ts-ignore
     return <RegisterForm onSubmitHandler={() => {}} />
   },
 }

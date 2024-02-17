@@ -1,12 +1,12 @@
 // Зануления
 html {
-    box-sizing: border-box;
-    font-size: 100%;
+  box-sizing: border-box;
+  font-size: 100%;
 
-    // это правила, которые устанавливают способы сглаживания шрифтов для веб-браузеров.
-    // Они помогают сделать текст более четким и улучшить его внешний вид на экранах с высоким разрешением.
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  // это правила, которые устанавливают способы сглаживания шрифтов для веб-браузеров.
+  // Они помогают сделать текст более четким и улучшить его внешний вид на экранах с высоким разрешением.
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 // Звездочка - любой тэг - inherit: наследуем от родителя
@@ -14,20 +14,20 @@ html {
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 /* Обнуляем внутренние падинги только у тех у кого есть класс
 - если им клас не пропишем обнуляться не будет */
 ul[class],
 ol[class] {
-    padding: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a,
@@ -37,15 +37,11 @@ select,
 textarea,
 optgroup,
 option {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    font-style: inherit;
-    color: inherit;
-}
-
-a:visited {
-    color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
 }
 
 // Отменяем внешний отступ
@@ -63,86 +59,86 @@ figcaption,
 blockquote,
 dl,
 dd {
-    margin: 0;
+  margin: 0;
 }
 
 // Убираем маркет "точку"
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 /* чтобы у картинки скролла не было при уменьшении экрана */
 img {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
 input,
 button,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
 }
 
 input {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 
-    &:active,
-    &:focus,
-    &:focus-visible {
-        outline: none;
-    }
+  &:active,
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 input:-webkit-autofill {
-    background-clip: text;
+  background-clip: text;
 }
 
 p,
 button {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 button {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 
-    &:hover {
-        border: none;
-    }
+  &:hover {
+    border: none;
+  }
 }
 
 // Стили с темой приложения по дефолту в проекте - самые частые:
 body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 
-    font-family: Roboto, sans-serif; // Основной шрифт проекта
-    font-size: 14px;
-    font-weight: 400; // жирность шрифта по умолчанию
+  font-family: Roboto, sans-serif; // Основной шрифт проекта
+  font-size: 14px;
+  font-weight: 400; // жирность шрифта по умолчанию
 
-    // текст будет отображаться обычным образом, без наклона (курсива).
-    font-style: normal;
-    line-height: 24px;
+  // текст будет отображаться обычным образом, без наклона (курсива).
+  font-style: normal;
+  line-height: 24px;
 
-    // частый цвет текста проекта
-    color: var(--color-light-100);
+  // частый цвет текста проекта
+  color: var(--color-light-100);
 
-    // Цвет фона - тема - приложения
-    background-color: var(--color-dark-900);
+  // Цвет фона - тема - приложения
+  background-color: var(--color-dark-900);
 }
 
 // Контейнер всего приложения, чтобы не вертеть головой влево далеко-вправо...
-// + создали для удобства ui-kit AppContainer в shared слое
+// + создали для удобства ui-kit Container в shared слое
 // контейнер нельзя родетелям делать у вешать ему display: flex
 // у него стандартные стили
 .container {
-    max-width: 1024px; // добавляем к ширине padding - 12рх: 1100 рх ширина + 12рх т.к у нас border-box стоит
-    margin: 0 auto;
-    padding: 0 12px;
+  max-width: 1024px; // добавляем к ширине padding - 12рх: 1100 рх ширина + 12рх т.к у нас border-box стоит
+  margin: 0 auto;
+  padding: 0 12px;
 }
 
 /*

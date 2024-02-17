@@ -1,16 +1,12 @@
 import { ComponentPropsWithoutRef, FC } from 'react'
 
+import { Sort } from '@/shared/lib/types/types'
 import { Icon } from '@/shared/ui/icon'
 import { clsx } from 'clsx'
 
 import s from './table-header.module.scss'
 
 import { Table } from '../table'
-
-export type Sort = {
-  direction: 'asc' | 'desc'
-  key: string
-} | null
 
 export type Column = {
   key: string

@@ -1,4 +1,4 @@
-import { validateFile } from '@/shared/common/utils/validate-file'
+import { validateFile } from '@/shared/lib/utils/validate-file'
 
 export const validateImage = (file: File) => {
   const maxSizeInBytes = 1024 * 1024

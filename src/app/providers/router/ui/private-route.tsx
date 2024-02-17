@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
 import { useMeQuery } from '@/features/auth/api/auth.api'
-import { ROUTES } from '@/shared/common/constants'
+import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Loader } from '@/shared/ui/loaders-components'
 
 /**
@@ -10,13 +10,13 @@ import { Loader } from '@/shared/ui/loaders-components'
  */
 
 export const PrivateRoute = () => {
-  const { data, isLoading } = useMeQuery()
+  const { isError, isLoading } = useMeQuery()
 
   if (isLoading) {
     return <Loader />
   }
 
-  return data ? <Outlet /> : <Navigate to={ROUTES.signIn} />
+  return !isError ? <Outlet /> : <Navigate to={ROUTES.signIn} />
 }
 
 /*

@@ -1,23 +1,22 @@
-import { useState } from 'react'
-
+import { memo, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import s from './profile.module.scss'
-
-import { requestHandler } from '@/common/utils'
-import { EditProfileForm, EditProfileFormProps } from '@/components/forms'
-import { Avatar } from '@/components/ui/avatar'
-import { BackButton } from '@/components/ui/back-button'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { FileUploader } from '@/components/ui/file-uploader/file-uploader.tsx'
-import { Icon } from '@/components/ui/icon/icon.tsx'
-import { Typography } from '@/components/ui/typography'
+import { EditProfileForm, EditProfileFormProps } from '@/features/forms/edit-profile'
 import { useProfile } from '@/features/profile/model/hooks'
 import { ProfileControls } from '@/features/profile/ui'
+import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { Avatar } from '@/shared/ui/avatar-s'
+import { BackButton } from '@/shared/ui/back-button'
+import { Button } from '@/shared/ui/button'
+import { Card } from '@/shared/ui/card'
+import { FileUploader } from '@/shared/ui/file-uploader'
+import { Icon } from '@/shared/ui/icon'
+import { Typography } from '@/shared/ui/typography'
 
-export const Profile = () => {
-  const { user, logout, updateAvatar, onUpdate } = useProfile()
+import s from './profile-page.module.scss'
+
+const ProfilePage = () => {
+  const { logout, onUpdate, updateAvatar, user } = useProfile()
 
   const [isEditMode, setEditMode] = useState(false)
 
@@ -32,38 +31,38 @@ export const Profile = () => {
   return (
     <>
       <BackButton />
-      <div className={s.root}>
-        <Card>
-          <div className={s.content}>
-            <Typography as="h2" variant="large">
-              Personal Information
-            </Typography>
-            <div className={s.avatarContainer}>
-              <Avatar size={96} userName={user.name} image={user.avatar} />
-              {!isEditMode && (
-                <FileUploader
-                  name="avatar"
-                  onChange={updateAvatar}
-                  className={s.editImage}
-                  accept="image/*"
-                  as={Button}
-                >
-                  <Icon className={s.icon} name={'edit'} height={20} width={20} />
-                </FileUploader>
-              )}
-            </div>
-            {isEditMode ? (
-              <EditProfileForm
-                onSubmit={onSubmit}
-                className={s.form}
-                initialValues={{ name: user.name }}
-              />
-            ) : (
-              <ProfileControls user={user} setEditMode={setEditMode} onLogout={logout} />
+      <Card className={s.profilePage}>
+        <div className={s.content}>
+          <Typography as={'h2'} variant={'large'}>
+            Personal Information
+          </Typography>
+          <div className={s.avatarContainer}>
+            <Avatar photoOrImage={user.avatar} size={96} userName={user.name} />
+            {!isEditMode && (
+              <FileUploader
+                accept={'image/*'}
+                as={Button}
+                className={s.editImage}
+                name={'avatar'}
+                onChange={updateAvatar}
+              >
+                <Icon className={s.icon} height={20} name={'edit'} width={20} />
+              </FileUploader>
             )}
           </div>
-        </Card>
-      </div>
+          {isEditMode ? (
+            <EditProfileForm
+              className={s.form}
+              initialValues={{ name: user.name }}
+              onSubmit={onSubmit}
+            />
+          ) : (
+            <ProfileControls onLogout={logout} setEditMode={setEditMode} user={user} />
+          )}
+        </div>
+      </Card>
     </>
   )
 }
+
+export default memo(ProfilePage)

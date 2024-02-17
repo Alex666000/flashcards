@@ -1,14 +1,15 @@
+import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useRecoverPasswordMutation } from '@/features/auth/api/auth.api'
 import { ForgotPasswordForm } from '@/features/auth/ui/forgot-password/forgot-password'
 import { ForgotPasswordFormType } from '@/features/auth/ui/forgot-password/use-forgot-password'
-import { ROUTES } from '@/shared/common/constants'
-import { htmlCodeResetPassword } from '@/shared/common/constants/html-mail-reset-password'
-import { errorNotification } from '@/shared/common/utils/error-notification'
+import { htmlCodeResetPassword } from '@/shared/lib/constants/html-mail-reset-password'
+import { ROUTES } from '@/shared/lib/constants/route-path'
+import { errorNotification } from '@/shared/lib/utils/error-notification'
 
-export const ForgotPasswordPage = () => {
+const ForgotPasswordPage = () => {
   const navigate = useNavigate()
   const [recoverPassword] = useRecoverPasswordMutation()
 
@@ -32,3 +33,5 @@ export const ForgotPasswordPage = () => {
 
   return <ForgotPasswordForm onForgotPasswordSubmit={handleRecoverPassword} />
 }
+
+export default memo(ForgotPasswordPage)

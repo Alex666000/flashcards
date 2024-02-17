@@ -1,8 +1,9 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-import { LoginArgs } from '@/features/auth'
-import { ROUTES } from '@/shared/common/constants'
+import { LoginBodyArgs } from '@/features/auth'
+import { useLoginForm } from '@/features/forms/login-form/use-login-form'
+import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui/controlled'
@@ -10,24 +11,23 @@ import { Typography } from '@/shared/ui/typography'
 
 import s from './login-form.module.scss'
 
-import { useLoginForm } from './use-login-form'
-
 type PropsType = {
-  onLoginFormDataSubmit: (data: LoginArgs) => void
+  onLoginFormDataSubmit: (formData: LoginBodyArgs) => void
 }
 
 export const LoginForm: FC<PropsType> = ({ onLoginFormDataSubmit }) => {
   const { control, handleSubmit } = useLoginForm()
-  const onSubmit = handleSubmit((data) => onLoginFormDataSubmit(data))
+  const onSubmit = handleSubmit((formData) => onLoginFormDataSubmit(formData))
 
   return (
-    <Card className={s.card}>
+    <Card className={s.cardBlock}>
+      {/* h1 - для семантики: 1 h1 должен быть в проекте!!! */}
       <Typography as={'h1'} className={s.title} variant={'large'}>
         Sign In
       </Typography>
       <form onSubmit={onSubmit}>
-        <div className={s.login_form}>
-          <ControlledTextField control={control} label={'Email'} name={'email'} />
+        <div className={s.loginForm}>
+          <ControlledTextField control={control} label={'Email'} name={'email'} type={'email'} />
           <ControlledTextField
             control={control}
             label={'Password'}
@@ -42,9 +42,9 @@ export const LoginForm: FC<PropsType> = ({ onLoginFormDataSubmit }) => {
           />
         </div>
         <Typography
-          as={'a'}
+          as={Link}
           className={s.recoverPasswordLink}
-          href={ROUTES.recoverPassword}
+          to={ROUTES.recoverPassword}
           variant={'body2'}
         >
           Forgot Password?

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { BrowserRouterDecorator } from '@/shared/config/storybook/decorators/browser-router-decorator'
-
-import { Header } from './header'
+import { Header } from '@/widgets'
 
 const meta = {
   component: Header,

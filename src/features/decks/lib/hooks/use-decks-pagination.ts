@@ -1,8 +1,10 @@
 import { useCallback } from 'react'
 
-import { useAppDispatch, useAppSelector } from '@/app/providers'
-import { currentPageSelector, pageSizeSelector } from '@/pages/decks-page/model/selectors'
-import { decksActions } from '@/pages/decks-page/model/slice/decks.slice'
+import { currentPageSelector } from '@/features/decks/model/selectors/current-page-selector'
+import { pageSizeSelector } from '@/features/decks/model/selectors/page-size-selector'
+import { decksActions } from '@/features/decks/model/slice/decks.slice'
+import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
+import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
 
 /**
  * Хук для управления пагинацией колод (decks) в приложении

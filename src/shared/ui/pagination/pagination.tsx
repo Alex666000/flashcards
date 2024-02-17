@@ -11,8 +11,8 @@ import s from './pagination.module.scss'
 export type PaginationProps = {
   className?: string // Дополнительные классы для стилизации
   currentPage: number // Текущая страница
-  onPageChange: (newPage: number) => void // Колбэк при изменении страницы
-  onPageSizeChange: (newPageSize: number) => void // Колбэк при изменении размера страницы: newPageSize
+  onSetPageChange: (newPage: number) => void // Колбэк при изменении страницы
+  onSetPageSizeChange: (newPageSize: number) => void // Колбэк при изменении размера страницы: newPageSize
   pageSize: number // Размер страницы (количество элементов на странице)
   siblingCount?: number // количество "соседних" страниц, которые отображаются в пагинации вокруг текущей страницы
   totalCount?: number // Общее количество элементов
@@ -26,8 +26,8 @@ export const Pagination: FC<PaginationProps> = memo(
   ({
     className,
     currentPage,
-    onPageChange,
-    onPageSizeChange,
+    onSetPageChange,
+    onSetPageSizeChange,
     pageSize,
     siblingCount,
     totalCount = 10,
@@ -46,15 +46,16 @@ export const Pagination: FC<PaginationProps> = memo(
 
     return (
       <div className={clsx(s.root, className)}>
-        {/* блок с кнопками навигации влево и вправо */}
+        {/* блок с кнопками навигации по страницам -- влево и вправо */}
         <NavigationBlock
           currentPage={currentPage}
-          onPageChange={onPageChange}
+          onSetPageChange={onSetPageChange}
           paginationRange={paginationRange}
         />
         <div className={s.selectBlock}>
           <Typography variant={'body2'}>Show</Typography>
-          <PageSizeSelect onPageSizeChange={onPageSizeChange} pageSize={pageSize} />
+          {/* Селект с кол-вом элементов на странице */}
+          <PageSizeSelect onPageSizeChange={onSetPageSizeChange} pageSize={pageSize} />
           <Typography variant={'body2'}>on the page</Typography>
         </div>
       </div>

@@ -1,18 +1,21 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { PageNotFound } from '@/shared/assets/illustrations/page-not-found'
-import { ROUTES } from '@/shared/common/constants'
+import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Button } from '@/shared/ui/button'
 
 import s from './not-found.module.scss'
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   return (
     <div className={s.root}>
       <PageNotFound />
       <Button as={Link} to={ROUTES.decks}>
-        Back to Packs
+        Back to Decks
       </Button>
     </div>
   )
 }
+
+export default memo(NotFoundPage)

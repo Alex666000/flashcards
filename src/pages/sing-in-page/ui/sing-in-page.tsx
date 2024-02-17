@@ -2,44 +2,48 @@ import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useAppDispatch } from '@/app/providers'
-import { LoginArgs } from '@/features/auth'
+import { LoginBodyArgs } from '@/features/auth'
 import { useLoginMutation, useMeQuery, util } from '@/features/auth/api/auth.api'
-import { LoginForm } from '@/features/login-form/login-form'
-import { ROUTES } from '@/shared/common/constants'
-import { errorNotification } from '@/shared/common/utils/error-notification'
+import { LoginForm } from '@/features/forms/login-form/login-form'
+import { ROUTES } from '@/shared/lib/constants/route-path'
+import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
+import { errorNotification } from '@/shared/lib/utils/error-notification'
 
 const SingInPage = memo(() => {
   const navigate = useNavigate()
-  const { data: meData, isError } = useMeQuery()
+  const { data: meAuthData, isError } = useMeQuery()
   const [login] = useLoginMutation()
   const dispatch = useAppDispatch()
 
-  const handleLogin = async (data: LoginArgs) => {
+  const handleLoginFormDataSubmit = async (formData: LoginBodyArgs) => {
     try {
-      await login(data)
+      await login(formData)
         .unwrap()
         .then(() => {
-          dispatch(util?.resetApiState())
-          toast.success('You are successfully authorized')
-          navigate(ROUTES.decks)
+          toast.success('You are successfully authorized', { containerId: 'common' })
+          dispatch(util?.resetApiState()) // только если все хорошо очищаем форму
         })
     } catch (error) {
-      errorNotification(error)
+      error ? errorNotification(error) : toast.error('Authorisation error')
     }
   }
 
-  if (meData && !('success' in meData) && !isError) {
+  if (meAuthData && !('success' in meAuthData) && !isError) {
     navigate(ROUTES.decks)
   }
 
-  return <LoginForm onSubmitHandler={handleLogin} />
+  return <LoginForm onLoginFormDataSubmit={handleLoginFormDataSubmit} />
 })
 
 export default SingInPage
 
 /*
-- ограничили ширину карточки контейнером, а не на всю страницу: div className={s.form_container}
-- &apos; - апостраф ' сверху над буквой
-- или так ограничивем контейнером: <div className={'container'}> или так: <AppContainer></AppContainer>
-*/
+- Нейминг - пример: когда на событие то так иначе обычно через глагол: createDeck()
+----------------------------------------------------------------------------------
+Нейминг: - 2.08.00 — неиминг название функций обработчиков например: onInputChange или когда колбек то onTodolist Added
+- если метод вызывается на event-e то on_target_onClick: if => onEvent => name on_target_Event: например: onBookCardClick (т.е нажали по
+- карточкам книг...указываем по чём кликнули). Еще пример onKey_target_Down
+- когда метод передаем пропсами из родителя в дочку всегда начинается с handle а заканчивается событием к примеру в дочке вызываем этот
+  колбек на событие onBlur - значит в родителе называем "обработать установку книг", в родителе в названии пропса удаляем handle и итог
+  такой: onSetBookBlur={handleSetBookBlur}. Методы которые создаются не на события называют стандартно с глагола6 createDeck() например
+ */

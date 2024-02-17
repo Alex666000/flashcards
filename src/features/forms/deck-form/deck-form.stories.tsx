@@ -1,9 +1,9 @@
-import { DeckForm } from '@/features/forms/deck/deck'
+import { DeckForm } from '@/features/forms/deck-form/deck-form'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   component: DeckForm,
-  title: 'Forms/Pack',
+  title: 'Forms/Deck',
 } satisfies Meta<typeof DeckForm>
 
 export default meta

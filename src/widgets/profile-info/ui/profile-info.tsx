@@ -11,7 +11,7 @@ export type ProfileInfoProps = Pick<UserAuthDataResponse, 'avatar' | 'email' | '
 export const ProfileInfo = forwardRef<ElementRef<'div'>, ProfileInfoProps>(
   ({ avatar, email, name }, ref) => {
     return (
-      <div className={s.profileInfo} ref={ref}>
+      <div className={s.profileInfoBlock} ref={ref}>
         <Avatar className={s.avatar} photoOrImage={avatar} userName={name} />
         <div className={s.userDetails}>
           <Typography variant={'subtitle2'}>{name}</Typography>

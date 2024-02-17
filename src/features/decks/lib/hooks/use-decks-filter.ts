@@ -1,12 +1,11 @@
 import { useCallback } from 'react'
 
-import { useAppDispatch, useAppSelector } from '@/app/providers'
-import {
-  searchNameSelector,
-  sliderValueSelector,
-  tabValueSelector,
-} from '@/pages/decks-page/model/selectors'
-import { decksActions } from '@/pages/decks-page/model/slice/decks.slice'
+import { searchNameSelector } from '@/features/decks/model/selectors/search-name-selector'
+import { sliderValueSelector } from '@/features/decks/model/selectors/slider-value-selector'
+import { tabValueSelector } from '@/features/decks/model/selectors/tab-value-selector'
+import { decksActions } from '@/features/decks/model/slice/decks.slice'
+import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
+import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
 
 /**
  *  useDecksFilter, используется для управления фильтрами колод (decks) в приложении
