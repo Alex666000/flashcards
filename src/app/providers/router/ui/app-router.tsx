@@ -34,9 +34,9 @@ export const AppRouter = () => {
         <Route element={<ForgotPasswordPage />} path={ROUTES.recoverPassword} />
         <Route element={<CheckEmailPage />} path={`${ROUTES.checkEmail}/:email`} />
         <Route element={<CreateNewPasswordPage />} path={`${ROUTES.createNewPassword}/:token`} />
-        <Route element={<VerifyEmailPage />} path={'/confirm-email/:code'} />
-        <Route element={<ErrorPage />} path={'/404'} />
-        <Route element={<Navigate to={'/404'} />} path={'*'} />
+        <Route element={<VerifyEmailPage />} path={ROUTES.verifyEmail} />
+        <Route element={<ErrorPage />} path={ROUTES.notFoundPage} />
+        <Route element={<Navigate to={ROUTES.notFoundPage} />} path={'*'} />
         {/*-------------------------------------- */}
         {/* Приватные пути */}
         <Route element={<PrivateRoute />}>

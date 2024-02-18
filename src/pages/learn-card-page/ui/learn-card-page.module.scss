@@ -1,17 +1,22 @@
-@import '@/app/styles/mixins';
-
-.cover {
-  align-self: center;
-  max-width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.root {
-  @include container(420px);
+.learnCardBlock {
+  width: 100%;
+  max-width: 480px;
+  margin: 96px auto;
+  padding-inline: 12px;
 
   .content {
-    @include flex(column, 24px, 24px, stretch);
+    display: flex;
+    flex-direction: column;
+    gap: 24px 24px;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    margin: 0 auto;
+    padding: 36px;
+
+    background-color: var(--color-dark-700);
+    border: 1px solid var(--color-dark-500);
+    border-radius: 2px;
 
     .title {
       align-self: center;
@@ -19,7 +24,11 @@
     }
 
     .question {
-      @include flex(column, 6px);
+      display: flex;
+      flex-direction: column;
+      gap: 6px 0;
+      align-items: flex-start;
+      justify-content: flex-start;
 
       word-break: break-word;
 
@@ -29,7 +38,11 @@
     }
 
     .answer {
-      @include flex(column, 6px);
+      display: flex;
+      flex-direction: column;
+      gap: 6px 0;
+      align-items: flex-start;
+      justify-content: flex-start;
 
       word-break: break-word;
 
@@ -46,4 +59,11 @@
       }
     }
   }
+}
+
+.cover {
+  align-self: center;
+  max-width: 100%;
+  height: 180px;
+  object-fit: cover;
 }

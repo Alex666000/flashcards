@@ -6,8 +6,11 @@ import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
 
-import s from 'src/pages/check-email-page/ui/check-email-page.module.scss'
+import s from './check-email-page.module.scss'
 
+/**
+ - На UX увидим "Проверьте свой email и кнопку назад"
+ */
 const CheckEmailPage = () => {
   const { email } = useParams<{ email: string }>()
 

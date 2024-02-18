@@ -1,20 +1,21 @@
 import { useState } from 'react'
 
 import {
-  EditDeckModal,
   EditDeckModalProps,
-} from '@/features/decks/ui/edit-deck-modal/edit-deck-modal'
+  EditMyDeckModal,
+} from '@/features/decks/ui/edit-my-deck-modal/edit-my-deck-modal'
 import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
 
 type Props = Omit<EditDeckModalProps, 'open' | 'setOpen'>
 
+// При клике на "карандашик" - откроется модалка с формой заполнения
 export const EditControl = ({ cover, id, isPrivate, name }: Props) => {
   const [open, setOpen] = useState(false)
 
   return (
     <>
-      <EditDeckModal
+      <EditMyDeckModal
         cover={cover}
         id={id}
         isPrivate={isPrivate}

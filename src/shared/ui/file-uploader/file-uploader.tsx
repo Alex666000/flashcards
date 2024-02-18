@@ -18,7 +18,7 @@ export const FileUploader = <T extends ElementType = 'button'>(
 ) => {
   const {
     accept = '', // Значение по умолчанию - пустая строка
-    as: WrapperComponent = Button, // Тип элемента обертки по умолчанию - 'button'
+    as: Component = Button, // Тип элемента обертки по умолчанию - 'button'
     asProps = { variant: 'secondary' }, // Значение по умолчанию для свойств элемента обертки
     children, // Дочерние элементы
     name, // Имя поля ввода файла
@@ -30,10 +30,10 @@ export const FileUploader = <T extends ElementType = 'button'>(
 
   return (
     <>
-      <WrapperComponent onClick={() => inputRef?.current?.click()} {...asProps} {...rest}>
+      <Component onClick={() => inputRef?.current?.click()} {...asProps} {...rest}>
         {children ?? <Icon height={16} name={'edit'} width={16} />}
         {/* Если переданы дочерние элементы, используйте их. В противном случае, используйте иконку по умолчанию. */}
-      </WrapperComponent>
+      </Component>
       <input
         accept={accept}
         name={name}

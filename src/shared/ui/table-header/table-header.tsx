@@ -1,6 +1,5 @@
 import { ComponentPropsWithoutRef, FC } from 'react'
 
-import { Sort } from '@/shared/lib/types/types'
 import { Icon } from '@/shared/ui/icon'
 import { clsx } from 'clsx'
 
@@ -14,6 +13,11 @@ export type Column = {
   title: string
 }
 
+export type Sort = {
+  direction: 'asc' | 'desc'
+  key: string
+} | null
+
 export type TableHeaderProps = Omit<
   ComponentPropsWithoutRef<'thead'> & {
     columns: Column[]
@@ -23,6 +27,7 @@ export type TableHeaderProps = Omit<
   'children'
 >
 
+// шапка таблицы - серая.. в ней сортировка
 export const TableHeader: FC<TableHeaderProps> = ({ columns, onSort, sort, ...restProps }) => {
   const handleSort = (key: string, sortable?: boolean) => () => {
     if (!onSort || sortable === false) {
@@ -47,15 +52,20 @@ export const TableHeader: FC<TableHeaderProps> = ({ columns, onSort, sort, ...re
       <Table.Row>
         {columns.map(({ key, sortable, title }) => {
           const sortTerms = sort && sort.key === key
-          const classes = {
-            cell: clsx(!(sortable === false) && s.hover),
-            icon: clsx(s.icon, sortTerms && sort.direction === 'desc' && s.down),
-          }
 
           return (
-            <Table.HeadCell className={classes.cell} key={key} onClick={handleSort(key, sortable)}>
+            <Table.HeadCell
+              className={clsx(!(sortable === false) && s.hover)}
+              key={key}
+              onClick={handleSort(key, sortable)}
+            >
               {title}
-              {sortTerms && <Icon className={classes.icon} name={'arrowDown'} />}
+              {sortTerms && (
+                <Icon
+                  className={clsx(s.icon, sortTerms && sort.direction === 'desc' && s.down)}
+                  name={'arrowDown'}
+                />
+              )}
             </Table.HeadCell>
           )
         })}

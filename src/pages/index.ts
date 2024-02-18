@@ -2,7 +2,7 @@ export { CheckEmailPageAsync as CheckEmailPage } from './check-email-page/ui/che
 export { CreateNewPasswordPageAsync as CreateNewPasswordPage } from './create-new-password-page/ui/create-new-password-page.async'
 export { DeckPageAsync as DeckPage } from './deck-page/ui/deck-page.async'
 export { DecksPageAsync as DecksPage } from './decks-page/ui/decks-page.async'
-export { ErrorPageAsync as ErrorPage } from './error-page/error-page.async'
+export { ErrorPageAsync as ErrorPage } from './error-page/ui/error-page.async'
 export { ForgotPasswordPageAsync as ForgotPasswordPage } from './forgot-password-page/ui/forgot-password-page.async'
 export { LearnCardPageAsync as LearnCardPage } from './learn-card-page/ui/learn-card-page.async'
 export { ProfilePageAsync as ProfilePage } from './profile-page/ui/profile-page.async'

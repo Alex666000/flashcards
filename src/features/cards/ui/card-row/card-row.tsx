@@ -11,11 +11,11 @@ import defaultImage from '../../../../shared/assets/images/default-image.jpg'
 import { Card } from '../../rtk-api'
 
 type Props = {
-  card: Card
-  isMyPack: boolean
+  card: Card // Объект с информацией о карточке
+  isMyDeck: boolean
 }
 
-export const CardRow: FC<Props> = memo(({ card, isMyPack }) => {
+export const CardRow: FC<Props> = memo(({ card, isMyDeck }) => {
   return (
     <Table.Row className={s.root} key={card.id}>
       <Table.Cell className={s.question}>
@@ -34,9 +34,10 @@ export const CardRow: FC<Props> = memo(({ card, isMyPack }) => {
       <Table.Cell className={s.grade}>
         <Rating selectedStars={card.grade} />
       </Table.Cell>
-      {isMyPack && (
+      {isMyDeck && (
         <Table.Cell className={s.controls}>
           <div className={s.buttons}>
+            {/*позволяющая изменить параметры карточки*/}
             <EditCardControl
               answer={card.answer}
               answerImg={card.answerImg}

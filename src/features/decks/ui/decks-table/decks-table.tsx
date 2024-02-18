@@ -1,8 +1,8 @@
 import { FC, memo } from 'react'
 
 import { Deck } from '@/features/decks/api/types'
-import { PackRow } from '@/features/decks/ui/pack-row/pack-row'
-import { packsTableColumns } from '@/shared/lib/constants/packsTableColumns'
+import { DeckRow } from '@/features/decks/ui/deck-row/deck-row'
+import { decksTableColumns } from '@/shared/lib/constants/decksTableColumns'
 import { Table } from '@/shared/ui/table'
 import { TableHeader, TableHeaderProps } from '@/shared/ui/table-header'
 
@@ -11,18 +11,17 @@ type Props = {
   items: Deck[]
 } & Pick<TableHeaderProps, 'onSort' | 'sort'>
 
-export const PacksTable: FC<Props> = memo(({ authUserId, items, ...rest }) => {
+export const DecksTable: FC<Props> = memo(({ authUserId, items, ...rest }) => {
   if (!items.length) {
     return <Table.Empty>No content with these terms...</Table.Empty>
   }
 
   return (
     <Table.Root>
-      <TableHeader columns={packsTableColumns} {...rest} />
+      {/* шапка таблицы - серая с логикой сортировки */}
+      <TableHeader columns={decksTableColumns} {...rest} />
       <Table.Body>
-        {items.map((pack) => (
-          <PackRow authUserId={authUserId} key={pack.id} pack={pack} />
-        ))}
+        {items?.map((deck) => <DeckRow authUserId={authUserId} deck={deck} key={deck?.id} />)}
       </Table.Body>
     </Table.Root>
   )

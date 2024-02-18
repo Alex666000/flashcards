@@ -5,7 +5,7 @@ import {
   SignUpArgs,
   UpdateProfileFormData,
   UserAuthDataResponse,
-} from '@/features/auth/rtk-api/auth.types'
+} from '@/features/auth/model/types/auth.types'
 import { flashCardsAPI } from '@/shared/api/flash-cards.api'
 
 export const authAPI = flashCardsAPI.injectEndpoints({

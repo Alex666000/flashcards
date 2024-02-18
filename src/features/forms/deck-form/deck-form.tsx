@@ -8,12 +8,13 @@ import { ControlledPreviewFileUploader } from '@/shared/ui/controlled/controlled
 
 import s from './deck-form.module.scss'
 
-type DeckFormDV = {
-  cover: null | string
+// DeckFormDefaultValues - то что отправляем на сервер в при заполнении полей формы согласно доке
+type DeckFormDefaultValues = {
+  cover?: null | string
 } & Pick<DeckFormType, 'isPrivate' | 'name'> // взять из типа DeckFormType эти свойиства только и всё
 
 type Props = {
-  defaultValues?: DeckFormDV // Значения по умолчанию для формы (например, если редактируется существующая колода)
+  defaultValues?: DeckFormDefaultValues
   onCancel: () => void // Колбек для отмены создания или редактирования колоды
   onSubmit: (deckFormData: FormData) => void // Колбек для отправки данных формы
 }
@@ -21,7 +22,7 @@ type Props = {
 // DeckForm -- ФОРМА для создания или редактирования колоды
 // на UX - состоит из всего что ниже Create new deck c кнопкой "Х":
 export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
-  // downloaded: Строка с URL изображения обложки, которое было загружено.
+  // downloaded: Строка с URL изображения обложки - cover, которое было загружено.
   // Используется для отображения превью загруженного изображения
   const [downloaded, setDownloaded] = useState<null | string>(defaultValues?.cover || null)
 
@@ -38,8 +39,8 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
   const { control, getFieldState, handleSubmit, resetField, setValue, trigger, watch } =
     useDeckForm(values)
 
-  // Переменная fileIsDirty используется для определения того, был ли файл обложки колоды изменен («грязный»)
-  // Она получается из состояния поля обложки с помощью getFieldState('cover').isDirty
+  // Переменная fileIsDirty используется для определения того, был ли файл обложки колоды изменен
+  // («грязный»). Она получается из состояния поля обложки с помощью getFieldState('cover').isDirty
   const fileIsDirty = getFieldState('cover').isDirty
 
   const file = watch('cover')
@@ -80,26 +81,35 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
     }
   }
 
-  // Обработчик отправки данных формы. Создает объект FormData, добавляет в него данные из формы
+  // Обработчик отправки данных формы. Создает объект formData, добавляет в него данные из формы
   // и вызывает функцию onSubmit
-  const sendHandler = (data: DeckFormType) => {
-    const form = new FormData()
+  // выбрали фото с компа и попали сюда
+  const sendHandler = (fileData: DeckFormType) => {
+    // общяя форма, в нее добавляем поля что юзер (append) заполнит и потом отправим
+    // в этот объект эти поля
+    const formData = new FormData()
 
-    form.append('name', data.name)
-    form.append('isPrivate', `${data.isPrivate}`)
+    formData.append('name', fileData.name)
+    formData.append('isPrivate', `${fileData.isPrivate}`)
 
     if (file === null) {
-      form.append('cover', '')
-    } else if (fileIsDirty && data.cover) {
-      form.append('cover', data.cover)
+      formData.append('cover', '')
+    } else if (fileIsDirty && fileData.cover) {
+      formData.append('cover', fileData.cover)
     }
 
-    onSubmit(form)
+    // когда пользователь заполнил поля отправил форму - и сверху в родителе делается post запрос
+    // на сервер с данными что юзер в форме заполнил - на сервак отправили: cover (фото), name
+    // и поле isPrivate смотри документацию и 1.14.00 Валера старые карточки 4 занятие конспект
+    onSubmit(formData)
+    // чтобы получить новую картинку и поля надо сделать get() запрос..
   }
 
   return (
+    // форма внутри модального окна
     <form className={s.deckForm} onSubmit={handleSubmit(sendHandler)}>
-      {/* Картинка + кнопка "Change Cover" -- Компонент для загрузки и предпросмотра изображения обложки */}
+      {/* Картинка + кнопка "Change Cover" - Компонент для загрузки и предпросмотра изображения
+      обложки cover */}
       <ControlledPreviewFileUploader
         control={control}
         deleteCoverHandler={deleteCoverHandler}
@@ -119,3 +129,8 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
     </form>
   )
 })
+
+/*
+- FormData - в доке отправлЯем на сервер ни как applicationjson а как multipartform-data,
+в ответе получаем applicationjson
+ */

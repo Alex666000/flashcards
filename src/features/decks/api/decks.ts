@@ -20,7 +20,7 @@ const decksAPI = flashCardsAPI.injectEndpoints({
       }),
     }),
     getDeckInfo: builder.query<Omit<Deck, 'author'>, { id: string }>({
-      providesTags: ['deck-form'],
+      providesTags: ['deck'],
       query: ({ id }) => ({
         method: 'GET',
         url: `v1/decks/${id}`,
@@ -35,7 +35,7 @@ const decksAPI = flashCardsAPI.injectEndpoints({
       }),
     }),
     updateDeck: builder.mutation<Deck, { data: FormData; id: string }>({
-      invalidatesTags: ['decks', 'deck-form'],
+      invalidatesTags: ['decks', 'deck'],
       query: ({ data, id }) => ({
         body: data,
         method: 'PATCH',

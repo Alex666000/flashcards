@@ -24,7 +24,7 @@ const SingInPage = () => {
           dispatch(util?.resetApiState()) // только если все хорошо очищаем форму
         })
     } catch (error) {
-      error ? errorNotification(error) : toast.error('Authorisation error')
+      errorNotification(error)
     }
   }
 

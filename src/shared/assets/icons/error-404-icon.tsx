@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-export const Error_404 = (props: SVGProps<SVGSVGElement>) => (
+export const Error_404Icon = (props: SVGProps<SVGSVGElement>) => (
   <svg fill={'none'} height={193} width={451} xmlns={'http://www.w3.org/2000/svg'} {...props}>
     <path d={'M296.1 16v16.2H193.4V2.1h-73.5v173.4h73.5l181.5 1.1V16h-78.8Z'} fill={'url(#a)'} />
     <path

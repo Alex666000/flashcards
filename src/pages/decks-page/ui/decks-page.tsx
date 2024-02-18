@@ -1,13 +1,13 @@
 import { memo, useEffect, useState } from 'react'
 
+import { UserAuthDataResponse } from '@/features/auth/model/types/auth.types'
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
-import { UserAuthDataResponse } from '@/features/auth/rtk-api/auth.types'
 import { useGetDecksQuery } from '@/features/decks/api'
 import { useDecksFilter } from '@/features/decks/lib/hooks/use-decks-filter'
 import { useDecksPagination } from '@/features/decks/lib/hooks/use-decks-pagination'
-import { CreateControl } from '@/features/decks/ui/create-control/create-control'
+import { CreateControlForNewDeck } from '@/features/decks/ui/create-control/create-control-for-new-deck'
+import { DecksTable } from '@/features/decks/ui/decks-table/decks-table'
 import { FilterControls } from '@/features/decks/ui/filter-controls/filter-controls'
-import { PacksTable } from '@/features/decks/ui/packs-table/packs-table'
 import { useDebounce } from '@/shared/lib/hooks/use-debounce'
 import { Sort } from '@/shared/lib/types/types'
 import { getSortedString } from '@/shared/lib/utils/get-sorted-string'
@@ -18,12 +18,12 @@ import { Typography } from '@/shared/ui/typography'
 import s from './decks.module.scss'
 
 /**
- * Компонент - страница колод - предоставляет полную функциональность для просмотра списка колод,
- применения фильтров к данным и навигации (пагинации) по страницам данных.
+ * Компонент - страница всех колод: decks - предоставляет полную функциональность для просмотра
+ * списка колод - для применения фильтров к данным и навигации (пагинации) по страницам.
  */
 
 const DecksPage = () => {
-  // Состояния поисковых параметров (фильтров) и пагинации
+  // Состояния поисковых параметров (фильтров) и пагинации: храним в локальном сетите редакса
   const { currentPage, pageSize, setCurrentPage, setPageSize } = useDecksPagination() // пагинация
   const { searchName, setSearchName, setSliderValue, setTabValue, sliderValue, tabValue } =
     useDecksFilter() // фильтры поиска - параметры поиска
@@ -38,7 +38,7 @@ const DecksPage = () => {
 
   const { data } = useMeQuery() // me() запрос
 
-  // console.log(data)
+  // console.log({ data })
   const userId = (data as UserAuthDataResponse).id
 
   // Запрос на сервер за колодами с такими поисковыми параметрами:
@@ -61,7 +61,7 @@ const DecksPage = () => {
   const totalCards = decks?.data?.maxCardsCount // общее кол-во карточек
 
   /**
-   *  Если текущая страница (currentPage) больше, чем количество страниц, необходимых для отображения
+   *  Если текущая стр (currentPage) больше, чем количество страниц, необходимых для отображения
    *  всех карточек (рассчитываемое как общее количество карточек (totalCards) деленное на количество
    *  карточек на странице (pageSize)), или изменена вкладка (tabValue), то устанавливается значение
    *  текущей страницы в 1.
@@ -86,13 +86,14 @@ const DecksPage = () => {
 
   return (
     <section className={s.decksPageBlock}>
-      <Container className={s.header}>
+      <Container className={s.headerDecksPage}>
         <div className={s.top}>
           <Typography as={'h1'} variant={'large'}>
             Decks list
           </Typography>
-          {/* создаем новую одну колоду по нажатию на кнопку: "Add new Deck" */}
-          <CreateControl />
+          {/* создаем новую одну колоду по нажатию на кнопку: "Add new Deck" внутри FormData и
+          input c type='file'*/}
+          <CreateControlForNewDeck />
         </div>
         {/* инпут + табы + слайдер + кнопка очистки всех фильтров = фильтровые контроли */}
         <FilterControls
@@ -106,8 +107,9 @@ const DecksPage = () => {
           sliderValue={sliderValue}
           tabValue={tabValue}
         />
+        {/* если колоды пришли с сервера */}
         {decks?.data?.items && (
-          <PacksTable authUserId={userId} items={decks.data.items} onSort={setSort} sort={sort} />
+          <DecksTable authUserId={userId} items={decks.data.items} onSort={setSort} sort={sort} />
         )}
         {/* Пагинация */}
         <Pagination
@@ -116,7 +118,7 @@ const DecksPage = () => {
           onSetPageChange={setCurrentPage}
           onSetPageSizeChange={setPageSize}
           pageSize={pageSize}
-          totalCount={decks?.data?.pagination.totalItems}
+          totalCount={decks?.data?.pagination?.totalItems}
         />
       </Container>
     </section>

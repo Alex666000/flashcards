@@ -5,7 +5,7 @@ import { useVerifyMailMutation } from '@/features/auth/rtk-api/auth.api'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Typography } from '@/shared/ui/typography'
 
-import styles from 'src/pages/verify-email-page/ui/verify-email-page.module.scss'
+import styles from './verify-email-page.module.scss'
 
 const VerifyEmailPage = () => {
   const { code } = useParams()

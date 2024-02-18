@@ -13,7 +13,7 @@ const deckSchema = z.object({
 export type DeckFormType = z.infer<typeof deckSchema>
 
 /**
- * кастомный хук useDeckForm позволяет легко создавать и управлять формой с заданными полями
+ * useDeckForm позволяет легко создавать и управлять формой с заданными полями
  * и правилами валидации, используя библиотеки react-hook-form и zod.
  */
 

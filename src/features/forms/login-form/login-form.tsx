@@ -6,6 +6,7 @@ import { useLoginForm } from '@/features/forms/login-form/use-login-form'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
+import { Container } from '@/shared/ui/container'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui/controlled'
 import { Typography } from '@/shared/ui/typography'
 
@@ -20,45 +21,56 @@ export const LoginForm: FC<PropsType> = ({ onLoginFormDataSubmit }) => {
   const onSubmit = handleSubmit((formData) => onLoginFormDataSubmit(formData))
 
   return (
-    <Card className={s.cardBlock}>
-      {/* h1 - для семантики: 1 h1 должен быть в проекте!!! */}
-      <Typography as={'h1'} className={s.title} variant={'large'}>
-        Sign In
-      </Typography>
-      <form onSubmit={onSubmit}>
-        <div className={s.loginForm}>
-          <ControlledTextField control={control} label={'Email'} name={'email'} type={'email'} />
-          <ControlledTextField
-            control={control}
-            label={'Password'}
-            name={'password'}
-            type={'password'}
-          />
-          <ControlledCheckbox
-            className={s.checkbox}
-            control={control}
-            label={'Remember me'}
-            name={'rememberMe'}
-          />
-        </div>
-        <Typography
-          as={Link}
-          className={s.recoverPasswordLink}
-          to={ROUTES.recoverPassword}
-          variant={'body2'}
-        >
-          Forgot Password?
-        </Typography>
-        <Button className={s.button} fullWidth type={'submit'}>
-          <Typography variant={'subtitle2'}>Sign In</Typography>
-        </Button>
-        <Typography className={s.caption} variant={'body2'}>
-          Don&apos;t have an account?
-        </Typography>
-        <Typography as={Link} className={s.signUpLink} to={ROUTES.singUp} variant={'link1'}>
-          Sign Up
-        </Typography>
-      </form>
-    </Card>
+    <section className={s.loginFormBlock}>
+      <Container>
+        <Card className={s.cardBlock}>
+          {/* h1 - для семантики: 1 h1 должен быть в проекте!!! */}
+          <Typography as={'h1'} className={s.title} variant={'large'}>
+            Sign In
+          </Typography>
+          <form onSubmit={onSubmit}>
+            <div className={s.loginForm}>
+              <ControlledTextField
+                control={control}
+                label={'Email'}
+                name={'email'}
+                type={'email'}
+              />
+              <ControlledTextField
+                control={control}
+                label={'Password'}
+                name={'password'}
+                type={'password'}
+              />
+              <ControlledCheckbox
+                className={s.checkbox}
+                control={control}
+                label={'Remember me'}
+                name={'rememberMe'}
+              />
+            </div>
+            <Typography
+              as={Link}
+              className={s.recoverPasswordLink}
+              // восстановление пароля
+              to={ROUTES.recoverPassword}
+              variant={'body2'}
+            >
+              Forgot Password?
+            </Typography>
+            <Button className={s.button} fullWidth type={'submit'}>
+              <Typography variant={'subtitle2'}>Sign In</Typography>
+            </Button>
+            <Typography className={s.caption} variant={'body2'}>
+              Don&apos;t have an account?
+            </Typography>
+            {/*регистрация*/}
+            <Typography as={Link} className={s.signUpLink} to={ROUTES.singUp} variant={'link1'}>
+              Sign Up
+            </Typography>
+          </form>
+        </Card>
+      </Container>
+    </section>
   )
 }

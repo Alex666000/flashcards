@@ -1,14 +1,15 @@
 export const ROUTES = {
   cards: '/cards',
   checkEmail: '/check-email',
-  createNewPassword: '/create-new-password-page',
+  createNewPassword: '/create-new-password',
   decks: '/decks',
   learn: '/learn-card',
+  notFoundPage: '/not-found-page/404',
   profile: '/profile',
   recoverPassword: '/recover-password',
   signIn: '/sign-in',
   singUp: '/sign-up',
-  verify: '/confirm-email/:code',
+  verifyEmail: '/confirm-email/:code',
 } as const
 
 /*

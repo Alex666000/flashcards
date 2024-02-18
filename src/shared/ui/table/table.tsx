@@ -7,7 +7,7 @@ import s from './table.module.scss'
 // Таблица - кастомный -- не Радикс компонент
 export const Root = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
   ({ className, ...rest }, ref) => {
-    return <table className={clsx(s.root, className)} {...rest} ref={ref} />
+    return <table className={clsx(s.rootTable, className)} {...rest} ref={ref} />
   }
 )
 // Шапка таблицы

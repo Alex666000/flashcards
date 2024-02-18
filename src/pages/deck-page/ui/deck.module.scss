@@ -1,18 +1,15 @@
-.root {
-  .header {
-    margin-bottom: 36px;
+.deckPageBlock {
+  margin-top: 96px;
+  padding-right: 12px;
+  padding-left: 12px;
 
-    .cover {
-      height: 100px;
-      margin-bottom: 24px;
-    }
+  .deckHeader {
+    margin-bottom: 36px;
 
     .top {
       display: flex;
-      flex-direction: row;
       align-items: center;
       justify-content: space-between;
-
       margin-bottom: 24px;
 
       .title {
@@ -22,6 +19,11 @@
         align-items: center;
         justify-content: center;
       }
+    }
+
+    .cover {
+      height: 100px;
+      margin-bottom: 24px;
     }
   }
 }

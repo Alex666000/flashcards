@@ -1,4 +1,4 @@
-export const packTableColumns = [
+export const deckTableColumns = [
   {
     key: 'question',
     title: 'Question',

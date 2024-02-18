@@ -7,7 +7,7 @@ interface ErrorPageProps {
   className?: string
 }
 
-export const ErrorPage = ({ className }: ErrorPageProps) => {
+export const ErrorPageForErrorBoundary = ({ className }: ErrorPageProps) => {
   const reloadPage = () => {
     // eslint-disable-next-line no-restricted-globals
     location.reload()

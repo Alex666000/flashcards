@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>
 
 export const AuthorizedUser: Story = {
   args: {
+    // @ts-ignore
     data: {
       avatar: '',
       email: 'user-email.gmail.com',
@@ -26,6 +27,7 @@ export const AuthorizedUser: Story = {
 
 export const UnauthorizedUser: Story = {
   args: {
+    // @ts-ignore
     data: null,
     logout: () => {},
   },

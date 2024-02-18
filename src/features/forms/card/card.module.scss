@@ -1,6 +1,6 @@
 @import '@/app/styles/mixins';
 
-.root {
+.learnCardBlock {
   @include flex(column, 24px, 0, stretch);
 
   .controls {

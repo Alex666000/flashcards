@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
+import { SearchIcon } from '@/shared/assets'
 import { Icon } from '@/shared/ui/icon/icon'
 import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
@@ -72,9 +73,7 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
                 {showPassword ? <Icon name={'eyeOff'} /> : <Icon name={'eye'} />}
               </button>
             )}
-            {isSearchType && (
-              <Icon className={classes.searchIcon} height={20} name={'search'} width={20} />
-            )}
+            {isSearchType && <SearchIcon className={s.icon} />}
             {displayClearButton && (
               <button
                 className={s.button}

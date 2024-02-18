@@ -1,6 +1,6 @@
 import { ElementRef, forwardRef } from 'react'
 
-import { UserAuthDataResponse } from '@/features/auth/rtk-api/auth.types'
+import { UserAuthDataResponse } from '@/features/auth/model/types/auth.types'
 import { Avatar } from '@/shared/ui/avatar-s'
 import { Typography } from '@/shared/ui/typography'
 

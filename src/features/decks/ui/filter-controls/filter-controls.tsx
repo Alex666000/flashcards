@@ -9,14 +9,14 @@ import { TextField } from '@/shared/ui/text-field_'
 import s from './filter-controls.module.scss'
 
 type Props = {
-  authUserId: string
-  searchName: string
-  setSearchName: (newString: string) => void
-  setSliderValue: (newValue: number[]) => void
-  setTabValue: (newTab: string) => void
+  authUserId: string // Идентификатор текущего пользователя.
+  searchName: string // Строка поиска для фильтрации по названию
+  setSearchName: (newString: string) => void // для обновления значения строки поиска.
+  setSliderValue: (newValue: number[]) => void // для установки нового значения слайдера
+  setTabValue: (newTab: string) => void // для выбора вкладки (фильтрация по моим карточкам или всем)
   sliderMaxValue?: number
-  sliderValue: number[]
-  tabValue: string
+  sliderValue: number[] //  Текущее значение слайдера
+  tabValue: string // Текущее выбранное значение вкладки
 }
 
 export const FilterControls = memo(
@@ -35,12 +35,15 @@ export const FilterControls = memo(
       { text: 'All cards', value: '' },
     ]
 
+    // позволяет пользователю очистить все фильтры одним нажатием. При клике на эту кнопку
+    // вызывается функция clearFilterHandler, которая обновляет все значения фильтров
     const clearFilterHandler = () => {
       setSliderValue([0, sliderMaxValue])
       setSearchName('')
       setTabValue('')
     }
 
+    // позволяет очистить текстовое поле
     const onClearTextField = () => {
       setSearchName('')
     }
@@ -54,12 +57,15 @@ export const FilterControls = memo(
           type={'search'}
           value={searchName}
         />
+        {/* позволяет выбрать между двумя вкладками: "My cards" (карточки пользователя) */}
+        {/* и "All cards" (все карточки). Определяет, какие карточки будут отображены */}
         <TabSwitcher
           label={'Show decks cards'}
           onValueChange={setTabValue}
           tabs={tabs}
           value={tabValue}
         />
+        {/* предоставляет пользователю возможность выбора числа карточек, которые будут отображены */}
         <Slider
           label={'Number of cards'}
           max={sliderMaxValue}
