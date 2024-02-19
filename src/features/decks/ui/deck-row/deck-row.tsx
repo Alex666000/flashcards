@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Deck } from '@/features/decks/api/types'
 import { DeleteControl } from '@/features/decks/ui/delete-control/delete-control'
 import { EditControl } from '@/features/decks/ui/edit-control/edit-control'
+import defaultCover from '@/shared/assets/images/default-image.jpg'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Button } from '@/shared/ui/button'
 import { Icon } from '@/shared/ui/icon'
@@ -11,9 +12,7 @@ import { IconButton } from '@/shared/ui/icon-button'
 import { Table } from '@/shared/ui/table'
 import { Typography } from '@/shared/ui/typography'
 
-import s from './pack-row.module.scss'
-
-import defaultCover from '../../../../shared/assets/images/default-image.jpg'
+import s from './deck-row.module.scss'
 
 type Props = {
   authUserId: string //  Идентификатор текущего пользователя

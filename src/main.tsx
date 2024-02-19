@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 import { createRoot } from 'react-dom/client'
 
-// подключаем шрифты и стили в проект
 import './app/styles/index.scss'
+// подключаем шрифты и стили в проект
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 
@@ -14,16 +14,16 @@ import { ErrorBoundary, store } from './app/providers/index'
 import { Toast } from './shared/ui/toast'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <ErrorBoundary>
+  <Provider store={store}>
+    <ErrorBoundary>
+      <BrowserRouter>
         <Toast />
         <StrictMode>
           <App />
         </StrictMode>
-      </ErrorBoundary>
-    </Provider>
-  </BrowserRouter>
+      </BrowserRouter>
+    </ErrorBoundary>
+  </Provider>
 )
 
 /*

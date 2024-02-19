@@ -21,15 +21,15 @@ const SingInPage = () => {
         .unwrap()
         .then(() => {
           toast.success('You are successfully authorized', { containerId: 'common' })
+
+          if (meAuthData && !('success' in meAuthData) && !isError) {
+            navigate(ROUTES.decks)
+          }
           dispatch(util?.resetApiState()) // только если все хорошо очищаем форму
         })
     } catch (error) {
       errorNotification(error)
     }
-  }
-
-  if (meAuthData && !('success' in meAuthData) && !isError) {
-    navigate(ROUTES.decks)
   }
 
   return <LoginForm onLoginFormDataSubmit={handleLoginFormDataSubmit} />

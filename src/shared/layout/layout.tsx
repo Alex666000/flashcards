@@ -25,12 +25,11 @@ import { Header } from '@/widgets'
 export const Layout = memo(() => {
   /* Для определения: загрузилось Арр или нет: или appStatus или loadingStatus? */
   // const loadingStatus = useAppSelector(loadingSelector) см. quiz
-
+  const appStatus = useAppSelector(appStatusSelector)
   const { data: meData } = useMeQuery() // авторизован ли я?
   const [logout] = useLogoutMutation()
 
   const dispatch = useAppDispatch()
-  const appStatus = useAppSelector(appStatusSelector)
   const navigate = useNavigate()
 
   const handleLogoutUserClick = () => {
@@ -42,7 +41,7 @@ export const Layout = memo(() => {
         navigate(ROUTES.signIn)
       })
       .catch((error) => {
-        error ? errorNotification(error) : toast.error('It did’t work out to log out')
+        errorNotification(error)
       })
   }
 
@@ -65,7 +64,7 @@ export const Layout = memo(() => {
         name={meData?.name}
         onLoginUserClick={redirectToSingIn}
         onLogoutUserClick={handleLogoutUserClick}
-        // onSetBookBlur={handleSetBookBlur}
+        // Нейминг функций: onSetBookBlur={handleSetBookBlur}
         onRedirectToProfileClick={redirectToProfile}
       />
       {/* В Outlet - пойдет все дочернее содержимое - в промежуток между хедером и футером*/}
