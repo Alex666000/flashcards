@@ -1,222 +1,227 @@
 .button {
-    all: unset; // зануляем все стили кнопки дефолтные
+  all: unset; // зануляем все стили кнопки дефолтные
 
-    cursor: pointer; // пальчик..
-    user-select: none; // может ли текст (внутри кнопки..) быть выделен курсором мыши или другими средствами выделения текста.
+  cursor: pointer; // пальчик..
+  user-select: none; // может ли текст (внутри кнопки..) быть выделен курсором мыши или другими средствами выделения текста.
 
-    display: inline-flex;
-    gap: 5px; // расстояние от иконки до текста кнопки - отступ между flex элементами
-    align-items: center; // выравнивание flex элементов по вертикали
+  display: inline-flex;
+  gap: 5px; // расстояние от иконки до текста кнопки - отступ между flex элементами
+  align-items: center; // выравнивание flex элементов по вертикали
+  justify-content: center;
+
+  padding: 6px 28px;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  text-align: center;
+  text-decoration: none; //  Убирает все украшения текста (нет подчеркивания, перечеркивания и линии над текстом)
+
+  background-color: transparent; // устанавливает прозрачный цвет фона для элемента
+  border: none;
+  border-radius: 4px;
+
+  transition: all 0.2s ease-in-out;
+
+  // если кнопка с иконкой, то
+  > svg {
+    // цвет текста у иконки
+    fill: var(--color-light-100);
+  }
+
+  &:disabled {
+    cursor: not-allowed; // запрещено использование указателя (курсора)
+    opacity: 0.5;
+  }
+
+  &.fullWidth {
     justify-content: center;
-
-    padding: 6px 28px;
-
-    font-size: var(--font-size-s);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-m);
-    text-align: center;
-    text-decoration: none; //  Убирает все украшения текста (нет подчеркивания, перечеркивания и линии над текстом)
-
-    background-color: transparent; // устанавливает прозрачный цвет фона для элемента
-    border: none;
-    border-radius: 4px;
-
-    transition: all 0.2s ease-in-out;
-
-    // если кнопка с иконкой, то
-    > svg {
-        // цвет текста у иконки
-        fill: var(--color-light-100);
-    }
-
-    &:disabled {
-        cursor: not-allowed; // запрещено использование указателя (курсора)
-        opacity: 0.5;
-    }
+    width: 100%;
+  }
 }
 
 // Основная кнопка
 .primary {
-    color: var(--color-light-100);
-    background-color: var(--color-accent-500);
+  color: var(--color-light-100);
+  background-color: var(--color-accent-500);
+  box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+
+  &:active {
+    background-color: var(--color-accent-700);
     box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+  }
 
-    &:active {
-        background-color: var(--color-accent-700);
-        box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
-    }
+  &:hover {
+    background-color: var(--color-accent-300);
+    box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+  }
 
-    &:hover {
-        background-color: var(--color-accent-300);
-        box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
-    }
+  &:disabled {
+    cursor: not-allowed; // запрещено использование указателя (курсора)
 
-    &:disabled {
-        cursor: not-allowed; // запрещено использование указателя (курсора)
+    color: var(--color-light-900);
 
-        color: var(--color-light-900);
+    opacity: 0.5;
+    background-color: var(--color-accent-900);
+    box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+  }
 
-        opacity: 0.5;
-        background-color: var(--color-accent-900);
-        box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
-    }
-
-    // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
-    &:focus-visible {
-        background: var(--color-accent-500);
-        outline: 2px solid var(--color-info-700); // когда кнопка выделена Tab добавляем обертку -- рамку в 2рх
-        box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
-    }
+  // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
+  &:focus-visible {
+    background: var(--color-accent-500);
+    outline: 2px solid var(--color-info-700); // когда кнопка выделена Tab добавляем обертку -- рамку в 2рх
+    box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+  }
 }
 
 // Второстепенная кнопка - серая кнопка
 .secondary {
-    color: var(--color-light-100);
+  color: var(--color-light-100);
+  background-color: var(--color-dark-300);
+  box-shadow: 0 4px 4px 0 rgb(77 86 96 / 13%);
+
+  &:active {
+    background-color: var(--color-dark-500);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+
+  &:disabled {
+    cursor: not-allowed; // запрещено использование указателя (курсора)
+    color: var(--color-light-900);
+    opacity: 0.5;
     background-color: var(--color-dark-300);
-    box-shadow: 0 4px 4px 0 rgb(77 86 96 / 13%);
+  }
 
-    &:active {
-        background-color: var(--color-dark-500);
-    }
-
-    &:hover {
-        background-color: var(--color-dark-100);
-    }
-
-    &:disabled {
-        cursor: not-allowed; // запрещено использование указателя (курсора)
-        color: var(--color-light-900);
-        opacity: 0.5;
-        background-color: var(--color-dark-300);
-    }
-
-    // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
-    &:focus-visible {
-        background: var(--color-dark-300);
-        outline: 2px solid var(--color-info-700); // когда кнопка выделена Tab - добавляем обертку -- рамку в 2рх
-        box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
-    }
+  // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
+  &:focus-visible {
+    background: var(--color-dark-300);
+    outline: 2px solid var(--color-info-700); // когда кнопка выделена Tab - добавляем обертку -- рамку в 2рх
+    box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
+  }
 }
 
 // Третичная кнопка - серая
 .tertiary {
-    padding: 0.5rem 2.8rem;
-    color: var(--color-accent-500);
-    border: 1px solid var(--color-accent-500);
+  padding: 0.5rem 2.8rem;
+  color: var(--color-accent-500);
+  border: 1px solid var(--color-accent-500);
 
-    &:hover {
-        background-color: var(--color-dark-500);
-        border: 1px solid var(--color-accent-700);
-    }
+  &:hover {
+    background-color: var(--color-dark-500);
+    border: 1px solid var(--color-accent-700);
+  }
 
-    &:active {
-        background-color: var(--color-accent-900);
-        border: 1px solid var(--color-accent-700);
-    }
+  &:active {
+    background-color: var(--color-accent-900);
+    border: 1px solid var(--color-accent-700);
+  }
 
-    &:disabled {
-        cursor: not-allowed; // запрещено использование указателя (курсора)
+  &:disabled {
+    cursor: not-allowed; // запрещено использование указателя (курсора)
 
-        color: var(--color-accent-900);
+    color: var(--color-accent-900);
 
-        opacity: 0.5;
-        background-color: transparent;
-        border: 1px solid var(--color-accent-900);
-    }
+    opacity: 0.5;
+    background-color: transparent;
+    border: 1px solid var(--color-accent-900);
+  }
 
-    &:focus-visible {
-        background: var(--color-dark-900);
-        outline: 0.125rem solid var(--color-info-700);
-    }
+  &:focus-visible {
+    background: var(--color-dark-900);
+    outline: 0.125rem solid var(--color-info-700);
+  }
 }
 
 // Ссылка-кнопка
 .link {
-    padding: 0.6rem 0;
-    font-size: var(--font-size-m);
+  padding: 0.6rem 0;
+  font-size: var(--font-size-m);
+  color: var(--color-accent-500);
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
+  }
+
+  &:focus {
+    border-radius: 130px;
+    outline-color: transparent;
+  }
+
+  &:focus-visible {
     color: var(--color-accent-500);
+    border-radius: 2rem;
+    outline: 0.125rem solid var(--color-info-700);
+  }
 
-    &:hover {
-        color: var(--color-accent-300);
-    }
+  // позволяет стилизовать ссылки, которые уже были посещены пользователем
+  &:visited {
+    color: var(--color-accent-700);
+    text-decoration: none;
+    background-color: transparent;
+    outline-color: transparent; // Для людей с проблемами со зрением -- outline: none - никогда не писать,
+    // а писать outline-color: transparent; соблюдать правила "prefers-reduced-motion"
+  }
 
-    &:active {
-        color: var(--color-accent-700);
-    }
-
-    &:focus {
-        border-radius: 130px;
-        outline: 2px solid var(--color-info-700);
-    }
-
-    &:focus-visible {
-        color: var(--color-accent-500);
-        border-radius: 2rem;
-        outline: 0.125rem solid var(--color-info-700);
-    }
-
-    // позволяет стилизовать ссылки, которые уже были посещены пользователем
-    &:visited {
-        color: var(--color-accent-700);
-        text-decoration: none;
-        background-color: transparent;
-        outline-color: transparent; // Для людей с проблемами со зрением -- outline: none - никогда не писать,
-        // а писать outline-color: transparent; соблюдать правила "prefers-reduced-motion"
-    }
-
-    &:disabled {
-        cursor: not-allowed; // запрещено использование указателя (курсора)
-        color: var(--color-accent-900);
-        opacity: 0.5;
-    }
+  &:disabled {
+    cursor: not-allowed; // запрещено использование указателя (курсора)
+    color: var(--color-accent-900);
+    opacity: 0.5;
+  }
 }
 
 // Кнопка на всю ширину
 .fullWidth {
-    width: 100%;
-    padding: 0.6rem 0;
+  width: 100%;
+  padding: 0.6rem 0;
 }
 
 // Если кнопка svg иконка -- убираем рамки и тд.
 .clear {
-    padding: 0;
-    background: none;
-    border: none;
-    outline-color: transparent; //  для установки цвета контурной обводки, и значение transparent означает, что цвет контурной обводки будет прозрачным (без цвета).
+  padding: 0;
+  background: none;
+  border: none;
+  outline-color: transparent; //  для установки цвета контурной обводки, и значение transparent означает, что цвет контурной обводки будет прозрачным (без цвета).
 }
 
 // Кнопка с рамкой но без заднего фона
 .outline {
-    color: var(--color-light-100);
-    border: 2px solid var(--color-accent-500);
+  color: var(--color-light-100);
+  border: 2px solid var(--color-accent-500);
 
-    &:hover {
-        border: 2px solid var(--color-accent-300);
-    }
+  &:hover {
+    border: 2px solid var(--color-accent-300);
+  }
 
-    &:active {
-        background-color: var(--color-accent-700);
-    }
+  &:active {
+    background-color: var(--color-accent-700);
+  }
 
-    &:disabled {
-        cursor: not-allowed; // запрещено использование указателя (курсора)
-        color: var(--color-light-900);
-        opacity: 0.5;
-        background-color: var(--color-accent-900);
-    }
+  &:disabled {
+    cursor: not-allowed; // запрещено использование указателя (курсора)
+    color: var(--color-light-900);
+    opacity: 0.5;
+    background-color: var(--color-accent-900);
+  }
 }
 
 // Размеры кнопки
 .m {
-    font-size: var(--font-size-m);
+  font-size: var(--font-size-m);
 }
 
 .l {
-    font-size: var(--font-size-l);
+  font-size: var(--font-size-l);
 }
 
 .xl {
-    font-size: var(--font-size-xl);
+  font-size: var(--font-size-xl);
 }
 
 /*
