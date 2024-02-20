@@ -41,7 +41,7 @@ export const Layout = memo(() => {
         navigate(ROUTES.signIn)
       })
       .catch((error) => {
-        errorNotification(error)
+        toast("I couldn't log out")
       })
   }
 

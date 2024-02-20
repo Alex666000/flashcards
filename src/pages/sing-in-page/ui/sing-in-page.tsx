@@ -1,18 +1,16 @@
 import { memo } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { LoginBodyArgs } from '@/features/auth'
 import { useLoginMutation, useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { LoginForm } from '@/features/forms/login-form/login-form'
 import { ROUTES } from '@/shared/lib/constants/route-path'
-import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
 import { requestHandler } from '@/shared/lib/utils/request-handler'
 
 const SingInPage = () => {
-  const { data: meAuthData, isError } = useMeQuery()
+  const { data: meAuthData } = useMeQuery()
   const [login] = useLoginMutation()
-  const dispatch = useAppDispatch()
 
   const handleLoginFormDataSubmit = async (data: LoginBodyArgs) => {
     await requestHandler(async () => {
