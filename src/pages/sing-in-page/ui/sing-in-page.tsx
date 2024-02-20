@@ -1,35 +1,28 @@
 import { memo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { LoginBodyArgs } from '@/features/auth'
-import { useLoginMutation, useMeQuery, util } from '@/features/auth/rtk-api/auth.api'
+import { useLoginMutation, useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { LoginForm } from '@/features/forms/login-form/login-form'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
-import { errorNotification } from '@/shared/lib/utils/error-notification'
+import { requestHandler } from '@/shared/lib/utils/request-handler'
 
 const SingInPage = () => {
-  const navigate = useNavigate()
   const { data: meAuthData, isError } = useMeQuery()
   const [login] = useLoginMutation()
   const dispatch = useAppDispatch()
 
-  const handleLoginFormDataSubmit = async (formData: LoginBodyArgs) => {
-    try {
-      await login(formData)
-        .unwrap()
-        .then(() => {
-          toast.success('You are successfully authorized', { containerId: 'common' })
+  const handleLoginFormDataSubmit = async (data: LoginBodyArgs) => {
+    await requestHandler(async () => {
+      await login(data).unwrap()
+      toast.success('You are successfully authorized', { containerId: 'common' })
+    })
+  }
 
-          if (meAuthData && !('success' in meAuthData) && !isError) {
-            navigate(ROUTES.decks)
-          }
-          dispatch(util?.resetApiState()) // только если все хорошо очищаем форму
-        })
-    } catch (error) {
-      errorNotification(error)
-    }
+  if (meAuthData && !('success' in meAuthData)) {
+    return <Navigate to={ROUTES.decks} />
   }
 
   return <LoginForm onLoginFormDataSubmit={handleLoginFormDataSubmit} />
