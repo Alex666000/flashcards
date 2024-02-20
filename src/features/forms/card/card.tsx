@@ -5,6 +5,7 @@ import { Card } from '@/features/cards/rtk-api'
 import { CardFormType, useCardForm } from '@/features/forms/card/use-card-form'
 import { usePreviewErrorData } from '@/features/forms/card/use-preview-error-data'
 import { Button } from '@/shared/ui/button'
+import { Container } from '@/shared/ui/container'
 import { ControlledTextField } from '@/shared/ui/controlled'
 import { ControlledPreviewFileUploader } from '@/shared/ui/controlled/controlled-preview-file-uploader'
 import { Select } from '@/shared/ui/select'
@@ -121,42 +122,50 @@ export const CardForm: FC<Props> = ({ defaultValues, onCancel, onSubmit }) => {
   }
 
   return (
-    <form className={s.root} onSubmit={handleSubmit(sendHandler)}>
-      <Select
-        label={'Choose A Question Format'}
-        onValueChange={setFormat}
-        options={options}
-        value={format}
-      />
-      <ControlledTextField control={control} label={'Question'} name={'question'} />
-      {/* Если в селекте выбрали картинку открывается Модалка с заполнением формы вопроса и ответа*/}
-      {withPicture && (
-        <ControlledPreviewFileUploader
-          control={control}
-          deleteCoverHandler={deleteCoverHandler('questionImg')}
-          errorMessage={errorData.questionImg.text}
-          extraActions={extraActions('questionImg')}
-          name={'questionImg'}
-          preview={previewData.questionImg.picture}
+    <form className={s.cardFormBlock} onSubmit={handleSubmit(sendHandler)}>
+      <Container className={s.selectContainer}>
+        <Select
+          className={s.select}
+          label={'Choose A Question Format'}
+          onValueChange={setFormat}
+          options={options}
+          value={format}
         />
-      )}
-      <ControlledTextField control={control} label={'Answer'} name={'answer'} />
-      {withPicture && (
-        <ControlledPreviewFileUploader
+        <ControlledTextField
+          className={s.userInput}
           control={control}
-          deleteCoverHandler={deleteCoverHandler('answerImg')}
-          errorMessage={errorData.answerImg.text}
-          extraActions={extraActions('answerImg')}
-          name={'answerImg'}
-          preview={previewData.answerImg.picture}
+          label={'Question'}
+          name={'question'}
         />
-      )}
-      <div className={s.controls}>
-        <Button onClick={onCancel} type={'button'} variant={'secondary'}>
-          Cancel
-        </Button>
-        <Button>{defaultValues ? 'Save Changes' : 'Add New Card'}</Button>
-      </div>
+        {/* Если в селекте выбрали картинку открывается Модалка с заполнением формы вопроса и ответа*/}
+        {withPicture && (
+          <ControlledPreviewFileUploader
+            control={control}
+            deleteCoverHandler={deleteCoverHandler('questionImg')}
+            errorMessage={errorData.questionImg.text}
+            extraActions={extraActions('questionImg')}
+            name={'questionImg'}
+            preview={previewData.questionImg.picture}
+          />
+        )}
+        <ControlledTextField control={control} label={'Answer'} name={'answer'} />
+        {withPicture && (
+          <ControlledPreviewFileUploader
+            control={control}
+            deleteCoverHandler={deleteCoverHandler('answerImg')}
+            errorMessage={errorData.answerImg.text}
+            extraActions={extraActions('answerImg')}
+            name={'answerImg'}
+            preview={previewData.answerImg.picture}
+          />
+        )}
+        <div className={s.controls}>
+          <Button onClick={onCancel} type={'button'} variant={'secondary'}>
+            Cancel
+          </Button>
+          <Button>{defaultValues ? 'Save Changes' : 'Add New Card'}</Button>
+        </div>
+      </Container>
     </form>
   )
 }

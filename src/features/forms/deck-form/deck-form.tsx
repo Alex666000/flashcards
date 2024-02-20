@@ -118,7 +118,7 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
         name={'cover'}
         preview={downloaded}
       />
-      <ControlledTextField control={control} label={'Name Pack'} name={'name'} />
+      <ControlledTextField control={control} label={'Name Deck'} name={'name'} />
       <ControlledCheckbox control={control} label={'Private Deck'} name={'isPrivate'} />
       <div className={s.controls}>
         <Button onClick={onCancel} type={'button'} variant={'secondary'}>

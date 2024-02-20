@@ -12,7 +12,7 @@ import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
  а также функции для обновления текущей страницы и размера страницы.
  */
 
-export const useDecksPagination = () => {
+export const useDecksLocalStatePagination = () => {
   const dispatch = useAppDispatch()
 
   const currentPage = useAppSelector(currentPageSelector)

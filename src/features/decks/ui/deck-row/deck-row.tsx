@@ -22,10 +22,15 @@ type Props = {
 /**
  * DeckRow - отображает информацию о колоде: deck, карточек в виде строки в таблице:
  */
+
 export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
   const isMyDeck = authUserId === deck.author.id
 
   const navigate = useNavigate()
+
+  const redirectToDeckPage = () => {
+    navigate(`${deck.id}`)
+  }
 
   const onLearn = () => {
     // перенаправляет пользователя на страницу изучения колоды
@@ -34,7 +39,7 @@ export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
 
   return (
     <Table.Row className={s.root} key={deck.id}>
-      <Table.Cell align={'left'} className={s.name}>
+      <Table.Cell align={'left'} className={s.name} onClick={redirectToDeckPage}>
         {/* ссылка в строке с картинкой и самой ссылкой именем колоды */}
         <Button as={Link} className={s.link} to={deck.id} variant={'link'}>
           <img alt={'Deck cover'} className={s.cover} src={deck.cover ?? defaultCover} />

@@ -16,7 +16,7 @@ import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
  * параметрами поиска, выбранной вкладкой и значением слайдера
  */
 
-export const useDecksFilter = () => {
+export const useDecksLocalStateFilter = () => {
   const searchName = useAppSelector(searchNameSelector)
   const tabValue = useAppSelector(tabValueSelector)
   const sliderValue = useAppSelector(sliderValueSelector)

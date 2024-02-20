@@ -1,6 +1,6 @@
 export const decksTableColumns = [
   {
-    key: 'name',
+    key: 'name', // ключ для сортировки
     title: 'Name',
   },
   {

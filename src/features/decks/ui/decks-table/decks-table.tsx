@@ -18,7 +18,8 @@ export const DecksTable: FC<Props> = memo(({ authUserId, items, ...rest }) => {
 
   return (
     <Table.Root>
-      {/* шапка таблицы - серая с логикой сортировки */}
+      {/* шапка таблицы - серая с логикой сортировки - decksTableColumns -- определяет вид
+      таблицы ее колонки */}
       <TableHeader columns={decksTableColumns} {...rest} />
       <Table.Body>
         {items?.map((deck) => <DeckRow authUserId={authUserId} deck={deck} key={deck?.id} />)}

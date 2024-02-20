@@ -8,7 +8,7 @@ import { deckActions } from '@/features/deck/model/slice/pack.sliece'
 import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
 import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
 
-export const useDeckData = () => {
+export const useDeckLocalStateData = () => {
   const currentPage = useAppSelector(deckCurrentPageSelector)
   const pageSize = useAppSelector(deckPageSizeSelector)
   const searchName = useAppSelector(deckSearchNameSelector)

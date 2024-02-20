@@ -3,8 +3,8 @@ import { memo, useEffect, useState } from 'react'
 import { UserAuthDataResponse } from '@/features/auth/model/types/auth.types'
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { useGetDecksQuery } from '@/features/decks/api'
-import { useDecksFilter } from '@/features/decks/lib/hooks/use-decks-filter'
-import { useDecksPagination } from '@/features/decks/lib/hooks/use-decks-pagination'
+import { useDecksLocalStateFilter } from '@/features/decks/lib/hooks/use-decks-local-state-filter'
+import { useDecksLocalStatePagination } from '@/features/decks/lib/hooks/use-decks-local-state-pagination'
 import { CreateControlForNewDeck } from '@/features/decks/ui/create-control/create-control-for-new-deck'
 import { DecksTable } from '@/features/decks/ui/decks-table/decks-table'
 import { FilterControls } from '@/features/decks/ui/filter-controls/filter-controls'
@@ -24,24 +24,24 @@ import s from './decks.module.scss'
 
 const DecksPage = () => {
   // Состояния поисковых параметров (фильтров) и пагинации: храним в локальном сетите редакса
-  const { currentPage, pageSize, setCurrentPage, setPageSize } = useDecksPagination() // пагинация
+  const { currentPage, pageSize, setCurrentPage, setPageSize } = useDecksLocalStatePagination() // пагинация
   const { searchName, setSearchName, setSliderValue, setTabValue, sliderValue, tabValue } =
-    useDecksFilter() // фильтры поиска - параметры поиска
+    useDecksLocalStateFilter() // фильтры поиска - параметры поиска
 
   // Сортировка:
   const [sort, setSort] = useState<Sort>({ direction: 'desc', key: 'updated' })
-  const sortedString = getSortedString(sort) // отсортированная строка
+  const sortedString = sort ? `${sort.key}-${sort.direction}` : undefined // отсортированная строка
 
   // Дебаунс для полей инпута и слайдера - возвращает массив:
   const debouncedSearchName = useDebounce(searchName)
   const debouncedSliderValue = useDebounce(sliderValue)
 
-  const { data } = useMeQuery() // me() запрос
+  const { data: userData } = useMeQuery() // me() запрос
 
   // console.log({ data })
-  const userId = (data as UserAuthDataResponse).id
+  const authUserId = (userData as UserAuthDataResponse).id
 
-  // Запрос на сервер за колодами с такими поисковыми параметрами:
+  // Запрос на сервер за колодами с такими поисковыми параметрами которые взяли из локального стейта редакса:
   const decks = useGetDecksQuery({
     // authorId берет значение у userId
     authorId: tabValue, // отправляем на сервак значение выбранного на UI - Таба
@@ -69,7 +69,6 @@ const DecksPage = () => {
    *  а также при выборе новой вкладки, текущая страница будет установлена в 1, чтобы пользователь
    *  всегда начинал просмотр колод с первой страницы.
    */
-
   useEffect(() => {
     if ((totalCards && totalCards / pageSize < currentPage) || tabValue) {
       setCurrentPage(1)
@@ -86,7 +85,7 @@ const DecksPage = () => {
 
   return (
     <section className={s.decksPageBlock}>
-      <Container className={s.headerDecksPage}>
+      <Container className={s.header}>
         <div className={s.top}>
           <Typography as={'h1'} variant={'large'}>
             Decks list
@@ -98,7 +97,7 @@ const DecksPage = () => {
         {/* инпут + табы + слайдер + кнопка очистки всех фильтров = фильтровые контроли */}
         <FilterControls
           // берет значения из локального редакса (см.конспект 3 с Валера - и с сервера)
-          authUserId={userId}
+          authUserId={authUserId}
           searchName={searchName}
           setSearchName={setSearchName}
           setSliderValue={setSliderValue}
@@ -109,7 +108,12 @@ const DecksPage = () => {
         />
         {/* если колоды пришли с сервера */}
         {decks?.data?.items && (
-          <DecksTable authUserId={userId} items={decks.data.items} onSort={setSort} sort={sort} />
+          <DecksTable
+            authUserId={authUserId}
+            items={decks.data.items}
+            onSort={setSort}
+            sort={sort}
+          />
         )}
         {/* Пагинация */}
         <Pagination

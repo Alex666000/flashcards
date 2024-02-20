@@ -17,6 +17,7 @@ export type EditDeckModalProps = {
 /**
  * Модальное окно для редактирования моей колоды
  */
+
 export const EditMyDeckModal: FC<EditDeckModalProps> = ({
   cover,
   id,

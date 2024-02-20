@@ -43,7 +43,7 @@ const LearnCardPage = () => {
   return (
     <section className={s.learnCardBlock}>
       <Container>
-        <BackButton />
+        <BackButton className={s.link} />
         <div>
           <Card className={s.content}>
             <Typography as={'h1'} className={s.title} variant={'large'}>

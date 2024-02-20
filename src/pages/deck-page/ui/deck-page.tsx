@@ -5,14 +5,13 @@ import { UserAuthDataResponse } from '@/features/auth/model/types/auth.types'
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { useGetCardsQuery } from '@/features/cards/rtk-api'
 import { CardsTable, CreateCardControl } from '@/features/cards/ui'
-import { useDeckData } from '@/features/deck/model/hooks/use-deck-data'
+import { useDeckLocalStateData } from '@/features/deck/model/hooks/use-deck-local-state-data'
 import { OwnerDeckDropDown } from '@/features/deck/ui/owner-deck-drop-down/owner-deck-drop-down'
 import { useDeleteDeckMutation, useGetDeckInfoQuery } from '@/features/decks/api'
 import { EditMyDeckModal } from '@/features/decks/ui/edit-my-deck-modal/edit-my-deck-modal'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { useDebounce } from '@/shared/lib/hooks/use-debounce'
 import { Sort } from '@/shared/lib/types/types'
-import { getSortedString } from '@/shared/lib/utils/get-sorted-string'
 import { requestHandler } from '@/shared/lib/utils/request-handler'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
@@ -30,37 +29,40 @@ import s from './deck.module.scss'
  */
 
 const DeckPage = () => {
+  const navigate = useNavigate()
+
   // для получения данных о текущей странице, id колоды - deckId, размере страницы, параметре поиска
   const { currentPage, deckId, pageSize, searchName, setCurrentPage, setPageSize, setSearchName } =
-    useDeckData()
+    useDeckLocalStateData()
 
   const debouncedSearchName = useDebounce(searchName)
 
-  const navigate = useNavigate()
+  // Сортировка
+  const [sort, setSort] = useState<Sort>({ direction: 'desc', key: 'updated' })
+  const sortedString = sort ? `${sort.key}-${sort.direction}` : undefined
 
-  // Запрашивает с сервера информацию об одной колоде с заданным id: deckId - отправляем на сервер
+  // Запрашиваем с сервера информацию о текущем пользователе
+  const { data: currentUserData } = useMeQuery()
+  const currentAuthUserId = (currentUserData as UserAuthDataResponse)?.id
+
+  // Запрашиваем с сервера информацию об одной колоде с заданным id: deckId - отправляем на сервер
   // (deckId достали с помощью useParams() из урла в хуке useDeckData() ),
-  const { data: deck, isLoading: isDeckLoading } = useGetDeckInfoQuery({ id: deckId })
-  const authorDeckId = deck?.userId
+  const { data: deckData, isLoading: isDeckLoading } = useGetDeckInfoQuery({ id: deckId ?? '' })
 
-  // Запрашивает информацию о текущем пользователе
-  const { data: meData } = useMeQuery()
-  const authUserId = (meData as UserAuthDataResponse)?.id
+  // id автора колоды
+  const authorDeckId = deckData?.userId
 
   // это моя колода
-  const isMyDeck = authorDeckId === authUserId
+  const isMyDeck = authorDeckId === currentAuthUserId
 
-  const [sort, setSort] = useState<Sort>({ direction: 'desc', key: 'updated' })
-  const sortedString = getSortedString(sort)
-
-  // Запрашивает карточки, принадлежащие данной колоде
+  // Запрашиваем карточки, принадлежащие данной колоде
   const { data } = useGetCardsQuery({
     id: deckId as string,
     params: {
       currentPage,
       itemsPerPage: pageSize,
-      orderBy: sortedString,
-      question: debouncedSearchName,
+      orderBy: sortedString ? sortedString : undefined,
+      question: debouncedSearchName ? debouncedSearchName : undefined,
     },
   })
 
@@ -84,26 +86,25 @@ const DeckPage = () => {
   return (
     <section className={s.deckPageBlock}>
       <Container>
-        {deck && (
-          // модальное окно для редактирования моей колоды - при нажатии на карандашик, когда создал
-          // свою колоду - когда ранее нажимал для создания колоды: кнопку "Add new deck"
-          // ТОЛЬКО ЕСЛИ ЕСТЬ СОЗДАННЫЕ - МОИ КОЛОДЫ
+        {deckData && (
           <EditMyDeckModal
-            cover={deck.cover}
-            id={deck.id}
-            isPrivate={deck.isPrivate}
-            name={deck.name}
+            cover={deckData.cover}
+            id={deckData.id}
+            isPrivate={deckData.isPrivate}
+            name={deckData.name}
             open={editIsOpen}
             setOpen={setEditIsOpen}
           />
         )}
+
+        {/* Все публичные колоды */}
         {/* стрелка назад */}
         <BackButton />
         <div className={s.deckHeader}>
           <div className={s.top}>
             <Typography as={'h1'} className={s.title} variant={'large'}>
               {/* название колоды - на UX над фотографией.. */}
-              {deck?.name}
+              {deckData?.name}
               {/* если моя созданная колода то: */}
               {isMyDeck && (
                 // DropDown при нажатии на "кружок с ..." появляется "карандашик" для редактирования
@@ -116,13 +117,13 @@ const DeckPage = () => {
                 />
               )}
             </Typography>
-            {deck && isMyDeck ? (
+            {deckData && isMyDeck ? (
               // в моей колоде при нажатии на кнопку "Add new Card" откроется модальное окно
               // для заполнения полей создания моей новой карточки с вопросом и ответом и ее форматом
               // в виде текста или картинки содержащим вопрос
-              <CreateCardControl deckId={deck.id} />
+              <CreateCardControl deckId={deckData.id} />
             ) : (
-              !!deck?.cardsCount && (
+              !!deckData?.cardsCount && (
                 // нажали на крудочек с 3 точками - потом learn-card-page -- редирект на стр. learn-card-page
                 // после того как побывал на learn-card-page поотвечал на вопрос ставиться счетчик сколько раз
                 // отвечал и выставляется оценка=рейтинг ответа
@@ -132,7 +133,7 @@ const DeckPage = () => {
               )
             )}
           </div>
-          {deck?.cover && <img alt={'Cover'} className={s.cover} src={deck.cover} />}
+          {deckData?.cover && <img alt={'Cover'} className={s.cover} src={deckData.cover} />}
           <TextField
             clearField={() => setSearchName('')}
             onChange={(e) => setSearchName(e.currentTarget.value)}
@@ -145,6 +146,7 @@ const DeckPage = () => {
         {data?.items && (
           <CardsTable cards={data.items} isMyDeck={isMyDeck} onSort={setSort} sort={sort} />
         )}
+
         {/*Позволяет переходить между страницами карточек колоды и изменять количество карточек на странице*/}
         <Pagination
           className={s.pagination}

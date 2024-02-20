@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from 'react'
+import { FC, MouseEvent, memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@/shared/ui/button'
@@ -25,30 +25,32 @@ type Props = {
  * Typography компонент: Отображает текст кнопки с использованием указанного варианта (variant="body2").
  * В итоге, компонент BackButton создает кнопку для возврата на предыдущую страницу, содержащую иконку и текст.
  */
-export const BackButton: FC<Props> = ({ className, text = 'Back to Previous Page', ...rest }) => {
-  const navigate = useNavigate()
+export const BackButton: FC<Props> = memo(
+  ({ className, text = 'Back to Previous Page', ...rest }) => {
+    const navigate = useNavigate()
 
-  // Создается функция backHandler, которая предотвращает стандартное действие события клика (e.preventDefault())
-  // и вызывает функцию navigate(-1) для перехода на предыдущую страницу.
-  const backHandler = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    navigate(-1)
+    // Создается функция backHandler, которая предотвращает стандартное действие события клика (e.preventDefault())
+    // и вызывает функцию navigate(-1) для перехода на предыдущую страницу.
+    const handleBackButtonClick = (e: MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault()
+      navigate(-1)
+    }
+
+    return (
+      <Button
+        as={Link}
+        className={clsx(s.button, className)}
+        onClick={handleBackButtonClick}
+        relative={'path'}
+        to={'..'}
+        variant={'link'}
+        {...rest}
+      >
+        <Icon height={22} name={'arrow-back'} width={22} />
+        <Typography className={s.text} variant={'body2'}>
+          {text}
+        </Typography>
+      </Button>
+    )
   }
-
-  return (
-    <Button
-      as={Link}
-      className={clsx(s.button, className)}
-      onClick={backHandler}
-      relative={'path'}
-      to={'..'}
-      variant={'link'}
-      {...rest}
-    >
-      <Icon height={22} name={'arrow-back'} width={22} />
-      <Typography className={s.text} variant={'body2'}>
-        {text}
-      </Typography>
-    </Button>
-  )
-}
+)
