@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { EditProfileForm, EditProfileFormProps } from '@/features/forms/edit-profile'
 import { useProfile } from '@/features/profile/model/hooks'
 import { ProfileControls } from '@/features/profile/ui'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Avatar } from '@/shared/ui/avatar-s'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
@@ -21,7 +21,7 @@ const ProfilePage = () => {
   const [isEditMode, setEditMode] = useState(false)
 
   const onSubmit = async (data: EditProfileFormProps) => {
-    await requestHandler(async () => {
+    await handleRequest(async () => {
       await onUpdate(data)
       setEditMode(false)
       toast.success('Your name successfully changed', { containerId: 'common' })

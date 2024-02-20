@@ -8,7 +8,7 @@ import {
 } from '@/features/forms/forgot-passwordforgot-password'
 import { emailRecoveringTemplate as html } from '@/shared/lib/constants/email-recovering-template'
 import { ROUTES } from '@/shared/lib/constants/route-path'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Container } from '@/shared/ui/container'
@@ -21,7 +21,7 @@ const ForgotPasswordPage = () => {
   const [recoverPassword] = useRecoverPasswordMutation()
 
   const onSubmit = async ({ email }: ForgotPasswordFormType) => {
-    await requestHandler(async () => {
+    await handleRequest(async () => {
       // отправляем на почту юзера письмо о восстановление пароля
       await recoverPassword({ email, html }).unwrap()
       // редиректим на страницу:

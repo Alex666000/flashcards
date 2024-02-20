@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { useUpdateDeckMutation } from '@/features/decks/api'
 import { DeckForm } from '@/features/forms/deck-form/deck-form'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { ModalWindow } from '@/shared/ui/modal-window'
 
 export type EditDeckModalProps = {
@@ -40,7 +40,7 @@ export const EditMyDeckModal: FC<EditDeckModalProps> = ({
   // передавая данные формы и идентификатор колоды.
   // После успешного выполнения мутации модальное окно закрываетс
   const editDeckHandler = async (data: FormData) => {
-    await requestHandler(async () => {
+    await handleRequest(async () => {
       await editDeck({ data, id }).unwrap()
       setOpen(false)
     })

@@ -12,7 +12,7 @@ import { EditMyDeckModal } from '@/features/decks/ui/edit-my-deck-modal/edit-my-
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { useDebounce } from '@/shared/lib/hooks/use-debounce'
 import { Sort } from '@/shared/lib/types/types'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
 import { Container } from '@/shared/ui/container'
@@ -42,13 +42,16 @@ const DeckPage = () => {
   const sortedString = sort ? `${sort.key}-${sort.direction}` : undefined
 
   // Запрашиваем с сервера информацию о текущем пользователе
-  const { data: currentUserData } = useMeQuery()
+  const { data: currentUserData, isFetching, isLoading } = useMeQuery()
   const currentAuthUserId = (currentUserData as UserAuthDataResponse)?.id
 
   // Запрашиваем с сервера информацию об одной колоде с заданным id: deckId - отправляем на сервер
   // (deckId достали с помощью useParams() из урла в хуке useDeckData() ),
-  const { data: deckData, isLoading: isDeckLoading } = useGetDeckInfoQuery({ id: deckId ?? '' })
-
+  const {
+    data: deckData,
+    isFetching: isDeckInfoFetching,
+    isLoading: isDeckInfoLoading,
+  } = useGetDeckInfoQuery({ id: deckId ?? '' })
   // id автора колоды
   const authorDeckId = deckData?.userId
 
@@ -56,30 +59,39 @@ const DeckPage = () => {
   const isMyDeck = authorDeckId === currentAuthUserId
 
   // Запрашиваем карточки, принадлежащие данной колоде
-  const { data } = useGetCardsQuery({
-    id: deckId as string,
-    params: {
-      currentPage,
-      itemsPerPage: pageSize,
-      orderBy: sortedString ? sortedString : undefined,
-      question: debouncedSearchName ? debouncedSearchName : undefined,
+  const { cards, cardsTotalCount } = useGetCardsQuery(
+    {
+      id: deckId as string,
+      params: {
+        currentPage,
+        itemsPerPage: pageSize,
+        orderBy: sortedString ? sortedString : undefined,
+        question: debouncedSearchName ? debouncedSearchName : undefined,
+      },
     },
-  })
+    // вернет объект с данными
+    {
+      // получаем данные с сервера и модифицируем как угодно:
+      selectFromResult: ({ data }) => {
+        return { cards: data?.items, cardsTotalCount: data?.pagination.totalItems }
+      },
+    }
+  )
 
-  const [deleteDeck] = useDeleteDeckMutation()
+  const [deleteDeck, { isLoading: isDeletedLoading }] = useDeleteDeckMutation()
 
   const [editIsOpen, setEditIsOpen] = useState(false)
 
   // для удаления колоды, которая вызывается при нажатии на кнопку удаления.
   // После удаления перенаправляет пользователя на страницу со списком колод.
-  const deletePackHandler = async () => {
-    await requestHandler(async () => {
+  const deleteDeckHandler = async () => {
+    await handleRequest(async () => {
       await deleteDeck({ id: deckId })
       navigate(ROUTES.decks)
     })
   }
 
-  if (isDeckLoading) {
+  if (isLoading || isFetching || isDeletedLoading || isDeckInfoLoading || isDeckInfoFetching) {
     return <Loader />
   }
 
@@ -110,7 +122,7 @@ const DeckPage = () => {
                 // DropDown при нажатии на "кружок с ..." появляется "карандашик" для редактирования
                 // и "корзина" для удаления и кнопка "learn" карточку
                 <OwnerDeckDropDown
-                  onDeleteHandler={deletePackHandler}
+                  onDeleteHandler={deleteDeckHandler}
                   // Открытие модального окна для редактирования моей колоды: При нажатии на кнопку
                   // редактирования (onEditHandler), открывается модальное окно для редактирования колоды.
                   onEditHandler={() => setEditIsOpen(true)}
@@ -143,10 +155,7 @@ const DeckPage = () => {
           />
         </div>
         {/* Рендеринг информации о колоде и ее карточках */}
-        {data?.items && (
-          <CardsTable cards={data.items} isMyDeck={isMyDeck} onSort={setSort} sort={sort} />
-        )}
-
+        {cards && <CardsTable cards={cards} isMyDeck={isMyDeck} onSort={setSort} sort={sort} />}
         {/*Позволяет переходить между страницами карточек колоды и изменять количество карточек на странице*/}
         <Pagination
           className={s.pagination}
@@ -154,7 +163,7 @@ const DeckPage = () => {
           onSetPageChange={setCurrentPage}
           onSetPageSizeChange={setPageSize}
           pageSize={pageSize}
-          totalCount={data?.pagination.totalItems}
+          totalCount={cardsTotalCount}
         />
       </Container>
     </section>

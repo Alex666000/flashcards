@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { useCreateDeckMutation } from '@/features/decks/api'
 import { DeckForm } from '@/features/forms/deck-form/deck-form'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Button } from '@/shared/ui/button'
 import { ModalWindow } from '@/shared/ui/modal-window'
 
@@ -30,7 +30,7 @@ export const CreateControlForNewDeck = () => {
   // с помощью функции createDeck из createDeckMutation()
   const handleCreateDeck = async (deckFormData: FormData) => {
     // Функция, которая принимает логику - колбек, связанную с запросом и его успешным выполнением
-    await requestHandler(async () => {
+    await handleRequest(async () => {
       await createDeck(deckFormData).unwrap()
       setOpen(false)
     })

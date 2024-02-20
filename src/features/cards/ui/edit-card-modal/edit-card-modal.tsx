@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { CardForm } from '@/features/forms/card/card'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { ModalWindow } from '@/shared/ui/modal-window'
 
 import { useUpdateCardMutation } from '../../rtk-api'
@@ -39,7 +39,7 @@ export const EditCardModal: FC<EditCardModalProps> = ({
   }
 
   const onSubmit = async (data: FormData) => {
-    await requestHandler(async () => {
+    await handleRequest(async () => {
       await updateCard({ cardId, data }).unwrap()
       setOpen(false)
     })

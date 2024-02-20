@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useGetRandomCardQuery, useRateCardMutation } from '@/features/cards/rtk-api'
 import { useGetDeckInfoQuery } from '@/features/decks/api'
 import { RateCardForm, RateType } from '@/features/forms/rate-card/rate-card'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
@@ -34,7 +34,7 @@ const LearnCardPage = () => {
   const { currentData: cardData } = useGetRandomCardQuery({ id })
 
   const onSubmit = async (data: RateType) => {
-    await requestHandler(async () => {
+    await handleRequest(async () => {
       await rateCard({ cardId: cardData!.id, grade: +data.grade, packId: id }).unwrap()
       setRateMode(false)
     })

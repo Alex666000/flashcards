@@ -6,14 +6,14 @@ import { LoginBodyArgs } from '@/features/auth'
 import { useLoginMutation, useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { LoginForm } from '@/features/forms/login-form/login-form'
 import { ROUTES } from '@/shared/lib/constants/route-path'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 
 const SingInPage = () => {
   const { data: meAuthData } = useMeQuery()
   const [login] = useLoginMutation()
 
   const handleLoginFormDataSubmit = async (data: LoginBodyArgs) => {
-    await requestHandler(async () => {
+    await handleRequest(async () => {
       await login(data).unwrap()
       toast.success('You are successfully authorized', { containerId: 'common' })
     })

@@ -12,6 +12,7 @@ import { useDebounce } from '@/shared/lib/hooks/use-debounce'
 import { Sort } from '@/shared/lib/types/types'
 import { getSortedString } from '@/shared/lib/utils/get-sorted-string'
 import { Container } from '@/shared/ui/container'
+import { Loader } from '@/shared/ui/loaders-components'
 import { Pagination } from '@/shared/ui/pagination'
 import { Typography } from '@/shared/ui/typography'
 
@@ -42,7 +43,11 @@ const DecksPage = () => {
   const authUserId = (userData as UserAuthDataResponse).id
 
   // Запрос на сервер за колодами с такими поисковыми параметрами которые взяли из локального стейта редакса:
-  const decks = useGetDecksQuery({
+  const {
+    data: decksData,
+    error,
+    isLoading,
+  } = useGetDecksQuery({
     // authorId берет значение у userId
     authorId: tabValue, // отправляем на сервак значение выбранного на UI - Таба
     // по id юзера: свой или чужой..
@@ -58,7 +63,7 @@ const DecksPage = () => {
     orderBy: sortedString,
   })
 
-  const totalCards = decks?.data?.maxCardsCount // общее кол-во карточек
+  const totalCards = decksData?.maxCardsCount // общее кол-во карточек
 
   /**
    *  Если текущая стр (currentPage) больше, чем количество страниц, необходимых для отображения
@@ -83,6 +88,21 @@ const DecksPage = () => {
     totalCards,
   ])
 
+  // обработка ошибок:
+  if (error) {
+    const err = error as any
+
+    return (
+      <Typography as={'h2'} variant={'error'}>
+        {err.data.error}
+      </Typography>
+    )
+  }
+
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <section className={s.decksPageBlock}>
       <Container className={s.header}>
@@ -102,15 +122,15 @@ const DecksPage = () => {
           setSearchName={setSearchName}
           setSliderValue={setSliderValue}
           setTabValue={setTabValue}
-          sliderMaxValue={decks?.data?.maxCardsCount}
+          sliderMaxValue={decksData?.maxCardsCount}
           sliderValue={sliderValue}
           tabValue={tabValue}
         />
         {/* если колоды пришли с сервера */}
-        {decks?.data?.items && (
+        {decksData?.items && (
           <DecksTable
             authUserId={authUserId}
-            items={decks.data.items}
+            items={decksData?.items}
             onSort={setSort}
             sort={sort}
           />
@@ -122,7 +142,7 @@ const DecksPage = () => {
           onSetPageChange={setCurrentPage}
           onSetPageSizeChange={setPageSize}
           pageSize={pageSize}
-          totalCount={decks?.data?.pagination?.totalItems}
+          totalCount={decksData?.pagination?.totalItems}
         />
       </Container>
     </section>

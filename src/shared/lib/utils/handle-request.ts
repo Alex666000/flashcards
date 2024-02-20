@@ -6,7 +6,7 @@
 
 import { errorToastNotification } from '@/shared/lib/utils/error-toast-notification'
 
-export const requestHandler = async (logic: () => Promise<any>): Promise<void> => {
+export const handleRequest = async (logic: () => Promise<any>): Promise<void> => {
   try {
     await logic()
   } catch (error) {

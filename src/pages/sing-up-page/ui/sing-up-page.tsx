@@ -30,7 +30,7 @@ const SignUpPage = () => {
           dispatch(util?.resetApiState())
         })
     } catch (error) {
-      error ? errorNotification(error) : toast.error('Error register')
+      errorNotification(error)
     }
   }
 

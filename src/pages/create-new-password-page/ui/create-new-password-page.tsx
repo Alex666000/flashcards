@@ -6,7 +6,7 @@ import { useResetPasswordMutation } from '@/features/auth/rtk-api/auth.api'
 import { CreateNewPasswordForm } from '@/features/forms/create-new-password/create-new-password'
 import { CreateNewPasswordFormType } from '@/features/forms/create-new-password/use-create-new-password'
 import { ROUTES } from '@/shared/lib/constants/route-path'
-import { requestHandler } from '@/shared/lib/utils/request-handler'
+import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
 
@@ -19,7 +19,7 @@ const CreateNewPasswordPage = () => {
 
   const onSubmit = async ({ password }: CreateNewPasswordFormType) => {
     if (token) {
-      await requestHandler(async () => {
+      await handleRequest(async () => {
         await resetPassword({ password, token }).unwrap()
         navigate(ROUTES.signIn)
         toast.success('The password has been changed', { containerId: 'common' })
