@@ -12,6 +12,6 @@ export const flashCardsAPI = createApi({
   reducerPath: 'flashCardsAPI', // имя редюсера которое будем ложить в store - его имя увидим в девтулзах
   // при смене фокуса, вкладки, чтобы данные обновлялись запрашивались - повторно запросы пойдут
   refetchOnFocus: false,
-  // 1 -- tagTypes: ['Deck'] --> тут в baseApi резервируем тэги - объявляем в base-rtk-api, а не конкретной апишке сущности, ни в decks-rtk-api:
+  // 1 -- tagTypes: ['Deck'] --> тут в baseApi резервируем тэги - объявляем в base-rtk-rtk-api, а не конкретной апишке сущности, ни в decks-rtk-rtk-api:
   tagTypes: ['me', 'decks', 'deck', 'cards'], // чтобы подгружать новые обновленные данные, а не в ручную обновлять страницу
 })

@@ -1,9 +1,5 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
-// eslint-disable-next-line no-duplicate-imports
-import { fetchBaseQuery } from '@reduxjs/toolkit/query'
-import { Mutex } from 'async-mutex'
-
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.flashcards.andrii.es',
   credentials: 'include',
