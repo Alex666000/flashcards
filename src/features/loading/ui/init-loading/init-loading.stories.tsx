@@ -1,6 +1,5 @@
+import { InitLoading } from '@/features/loading/ui'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { InitLoading } from './'
 
 const meta = {
   component: InitLoading,

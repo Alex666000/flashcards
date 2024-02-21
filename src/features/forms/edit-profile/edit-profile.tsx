@@ -6,7 +6,7 @@ import { clsx } from 'clsx'
 
 import s from './edit-profile.module.scss'
 
-import { EditProfileFormProps, useEditProfile } from './'
+import { EditProfileFormProps, useEditProfile } from './use-edit-profile'
 
 type Props = {
   className?: string

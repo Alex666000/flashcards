@@ -3,11 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useSignUpMutation, util } from '@/features/auth/rtk-api/auth.api'
-import { RegisterForm } from '@/features/forms/register-form/register-form'
-import { RegisterFormData } from '@/features/forms/register-form/use-register-form'
-import { ROUTES } from '@/shared/lib/constants/route-path'
-import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
-import { errorNotification } from '@/shared/lib/utils/error-notification'
+import { RegisterForm, RegisterFormData } from '@/features/forms'
+import { ROUTES, errorNotification, useAppDispatch } from '@/shared/lib'
 
 const SignUpPage = () => {
   const navigate = useNavigate()

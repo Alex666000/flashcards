@@ -1,6 +1,6 @@
 import { SVGProps, memo } from 'react'
 
-export const KeyboardArrowRight = memo((props: SVGProps<SVGSVGElement>) => (
+export const KeyboardArrowRightIcon = memo((props: SVGProps<SVGSVGElement>) => (
   <svg
     fill={'none'}
     height={'16'}

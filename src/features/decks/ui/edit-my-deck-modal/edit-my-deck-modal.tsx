@@ -1,9 +1,10 @@
 import { FC } from 'react'
 
-import { useUpdateDeckMutation } from '@/features/decks/api'
 import { DeckForm } from '@/features/forms/deck-form/deck-form'
 import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { ModalWindow } from '@/shared/ui/modal-window'
+
+import { useUpdateDeckMutation } from '../../rtk-api'
 
 export type EditDeckModalProps = {
   cover: null | string // обложка

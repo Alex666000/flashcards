@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react'
+import { memo } from 'react'
 
 import { ThemeToggle } from '@/app/providers/theme-toogle/theme-toogle'
 import { Layout } from '@/shared/layout'

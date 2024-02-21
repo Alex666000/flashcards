@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form'
 
-import { emailSchema, passwordSchema } from '@/shared/lib/form-validate-zod-schemas/zod-schema'
+import { emailSchema, stringSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 const registrationSchema = z
   .object({
-    confirmPassword: passwordSchema,
+    confirmPassword: stringSchema,
     email: emailSchema,
-    password: passwordSchema,
+    password: stringSchema,
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",

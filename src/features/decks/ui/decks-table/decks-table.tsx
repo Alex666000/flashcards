@@ -1,8 +1,8 @@
 import { FC, memo } from 'react'
 
-import { Deck } from '@/features/decks/api/types'
-import { DeckRow } from '@/features/decks/ui/deck-row/deck-row'
-import { decksTableColumns } from '@/shared/lib/constants/decksTableColumns'
+import { DeckRow } from '@/features/decks'
+import { Deck } from '@/features/decks/rtk-api/types'
+import { decksTableColumns } from '@/shared/lib'
 import { Table } from '@/shared/ui/table'
 import { TableHeader, TableHeaderProps } from '@/shared/ui/table-header'
 

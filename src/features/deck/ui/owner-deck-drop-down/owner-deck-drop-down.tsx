@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { ROUTES } from '@/shared/lib/constants/route-path'
+import { ROUTES } from '@/shared/lib'
 import { DropDown, DropDownItemWithIcon } from '@/shared/ui/drop-down_'
 import { Icon } from '@/shared/ui/icon'
 

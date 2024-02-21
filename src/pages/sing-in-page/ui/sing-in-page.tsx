@@ -4,9 +4,8 @@ import { toast } from 'react-toastify'
 
 import { LoginBodyArgs } from '@/features/auth'
 import { useLoginMutation, useMeQuery } from '@/features/auth/rtk-api/auth.api'
-import { LoginForm } from '@/features/forms/login-form/login-form'
-import { ROUTES } from '@/shared/lib/constants/route-path'
-import { handleRequest } from '@/shared/lib/utils/handle-request'
+import { LoginForm } from '@/features/forms'
+import { ROUTES, handleRequest } from '@/shared/lib'
 
 const SingInPage = () => {
   const { data: meAuthData } = useMeQuery()

@@ -1,6 +1,6 @@
 import { FC, memo } from 'react'
 
-import { Card } from '@/features/cards/rtk-api'
+import { Card } from '@/features/cards'
 import { CardRow } from '@/features/cards/ui/card-row/card-row'
 import { deckTableColumns } from '@/shared/lib/constants/deckTableColumns'
 import { Table } from '@/shared/ui/table'

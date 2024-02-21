@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Control, FieldPath, FieldValues } from 'react-hook-form'
 
 import { Button } from '@/shared/ui/button'
-import { ControlledFileUploader } from '@/shared/ui/controlled/controlled-file-uploader'
+import { ControlledFileUploader } from '@/shared/ui/controlled'
 import { Icon } from '@/shared/ui/icon'
 import { clsx } from 'clsx'
 

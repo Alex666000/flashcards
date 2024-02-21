@@ -1,9 +1,7 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-import { LoginBodyArgs } from '@/features/auth'
-import { useLoginForm } from '@/features/forms/login-form/use-login-form'
-import { ROUTES } from '@/shared/lib/constants/route-path'
+import { ROUTES } from '@/shared/lib'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Container } from '@/shared/ui/container'
@@ -11,6 +9,9 @@ import { ControlledCheckbox, ControlledTextField } from '@/shared/ui/controlled'
 import { Typography } from '@/shared/ui/typography'
 
 import s from './login-form.module.scss'
+
+import { LoginBodyArgs } from '../../auth'
+import { useLoginForm } from './use-login-form'
 
 type PropsType = {
   onLoginFormDataSubmit: (formData: LoginBodyArgs) => void

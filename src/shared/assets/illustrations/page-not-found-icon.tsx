@@ -775,4 +775,4 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =
 const ForwardRef = forwardRef(SvgComponent)
 const Memo = memo(ForwardRef)
 
-export { Memo as PageNotFound }
+export { Memo as PageNotFoundIcon }

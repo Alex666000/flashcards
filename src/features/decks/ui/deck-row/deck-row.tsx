@@ -1,7 +1,7 @@
 import { FC, memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { Deck } from '@/features/decks/api/types'
+import { Deck } from '@/features/decks/rtk-api/types'
 import { DeleteControl } from '@/features/decks/ui/delete-control/delete-control'
 import { EditControl } from '@/features/decks/ui/edit-control/edit-control'
 import defaultCover from '@/shared/assets/images/default-image.jpg'

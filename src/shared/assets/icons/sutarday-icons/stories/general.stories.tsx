@@ -1,4 +1,4 @@
-import { KeyboardArrowLeft, KeyboardArrowRight, SearchIcon } from '@/shared/assets'
+import { KeyboardArrowLeftIcon, KeyboardArrowRightIcon, SearchIcon } from '@/shared/assets'
 import { AddMediaIcon } from '@/shared/assets/icons/sutarday-icons/AddMediaIcon'
 import { ArrowDownIcon } from '@/shared/assets/icons/sutarday-icons/ArrowDown'
 import { ArrowLeft } from '@/shared/assets/icons/sutarday-icons/ArrowLeft'
@@ -35,8 +35,8 @@ export const AllIcons = {
         <Edit />
         <Eye />
         <EyeClosed />
-        <KeyboardArrowLeft />
-        <KeyboardArrowRight />
+        <KeyboardArrowLeftIcon />
+        <KeyboardArrowRightIcon />
         <LogOutIcon />
         <MailIcon />
         <More />

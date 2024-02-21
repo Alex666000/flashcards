@@ -1,6 +1,8 @@
 import { FC, memo } from 'react'
 
-import { DeleteCardControl, EditCardControl } from '@/features/cards/ui'
+import { Card } from '@/features/cards'
+import { DeleteCardControl } from '@/features/cards/ui/delete-card-control/delete-card-control'
+import { EditCardControl } from '@/features/cards/ui/edit-card-control/edit-card-control'
 import { Rating } from '@/shared/ui/rating'
 import { Table } from '@/shared/ui/table'
 import { Typography } from '@/shared/ui/typography'
@@ -8,7 +10,6 @@ import { Typography } from '@/shared/ui/typography'
 import s from './card-row.module.scss'
 
 import defaultImage from '../../../../shared/assets/images/default-image.jpg'
-import { Card } from '../../rtk-api'
 
 type Props = {
   card: Card // Объект с информацией о карточке

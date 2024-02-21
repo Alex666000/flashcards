@@ -1,12 +1,16 @@
 import { memo, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { DeckFormType, useDeckForm } from '@/features/forms/deck-form/use-deck-form'
 import { Button } from '@/shared/ui/button'
-import { ControlledCheckbox, ControlledTextField } from '@/shared/ui/controlled'
-import { ControlledPreviewFileUploader } from '@/shared/ui/controlled/controlled-preview-file-uploader'
+import {
+  ControlledCheckbox,
+  ControlledPreviewFileUploader,
+  ControlledTextField,
+} from '@/shared/ui/controlled'
 
 import s from './deck-form.module.scss'
+
+import { DeckFormType, useDeckForm } from './use-deck-form'
 
 // DeckFormDefaultValues - то что отправляем на сервер в при заполнении полей формы согласно доке
 type DeckFormDefaultValues = {

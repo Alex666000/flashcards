@@ -14,7 +14,7 @@ import {
   SingUpPage,
   VerifyEmailPage,
 } from '@/pages'
-import { ROUTES } from '@/shared/lib/constants/route-path'
+import { ROUTES } from '@/shared/lib'
 import { Loader } from '@/shared/ui/loaders-components'
 
 import { PrivateRoute } from './private-route'

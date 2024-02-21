@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import { CheckEmailImageIcon } from '@/shared/assets/illustrations/check-email-image-icon'
+import { CheckEmailImageIcon } from '@/shared/assets/illustrations'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
@@ -11,6 +11,7 @@ import s from './check-email-page.module.scss'
 /**
  - На UX увидим "Проверьте свой email и кнопку назад"
  */
+
 const CheckEmailPage = () => {
   const { email } = useParams<{ email: string }>()
 

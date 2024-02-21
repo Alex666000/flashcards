@@ -1,13 +1,11 @@
 import { FC, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { Card } from '@/features/cards/rtk-api'
-import { CardFormType, useCardForm } from '@/features/forms/card/use-card-form'
-import { usePreviewErrorData } from '@/features/forms/card/use-preview-error-data'
+import { Card } from '@/features/cards'
+import { CardFormType, useCardForm, usePreviewErrorData } from '@/features/forms'
 import { Button } from '@/shared/ui/button'
 import { Container } from '@/shared/ui/container'
-import { ControlledTextField } from '@/shared/ui/controlled'
-import { ControlledPreviewFileUploader } from '@/shared/ui/controlled/controlled-preview-file-uploader'
+import { ControlledPreviewFileUploader, ControlledTextField } from '@/shared/ui/controlled'
 import { Select } from '@/shared/ui/select'
 
 import s from './card.module.scss'

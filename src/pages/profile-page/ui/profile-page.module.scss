@@ -1,6 +1,20 @@
+.profilePageBlock {
+  position: relative;
+}
+
+.backButton {
+  position: absolute;
+  top: -65px;
+  left: 300px;
+}
+
+.profilePageContainer {
+  margin-top: 155px;
+}
+
 .profilePage {
   max-width: 420px;
-  margin: 92px auto;
+  margin: 100px auto;
   padding: 36px;
 
   background-color: var(--color-dark-700);

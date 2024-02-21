@@ -1,16 +1,15 @@
-import { useCallback } from 'react'
-
-import { currentPageSelector } from '@/features/decks/model/selectors/current-page-selector'
-import { pageSizeSelector } from '@/features/decks/model/selectors/page-size-selector'
-import { decksActions } from '@/features/decks/model/slice/decks.slice'
-import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
-import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
-
 /**
  * Хук для управления пагинацией колод (decks) в приложении
  * Хук возвращает объект, содержащий текущую страницу, размер страницы,
  а также функции для обновления текущей страницы и размера страницы.
  */
+import { useCallback } from 'react'
+
+import { useAppDispatch, useAppSelector } from '@/shared/lib'
+
+import { currentPageSelector } from '../../model/selectors/current-page-selector'
+import { pageSizeSelector } from '../../model/selectors/page-size-selector'
+import { decksActions } from '../../model/slice/decks.slice'
 
 export const useDecksLocalStatePagination = () => {
   const dispatch = useAppDispatch()

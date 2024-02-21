@@ -1,5 +1,5 @@
-import { ForgotPasswordForm } from '@/features/forms/forgot-passwordforgot-password/forgot-password'
-import { ForgotPasswordFormType } from '@/features/forms/forgot-passwordforgot-password/use-forgot-password'
+import { ForgotPasswordForm } from '@/features/forms/forgot-password/forgot-password'
+import { ForgotPasswordFormType } from '@/features/forms/forgot-password/use-forgot-password'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { CardPropsDV } from '@/features/forms/card/card'
+import { CardPropsDV } from '@/features/forms'
 
 export const usePreviewErrorData = (defaultValues?: CardPropsDV) => {
   const isAnyPictureExist = defaultValues?.questionImg || defaultValues?.answerImg

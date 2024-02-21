@@ -10,7 +10,7 @@ const initialState = {
 
 const slice = createSlice({
   initialState,
-  name: 'pack',
+  name: 'deck',
   reducers: {
     setCurrentPage: (state, action: PayloadAction<{ newPage: number }>) => {
       state.pagination.currentPage = action.payload.newPage

@@ -1,12 +1,13 @@
 import { FC, memo } from 'react'
 
-import { NavigationBlock } from '@/shared/ui/pagination/navigation-block/navigation-block'
-import { PageSizeSelect } from '@/shared/ui/pagination/page-size-select/page-size-select'
-import { usePagination } from '@/shared/ui/pagination/usePagination'
 import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
 
 import s from './pagination.module.scss'
+
+import { NavigationBlock } from './navigation-block/navigation-block'
+import { PageSizeSelect } from './page-size-select/page-size-select'
+import { usePagination } from './usePagination'
 
 export type PaginationProps = {
   className?: string // Дополнительные классы для стилизации

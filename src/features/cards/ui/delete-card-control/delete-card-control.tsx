@@ -1,11 +1,10 @@
 import { FC, useState } from 'react'
 
+import { useDeleteCardMutation } from '@/features/cards/rtk-api/cards'
 import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Dialog } from '@/shared/ui/dialog'
 import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
-
-import { useDeleteCardMutation } from '../../rtk-api'
 
 type Props = {
   id: string

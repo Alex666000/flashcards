@@ -8,7 +8,7 @@ import {
 } from 'react'
 
 import { Mods, classNames } from '@/shared/lib/classNames-lib/classNames'
-import { InferType } from '@/shared/types/infer-element-type'
+import { InferType } from '@/shared/types/infer-element.type'
 
 import s from './button.module.scss'
 

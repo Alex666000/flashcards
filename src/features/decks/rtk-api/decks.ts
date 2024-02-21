@@ -1,4 +1,4 @@
-import { Deck, DecksParams, DecksResponse } from '@/features/decks/api/types'
+import { Deck, DecksParams, DecksResponse } from '@/features/decks/rtk-api/types'
 import { flashCardsAPI } from '@/shared/api/flash-cards.api'
 
 const decksAPI = flashCardsAPI.injectEndpoints({

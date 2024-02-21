@@ -1,16 +1,16 @@
 import {
   CardRateRequest,
-  CardResponse,
+  CardResponseData,
   CardsParams,
-  CardsResponse,
+  CardsResponseData,
   RandomCardRequest,
-} from '@/features/cards/rtk-api/types'
-import { flashCardsAPI } from '@/shared/api/flash-cards.api'
-import { errorNotification } from '@/shared/lib/utils/error-notification'
+} from '@/features/cards'
+import { flashCardsAPI } from '@/shared/api'
+import { errorNotification } from '@/shared/lib'
 
-const cardsAPI = flashCardsAPI.injectEndpoints({
+export const cardsAPI = flashCardsAPI.injectEndpoints({
   endpoints: (builder) => ({
-    createCard: builder.mutation<CardResponse, { data: FormData; deckId: string }>({
+    createCard: builder.mutation<CardResponseData, { data: FormData; deckId: string }>({
       invalidatesTags: ['cards'],
       query: ({ data, deckId }) => ({
         body: data,
@@ -26,7 +26,7 @@ const cardsAPI = flashCardsAPI.injectEndpoints({
         url: `v1/cards/${id}`,
       }),
     }),
-    getCards: builder.query<CardsResponse, { id: string; params: CardsParams }>({
+    getCards: builder.query<CardsResponseData, { id: string; params: CardsParams }>({
       providesTags: ['cards'],
       query: ({ id, params }) => ({
         method: 'GET',
@@ -34,14 +34,14 @@ const cardsAPI = flashCardsAPI.injectEndpoints({
         url: `v1/decks/${id}/cards`,
       }),
     }),
-    getRandomCard: builder.query<CardResponse, RandomCardRequest>({
+    getRandomCard: builder.query<CardResponseData, RandomCardRequest>({
       query: ({ id, previousCardId }) => ({
         method: 'GET',
         params: { previousCardId },
         url: `v1/decks/${id}/learn`,
       }),
     }),
-    rateCard: builder.mutation<CardResponse, CardRateRequest>({
+    rateCard: builder.mutation<CardResponseData, CardRateRequest>({
       invalidatesTags: ['cards'],
       async onQueryStarted({ packId }, { dispatch, queryFulfilled }) {
         try {
@@ -62,7 +62,7 @@ const cardsAPI = flashCardsAPI.injectEndpoints({
         url: `v1/decks/${packId}/learn`,
       }),
     }),
-    updateCard: builder.mutation<CardResponse, { cardId: string; data: FormData }>({
+    updateCard: builder.mutation<CardResponseData, { cardId: string; data: FormData }>({
       invalidatesTags: ['cards'],
       query: ({ cardId, data }) => ({
         body: data,

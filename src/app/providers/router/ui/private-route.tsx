@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
-import { ROUTES } from '@/shared/lib/constants/route-path'
+import { ROUTES } from '@/shared/lib'
 import { Loader } from '@/shared/ui/loaders-components'
 
 /**

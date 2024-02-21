@@ -1,15 +1,13 @@
 import { FC } from 'react'
 
-import {
-  ForgotPasswordFormType,
-  useForgotPassword,
-} from '@/features/forms/forgot-passwordforgot-password/use-forgot-password'
 import { Button } from '@/shared/ui/button'
 import { ControlledTextField } from '@/shared/ui/controlled'
 import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
 
 import s from './forgot-password.module.scss'
+
+import { ForgotPasswordFormType, useForgotPassword } from './use-forgot-password'
 
 type PropsType = {
   className?: string

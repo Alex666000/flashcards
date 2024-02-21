@@ -1,10 +1,11 @@
 import { FC, useState } from 'react'
 
-import { useDeleteDeckMutation } from '@/features/decks/api'
 import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Dialog } from '@/shared/ui/dialog'
 import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
+
+import { useDeleteDeckMutation } from '../../rtk-api'
 
 type Props = {
   id: string

@@ -1,6 +1,9 @@
 import { FC, useState } from 'react'
 
-import { EditCardModal, EditCardModalProps } from '@/features/cards/ui'
+import {
+  EditCardModal,
+  EditCardModalProps,
+} from '@/features/cards/ui/edit-card-modal/edit-card-modal'
 import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
 

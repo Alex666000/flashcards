@@ -5,8 +5,8 @@ import {
   SignUpArgs,
   UpdateProfileFormData,
   UserAuthDataResponse,
-} from '@/features/auth/model/types/auth.types'
-import { flashCardsAPI } from '@/shared/api/flash-cards.api'
+} from '@/features/auth'
+import { flashCardsAPI } from '@/shared/api'
 
 export const authAPI = flashCardsAPI.injectEndpoints({
   endpoints: (builder) => ({

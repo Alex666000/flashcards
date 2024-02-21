@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { deckCurrentPageSelector } from '@/features/deck/model/selectors/deck-current-page-selector'
 import { deckPageSizeSelector } from '@/features/deck/model/selectors/deck-page-size-selector'
 import { deckSearchNameSelector } from '@/features/deck/model/selectors/deck-search-name-selector'
-import { deckActions } from '@/features/deck/model/slice/pack.sliece'
+import { deckActions } from '@/features/deck/model/slice/deck.slice'
 import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
 import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
 

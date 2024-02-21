@@ -3,10 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useResetPasswordMutation } from '@/features/auth/rtk-api/auth.api'
-import { CreateNewPasswordForm } from '@/features/forms/create-new-password/create-new-password'
-import { CreateNewPasswordFormType } from '@/features/forms/create-new-password/use-create-new-password'
+import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/features/forms'
+import { handleRequest } from '@/shared/lib'
 import { ROUTES } from '@/shared/lib/constants/route-path'
-import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
 

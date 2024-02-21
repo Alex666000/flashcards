@@ -1,15 +1,13 @@
 import { FC } from 'react'
 
-import {
-  CreateNewPasswordFormType,
-  useCreateNewPassword,
-} from '@/features/forms/create-new-password/use-create-new-password'
 import { Button } from '@/shared/ui/button'
 import { ControlledTextField } from '@/shared/ui/controlled'
 import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
 
 import s from './create-new-password.module.scss'
+
+import { CreateNewPasswordFormType, useCreateNewPassword } from './use-create-new-password'
 
 type PropsType = {
   className?: string

@@ -2,19 +2,15 @@ import { memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useRecoverPasswordMutation } from '@/features/auth/rtk-api/auth.api'
-import {
-  ForgotPasswordForm,
-  ForgotPasswordFormType,
-} from '@/features/forms/forgot-passwordforgot-password'
-import { emailRecoveringTemplate as html } from '@/shared/lib/constants/email-recovering-template'
-import { ROUTES } from '@/shared/lib/constants/route-path'
-import { handleRequest } from '@/shared/lib/utils/handle-request'
+import { ForgotPasswordForm, ForgotPasswordFormType } from '@/features/forms'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Container } from '@/shared/ui/container'
 import { Typography } from '@/shared/ui/typography'
 
 import s from './forgot-password-page.module.scss'
+
+import { ROUTES, handleRequest, emailRecoveringTemplate as html } from '../../../shared/lib'
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate()

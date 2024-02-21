@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { useVerifyMailMutation } from '@/features/auth/rtk-api/auth.api'
-import { ROUTES } from '@/shared/lib/constants/route-path'
+import { ROUTES } from '@/shared/lib'
 import { Typography } from '@/shared/ui/typography'
 
 import styles from './verify-email-page.module.scss'

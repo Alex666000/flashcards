@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { SignInFormProps, useSignIn } from '@/features/auth/lib/hooks/use-sign-in'
+import { SignInFormProps, useSignIn } from '@/features/auth'
 import { Button } from '@/shared/ui/button'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui/controlled'
 import { Typography } from '@/shared/ui/typography'

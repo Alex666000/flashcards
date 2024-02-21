@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
-import { Error_404Icon } from '@/shared/assets/icons/error-404-icon'
-import { ROUTES } from '@/shared/lib/constants/route-path'
+import { Error_404Icon } from '@/shared/assets/icons'
+import { ROUTES } from '@/shared/lib'
 import { Button } from '@/shared/ui/button'
 import { Typography } from '@/shared/ui/typography'
 

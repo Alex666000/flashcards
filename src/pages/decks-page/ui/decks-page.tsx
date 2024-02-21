@@ -1,16 +1,16 @@
 import { memo, useEffect, useState } from 'react'
 
-import { UserAuthDataResponse } from '@/features/auth/model/types/auth.types'
+import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
-import { useGetDecksQuery } from '@/features/decks/api'
-import { useDecksLocalStateFilter } from '@/features/decks/lib/hooks/use-decks-local-state-filter'
-import { useDecksLocalStatePagination } from '@/features/decks/lib/hooks/use-decks-local-state-pagination'
-import { CreateControlForNewDeck } from '@/features/decks/ui/create-control/create-control-for-new-deck'
-import { DecksTable } from '@/features/decks/ui/decks-table/decks-table'
-import { FilterControls } from '@/features/decks/ui/filter-controls/filter-controls'
-import { useDebounce } from '@/shared/lib/hooks/use-debounce'
-import { Sort } from '@/shared/lib/types/types'
-import { getSortedString } from '@/shared/lib/utils/get-sorted-string'
+import {
+  CreateControlForNewDeck,
+  DecksTable,
+  FilterControls,
+  useDecksLocalStateFilter,
+  useDecksLocalStatePagination,
+} from '@/features/decks'
+import { useGetDecksQuery } from '@/features/decks/rtk-api'
+import { Sort, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { Loader } from '@/shared/ui/loaders-components'
 import { Pagination } from '@/shared/ui/pagination'

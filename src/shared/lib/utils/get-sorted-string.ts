@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { Sort } from '@/shared/lib/types/types'
+import { Sort } from '@/shared/lib/types/sort.types'
 
 /**
  * getSortedString() - полезна для преобразования sort-объекта с информацией о сортировке в строку,

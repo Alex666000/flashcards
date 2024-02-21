@@ -1,5 +1,11 @@
-import { LoginBodyArgs } from '@/features/auth/model/types/auth.types'
-
+export { useSignIn } from './lib/hooks/use-sign-in'
+export type { SignInFormProps } from './lib/hooks/use-sign-in'
+export type { LoginBodyArgs } from './model/types/auth.types'
+export type { UserAuthDataResponse } from './model/types/auth.types'
+export type { LoginDataResponse } from './model/types/auth.types'
+export type { UpdateProfileFormData } from './model/types/auth.types'
+export type { SignUpArgs } from './model/types/auth.types'
+export type { RecoverPasswordBodyArgs } from './model/types/auth.types'
+export { authAPI } from './rtk-api/auth.api'
 export { SignUpForm } from './ui/sign-up-form/sign-up-form'
 export { useSignUp } from './ui/sign-up-form/use-sign-up'
-export type { LoginBodyArgs }

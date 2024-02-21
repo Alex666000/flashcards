@@ -1,4 +1,4 @@
-import { Pagination } from '@/features/decks/api/types'
+import { Pagination } from '../../decks/rtk-api/types'
 
 export type Card = {
   answer: string
@@ -16,7 +16,7 @@ export type Card = {
   userId: string
 }
 
-export type CardsResponse = {
+export type CardsResponseData = {
   items: Card[]
   pagination: Pagination
 }
@@ -29,7 +29,7 @@ export type CardsParams = {
   question?: string
 } | void
 
-export type CardResponse = Omit<Card, 'userId'>
+export type CardResponseData = Omit<Card, 'userId'>
 
 export type RandomCardRequest = {
   id: string

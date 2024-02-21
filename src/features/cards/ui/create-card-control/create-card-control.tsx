@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { CreateCardModal } from '@/features/cards/ui'
+import { CreateCardModal } from '@/features/cards/ui/create-card-modal/create-card-modal'
 import { Button } from '@/shared/ui/button'
 
 type Props = {

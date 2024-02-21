@@ -1,10 +1,9 @@
+import { useSignUp } from '@/features/auth'
 import { Button } from '@/shared/ui/button'
 import { ControlledTextField } from '@/shared/ui/controlled'
 import { clsx } from 'clsx'
 
 import s from './sign-up-form.module.scss'
-
-import { useSignUp } from './use-sign-up'
 
 type Props = {
   className?: string

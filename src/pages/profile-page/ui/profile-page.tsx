@@ -1,14 +1,14 @@
 import { memo, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { EditProfileForm, EditProfileFormProps } from '@/features/forms/edit-profile'
-import { useProfile } from '@/features/profile/model/hooks'
-import { ProfileControls } from '@/features/profile/ui'
-import { handleRequest } from '@/shared/lib/utils/handle-request'
+import { EditProfileForm, EditProfileFormProps } from '@/features/forms'
+import { ProfileControls, useProfile } from '@/features/profile'
+import { handleRequest } from '@/shared/lib'
 import { Avatar } from '@/shared/ui/avatar-s'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
+import { Container } from '@/shared/ui/container'
 import { FileUploader } from '@/shared/ui/file-uploader'
 import { Icon } from '@/shared/ui/icon'
 import { Typography } from '@/shared/ui/typography'
@@ -29,39 +29,41 @@ const ProfilePage = () => {
   }
 
   return (
-    <>
-      <BackButton />
-      <Card className={s.profilePage}>
-        <div className={s.content}>
-          <Typography as={'h2'} variant={'large'}>
-            Personal Information
-          </Typography>
-          <div className={s.avatarContainer}>
-            <Avatar photoOrImage={user.avatar} size={96} userName={user.name} />
-            {!isEditMode && (
-              <FileUploader
-                accept={'image/*'}
-                as={Button}
-                className={s.editImage}
-                name={'avatar'}
-                onChange={updateAvatar}
-              >
-                <Icon className={s.icon} height={20} name={'edit'} width={20} />
-              </FileUploader>
+    <section className={s.profilePageBlock}>
+      <BackButton className={s.backButton} />
+      <Container className={s.profilePageContainer}>
+        <Card className={s.profilePage}>
+          <div className={s.content}>
+            <Typography as={'h2'} variant={'large'}>
+              Personal Information
+            </Typography>
+            <div className={s.avatarContainer}>
+              <Avatar photoOrImage={user.avatar} size={96} userName={user.name} />
+              {!isEditMode && (
+                <FileUploader
+                  accept={'image/*'}
+                  as={Button}
+                  className={s.editImage}
+                  name={'avatar'}
+                  onChange={updateAvatar}
+                >
+                  <Icon className={s.icon} height={20} name={'edit'} width={20} />
+                </FileUploader>
+              )}
+            </div>
+            {isEditMode ? (
+              <EditProfileForm
+                className={s.form}
+                initialValues={{ name: user.name }}
+                onSubmit={onSubmit}
+              />
+            ) : (
+              <ProfileControls onLogout={logout} setEditMode={setEditMode} user={user} />
             )}
           </div>
-          {isEditMode ? (
-            <EditProfileForm
-              className={s.form}
-              initialValues={{ name: user.name }}
-              onSubmit={onSubmit}
-            />
-          ) : (
-            <ProfileControls onLogout={logout} setEditMode={setEditMode} user={user} />
-          )}
-        </div>
-      </Card>
-    </>
+        </Card>
+      </Container>
+    </section>
   )
 }
 

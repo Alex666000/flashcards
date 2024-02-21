@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
 
-import { emailSchema, passwordSchema } from '@/shared/lib/form-validate-zod-schemas/zod-schema'
+import { emailSchema, stringSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 // Определение схемы валидации для полей формы: Zod
 const loginSchema = z.object({
   email: emailSchema,
-  password: passwordSchema,
+  password: stringSchema,
   rememberMe: z.boolean().optional(),
 })
 

@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { fileSchema, stringSchema } from '@/shared/lib/form-validate-zod-schemas/zod-schema'
+import { fileSchema, stringSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 

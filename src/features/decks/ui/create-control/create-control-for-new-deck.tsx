@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { useCreateDeckMutation } from '@/features/decks/api'
-import { DeckForm } from '@/features/forms/deck-form/deck-form'
+import { useCreateDeckMutation } from '@/features/decks/rtk-api'
+import { DeckForm } from '@/features/forms'
 import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Button } from '@/shared/ui/button'
 import { ModalWindow } from '@/shared/ui/modal-window'

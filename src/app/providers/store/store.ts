@@ -1,6 +1,6 @@
 import { appReducer } from '@/app/model/slice/app.slice'
 import { authAPI } from '@/features/auth/rtk-api/auth.api'
-import { deckReducer } from '@/features/deck/model/slice/pack.sliece'
+import { deckReducer } from '@/features/deck/model/slice/deck.slice'
 import { decksReducer } from '@/features/decks/model/slice/decks.slice'
 import { loadingReducer } from '@/features/loading/model/slice/loading.slice'
 import { flashCardsAPI } from '@/shared/api/flash-cards.api'

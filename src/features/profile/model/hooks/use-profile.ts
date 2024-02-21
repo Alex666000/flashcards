@@ -6,7 +6,7 @@ import {
   useMeQuery,
   useUpdateProfileMutation,
 } from '@/features/auth/rtk-api/auth.api'
-import { EditProfileFormProps } from '@/features/forms/edit-profile'
+import { EditProfileFormProps } from '@/features/forms/edit-profile/use-edit-profile'
 import { errorNotification } from '@/shared/lib/utils/error-notification'
 import { validateImage } from '@/shared/lib/utils/validate-image'
 import { ProfileInfoProps } from '@/widgets/profile-info/ui/profile-info'

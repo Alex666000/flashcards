@@ -1,10 +1,9 @@
 import { FC } from 'react'
 
+import { useUpdateCardMutation } from '@/features/cards/rtk-api/cards'
 import { CardForm } from '@/features/forms/card/card'
 import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { ModalWindow } from '@/shared/ui/modal-window'
-
-import { useUpdateCardMutation } from '../../rtk-api'
 
 export type EditCardModalProps = {
   answer: string
