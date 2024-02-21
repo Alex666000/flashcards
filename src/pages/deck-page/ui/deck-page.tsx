@@ -7,7 +7,7 @@ import { CardsTable, CreateCardControl } from '@/features/cards'
 import { useGetCardsQuery } from '@/features/cards/rtk-api/cards'
 import { OwnerDeckDropDown, useDeckLocalStateData } from '@/features/deck'
 import { EditMyDeckModal } from '@/features/decks'
-import { useDeleteDeckMutation, useGetDeckInfoQuery } from '@/features/decks/rtk-api'
+import { useDeleteDeckMutation, useGetDeckQuery } from '@/features/decks/rtk-api'
 import { ROUTES, Sort, handleRequest, useDebounce } from '@/shared/lib'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
@@ -38,8 +38,8 @@ const DeckPage = () => {
   const sortedString = sort ? `${sort.key}-${sort.direction}` : undefined
 
   // Запрашиваем с сервера информацию о текущем пользователе
-  const { data: currentUserData, isFetching, isLoading } = useMeQuery()
-  const currentAuthUserId = (currentUserData as UserAuthDataResponse)?.id
+  const { data: currentUserInfoData, isFetching, isLoading } = useMeQuery()
+  const currentAuthUserId = (currentUserInfoData as UserAuthDataResponse)?.id
 
   // Запрашиваем с сервера информацию об одной колоде с заданным id: deckId - отправляем на сервер
   // (deckId достали с помощью useParams() из урла в хуке useDeckData() ),
@@ -47,7 +47,8 @@ const DeckPage = () => {
     data: deckData,
     isFetching: isDeckInfoFetching,
     isLoading: isDeckInfoLoading,
-  } = useGetDeckInfoQuery({ id: deckId ?? '' })
+  } = useGetDeckQuery({ id: deckId ?? '' })
+
   // id автора колоды
   const authorDeckId = deckData?.userId
 
@@ -107,8 +108,9 @@ const DeckPage = () => {
 
         {/* Все публичные колоды */}
         {/* стрелка назад */}
-        <BackButton />
+
         <div className={s.deckHeader}>
+          <BackButton />
           <div className={s.top}>
             <Typography as={'h1'} className={s.title} variant={'large'}>
               {/* название колоды - на UX над фотографией.. */}
@@ -151,16 +153,19 @@ const DeckPage = () => {
           />
         </div>
         {/* Рендеринг информации о колоде и ее карточках */}
-        {cards && <CardsTable cards={cards} isMyDeck={isMyDeck} onSort={setSort} sort={sort} />}
-        {/*Позволяет переходить между страницами карточек колоды и изменять количество карточек на странице*/}
-        <Pagination
-          className={s.pagination}
-          currentPage={currentPage}
-          onSetPageChange={setCurrentPage}
-          onSetPageSizeChange={setPageSize}
-          pageSize={pageSize}
-          totalCount={cardsTotalCount}
-        />
+        {cards && (
+          <div className={s.deckTable}>
+            <CardsTable cards={cards} isMyDeck={isMyDeck} onSort={setSort} sort={sort} />
+            <Pagination
+              className={s.pagination}
+              currentPage={currentPage}
+              onSetPageChange={setCurrentPage}
+              onSetPageSizeChange={setPageSize}
+              pageSize={pageSize}
+              totalCount={cardsTotalCount}
+            />
+          </div>
+        )}
       </Container>
     </section>
   )

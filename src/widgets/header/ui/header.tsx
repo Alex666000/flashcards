@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { ElementRef, forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { StatusType } from '@/app/model/slice/app.slice'
@@ -20,6 +20,7 @@ type Props = {
   avatar?: string
   email?: string
   isAuth: boolean
+  isDisabled?: boolean
   isLoading: StatusType
   name?: string
   onLoginUserClick?: () => void
@@ -27,66 +28,66 @@ type Props = {
   onRedirectToProfileClick: () => void
 }
 
-export const Header = memo(
-  ({
-    avatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEpWWQrAJpIR6Xy7FhzhCT00vzSmT7xw9S2Q&usqp=CAU',
+export const Header = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
+  const {
+    avatar = '',
     email = 'NoNameEmail@.com',
     isAuth,
+    isDisabled,
     isLoading = 'idle',
     name = 'Some_Name',
     onLoginUserClick,
     onLogoutUserClick,
     onRedirectToProfileClick,
-  }: Props) => {
-    return (
-      <div className={s.headerBlock}>
-        <Container className={s.headerContainer}>
-          <Button as={Link} className={s.link} to={ROUTES.decks} variant={'link'}>
-            <LogoIcon className={s.logo} />
-          </Button>
-          {isAuth ? (
-            <div className={s.userNameOrEmail}>
-              <Typography as={Link} className={s.name} to={ROUTES.profile} variant={'subtitle1'}>
-                {name || email}
-              </Typography>
-              <Dropdown
-                trigger={
-                  <button className={s.dropdownButton}>
-                    <Avatar photoOrImage={avatar} size={40} userName={name || email} />
-                  </button>
-                }
-              >
-                {/* Item с инфой профиля: иконка + имя (почта) профиля */}
-                <DropdownItem>
-                  <ProfileInfo avatar={avatar} email={email} name={name} />
-                </DropdownItem>
-                {/* Item с иконкой слева и текстом справа */}
-                <DropdownItemWithIcon
-                  icon={<Person />}
-                  onSelect={onRedirectToProfileClick}
-                  text={'Profile'}
-                />
-                {/* Item с иконкой слева и текстом справа */}
-                <DropdownItemWithIcon
-                  icon={<LogOutIcon />}
-                  onSelect={onLogoutUserClick}
-                  // onSetBookBlur={handleSetBookBlur}
-                  text={'Sign out'}
-                />
-              </Dropdown>
-            </div>
-          ) : (
-            <Button onClick={onLoginUserClick} variant={'primary'}>
-              Sign In
-            </Button>
-          )}
-        </Container>
-        {isLoading === 'loading' ? <LeanerProgress /> : ''}
-      </div>
-    )
-  }
-)
+  } = props as Props
 
+  return (
+    <header className={s.headerBlock} ref={ref}>
+      <Container className={s.headerContainer}>
+        <Button as={Link} className={s.link} to={ROUTES.decks} variant={'link'}>
+          <LogoIcon className={s.logo} />
+        </Button>
+        {isAuth ? (
+          <div className={s.userNameOrEmail}>
+            <Typography as={Link} className={s.name} to={ROUTES.profile} variant={'subtitle1'}>
+              {name || email}
+            </Typography>
+            <Dropdown
+              trigger={
+                <button className={s.dropdownButton}>
+                  <Avatar photoOrImage={avatar} userName={name || email} />
+                </button>
+              }
+            >
+              {/* Item с инфой профиля: иконка + имя (почта) профиля */}
+              <DropdownItem>
+                <ProfileInfo avatar={avatar} email={email} name={name} />
+              </DropdownItem>
+              {/* Item с иконкой слева и текстом справа */}
+              <DropdownItemWithIcon
+                icon={<Person />}
+                onSelect={onRedirectToProfileClick}
+                text={'Profile'}
+              />
+              {/* Item с иконкой слева и текстом справа */}
+              <DropdownItemWithIcon
+                disabled={isDisabled}
+                icon={<LogOutIcon />}
+                onSelect={onLogoutUserClick}
+                text={'Sign out'}
+              />
+            </Dropdown>
+          </div>
+        ) : (
+          <Button onClick={onLoginUserClick} variant={'primary'}>
+            Sign In
+          </Button>
+        )}
+      </Container>
+      {isLoading === 'loading' ? <LeanerProgress /> : ''}
+    </header>
+  )
+})
 /*
 -headerContainer - берет все стили контейнера проекта + стили для headerContainer этой компоненты
 - теория Dropdown - в моем ui kit-e см.

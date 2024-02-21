@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { BrowserRouterDecorator } from '@/shared/config/storybook/decorators/browser-router-decorator'
+import { BrowserRouterDecorator } from '@/shared/config'
 
 import { BackButton } from './'
 

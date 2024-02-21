@@ -6,6 +6,22 @@
   .deckHeader {
     margin-bottom: 36px;
 
+    .backBtn {
+      cursor: pointer;
+
+      display: flex;
+      gap: 6px;
+      align-items: center;
+
+      max-width: 137px;
+      margin-top: 24px;
+      margin-bottom: 33px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
     .top {
       display: flex;
       align-items: center;
@@ -26,4 +42,23 @@
       margin-bottom: 24px;
     }
   }
+}
+
+.pagination {
+  display: flex;
+  gap: 15px;
+
+  width: 100%;
+  max-width: 100px;
+  margin-top: 20px;
+
+  > select {
+    width: 100px;
+  }
+}
+
+.deckTable {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

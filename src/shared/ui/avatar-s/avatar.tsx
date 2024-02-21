@@ -1,4 +1,4 @@
-import { CSSProperties, forwardRef } from 'react'
+import { CSSProperties, ElementRef, forwardRef } from 'react'
 
 import * as AvatarRadix from '@radix-ui/react-avatar'
 import { clsx } from 'clsx'
@@ -13,7 +13,7 @@ type Props = {
   userName: string
 }
 
-export const Avatar = forwardRef<any, Props>(
+export const Avatar = forwardRef<ElementRef<typeof AvatarRadix.Root>, Props>(
   ({ className, photoOrImage, size = 36, style, userName }, ref) => {
     const initials = userName
       ?.split(' ')

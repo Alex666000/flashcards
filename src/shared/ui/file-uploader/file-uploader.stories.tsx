@@ -1,8 +1,9 @@
 import { Button } from '@/shared/ui/button'
-import { FileUploader } from '@/shared/ui/file-uploader/file-uploader'
 import { Icon } from '@/shared/ui/icon/icon'
 import { IconButton } from '@/shared/ui/icon-button'
 import { Meta } from '@storybook/react'
+
+import { FileUploader } from './file-uploader'
 
 const meta = {
   component: FileUploader,

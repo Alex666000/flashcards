@@ -15,7 +15,7 @@ export const useDeckLocalStateData = () => {
 
   // для извлечения параметров из URL
   //  извлекает параметр id из URL
-  const { id } = useParams()
+  const { id = '' } = useParams<{ id: string }>()
   const deckId = id as string
 
   const dispatch = useAppDispatch()

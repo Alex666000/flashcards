@@ -3,19 +3,12 @@
     // сверху-снизу-96, а по горизонтали выравниваем
     margin: 96px auto 36px;
     padding: 15px;
-
-    .top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
   }
 
   .pagination {
     display: flex;
     flex-direction: row;
-    gap: 24px 24px;
+    gap: 24px 115px;
     align-items: center;
     justify-content: center;
 

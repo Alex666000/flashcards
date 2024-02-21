@@ -19,7 +19,7 @@ const decksAPI = flashCardsAPI.injectEndpoints({
         url: `v1/decks/${id}`,
       }),
     }),
-    getDeckInfo: builder.query<Omit<Deck, 'author'>, { id: string }>({
+    getDeck: builder.query<Omit<Deck, 'author'>, { id: string }>({
       providesTags: ['deck'],
       query: ({ id }) => ({
         method: 'GET',
@@ -48,7 +48,7 @@ const decksAPI = flashCardsAPI.injectEndpoints({
 export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
-  useGetDeckInfoQuery,
+  useGetDeckQuery,
   useGetDecksQuery,
   useUpdateDeckMutation,
 } = decksAPI

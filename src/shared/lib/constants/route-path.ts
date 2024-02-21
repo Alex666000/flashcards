@@ -4,7 +4,7 @@ export const ROUTES = {
   createNewPassword: '/create-new-password',
   decks: '/decks',
   learn: '/learn-card',
-  notFoundPage: '/not-found-page/404',
+  notFoundPage: '/not-found-page',
   profile: '/profile',
   recoverPassword: '/recover-password',
   signIn: '/sign-in',

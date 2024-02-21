@@ -13,7 +13,7 @@ export type TextFieldProps = {
   label?: string
   readonly?: boolean
   type?: 'email' | 'password' | 'search' | 'text'
-  value: string
+  value?: string
 } & ComponentPropsWithoutRef<'input'>
 
 type PropsType = TextFieldProps & Omit<ComponentPropsWithoutRef<'input'>, keyof TextFieldProps>

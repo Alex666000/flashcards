@@ -24,10 +24,17 @@
   }
 }
 
+.selectBlock p {
+  width: 100%;
+  min-width: 75px;
+}
+
 .buttons {
   display: flex;
   flex-direction: row;
   gap: 0 12px;
   align-items: center;
   justify-content: flex-start;
+
+  max-width: 200px;
 }

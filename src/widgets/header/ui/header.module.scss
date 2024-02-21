@@ -23,33 +23,6 @@
     // чтобы высота была никогда не меньше - не хардкодим её
     // иначе просто не указываем она подстроится под размер контента
     min-height: 60px;
-
-    .link {
-      display: grid;
-      place-items: center;
-
-      // эти 3 своиства делают резиновой размеры при сжатии экрана
-      width: 100%;
-      max-width: 130px;
-      min-height: 46px;
-
-      outline: 2px solid transparent; // transparent вместо none писать!
-
-      transition: 0.3s;
-
-      &:hover {
-        filter: drop-shadow(0 0 4px var(--color-accent-700));
-      }
-
-      // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
-      &:focus-visible {
-        outline: 2px solid var(--color-info-700);
-      }
-
-      .logo {
-        cursor: pointer; // хотя он виит внутри Button что обернула логотип
-      }
-    }
   }
 }
 

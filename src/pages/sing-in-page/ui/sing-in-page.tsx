@@ -7,6 +7,7 @@ import { useLoginMutation, useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { LoginForm } from '@/features/forms'
 import { ROUTES, handleRequest } from '@/shared/lib'
 
+// авторизация - логинизация
 const SingInPage = () => {
   const { data: meAuthData } = useMeQuery()
   const [login] = useLoginMutation()

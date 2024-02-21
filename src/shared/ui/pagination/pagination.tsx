@@ -57,7 +57,9 @@ export const Pagination: FC<PaginationProps> = memo(
           <Typography variant={'body2'}>Show</Typography>
           {/* Селект с кол-вом элементов на странице */}
           <PageSizeSelect onPageSizeChange={onSetPageSizeChange} pageSize={pageSize} />
-          <Typography variant={'body2'}>on the page</Typography>
+          <Typography className={s.ps} variant={'body2'}>
+            on the page
+          </Typography>
         </div>
       </div>
     )

@@ -10,6 +10,7 @@ import {
   useDecksLocalStatePagination,
 } from '@/features/decks'
 import { useGetDecksQuery } from '@/features/decks/rtk-api'
+import { DecksPageHeader } from '@/pages/decks-page/ui/decks-page-header/decks-page-header'
 import { Sort, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { Loader } from '@/shared/ui/loaders-components'
@@ -106,14 +107,8 @@ const DecksPage = () => {
   return (
     <section className={s.decksPageBlock}>
       <Container className={s.header}>
-        <div className={s.top}>
-          <Typography as={'h1'} variant={'large'}>
-            Decks list
-          </Typography>
-          {/* создаем новую одну колоду по нажатию на кнопку: "Add new Deck" внутри FormData и
-          input c type='file'*/}
-          <CreateControlForNewDeck />
-        </div>
+        {/*внутри есть CreateControlForNewDeck для создания новой колоды*/}
+        <DecksPageHeader />
         {/* инпут + табы + слайдер + кнопка очистки всех фильтров = фильтровые контроли */}
         <FilterControls
           // берет значения из локального редакса (см.конспект 3 с Валера - и с сервера)

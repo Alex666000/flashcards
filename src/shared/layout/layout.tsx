@@ -7,7 +7,6 @@ import { useLogoutMutation, useMeQuery, util } from '@/features/auth/rtk-api/aut
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
 import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
-import { errorNotification } from '@/shared/lib/utils/error-notification'
 import { Header } from '@/widgets'
 
 /** Layout - убираем дублирующиеся слой - например Header, одинаковый на всех страницах он,
@@ -26,8 +25,10 @@ export const Layout = memo(() => {
   /* Для определения: загрузилось Арр или нет: или appStatus или loadingStatus? */
   // const loadingStatus = useAppSelector(loadingSelector) см. quiz
   const appStatus = useAppSelector(appStatusSelector)
-  const { data: meData } = useMeQuery() // авторизован ли я?
-  const [logout] = useLogoutMutation()
+  const { data: meData, isError } = useMeQuery() // авторизован ли я?
+  const isAuth = !isError // авторизован если нет ошибки
+
+  const [logout, { isLoading }] = useLogoutMutation()
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -59,7 +60,8 @@ export const Layout = memo(() => {
       <Header
         avatar={meData?.avatar}
         email={meData?.email}
-        isAuth={!!meData}
+        isAuth={isAuth}
+        isDisabled={isLoading}
         isLoading={appStatus}
         name={meData?.name}
         onLoginUserClick={redirectToSingIn}
