@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { ROUTES } from '@/shared/lib'
-import { Loader } from '@/shared/ui/loaders-components'
+import { Loader } from '@/shared/ui/loaders-components/app-loader'
 
 /**
  * Тут всегда достаём data me() запроса

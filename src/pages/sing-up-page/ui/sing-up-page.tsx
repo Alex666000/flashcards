@@ -27,7 +27,7 @@ const SignUpPage = () => {
           dispatch(util?.resetApiState())
         })
     } catch (error) {
-      errorNotification(error)
+      errorNotification(error ?? 'Could not sign up') // toast.error(error?.data?.message ?? 'Could not sign up')
     }
   }
 

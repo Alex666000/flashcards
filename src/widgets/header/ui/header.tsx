@@ -10,7 +10,7 @@ import { Avatar } from '@/shared/ui/avatar-s'
 import { Button } from '@/shared/ui/button'
 import { Container } from '@/shared/ui/container'
 import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/shared/ui/dropdown-s'
-import { LeanerProgress } from '@/shared/ui/loaders-components'
+import { LeanerProgress } from '@/shared/ui/loaders-components/app-loader'
 import { Typography } from '@/shared/ui/typography'
 import { ProfileInfo } from '@/widgets'
 

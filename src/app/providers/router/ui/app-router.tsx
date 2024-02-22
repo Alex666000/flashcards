@@ -15,7 +15,7 @@ import {
   VerifyEmailPage,
 } from '@/pages'
 import { ROUTES } from '@/shared/lib'
-import { Loader } from '@/shared/ui/loaders-components'
+import { Loader } from '@/shared/ui/loaders-components/app-loader'
 
 import { PrivateRoute } from './private-route'
 

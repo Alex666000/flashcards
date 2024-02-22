@@ -52,6 +52,7 @@ const ProfilePage = () => {
               )}
             </div>
             {isEditMode ? (
+              // нажал на карандашик
               <EditProfileForm
                 className={s.form}
                 initialValues={{ name: user.name }}

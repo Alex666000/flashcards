@@ -2,8 +2,8 @@ import { appReducer } from '@/app/model/slice/app.slice'
 import { authAPI } from '@/features/auth/rtk-api/auth.api'
 import { deckReducer } from '@/features/deck/model/slice/deck.slice'
 import { decksReducer } from '@/features/decks/model/slice/decks.slice'
-import { loadingReducer } from '@/features/loading/model/slice/loading.slice'
 import { flashCardsAPI } from '@/shared/api/flash-cards.api'
+import { loadingReducer } from '@/shared/ui/loaders-components/app-loader/model/slice'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
@@ -11,7 +11,7 @@ export const store = configureStore({
   // РТК апишка всего проекта - родитель для частных апишек проекта
   middleware: (gDM) => gDM().concat(flashCardsAPI.middleware),
   reducer: {
-    appReducer, // обычный реюсер
+    appReducer, // обычный реюсер - для глобального статуса для глобального лоадера
     [authAPI.reducerPath]: authAPI.reducer, // RTK редюсер
     deck: deckReducer,
     decks: decksReducer, // обычный реюсер
