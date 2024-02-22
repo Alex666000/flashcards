@@ -15,7 +15,7 @@ import {
   VerifyEmailPage,
 } from '@/pages'
 import { ROUTES } from '@/shared/lib'
-import { Loader } from '@/shared/ui/loaders-components/app-loader'
+import { Loader } from '@/shared/ui/loaders-components/loaders'
 
 import { PrivateRoute } from './private-route'
 
@@ -25,7 +25,7 @@ import { PrivateRoute } from './private-route'
 
 export const AppRouter = () => {
   return (
-    // Loader или LeanerProgress в Suspense
+    // Loader или LeanerProgress в Suspense - пока страница грузится - "видим крутилку"
     <Suspense fallback={<Loader />}>
       <Routes>
         {/* Общедоступные-публичные пути */}

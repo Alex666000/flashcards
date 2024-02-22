@@ -3,7 +3,6 @@ import { memo, useEffect, useState } from 'react'
 import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import {
-  CreateControlForNewDeck,
   DecksTable,
   FilterControls,
   useDecksLocalStateFilter,
@@ -13,7 +12,7 @@ import { useGetDecksQuery } from '@/features/decks/rtk-api'
 import { DecksPageHeader } from '@/pages/decks-page/ui/decks-page-header/decks-page-header'
 import { Sort, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
-import { Loader } from '@/shared/ui/loaders-components'
+import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
 import { Pagination } from '@/shared/ui/pagination'
 import { Typography } from '@/shared/ui/typography'
 
@@ -101,7 +100,7 @@ const DecksPage = () => {
   }
 
   if (isLoading) {
-    return <Loader />
+    return <LeanerProgress />
   }
 
   return (

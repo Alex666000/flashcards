@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { ROUTES } from '@/shared/lib'
-import { Loader } from '@/shared/ui/loaders-components/app-loader'
+import { Loader } from '@/shared/ui/loaders-components/loaders'
 
 /**
  * Тут всегда достаём data me() запроса
@@ -10,13 +10,14 @@ import { Loader } from '@/shared/ui/loaders-components/app-loader'
  */
 
 export const PrivateRoute = () => {
-  const { isError, isLoading } = useMeQuery()
+  const { data, isLoading } = useMeQuery()
+  const isAuthenticated = !!data && !('success' in data)
 
   if (isLoading) {
     return <Loader />
   }
 
-  return !isError ? <Outlet /> : <Navigate to={ROUTES.signIn} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.signIn} />
 }
 
 /*

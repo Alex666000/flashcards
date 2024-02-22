@@ -1,7 +1,6 @@
-import { ElementRef, forwardRef } from 'react'
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
-import { StatusType } from '@/app/model/slice/app.slice'
 import { LogoIcon } from '@/shared/assets'
 import { LogOutIcon } from '@/shared/assets/icons/sutarday-icons/LogOutIcon'
 import { Person } from '@/shared/assets/icons/sutarday-icons/Person'
@@ -10,7 +9,7 @@ import { Avatar } from '@/shared/ui/avatar-s'
 import { Button } from '@/shared/ui/button'
 import { Container } from '@/shared/ui/container'
 import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/shared/ui/dropdown-s'
-import { LeanerProgress } from '@/shared/ui/loaders-components/app-loader'
+import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
 import { Typography } from '@/shared/ui/typography'
 import { ProfileInfo } from '@/widgets'
 
@@ -20,29 +19,27 @@ type Props = {
   avatar?: string
   email?: string
   isAuth: boolean
-  isDisabled?: boolean
-  isLoading: StatusType
+  isLoading: boolean
   name?: string
   onLoginUserClick?: () => void
   onLogoutUserClick: () => void
   onRedirectToProfileClick: () => void
 }
 
-export const Header = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
+export const Header = memo((props: Props) => {
   const {
     avatar = '',
     email = 'NoNameEmail@.com',
     isAuth,
-    isDisabled,
-    isLoading = 'idle',
+    isLoading,
     name = 'Some_Name',
     onLoginUserClick,
     onLogoutUserClick,
     onRedirectToProfileClick,
-  } = props as Props
+  } = props
 
   return (
-    <header className={s.headerBlock} ref={ref}>
+    <header className={s.headerBlock}>
       <Container className={s.headerContainer}>
         <Button as={Link} className={s.link} to={ROUTES.decks} variant={'link'}>
           <LogoIcon className={s.logo} />
@@ -71,7 +68,6 @@ export const Header = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
               />
               {/* Item с иконкой слева и текстом справа */}
               <DropdownItemWithIcon
-                disabled={isDisabled}
                 icon={<LogOutIcon />}
                 onSelect={onLogoutUserClick}
                 text={'Sign out'}
@@ -84,7 +80,8 @@ export const Header = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
           </Button>
         )}
       </Container>
-      {isLoading === 'loading' ? <LeanerProgress /> : ''}
+      {/* если тут написать то одновременно срабатывает при загрузке и LeanerProgress сверху и крутилка по середине экрана */}
+      {isLoading ? <LeanerProgress /> : ''}
     </header>
   )
 })

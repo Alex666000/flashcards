@@ -5,6 +5,7 @@ import { Layout } from '@/shared/layout'
 
 import { AppRouter } from './providers/index'
 
+console.log('App')
 export const App = memo(() => {
   return (
     <>

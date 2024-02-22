@@ -12,7 +12,7 @@ import { ROUTES, Sort, handleRequest, useDebounce } from '@/shared/lib'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
 import { Container } from '@/shared/ui/container'
-import { Loader } from '@/shared/ui/loaders-components/app-loader'
+import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
 import { Pagination } from '@/shared/ui/pagination'
 import { TextField } from '@/shared/ui/text-field_'
 import { Typography } from '@/shared/ui/typography'
@@ -89,7 +89,7 @@ const DeckPage = () => {
   }
 
   if (isLoading || isFetching || isDeletedLoading || isDeckInfoLoading || isDeckInfoFetching) {
-    return <Loader />
+    return <LeanerProgress />
   }
 
   return (

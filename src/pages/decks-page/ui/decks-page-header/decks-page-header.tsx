@@ -5,7 +5,7 @@ import { Typography } from '@/shared/ui/typography'
 
 import s from './decks-page-header.module.scss'
 
-export const DecksPageHeader = memo((props) => {
+export const DecksPageHeader = memo(() => {
   return (
     <div className={s.top}>
       <Typography as={'h1'} variant={'large'}>

@@ -1,5 +1,4 @@
-import { CreateNewPasswordForm } from '@/components/forms/create-new-password-page/create-new-password-page.tsx'
-import { CreateNewPasswordFormType } from '@/components/forms/create-new-password-page/use-create-new-password-page.ts'
+import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/features/forms'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

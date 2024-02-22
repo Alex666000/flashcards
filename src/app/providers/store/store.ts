@@ -3,7 +3,7 @@ import { authAPI } from '@/features/auth/rtk-api/auth.api'
 import { deckReducer } from '@/features/deck/model/slice/deck.slice'
 import { decksReducer } from '@/features/decks/model/slice/decks.slice'
 import { flashCardsAPI } from '@/shared/api/flash-cards.api'
-import { loadingReducer } from '@/shared/ui/loaders-components/app-loader/model/slice'
+import { loadingReducer } from '@/shared/ui/loaders-components/loaders/model/slice'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 

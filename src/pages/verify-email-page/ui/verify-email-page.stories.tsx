@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import { store } from '@/app/providers'
-import { VerifyEmailPage } from '@/pages/verify-email-page/ui/verify-email-page'
+import { VerifyEmailPage } from '@/pages'
 
 const meta = {
   argTypes: {},

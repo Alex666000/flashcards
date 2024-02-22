@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css'
  */
 export const Toast = () => (
   <ToastContainer
-    autoClose={4000}
+    autoClose={3000}
     closeOnClick
     containerId={'common'}
     draggable

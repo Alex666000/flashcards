@@ -2,7 +2,7 @@ import { memo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useGetRandomCardQuery, useRateCardMutation } from '@/features/cards/rtk-api/cards'
-import { useGetDeckInfoQuery } from '@/features/decks/rtk-api'
+import { useGetDeckQuery } from '@/features/decks/rtk-api'
 import { RateCardForm, RateType } from '@/features/forms'
 import { handleRequest } from '@/shared/lib'
 import { BackButton } from '@/shared/ui/back-button'
@@ -30,7 +30,7 @@ const LearnCardPage = () => {
   // для получения параметров из URL - получаем id из урла
   const params = useParams()
   const id = params.id as string
-  const { currentData: deckData } = useGetDeckInfoQuery({ id })
+  const { currentData: deckData } = useGetDeckQuery({ id })
   const { currentData: cardData } = useGetRandomCardQuery({ id })
 
   const onSubmit = async (data: RateType) => {

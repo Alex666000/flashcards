@@ -1,4 +1,4 @@
-import { CheckEmailPage } from '@/pages/check-email-page/ui/check-email-page'
+import { CheckEmailPage } from '@/pages'
 import { BrowserRouterDecorator } from '@/shared/config'
 import { Meta, StoryObj } from '@storybook/react'
 

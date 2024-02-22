@@ -1,12 +1,14 @@
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
 import { useLogoutMutation, useMeQuery, util } from '@/features/auth/rtk-api/auth.api'
+import { errorNotification } from '@/shared/lib'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { useAppDispatch } from '@/shared/lib/hooks/use-app-dispatch'
 import { useAppSelector } from '@/shared/lib/hooks/use-app-selector'
+import { loadingSelector } from '@/shared/ui/loaders-components/loaders/model/selectors/loading-selector'
 import { Header } from '@/widgets'
 
 /** Layout - убираем дублирующиеся слой - например Header, одинаковый на всех страницах он,
@@ -23,17 +25,15 @@ import { Header } from '@/widgets'
 
 export const Layout = memo(() => {
   /* Для определения: загрузилось Арр или нет: или appStatus или loadingStatus? */
-  // const loadingStatus = useAppSelector(loadingSelector) см. quiz
-  const appStatus = useAppSelector(appStatusSelector)
-  const { data: meData, isError } = useMeQuery() // авторизован ли я?
-  const isAuth = !isError // авторизован если нет ошибки
+  const loadingStatus = useAppSelector(loadingSelector)
+  const { data: meData } = useMeQuery() // авторизован ли я?
 
-  const [logout, { isLoading }] = useLogoutMutation()
+  const [logout] = useLogoutMutation()
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const handleLogoutUserClick = () => {
+  const handleLogoutUserClick = useCallback(() => {
     logout()
       .unwrap()
       .then(() => {
@@ -42,17 +42,21 @@ export const Layout = memo(() => {
         navigate(ROUTES.signIn)
       })
       .catch((error) => {
-        toast("I couldn't log out")
+        errorNotification(error)
       })
-  }
+  }, [dispatch, navigate])
 
-  const redirectToProfile = () => {
-    navigate(ROUTES.profile)
-  }
+  const redirectToSingIn = useCallback(() => {
+    return () => {
+      navigate(ROUTES.signIn)
+    }
+  }, [navigate])
 
-  const redirectToSingIn = () => {
-    navigate(ROUTES.signIn)
-  }
+  const redirectToProfile = useCallback(() => {
+    return () => {
+      navigate(ROUTES.profile)
+    }
+  }, [navigate])
 
   return (
     <>
@@ -60,13 +64,12 @@ export const Layout = memo(() => {
       <Header
         avatar={meData?.avatar}
         email={meData?.email}
-        isAuth={isAuth}
-        isDisabled={isLoading}
-        isLoading={appStatus}
+        isAuth={!!meData}
+        isLoading={loadingStatus}
         name={meData?.name}
         onLoginUserClick={redirectToSingIn}
-        onLogoutUserClick={handleLogoutUserClick}
         // Нейминг функций: onSetBookBlur={handleSetBookBlur}
+        onLogoutUserClick={handleLogoutUserClick}
         onRedirectToProfileClick={redirectToProfile}
       />
       {/* В Outlet - пойдет все дочернее содержимое - в промежуток между хедером и футером*/}
