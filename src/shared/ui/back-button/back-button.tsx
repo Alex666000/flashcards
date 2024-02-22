@@ -1,4 +1,4 @@
-import { FC, MouseEvent, memo } from 'react'
+import { FC, MouseEvent, memo, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@/shared/ui/button'
@@ -31,10 +31,12 @@ export const BackButton: FC<Props> = memo(
 
     // Создается функция backHandler, которая предотвращает стандартное действие события клика (e.preventDefault())
     // и вызывает функцию navigate(-1) для перехода на предыдущую страницу.
-    const handleBackButtonClick = (e: MouseEvent<HTMLAnchorElement>) => {
-      e.preventDefault()
-      navigate(-1)
-    }
+    const handleBackButtonClick = useCallback(() => {
+      return (e: MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault()
+        navigate(-1)
+      }
+    }, [navigate])
 
     return (
       <Button
