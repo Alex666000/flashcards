@@ -140,9 +140,12 @@
   padding: 0.6rem 0;
   font-size: var(--font-size-m);
   color: var(--color-accent-500);
+  text-decoration: none;
 
   &:hover {
     color: var(--color-accent-300);
+    text-decoration: underline;
+    opacity: 0.9;
   }
 
   &:active {
@@ -151,7 +154,6 @@
 
   &:focus {
     border-radius: 130px;
-    outline-color: transparent;
   }
 
   &:focus-visible {
