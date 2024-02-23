@@ -1,3 +1,4 @@
+# задеплоеный проект: https://flashcards-gold.vercel.app/
 # Удалить пакет: pnpm remove @ayub-begimkulov/i18n
 
                                           # Правила вертски html:
