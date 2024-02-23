@@ -29,7 +29,7 @@ const ForgotPasswordPage = () => {
       // отправляем на почту юзера письмо о восстановление пароля
       await recoverPassword({ email, html }).unwrap()
       // редиректим на страницу:
-      navigate(`${ROUTES.checkEmail}/${email}`)
+      navigate(`${ROUTES.checkEmail}/${email}`) //
     })
   }
 
