@@ -9,8 +9,7 @@ import { VerifyEmailPage } from '@/pages'
 const meta = {
   argTypes: {},
   component: VerifyEmailPage,
-  tags: ['autodocs'],
-  title: 'Components/VerifyEmailPage',
+  title: 'pages/verify-email-page',
 } satisfies Meta<typeof VerifyEmailPage>
 
 export default meta

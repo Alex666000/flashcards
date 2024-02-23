@@ -9,7 +9,7 @@ import { ModalWindow } from './'
 const meta = {
   component: ModalWindow,
   tags: ['autodocs'],
-  title: 'Components/Modal Window',
+  title: 'shared/ui/modal-window',
 } satisfies Meta<typeof ModalWindow>
 
 export default meta

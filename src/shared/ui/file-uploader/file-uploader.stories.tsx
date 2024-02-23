@@ -8,7 +8,7 @@ import { FileUploader } from './file-uploader'
 const meta = {
   component: FileUploader,
   tags: ['autodocs'],
-  title: 'Components/FileUploader',
+  title: 'shared/ui/file-uploader',
 } satisfies Meta<typeof FileUploader>
 
 export default meta

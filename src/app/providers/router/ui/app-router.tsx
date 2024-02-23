@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, memo } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 import {
@@ -23,7 +23,7 @@ import { PrivateRoute } from './private-route'
  * AppRouter (всё равно что Pages назвать..)  - отрисовывает все пути проекта
  */
 
-export const AppRouter = () => {
+export const AppRouter = memo(() => {
   return (
     // Loader или LeanerProgress в Suspense - пока страница грузится - "видим крутилку"
     <Suspense fallback={<Loader />}>
@@ -50,7 +50,7 @@ export const AppRouter = () => {
       </Routes>
     </Suspense>
   )
-}
+})
 
 /*
 - Layout - макет всего проекта - тут из Header и Аутлета - всего остального

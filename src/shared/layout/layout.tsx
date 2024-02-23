@@ -2,7 +2,6 @@ import { memo, useCallback } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
 import { useLogoutMutation, useMeQuery, util } from '@/features/auth/rtk-api/auth.api'
 import { errorNotification } from '@/shared/lib'
 import { ROUTES } from '@/shared/lib/constants/route-path'
@@ -47,15 +46,11 @@ export const Layout = memo(() => {
   }, [dispatch, navigate])
 
   const redirectToSingIn = useCallback(() => {
-    return () => {
-      navigate(ROUTES.signIn)
-    }
+    navigate(ROUTES.signIn)
   }, [navigate])
 
   const redirectToProfile = useCallback(() => {
-    return () => {
-      navigate(ROUTES.profile)
-    }
+    navigate(ROUTES.profile)
   }, [navigate])
 
   return (

@@ -5,7 +5,7 @@ import { Rating } from './rating'
 const meta = {
   component: Rating,
   tags: ['autodocs'],
-  title: 'Components/Rating',
+  title: 'shared/ui/rating',
 } satisfies Meta<typeof Rating>
 
 export default meta
@@ -21,7 +21,7 @@ export const Selected: Story = {
   },
 }
 
-export const Size: Story = {
+export const Large: Story = {
   args: {
     size: 25,
   },

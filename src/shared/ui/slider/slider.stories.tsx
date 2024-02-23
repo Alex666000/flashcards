@@ -7,7 +7,7 @@ import { Slider } from './'
 const meta = {
   component: Slider,
   tags: ['autodocs'],
-  title: 'Components/Slider',
+  title: 'shared/ui/slider',
   //argTypes: {},
 } satisfies Meta<typeof Slider>
 

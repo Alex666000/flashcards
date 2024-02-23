@@ -8,7 +8,7 @@ const meta = {
   component: BackButton,
   decorators: [BrowserRouterDecorator],
   tags: ['autodocs'],
-  title: 'Components/Back Button',
+  title: 'shared/ui/back-button',
 } satisfies Meta<typeof BackButton>
 
 export default meta

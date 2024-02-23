@@ -9,7 +9,7 @@ import { Sort, TableHeader } from './'
 const meta = {
   component: Table.Root,
   tags: ['autodocs'],
-  title: 'Components/Table Header',
+  title: 'shared/ui/table-header',
 } satisfies Meta<typeof Table.Root>
 
 export default meta

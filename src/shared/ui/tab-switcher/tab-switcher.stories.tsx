@@ -6,7 +6,7 @@ import { Meta } from '@storybook/react'
 const meta = {
   component: TabSwitcher,
   tags: ['autodocs'],
-  title: 'Components/Tab Switcher',
+  title: 'shared/ui/tab-switcher',
 } satisfies Meta<typeof TabSwitcher>
 
 export default meta

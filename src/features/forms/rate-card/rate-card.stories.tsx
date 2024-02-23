@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { RateCardForm, RateType } from '@/features/forms/rate-card/rate-card'
+import { RateCardForm, RateType } from './rate-card'
 
 const meta = {
   component: RateCardForm,
-  title: 'Forms/Rate Card',
+  title: 'features/forms/rate-card',
 } satisfies Meta<typeof RateCardForm>
 
 export default meta

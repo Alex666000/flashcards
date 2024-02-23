@@ -1,11 +1,10 @@
 import { memo } from 'react'
 
-import { ThemeToggle } from '@/app/providers/theme-toogle/theme-toogle'
 import { Layout } from '@/shared/layout'
 
 import { AppRouter } from './providers/index'
+import { ThemeToggle } from './providers/theme-toggle/theme-toggle'
 
-console.log('App')
 export const App = memo(() => {
   return (
     <>

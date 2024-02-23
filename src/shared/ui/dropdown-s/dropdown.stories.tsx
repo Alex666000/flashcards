@@ -9,7 +9,7 @@ import { Button } from '../button'
 const meta = {
   component: Dropdown,
   tags: ['autodocs'],
-  title: 'Components/Dropdown',
+  title: 'shared/ui/dropdown',
 } satisfies Meta<typeof Dropdown>
 
 export default meta

@@ -1,9 +1,10 @@
-import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/features/forms'
 import { Meta, StoryObj } from '@storybook/react'
+
+import { CreateNewPasswordForm, CreateNewPasswordFormType } from '../index'
 
 const meta = {
   component: CreateNewPasswordForm,
-  title: 'Forms/Create New Password',
+  title: 'features/forms/create-new-password',
 } satisfies Meta<typeof CreateNewPasswordForm>
 
 export default meta

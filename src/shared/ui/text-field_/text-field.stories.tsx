@@ -13,7 +13,7 @@ const meta = {
   },
   component: TextField,
   tags: ['autodocs'],
-  title: 'Components/Text Field',
+  title: 'shared/ui/text-field',
 } satisfies Meta<typeof TextField>
 
 export default meta

@@ -6,8 +6,7 @@ import { Meta } from '@storybook/react'
 
 const meta = {
   component: Dialog,
-  tags: ['autodocs'],
-  title: 'Components/Dialog',
+  title: 'shared/ui/dialog',
 } satisfies Meta<typeof Dialog>
 
 export default meta

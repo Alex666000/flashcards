@@ -9,7 +9,7 @@ import { Card } from './'
 const meta = {
   component: Card,
   tags: ['autodocs'],
-  title: 'Components/Card',
+  title: 'shared/ui/card',
 } satisfies Meta<typeof Card>
 
 export default meta
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    children: <div style={{ height: '100px' }}></div>,
+    children: <div style={{ height: '100px' }}>Hello developer!</div>,
   },
 }
 

@@ -29,7 +29,7 @@ const DeckPage = () => {
 
   // для получения данных о текущей странице, id колоды - deckId, размере страницы, параметре поиска
   const { currentPage, deckId, pageSize, searchName, setCurrentPage, setPageSize, setSearchName } =
-    useDeckLocalStateData()
+    useDeckLocalStateData() // можно через searchParams - см проект flashcards в папке "самые крутые образцы"
 
   const debouncedSearchName = useDebounce(searchName)
 

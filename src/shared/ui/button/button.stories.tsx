@@ -74,15 +74,6 @@ export const Outline: Story = {
   },
 }
 
-export const Link: Story = {
-  args: {
-    // взяли пропсы Primary - и переопределили 2 пропса со своими значениями
-    ...Primary.args,
-    children: 'Full width Button',
-    fullWidth: true,
-  },
-}
-
 export const FullWidth: Story = {
   args: {
     children: 'Full Width Button',

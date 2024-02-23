@@ -4,7 +4,7 @@ import { Loader } from './loader'
 
 const meta = {
   component: Loader,
-  title: 'Components/Initialization Loading',
+  title: 'shared/ui/loader',
 } satisfies Meta<typeof Loader>
 
 export default meta

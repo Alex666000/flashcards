@@ -6,7 +6,7 @@ const meta = {
   argTypes: { onValueChange: { action: 'select changes' } },
   component: Select,
   tags: ['autodocs'],
-  title: 'Components/Select',
+  title: 'shared/ui/select',
 } satisfies Meta<typeof Select>
 
 export default meta

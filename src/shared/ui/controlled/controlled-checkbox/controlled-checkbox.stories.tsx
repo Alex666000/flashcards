@@ -10,7 +10,7 @@ import { DevTool } from '@hookform/devtools'
 
 const meta = {
   component: ControlledCheckbox,
-  title: 'Components/Controlled/Checkbox',
+  title: 'shared/ui/controlled-checkbox',
 } satisfies Meta<typeof ControlledCheckbox>
 
 export default meta

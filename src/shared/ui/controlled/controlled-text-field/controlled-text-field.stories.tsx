@@ -10,7 +10,7 @@ import { DevTool } from '@hookform/devtools'
 
 const meta = {
   component: ControlledTextField,
-  title: 'Components/Controlled/Text Field',
+  title: 'shared/ui/controlled-text-field',
 } satisfies Meta<typeof ControlledTextField>
 
 export default meta

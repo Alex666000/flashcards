@@ -4,7 +4,7 @@ import { Moon } from '@/shared/assets/icons/sutarday-icons/MoonIcon'
 import { Sun } from '@/shared/assets/icons/sutarday-icons/SunIcon'
 import * as RadixToggle from '@radix-ui/react-toggle'
 
-import s from './theme-toogle.module.scss'
+import s from './theme-toggle.module.scss'
 
 export const ThemeToggle = () => {
   // Проверяем, есть ли сохраненная тема в локальном хранилище

@@ -9,7 +9,7 @@ import { DevTool } from '@hookform/devtools'
 
 const meta = {
   component: ControlledSelect,
-  title: 'Components/Controlled/Select',
+  title: 'shared/ui/controlled-select',
 } satisfies Meta<typeof ControlledSelect>
 
 export default meta

@@ -10,7 +10,7 @@ import { Table } from './'
 const meta = {
   component: Table.Root,
   tags: ['autodocs'],
-  title: 'Components/Table',
+  title: 'shared/ui/table',
 } satisfies Meta<typeof Table.Root>
 
 export default meta

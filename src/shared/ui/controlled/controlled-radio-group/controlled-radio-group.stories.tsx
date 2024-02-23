@@ -9,7 +9,7 @@ import { Meta } from '@storybook/react'
 
 const meta = {
   component: ControlledRadioGroup,
-  title: 'Components/Controlled/Radio Group',
+  title: 'shared/ui/controlled-radio-group',
 } satisfies Meta<typeof ControlledRadioGroup>
 
 export default meta

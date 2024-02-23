@@ -6,7 +6,7 @@ import { Pagination } from './'
 
 export default {
   component: Pagination,
-  title: 'Components/Pagination',
+  title: 'shared/ui/pagination',
 } as Meta<typeof Pagination>
 
 export const Default = () => {

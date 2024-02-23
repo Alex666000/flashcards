@@ -1,11 +1,10 @@
 import type { Meta } from '@storybook/react'
 
-import { ThemeToggle } from './theme-toogle'
+import { ThemeToggle } from './theme-toggle'
 
 export default {
   component: ThemeToggle,
-  tags: ['autodocs'],
-  title: 'Components/ThemeToggle',
+  title: 'app/providers/theme-toggle',
 } satisfies Meta<typeof ThemeToggle>
 
 export const Simple = {}

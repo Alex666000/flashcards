@@ -4,7 +4,7 @@ import { LeanerProgress } from './leaner-progress'
 
 const meta = {
   component: LeanerProgress,
-  title: 'Components/Query Loading',
+  title: 'shared/ui/leaner-progress',
 } satisfies Meta<typeof LeanerProgress>
 
 export default meta
