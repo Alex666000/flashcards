@@ -1,14 +1,12 @@
-.loginFormBlock {
+.loginCard {
   width: 100%;
   max-width: 420px;
-  height: 100vh;
-  margin: 0 auto;
-}
-
-.cardBlock {
-  width: 100%;
-  margin: 100px auto;
+  margin: 50px auto;
   padding: 33px 36px 29px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 2px;
 }
 
 .loginForm {
@@ -21,8 +19,8 @@
 }
 
 .checkbox {
+  width: 100%;
   margin-bottom: 6px;
-  margin-left: -6px;
 }
 
 .title {
@@ -38,7 +36,7 @@
   justify-content: flex-end;
 
   width: 100%;
-  margin-bottom: 66px;
+  margin-bottom: 40px;
 
   color: inherit;
   text-align: right;

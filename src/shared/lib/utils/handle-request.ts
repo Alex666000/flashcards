@@ -6,6 +6,7 @@
 
 import { errorToastNotification } from '@/shared/lib/utils/error-toast-notification'
 
+// см 2 конспект старые карты Валера logic как работает
 export const handleRequest = async (logic: () => Promise<any>): Promise<void> => {
   try {
     await logic()

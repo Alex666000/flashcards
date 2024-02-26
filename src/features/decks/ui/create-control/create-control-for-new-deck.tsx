@@ -1,7 +1,9 @@
 import { useState } from 'react'
 
+import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
 import { useCreateDeckMutation } from '@/features/decks/rtk-api'
 import { DeckForm } from '@/features/forms'
+import { useAppSelector } from '@/shared/lib'
 import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Button } from '@/shared/ui/button'
 import { ModalWindow } from '@/shared/ui/modal-window'
@@ -20,6 +22,9 @@ import { ModalWindow } from '@/shared/ui/modal-window'
 
 // отвечает за создание новой колоды:
 export const CreateControlForNewDeck = () => {
+  // для дизейбла кнопки
+  const appStatus = useAppSelector(appStatusSelector)
+
   // открытием и закрытием модального окна для создания новой колоды
   const [open, setOpen] = useState(false)
 
@@ -42,7 +47,9 @@ export const CreateControlForNewDeck = () => {
         {/* форма внутри модального окна для создания новой колоды */}
         <DeckForm onCancel={() => setOpen(false)} onSubmit={handleCreateDeck} />
       </ModalWindow>
-      <Button onClick={() => setOpen(true)}>Add New Deck</Button>
+      <Button disabled={appStatus === 'loading'} onClick={() => setOpen(true)}>
+        Add New Deck
+      </Button>
     </>
   )
 }

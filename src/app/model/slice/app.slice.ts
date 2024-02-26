@@ -19,7 +19,7 @@ const initialState: AppInitialStateType = {
 export const addQuestionAC = createAction<string>('app/addQuestion')
 export const addOrderByAC = createAction<string>('app/addOrderByAC')
 
-const appSlice = createSlice({
+export const appSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addQuestionAC, (state, action) => {
@@ -68,7 +68,7 @@ const appSlice = createSlice({
 
                 return
               }
-              if (action?.payload?.data?.path.endsWith('me?')) {
+              if (action?.payload?.data?.path?.endsWith('me?')) {
                 state.status = 'failed'
 
                 return

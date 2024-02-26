@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import { useVerifyMailMutation } from '@/features/auth/rtk-api/auth.api'
 import { ROUTES } from '@/shared/lib'
+import { Page } from '@/shared/ui/page'
 import { Typography } from '@/shared/ui/typography'
 
 import styles from './verify-email-page.module.scss'
@@ -11,14 +12,17 @@ const VerifyEmailPage = () => {
   const { code } = useParams()
   const [verifyMail] = useVerifyMailMutation()
 
+  // т.к есть зависимости эффект за ними следит и при их изменении (обновлении)
+  // отправит снова запрос на сервер для обновления там новых данных и в респонсе
+  // ловим обновленные данные
   useEffect(() => {
     if (code) {
       verifyMail({ code })
     }
-  }, [code])
+  }, [code, verifyMail])
 
   return (
-    <div className={styles.root}>
+    <Page className={styles.verifyEmailBlock}>
       <Typography as={'h1'} className={styles.title} variant={'large'}>
         Your Email is Verified
       </Typography>
@@ -32,7 +36,7 @@ const VerifyEmailPage = () => {
         </Link>{' '}
         page.
       </Typography>
-    </div>
+    </Page>
   )
 }
 

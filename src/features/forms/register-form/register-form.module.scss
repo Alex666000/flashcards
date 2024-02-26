@@ -1,14 +1,14 @@
-.registerFormBlock {
-  margin-top: 100px;
-}
-
-.card {
+.registerCard {
   width: 100%; // резиновая ширина
   max-width: 420px; // резиновая ширина
-  margin: 36px auto;
+  margin: 50px auto;
   padding: 2.05rem 2.25rem 1.2rem;
 
   text-align: center;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 2px;
 
   .title {
     margin-bottom: 27px;
@@ -16,21 +16,24 @@
   }
 
   .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
     div {
       text-align: left;
     }
 
     div + div {
-      margin-top: 10px;
+      // margin-top: 10px;
     }
   }
 
   .button {
-    margin-top: 2.5rem;
+    margin-top: 1rem;
   }
 
   .subtitle {
-    margin-top: 1.25rem;
     color: var(--color-light-900);
   }
 
@@ -45,4 +48,11 @@
     text-decoration: underline;
     white-space: pre-line;
   }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

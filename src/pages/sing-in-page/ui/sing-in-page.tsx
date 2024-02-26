@@ -6,10 +6,14 @@ import { LoginBodyArgs } from '@/features/auth'
 import { useLoginMutation, useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { LoginForm } from '@/features/forms'
 import { ROUTES, handleRequest } from '@/shared/lib'
+import { Page } from '@/shared/ui/page'
 
 // авторизация - логинизация
 const SingInPage = () => {
   const { data: meAuthData } = useMeQuery()
+  // в мутациях 1 параметр функция которую вызываем и засовываем данные в нее
+  // тут вызываем даем данные но на основании их не отрисовываем ничего а просто логинемся
+  // и редиректимся на страницу всех колод
   const [login] = useLoginMutation()
 
   const handleLoginFormDataSubmit = async (data: LoginBodyArgs) => {
@@ -23,7 +27,11 @@ const SingInPage = () => {
     return <Navigate to={ROUTES.decks} />
   }
 
-  return <LoginForm onLoginFormDataSubmit={handleLoginFormDataSubmit} />
+  return (
+    <Page>
+      <LoginForm onLoginFormDataSubmit={handleLoginFormDataSubmit} />
+    </Page>
+  )
 }
 
 export default memo(SingInPage)

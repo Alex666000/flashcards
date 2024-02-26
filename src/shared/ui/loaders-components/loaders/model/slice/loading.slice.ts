@@ -2,20 +2,20 @@ import { createSlice, isFulfilled, isPending, isRejected } from '@reduxjs/toolki
 
 const initialState = {
   // храним состояние редакса для LeanerProgress: для всего проекта
-  queryInProgress: false,
+  isQueryInProgress: false,
 }
 
-const slice = createSlice({
+const loginSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(isPending, (state) => {
-        state.queryInProgress = true // видим "Линеар-прогресс"
+        state.isQueryInProgress = true // видим "Линеар-прогресс"
       })
       .addMatcher(isFulfilled, (state) => {
-        state.queryInProgress = false
+        state.isQueryInProgress = false
       })
       .addMatcher(isRejected, (state) => {
-        state.queryInProgress = false
+        state.isQueryInProgress = false
       })
   },
   initialState,
@@ -23,9 +23,9 @@ const slice = createSlice({
   reducers: {},
 })
 
-export const loadingReducer = slice.reducer
+export const loadingReducer = loginSlice.reducer
 
-export const loadingActions = slice.actions
+export const loadingActions = loginSlice.actions
 
 /*
 - Код в extraReducers с addMatcher() покроет все крутилки в проекте! Поэтому loading - feature

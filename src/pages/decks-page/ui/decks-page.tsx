@@ -5,12 +5,12 @@ import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import {
   DecksTable,
   FilterControls,
-  useDecksLocalStateFilter,
-  useDecksLocalStatePagination,
+  useDecksReduxStateFilter,
+  useDecksReduxStatePagination,
 } from '@/features/decks'
 import { useGetDecksQuery } from '@/features/decks/rtk-api'
 import { DecksPageHeader } from '@/pages/decks-page/ui/decks-page-header/decks-page-header'
-import { Sort, useDebounce } from '@/shared/lib'
+import { Sort, useAppSelector, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
 import { Pagination } from '@/shared/ui/pagination'
@@ -24,10 +24,13 @@ import s from './decks.module.scss'
  */
 
 const DecksPage = () => {
-  // Состояния поисковых параметров (фильтров) и пагинации: храним в локальном сетите редакса
-  const { currentPage, pageSize, setCurrentPage, setPageSize } = useDecksLocalStatePagination() // пагинация
+  // Состояния поисковых параметров (фильтров) и "ПАГИНАЦИИ":
+  // храним в локальном стейте-редакса состояния пагинации
+  const { currentPage, pageSize, setCurrentPage, setPageSize } = useDecksReduxStatePagination()
+
+  // фильтры поиска - параметры поиска "инпут + таб + слайдер"
   const { searchName, setSearchName, setSliderValue, setTabValue, sliderValue, tabValue } =
-    useDecksLocalStateFilter() // фильтры поиска - параметры поиска
+    useDecksReduxStateFilter()
 
   // Сортировка:
   const [sort, setSort] = useState<Sort>({ direction: 'desc', key: 'updated' })
@@ -44,7 +47,9 @@ const DecksPage = () => {
 
   // Запрос на сервер за колодами с такими поисковыми параметрами которые взяли из локального стейта редакса:
   const {
-    data: decksData,
+    // currentData теперь вместо data тк сделали  - текущая выбранная дата - тк сделали "пессимистик апдейт"
+    // с помощью onQueryStarted в квери запросе: createDeck
+    currentData: decksData,
     error,
     isLoading,
   } = useGetDecksQuery({
@@ -136,7 +141,7 @@ const DecksPage = () => {
           onSetPageChange={setCurrentPage}
           onSetPageSizeChange={setPageSize}
           pageSize={pageSize}
-          totalCount={decksData?.pagination?.totalItems}
+          totalCount={decksData?.pagination?.totalItems || 10}
         />
       </Container>
     </section>

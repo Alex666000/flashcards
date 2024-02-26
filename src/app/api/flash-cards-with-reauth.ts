@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
-const baseQuery = fetchBaseQuery({
+export const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.flashcards.andrii.es',
   credentials: 'include',
 })

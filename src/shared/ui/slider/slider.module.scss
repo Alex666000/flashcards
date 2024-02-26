@@ -1,93 +1,105 @@
 @import '@/app/styles/mixins';
 
 .label {
-    @include flex(column, 7px);
+  display: flex;
+  flex-direction: column;
+  gap: 7px 0;
+  align-items: flex-start;
+  justify-content: flex-start;
 
-    .body {
-        @include flex(row, 0, 0, center, space-between);
+  .body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-        width: 251px;
-        height: 36px;
+    width: 251px;
+    height: 36px;
 
-        .value {
-            display: grid;
-            place-items: center;
+    .value {
+      display: grid;
+      place-items: center;
 
-            width: 36px;
-            height: 36px;
+      width: 36px;
+      height: 36px;
 
-            color: var(--color-light-100);
+      color: var(--color-light-100);
 
-            border: 1px solid var(--color-dark-300);
-            border-radius: 2px;
-        }
-
-        .line {
-            @include flex(row, 0, 0, center);
-
-            touch-action: none;
-            user-select: none;
-
-            position: relative;
-
-            width: 155px;
-            height: 16px;
-
-            .track {
-                position: relative;
-
-                flex-grow: 1;
-
-                height: 4px;
-
-                background-color: var(--color-accent-900);
-                border-radius: 9999px;
-
-                .range {
-                    position: absolute;
-                    height: 100%;
-                    background-color: var(--color-accent-500);
-                    border-radius: 9999px;
-                }
-            }
-
-            .thumb {
-                @include interactive-circle-element(36px);
-
-                cursor: pointer;
-
-                position: relative;
-
-                display: grid;
-                place-items: center;
-
-                width: 16px;
-                height: 16px;
-
-                background-color: var(--color-accent-500);
-                border-radius: 10px;
-                outline: none;
-
-                &:hover::after,
-                &:focus-visible::after {
-                    @include animation-circle-control(1, --color-accent-500);
-
-                    opacity: 0.3;
-                }
-
-                .dot {
-                    all: unset;
-
-                    position: relative;
-                    z-index: 2;
-
-                    width: 8px;
-                    height: 8px;
-
-                    background-color: var(--color-light-100);
-                    border-radius: 50%;
-                }
-            }
-        }
+      border: 1px solid var(--color-dark-300);
+      border-radius: 2px;
     }
+
+    .line {
+      touch-action: none;
+      user-select: none;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      width: 155px;
+      height: 16px;
+
+      .track {
+        position: relative;
+
+        flex-grow: 1;
+
+        height: 4px;
+
+        background-color: var(--color-accent-900);
+        border-radius: 9999px;
+
+        .range {
+          position: absolute;
+          height: 100%;
+          background-color: var(--color-accent-500);
+          border-radius: 9999px;
+        }
+      }
+
+      .thumb {
+        @include interactive-circle-element(36px);
+
+        cursor: pointer;
+
+        position: relative;
+
+        display: grid;
+        place-items: center;
+
+        width: 16px;
+        height: 16px;
+
+        background-color: var(--color-accent-500);
+        border-radius: 10px;
+        outline: none;
+
+        &:hover::after,
+        &:focus-visible::after {
+          @include animation-circle-control(1, --color-accent-500);
+
+          opacity: 0.3;
+        }
+
+        .dot {
+          all: unset;
+
+          position: relative;
+          z-index: 2;
+
+          width: 8px;
+          height: 8px;
+
+          background-color: var(--color-light-100);
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+.disabled {
+  opacity: 0.5;
 }

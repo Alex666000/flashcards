@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { useDeleteCardMutation } from '@/features/cards/rtk-api/cards'
+import { useDeleteCardMutation } from '@/features/cards/rtk-api/cards.api'
 import { handleRequest } from '@/shared/lib/utils/handle-request'
 import { Dialog } from '@/shared/ui/dialog'
 import { Icon } from '@/shared/ui/icon'

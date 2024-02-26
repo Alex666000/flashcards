@@ -88,18 +88,19 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
   // Обработчик отправки данных формы. Создает объект formData, добавляет в него данные из формы
   // и вызывает функцию onSubmit
   // выбрали фото с компа и попали сюда
-  const sendHandler = (fileData: DeckFormType) => {
+  const sendHandler = (file: DeckFormType) => {
     // общяя форма, в нее добавляем поля что юзер (append) заполнит и потом отправим
     // в этот объект эти поля
     const formData = new FormData()
 
-    formData.append('name', fileData.name)
-    formData.append('isPrivate', `${fileData.isPrivate}`)
+    // в formData добавляем наш файл
+    formData.append('name', file.name)
+    formData.append('isPrivate', `${file.isPrivate}`)
 
     if (file === null) {
       formData.append('cover', '')
-    } else if (fileIsDirty && fileData.cover) {
-      formData.append('cover', fileData.cover)
+    } else if (fileIsDirty && file.cover) {
+      formData.append('cover', file.cover)
     }
 
     // когда пользователь заполнил поля отправил форму - и сверху в родителе делается post запрос
@@ -107,6 +108,9 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
     // и поле isPrivate смотри документацию и 1.14.00 Валера старые карточки 4 занятие конспект
     onSubmit(formData)
     // чтобы получить новую картинку и поля надо сделать get() запрос..
+    // смотрим нетворк что за запрос ушел и что нам в ответе пришло
+    // когда ответ от сервака тип картинки придет blob значит др код с formData пишем см.
+    // Валера 4 занятия старые карты 1.20.00
   }
 
   return (

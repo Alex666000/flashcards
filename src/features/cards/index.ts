@@ -1,4 +1,4 @@
-export { cardsAPI } from './rtk-api/cards'
+export { cardsAPI } from './rtk-api/cards.api'
 export type { Card } from './rtk-api/types'
 export type { CardsResponseData } from './rtk-api/types'
 export type { CardsParams } from './rtk-api/types'

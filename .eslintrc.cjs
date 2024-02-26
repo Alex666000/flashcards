@@ -6,6 +6,7 @@ module.exports = {
       rules: {
         'react-hooks/rules-of-hooks': 'off',
         'no-console': 'off',
+        "prefer-const": "off",
         'import/namespace': 'off',
         // 'no-trailing-spaces': 'error-page',
       },

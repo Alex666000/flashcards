@@ -26,13 +26,13 @@ export type Pagination = {
   totalPages: number
 }
 
-export type DecksResponse = {
+export type DecksResponseData = {
   items: Deck[]
   maxCardsCount: number
   pagination: Pagination
 }
 
-export type DecksParams = {
+export type DecksSearchParams = {
   authorId?: string
   currentPage?: number
   itemsPerPage?: number

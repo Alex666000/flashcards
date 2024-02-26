@@ -1,5 +1,7 @@
 import { memo } from 'react'
 
+import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
+import { useAppSelector } from '@/shared/lib'
 import { Button } from '@/shared/ui/button'
 import { Icon } from '@/shared/ui/icon'
 import { Slider } from '@/shared/ui/slider'
@@ -35,6 +37,9 @@ export const FilterControls = memo(
       { text: 'All cards', value: '' },
     ]
 
+    // для дизейбла кнопки
+    const appStatus = useAppSelector(appStatusSelector)
+
     // позволяет пользователю очистить все фильтры одним нажатием. При клике на эту кнопку
     // вызывается функция clearFilterHandler, которая обновляет все значения фильтров
     const clearFilterHandler = () => {
@@ -60,6 +65,7 @@ export const FilterControls = memo(
         {/* позволяет выбрать между двумя вкладками: "My cards" (карточки пользователя) */}
         {/* и "All cards" (все карточки). Определяет, какие карточки будут отображены */}
         <TabSwitcher
+          disabled={appStatus === 'loading'}
           label={'Show decks cards'}
           onValueChange={setTabValue}
           tabs={tabs}
@@ -67,13 +73,20 @@ export const FilterControls = memo(
         />
         {/* предоставляет пользователю возможность выбора числа карточек, которые будут отображены */}
         <Slider
+          disabled={appStatus === 'loading'}
           label={'Number of cards'}
           max={sliderMaxValue}
           min={0}
           onChange={setSliderValue}
           value={sliderValue}
         />
-        <Button className={s.clearButton} onClick={clearFilterHandler} variant={'secondary'}>
+        <Button
+          className={s.clearButton}
+          // дизейбл кнопки
+          disabled={appStatus === 'loading'}
+          onClick={clearFilterHandler}
+          variant={'secondary'}
+        >
           <Icon className={s.icon} name={'trash-bin'} />
           Clear Filter
         </Button>

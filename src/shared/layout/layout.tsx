@@ -23,14 +23,14 @@ import { Header } from '@/widgets'
  */
 
 export const Layout = memo(() => {
-  /* Для определения: загрузилось Арр или нет: или appStatus или loadingStatus? */
-  const loadingStatus = useAppSelector(loadingSelector)
-  const { data: meData } = useMeQuery() // авторизован ли я?
-
-  const [logout] = useLogoutMutation()
-
+  /* Для определения: загрузилось Арр или нет: или appStatus или isAppLoading?
+  Глобальный статус всего Арр */
+  const isAppLoading = useAppSelector(loadingSelector)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
+  const { data: meData } = useMeQuery() // авторизован ли я?
+  const [logout] = useLogoutMutation()
 
   const handleLogoutUserClick = useCallback(() => {
     logout()
@@ -38,12 +38,13 @@ export const Layout = memo(() => {
       .then(() => {
         toast.info('You are successfully logged out', { containerId: 'common' })
         dispatch(util?.resetApiState())
+        // при нажатии на лагаут - редиректим на стр.Логиеа (паттерн)
         navigate(ROUTES.signIn)
       })
       .catch((error) => {
         errorNotification(error)
       })
-  }, [dispatch, navigate])
+  }, [dispatch, logout, navigate])
 
   const redirectToSingIn = useCallback(() => {
     navigate(ROUTES.signIn)
@@ -60,7 +61,7 @@ export const Layout = memo(() => {
         avatar={meData?.avatar}
         email={meData?.email}
         isAuth={!!meData}
-        isLoading={loadingStatus}
+        isLoading={isAppLoading}
         name={meData?.name}
         onLoginUserClick={redirectToSingIn}
         // Нейминг функций: onSetBookBlur={handleSetBookBlur}

@@ -11,16 +11,17 @@ import { CreateNewPasswordFormType, useCreateNewPassword } from './use-create-ne
 
 type PropsType = {
   className?: string
-  onSubmit: (data: CreateNewPasswordFormType) => void
+  onSetCreateNewPasswordSubmit: (data: CreateNewPasswordFormType) => void
 }
 
-export const CreateNewPasswordForm: FC<PropsType> = ({ className, onSubmit }) => {
-  const classes = clsx(s.form, className)
-
+export const CreateNewPasswordForm: FC<PropsType> = ({
+  className,
+  onSetCreateNewPasswordSubmit,
+}) => {
   const { control, handleSubmit } = useCreateNewPassword()
 
   return (
-    <form className={classes} onSubmit={handleSubmit(onSubmit)}>
+    <form className={clsx(s.form, className)} onSubmit={handleSubmit(onSetCreateNewPasswordSubmit)}>
       <ControlledTextField
         control={control}
         label={'Password'}

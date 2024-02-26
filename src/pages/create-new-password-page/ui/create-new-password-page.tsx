@@ -7,18 +7,23 @@ import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/features/for
 import { handleRequest } from '@/shared/lib'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Card } from '@/shared/ui/card'
+import { Container } from '@/shared/ui/container'
+import { Page } from '@/shared/ui/page'
 import { Typography } from '@/shared/ui/typography'
 
 import s from './create-new-password-page.module.scss'
 
 const CreateNewPasswordPage = () => {
-  const [resetPassword] = useResetPasswordMutation()
   const navigate = useNavigate()
+  // с урла достаем токен
   const { token } = useParams<{ token: string }>()
 
-  const onSubmit = async ({ password }: CreateNewPasswordFormType) => {
+  const [resetPassword] = useResetPasswordMutation()
+
+  const handleSetCreateNewPasswordSubmit = async ({ password }: CreateNewPasswordFormType) => {
     if (token) {
       await handleRequest(async () => {
+        // отправляем запрос на сервак
         await resetPassword({ password, token }).unwrap()
         navigate(ROUTES.signIn)
         toast.success('The password has been changed', { containerId: 'common' })
@@ -27,16 +32,23 @@ const CreateNewPasswordPage = () => {
   }
 
   return (
-    <div className={s.container}>
-      <Card>
-        <section className={s.content}>
-          <Typography as={'h2'} variant={'large'}>
-            Create new password
-          </Typography>
-          <CreateNewPasswordForm className={s.form} onSubmit={onSubmit} />
+    <Page>
+      <Container>
+        <section className={s.container}>
+          <Card>
+            <section className={s.content}>
+              <Typography as={'h2'} variant={'large'}>
+                Create new password
+              </Typography>
+              <CreateNewPasswordForm
+                className={s.form}
+                onSetCreateNewPasswordSubmit={handleSetCreateNewPasswordSubmit}
+              />
+            </section>
+          </Card>
         </section>
-      </Card>
-    </div>
+      </Container>
+    </Page>
   )
 }
 

@@ -4,6 +4,7 @@ import { emailSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
+// схема валидации
 const forgotPasswordSchema = z.object({
   email: emailSchema,
 })

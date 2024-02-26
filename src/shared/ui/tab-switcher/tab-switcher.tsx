@@ -13,7 +13,10 @@ export type Tab = {
 }
 
 type Props = {
+  ariaLabel?: string
   className?: string
+  disabled?: boolean
+  fullWidth?: boolean
   label?: string
   onValueChange: (value: string) => void
   tabs: Tab[]
@@ -21,7 +24,18 @@ type Props = {
 }
 
 export const TabSwitcher = forwardRef<ElementRef<typeof TabsSwitcherRadix.Root>, Props>(
-  ({ className, label, onValueChange, tabs, value, ...restProps }, ref) => {
+  (props, ref) => {
+    const {
+      ariaLabel,
+      className,
+      disabled,
+      fullWidth,
+      label,
+      onValueChange,
+      tabs,
+      value,
+      ...rest
+    } = props
     const classes = clsx(s.label, className)
 
     return (
@@ -32,12 +46,15 @@ export const TabSwitcher = forwardRef<ElementRef<typeof TabsSwitcherRadix.Root>,
           onValueChange={onValueChange}
           ref={ref}
           value={value}
-          {...restProps}
+          {...rest}
         >
-          <TabsSwitcherRadix.List>
-            {tabs.map((t) => (
+          <TabsSwitcherRadix.List
+            aria-label={ariaLabel || 'tab switcher'}
+            className={clsx(clsx(s.list, disabled && s.disabled))}
+          >
+            {tabs?.map((t) => (
               <TabsSwitcherRadix.Trigger
-                className={s.trigger}
+                className={clsx(s.trigger, fullWidth && s.fullWidth, disabled && s.disabled)}
                 disabled={t.disabled}
                 key={t.value}
                 value={t.value}

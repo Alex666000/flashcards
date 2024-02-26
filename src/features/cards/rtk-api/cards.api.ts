@@ -5,8 +5,9 @@ import {
   CardsResponseData,
   RandomCardRequest,
 } from '@/features/cards'
-import { flashCardsAPI } from '@/shared/api'
 import { errorNotification } from '@/shared/lib'
+
+import { flashCardsAPI } from '../../../app/api'
 
 export const cardsAPI = flashCardsAPI.injectEndpoints({
   endpoints: (builder) => ({

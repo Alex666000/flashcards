@@ -1,11 +1,12 @@
-import { appReducer } from '@/app/model/slice/app.slice'
-import { authAPI } from '@/features/auth/rtk-api/auth.api'
+import { authAPI } from '@/features/auth'
 import { deckReducer } from '@/features/deck/model/slice/deck.slice'
 import { decksReducer } from '@/features/decks/model/slice/decks.slice'
-import { flashCardsAPI } from '@/shared/api/flash-cards.api'
 import { loadingReducer } from '@/shared/ui/loaders-components/loaders/model/slice'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
+
+import { flashCardsAPI } from '../../api/flash-cards.api'
+import { appReducer } from '../../model/slice/app.slice'
 
 export const store = configureStore({
   // РТК апишка всего проекта - родитель для частных апишек проекта
@@ -15,6 +16,8 @@ export const store = configureStore({
     [authAPI.reducerPath]: authAPI.reducer, // RTK редюсер
     deck: deckReducer,
     decks: decksReducer, // обычный реюсер
+    // назвали через двоеточие чтобы в селекторе удобно обращаться иначе бы обращались так:
+    // const selectLoading = (state: RootState) => state.loadingReducer.isQueryInProgress
     loading: loadingReducer, // обычный реюсер
   },
 })

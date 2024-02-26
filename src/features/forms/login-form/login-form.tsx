@@ -18,18 +18,20 @@ type PropsType = {
 }
 
 export const LoginForm: FC<PropsType> = ({ onLoginFormDataSubmit }) => {
+  // обертка над useForm from 'react-hook-form' для валидации (схема валидации внутри)
+  // control -забираем с полей формы то что ввел юзер
   const { control, handleSubmit } = useLoginForm()
-  const onSubmit = handleSubmit((formData) => onLoginFormDataSubmit(formData))
+  const handleSetLoginFormDataSubmit = handleSubmit((formData) => onLoginFormDataSubmit(formData))
 
   return (
     <section className={s.loginFormBlock}>
       <Container>
-        <Card className={s.cardBlock}>
+        <Card className={s.loginCard}>
           {/* h1 - для семантики: 1 h1 должен быть в проекте!!! */}
           <Typography as={'h1'} className={s.title} variant={'large'}>
             Sign In
           </Typography>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSetLoginFormDataSubmit}>
             <div className={s.loginForm}>
               <ControlledTextField
                 control={control}

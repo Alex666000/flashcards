@@ -6,7 +6,8 @@ import {
   UpdateProfileFormData,
   UserAuthDataResponse,
 } from '@/features/auth'
-import { flashCardsAPI } from '@/shared/api'
+
+import { flashCardsAPI } from '../../../app/api'
 
 export const authAPI = flashCardsAPI.injectEndpoints({
   endpoints: (builder) => ({

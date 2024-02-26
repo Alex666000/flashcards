@@ -11,16 +11,19 @@ import { ForgotPasswordFormType, useForgotPassword } from './use-forgot-password
 
 type PropsType = {
   className?: string
-  onSubmit: (data: ForgotPasswordFormType) => void
+  onForgotPasswordFormDataSubmit: (formData: ForgotPasswordFormType) => void
 }
 
-export const ForgotPasswordForm: FC<PropsType> = ({ className, onSubmit }) => {
+export const ForgotPasswordForm: FC<PropsType> = ({
+  className,
+  onForgotPasswordFormDataSubmit,
+}) => {
   const classes = clsx(s.form, className)
 
   const { control, handleSubmit } = useForgotPassword()
 
   return (
-    <form className={classes} onSubmit={handleSubmit(onSubmit)}>
+    <form className={classes} onSubmit={handleSubmit(onForgotPasswordFormDataSubmit)}>
       <ControlledTextField control={control} label={'Email'} name={'email'} />
       <Typography className={s.information} variant={'body2'}>
         Enter your email address and we will send you further instructions
