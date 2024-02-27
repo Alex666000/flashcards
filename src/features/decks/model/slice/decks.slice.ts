@@ -35,7 +35,7 @@ const initialState = {
   // Пагинация:
   pagination: {
     currentPage: 1,
-    pageSize: 10,
+    pageSize: 7,
   } as PaginationType,
   // Фильтры поиска - квери параметры:
   searchParams: {

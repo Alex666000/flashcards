@@ -66,6 +66,9 @@ const DecksPage = () => {
     name: debouncedSearchName,
     orderBy: sortedString,
   })
+  //   decksId: string
+  //   question?: string
+  //   answer?: string
 
   const totalCards = decksData?.maxCardsCount // общее кол-во карточек
 
