@@ -28,7 +28,7 @@ export const FilterControls = memo(
     setSearchName,
     setSliderValue,
     setTabValue,
-    sliderMaxValue = 10,
+    sliderMaxValue = 100,
     sliderValue,
     tabValue,
   }: Props) => {

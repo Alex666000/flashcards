@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 
 import { useDeleteCardMutation } from '@/features/cards/rtk-api/cards.api'
-import { handleRequest } from '@/shared/lib/utils/handle-request'
+import { handleRequestOnServer } from '@/shared/lib/utils/handle-request-on-server'
 import { Dialog } from '@/shared/ui/dialog'
 import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
@@ -16,7 +16,7 @@ export const DeleteCardControl: FC<Props> = ({ id }) => {
   const [deleteCard] = useDeleteCardMutation()
 
   const onConfirm = async () => {
-    await handleRequest(async () => {
+    await handleRequestOnServer(async () => {
       await deleteCard({ id }).unwrap()
       setDeleteIsOpen(false)
     })

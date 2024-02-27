@@ -21,9 +21,15 @@ export const DecksTable: FC<Props> = memo(({ authUserId, items, ...rest }) => {
       {/* шапка таблицы - серая с логикой сортировки - decksTableColumns -- определяет вид
       таблицы ее колонки */}
       <TableHeader columns={decksTableColumns} {...rest} />
+      {/* Table.Body - состоит из строк */}
       <Table.Body>
         {items?.map((deck) => <DeckRow authUserId={authUserId} deck={deck} key={deck?.id} />)}
       </Table.Body>
     </Table.Root>
   )
 })
+
+/*
+- Таблица состоит из шапки (состоит из 1 строки с иконкой "стрелочки") с названием колонок где
+есть логика сортировки и строк DeckRow - строки состоят из многих ячеек с контентом
+ */

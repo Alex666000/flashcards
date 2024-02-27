@@ -18,17 +18,16 @@ import 'react-toastify/dist/ReactToastify.css'
  */
 export const Toast = () => (
   <ToastContainer
-    autoClose={3000}
+    autoClose={2000}
     closeOnClick
-    containerId={'common'}
     draggable
     hideProgressBar={false}
-    newestOnTop={false}
+    limit={1}
+    newestOnTop
     pauseOnFocusLoss
-    pauseOnHover
-    position={'bottom-left'}
+    position={'top-center'}
     rtl={false}
-    theme={'dark'}
+    theme={'colored'}
   />
 )
 

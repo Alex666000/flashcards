@@ -11,7 +11,7 @@ import { Typography } from '@/shared/ui/typography'
 
 import s from './forgot-password-page.module.scss'
 
-import { ROUTES, handleRequest, emailRecoveringTemplate as html } from '../../../shared/lib'
+import { ROUTES, handleRequestOnServer, emailRecoveringTemplate as html } from '../../../shared/lib'
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ const ForgotPasswordPage = () => {
   // что в хедерах мне отправлять:
   // https://api.flashcards.andrii.es/v1/auth/reset-password/7889507e-b17d-4f03-943b-68cb215e6087
   const handleForgotPasswordFormDataSubmit = async ({ email }: ForgotPasswordFormType) => {
-    await handleRequest(async () => {
+    await handleRequestOnServer(async () => {
       // отправляем запрос на сервер который - на почту юзера письмо о восстановление пароля
       await recoverPassword({ email, html }).unwrap()
       // редиректим на страницу:

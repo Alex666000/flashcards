@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { handleRequest } from '@/shared/lib/utils/handle-request'
+import { handleRequestOnServer } from '@/shared/lib/utils/handle-request-on-server'
 import { Dialog } from '@/shared/ui/dialog'
 import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
@@ -18,7 +18,7 @@ export const DeleteControl: FC<Props> = ({ id, name }) => {
   const [deleteDeck] = useDeleteDeckMutation()
 
   const onConfirm = async () => {
-    await handleRequest(async () => {
+    await handleRequestOnServer(async () => {
       await deleteDeck({ id }).unwrap()
       setOpen(false)
     })

@@ -1,9 +1,27 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 // types
+type InitialStateType = typeof initialState
+
 export type CardsCountType = {
   maxCardsCount: number | undefined
   minCardsCount: number
+}
+
+type PaginationType = {
+  currentPage: number
+  pageSize: number
+}
+
+type SearchParamsType = {
+  authorId: string | undefined
+  cardsCount: CardsCountType
+  currentPage: number
+  itemsPerPage: number
+  searchName: string
+  sliderValue: number[]
+  sortOptions: Sort
+  tabValue: string
 }
 
 export type Sort = {
@@ -18,21 +36,20 @@ const initialState = {
   pagination: {
     currentPage: 1,
     pageSize: 10,
-  },
+  } as PaginationType,
   // Фильтры поиска - квери параметры:
   searchParams: {
-    authorId: '' as string | undefined,
+    authorId: '',
     cardsCount: {
       maxCardsCount: undefined,
       minCardsCount: 0,
     } as CardsCountType,
-    currentPage: 1,
     itemsPerPage: 0,
-    searchName: ' ', // поисковое значение в инпуте ++++
-    sliderValue: [0, 100] as number[], // значения стайдера ++++
-    sort: { direction: 'desc', key: 'updated' } as Sort,
-    tabValue: 'all', // значения табов ++++
-  },
+    searchName: '', // поисковое значение в инпуте ++++
+    sliderValue: [0, 100], // значения стайдера ++++
+    sortOptions: { direction: 'desc', key: 'updated' },
+    tabValue: '', // значения табов ++++
+  } as SearchParamsType,
 }
 
 // slice
@@ -45,7 +62,7 @@ const decksSlice = createSlice({
       state.searchParams.searchName = ''
       state.searchParams.tabValue = 'all'
       state.searchParams.authorId = undefined
-      state.searchParams.sort = null
+      state.searchParams.sortOptions = null
     },
     resetOnDefaultCurrentPage: (state) => {
       state.pagination.currentPage = 1
@@ -68,11 +85,11 @@ const decksSlice = createSlice({
     setSliderValue: (state, action: PayloadAction<{ newSliderValue: number[] }>) => {
       state.searchParams.sliderValue = action.payload.newSliderValue
     },
-    setSort: (state, action: PayloadAction<{ sort: Sort }>) => {
-      state.searchParams.sort = action.payload.sort
+    setSort: (state, action: PayloadAction<{ sortOptions: Sort }>) => {
+      state.searchParams.sortOptions = action.payload.sortOptions
     },
-    setTabValue: (state, action: PayloadAction<{ newTabValue: string }>) => {
-      state.searchParams.tabValue = action.payload.newTabValue
+    setTabsValue: (state, action: PayloadAction<{ newUserTabValue: string }>) => {
+      state.searchParams.tabValue = action.payload.newUserTabValue
     },
   },
 })

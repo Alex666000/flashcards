@@ -21,7 +21,7 @@ import { ModalWindow } from '@/shared/ui/modal-window'
  */
 
 // отвечает за создание новой колоды:
-export const CreateControlForNewDeck = () => {
+export const ControlForNewDeck = () => {
   // для дизейбла кнопки
   const appStatus = useAppSelector(appStatusSelector)
 

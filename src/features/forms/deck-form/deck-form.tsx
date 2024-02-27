@@ -20,12 +20,12 @@ type DeckFormDefaultValues = {
 type Props = {
   defaultValues?: DeckFormDefaultValues
   onCancel: () => void // Колбек для отмены создания или редактирования колоды
-  onSubmit: (deckFormData: FormData) => void // Колбек для отправки данных формы
+  onSendDeckFormDataSubmit: (deckFormData: FormData) => void // Колбек для отправки данных формы
 }
 
-// DeckForm -- ФОРМА для создания или редактирования колоды
+// DeckForm -- ФОРМА для создания или редактирования  моей колоды
 // на UX - состоит из всего что ниже Create new deck c кнопкой "Х":
-export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
+export const DeckForm = memo(({ defaultValues, onCancel, onSendDeckFormDataSubmit }: Props) => {
   // downloaded: Строка с URL изображения обложки - cover, которое было загружено.
   // Используется для отображения превью загруженного изображения
   const [downloaded, setDownloaded] = useState<null | string>(defaultValues?.cover || null)
@@ -62,7 +62,7 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
 
   // Функция, выполняемая при дополнительных действиях с обложкой (например, при успешной загрузке).
   // Валидирует обложку, обрабатывает ошибки, обновляет downloaded и выводит уведомления
-  const extraActions = async () => {
+  const extraActionsForCover = async () => {
     const success = await trigger('cover')
     const { error } = getFieldState('cover')
     const file = watch('cover')
@@ -88,41 +88,40 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSubmit }: Props) => {
   // Обработчик отправки данных формы. Создает объект formData, добавляет в него данные из формы
   // и вызывает функцию onSubmit
   // выбрали фото с компа и попали сюда
-  const sendHandler = (file: DeckFormType) => {
+  const handlerSendFormDataSubmit = (data: DeckFormType) => {
     // общяя форма, в нее добавляем поля что юзер (append) заполнит и потом отправим
     // в этот объект эти поля
-    const formData = new FormData()
+    const deckFormData = new FormData()
 
-    // в formData добавляем наш файл
-    formData.append('name', file.name)
-    formData.append('isPrivate', `${file.isPrivate}`)
+    // в deckFormData добавляем наш файл
+    deckFormData.append('name', data.name)
+    deckFormData.append('isPrivate', `${data.isPrivate}`)
 
     if (file === null) {
-      formData.append('cover', '')
-    } else if (fileIsDirty && file.cover) {
-      formData.append('cover', file.cover)
+      deckFormData.append('cover', '')
+    } else if (fileIsDirty && data.cover) {
+      deckFormData.append('cover', data.cover)
     }
-
     // когда пользователь заполнил поля отправил форму - и сверху в родителе делается post запрос
     // на сервер с данными что юзер в форме заполнил - на сервак отправили: cover (фото), name
     // и поле isPrivate смотри документацию и 1.14.00 Валера старые карточки 4 занятие конспект
-    onSubmit(formData)
+    onSendDeckFormDataSubmit(deckFormData)
     // чтобы получить новую картинку и поля надо сделать get() запрос..
     // смотрим нетворк что за запрос ушел и что нам в ответе пришло
-    // когда ответ от сервака тип картинки придет blob значит др код с formData пишем см.
+    // когда ответ от сервака тип картинки придет blob значит др код с deckFormData пишем см.
     // Валера 4 занятия старые карты 1.20.00
   }
 
   return (
     // форма внутри модального окна
-    <form className={s.deckForm} onSubmit={handleSubmit(sendHandler)}>
+    <form className={s.deckForm} onSubmit={handleSubmit(handlerSendFormDataSubmit)}>
       {/* Картинка + кнопка "Change Cover" - Компонент для загрузки и предпросмотра изображения
       обложки cover */}
       <ControlledPreviewFileUploader
         control={control}
         deleteCoverHandler={deleteCoverHandler}
         errorMessage={coverError}
-        extraActions={extraActions}
+        extraActions={extraActionsForCover}
         name={'cover'}
         preview={downloaded}
       />

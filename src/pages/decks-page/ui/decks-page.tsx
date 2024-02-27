@@ -1,18 +1,19 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useEffect } from 'react'
 
 import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import {
   DecksTable,
   FilterControls,
-  useDecksReduxStateFilter,
+  useDecksReduxStateFilterParams,
   useDecksReduxStatePagination,
 } from '@/features/decks'
 import { useGetDecksQuery } from '@/features/decks/rtk-api'
-import { DecksPageHeader } from '@/pages/decks-page/ui/decks-page-header/decks-page-header'
-import { Sort, useAppSelector, useDebounce } from '@/shared/lib'
+import { ControlForNewDeckHeader } from '@/pages/decks-page/ui/control-for-new-deck-header/control-for-new-deck-header'
+import { getSortedString, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
+import { Page } from '@/shared/ui/page'
 import { Pagination } from '@/shared/ui/pagination'
 import { Typography } from '@/shared/ui/typography'
 
@@ -28,42 +29,50 @@ const DecksPage = () => {
   // храним в локальном стейте-редакса состояния пагинации
   const { currentPage, pageSize, setCurrentPage, setPageSize } = useDecksReduxStatePagination()
 
-  // фильтры поиска - параметры поиска "инпут + таб + слайдер"
-  const { searchName, setSearchName, setSliderValue, setTabValue, sliderValue, tabValue } =
-    useDecksReduxStateFilter()
+  // "КВЕРИ ПАРАМЕТРЫ" - фильтры поиска - параметры поиска "инпут + таб + слайдер" и тд.
+  const {
+    onSetSearchNameChange,
+    onSetSliderValueChange,
+    onSetSortChange,
+    onSetTabValueChange,
+    searchName,
+    sliderValue,
+    sortOptions,
+    tabValue,
+  } = useDecksReduxStateFilterParams()
 
-  // Сортировка:
-  const [sort, setSort] = useState<Sort>({ direction: 'desc', key: 'updated' })
-  const sortedString = sort ? `${sort.key}-${sort.direction}` : undefined // отсортированная строка
+  // отсортированная строка
+  const sortedString = getSortedString(sortOptions)
 
   // Дебаунс для полей инпута и слайдера - возвращает массив:
+
   const debouncedSearchName = useDebounce(searchName)
   const debouncedSliderValue = useDebounce(sliderValue)
 
+  console.log(debouncedSearchName)
   const { data: userData } = useMeQuery() // me() запрос
-
-  // console.log({ data })
   const authUserId = (userData as UserAuthDataResponse).id
 
-  // Запрос на сервер за колодами с такими поисковыми параметрами которые взяли из локального стейта редакса:
+  // Запрос на сервер за колодами с такими поисковыми параметрами которые взяли из стейта редакса:
   const {
-    // currentData теперь вместо data тк сделали  - текущая выбранная дата - тк сделали "пессимистик апдейт"
-    // с помощью onQueryStarted в квери запросе: createDeck
+    // currentData теперь вместо data - тк сделали "пессимистик апдейт" с помощью onQueryStarted
+    // в квери запросе: createDeck в апишке decks.api
     currentData: decksData,
     error,
+    isFetching,
     isLoading,
   } = useGetDecksQuery({
     // authorId берет значение у userId
-    authorId: tabValue, // отправляем на сервак значение выбранного на UI - Таба
+    authorId: String(tabValue), // отправляем на сервак значение выбранного на UI - Таба
     // по id юзера: свой или чужой..
-    // т.к возвращаются пагинированные данные - по дефолту приходит первая стр. и на ней 5 элем.
+    // т.к возвращаются пагинированные данные - по дефолту приходит первая стр. и на ней 5 элем
     currentPage: currentPage,
-    // Параметры запроса - столько-то decks-колод на странице отобразить - по дефолту в редюсере 5 указал
+    // Параметры запроса - столько-то decks-колод на странице отобразить
     itemsPerPage: pageSize,
     // если хотим найти все колоды у которых больше 5 карточек, например от 5-10
     // то передаем: minCardsCount = 5, maxCardsCount=10
     maxCardsCount: debouncedSliderValue[1],
-    minCardsCount: debouncedSliderValue[0], //  например хотим найти все колоды у которых меньше 5 карточек
+    minCardsCount: debouncedSliderValue[0], // например хотим найти все колоды у которых < 5 cards
     name: debouncedSearchName,
     orderBy: sortedString,
   })
@@ -104,47 +113,48 @@ const DecksPage = () => {
     )
   }
 
-  if (isLoading) {
-    return <LeanerProgress />
-  }
+  const loadingStatus = isLoading || isFetching
 
   return (
-    <section className={s.decksPageBlock}>
-      <Container className={s.header}>
-        {/*внутри есть CreateControlForNewDeck для создания новой колоды*/}
-        <DecksPageHeader />
-        {/* инпут + табы + слайдер + кнопка очистки всех фильтров = фильтровые контроли */}
-        <FilterControls
-          // берет значения из локального редакса (см.конспект 3 с Валера - и с сервера)
-          authUserId={authUserId}
-          searchName={searchName}
-          setSearchName={setSearchName}
-          setSliderValue={setSliderValue}
-          setTabValue={setTabValue}
-          sliderMaxValue={decksData?.maxCardsCount}
-          sliderValue={sliderValue}
-          tabValue={tabValue}
-        />
-        {/* если колоды пришли с сервера */}
-        {decksData?.items && (
-          <DecksTable
+    <>
+      {loadingStatus && <LeanerProgress />}
+      <Page className={s.decksPageBlock}>
+        <Container className={s.header}>
+          {/* для создания новой "МОЕЙ" колоды*/}
+          <ControlForNewDeckHeader />
+          {/* инпут + табы + слайдер + кнопка очистки всех фильтров */}
+          <FilterControls
+            // берет значения из локального редакса (см.конспект 3 с Валера - и с сервера)
             authUserId={authUserId}
-            items={decksData?.items}
-            onSort={setSort}
-            sort={sort}
+            searchName={searchName}
+            setSearchName={onSetSearchNameChange}
+            setSliderValue={onSetSliderValueChange}
+            setTabValue={onSetTabValueChange}
+            sliderMaxValue={decksData?.maxCardsCount}
+            sliderValue={sliderValue}
+            tabValue={tabValue}
           />
-        )}
-        {/* Пагинация */}
-        <Pagination
-          className={s.pagination}
-          currentPage={currentPage}
-          onSetPageChange={setCurrentPage}
-          onSetPageSizeChange={setPageSize}
-          pageSize={pageSize}
-          totalCount={decksData?.pagination?.totalItems || 10}
-        />
-      </Container>
-    </section>
+          {/* если колоды пришли с сервера */}
+          {decksData?.items && (
+            <DecksTable
+              authUserId={authUserId}
+              items={decksData?.items}
+              onSort={onSetSortChange}
+              sort={sortOptions}
+            />
+          )}
+          {/* Пагинация */}
+          <Pagination
+            className={s.pagination}
+            currentPage={currentPage}
+            onSetPageChange={setCurrentPage}
+            onSetPageSizeChange={setPageSize}
+            pageSize={pageSize}
+            totalCount={decksData?.pagination?.totalItems || 10}
+          />
+        </Container>
+      </Page>
+    </>
   )
 }
 

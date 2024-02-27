@@ -2,9 +2,8 @@ import { toast } from 'react-toastify'
 
 import { flashCardsAPI } from '@/app/api/flash-cards.api'
 import { RootState } from '@/app/providers/store/store'
+import { updateDecksQueryData } from '@/features/decks/model/utils/updateDeckQueryData'
 import { Deck, DecksResponseData, DecksSearchParams } from '@/features/decks/rtk-api/types'
-
-import { updateDecksQueryData } from '../model/utils/updateDeckQueryData'
 
 const decksAPI = flashCardsAPI.injectEndpoints({
   endpoints: (builder) => ({

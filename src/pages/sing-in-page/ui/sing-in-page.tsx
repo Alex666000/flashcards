@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { LoginBodyArgs } from '@/features/auth'
 import { useLoginMutation, useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import { LoginForm } from '@/features/forms'
-import { ROUTES, handleRequest } from '@/shared/lib'
+import { ROUTES, handleRequestOnServer } from '@/shared/lib'
 import { Page } from '@/shared/ui/page'
 
 // авторизация - логинизация
@@ -17,7 +17,7 @@ const SingInPage = () => {
   const [login] = useLoginMutation()
 
   const handleLoginFormDataSubmit = async (data: LoginBodyArgs) => {
-    await handleRequest(async () => {
+    await handleRequestOnServer(async () => {
       await login(data).unwrap()
       toast.success('You are successfully authorized', { containerId: 'common' })
     })

@@ -3,9 +3,9 @@ import { memo } from 'react'
 import { ControlForNewDeck } from '@/features/decks'
 import { Typography } from '@/shared/ui/typography'
 
-import s from './decks-page-header.module.scss'
+import s from './control-for-new-deck-header.module.scss'
 
-export const DecksPageHeader = memo(({}) => {
+export const ControlForNewDeckHeader = memo(({}) => {
   return (
     <div className={s.top}>
       <Typography as={'h1'} variant={'large'}>

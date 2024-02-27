@@ -7,7 +7,7 @@ export const sliderValueSelector = (state: RootState) => state.decks.searchParam
 export const tabValueSelector = (state: RootState) => state.decks.searchParams.tabValue
 export const cardsCountSelector = (state: RootState) => state.decks.searchParams.cardsCount
 export const authorIdSelector = (state: RootState) => state.decks.searchParams.authorId
-export const sortSelector = (state: RootState) => state.decks.searchParams.sort
+export const sortOptionsSelector = (state: RootState) => state.decks.searchParams.sortOptions
 /*
 - Селектор достает из инишл стейта значение - особенно при его изменении на новое чтобы в UI
 отрисовать актуальные данные: стейт - подстейт (редюсер) - инишлстейт - свойство + его значение

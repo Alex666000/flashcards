@@ -39,8 +39,6 @@ export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Prop
 
   const [open, setOpen] = useState(false)
 
-  const imgClasses = clsx(s.image, preview && s.hover, open && s.open)
-
   const onClickHandler = () => {
     if (preview) {
       setOpen((prevState) => !prevState)
@@ -56,8 +54,13 @@ export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Prop
   }
 
   return (
-    <div className={s.root}>
-      <img alt={'img'} className={imgClasses} onClick={onClickHandler} src={preview ?? noCover} />
+    <div className={s.controlledPreviewBlock}>
+      <img
+        alt={'img'}
+        className={clsx(s.image, preview && s.hover, open && s.open)}
+        onClick={onClickHandler}
+        src={preview ?? noCover}
+      />
       {displayInlineError && errorMessage && (
         <Typography className={s.error} variant={'caption'}>
           {/*Сообщение об ошибке для отображения в случае проблемы с загрузкой файла*/}

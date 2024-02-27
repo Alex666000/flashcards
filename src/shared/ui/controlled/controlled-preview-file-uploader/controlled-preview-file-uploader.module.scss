@@ -1,4 +1,4 @@
-.learnCardBlock {
+.controlledPreviewBlock {
   display: flex;
   flex-direction: column;
   gap: 24px 0;
@@ -6,6 +6,7 @@
   justify-content: flex-start;
 
   .image {
+    display: inline-block;
     aspect-ratio: 3/1;
     width: 100%;
 

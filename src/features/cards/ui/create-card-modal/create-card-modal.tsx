@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { useCreateCardMutation } from '@/features/cards/rtk-api/cards.api'
 import { CardForm } from '@/features/forms/card/card'
-import { handleRequest } from '@/shared/lib/utils/handle-request'
+import { handleRequestOnServer } from '@/shared/lib/utils/handle-request-on-server'
 import { ModalWindow } from '@/shared/ui/modal-window'
 
 type Props = {
@@ -19,7 +19,7 @@ export const CreateCardModal: FC<Props> = ({ deckId, open, setOpen }) => {
   }
 
   const onSubmit = async (data: FormData) => {
-    await handleRequest(async () => {
+    await handleRequestOnServer(async () => {
       await createCard({ data, deckId }).unwrap()
       setOpen(false)
     })

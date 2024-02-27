@@ -24,33 +24,33 @@ type Props = {
  */
 
 export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
-  const isMyDeck = authUserId === deck.author.id
-
   const navigate = useNavigate()
 
+  const isMyDeck = authUserId === deck?.author.id
+
   const redirectToDeckPage = () => {
-    navigate(`${deck.id}`)
+    navigate(`${deck?.id}`)
   }
 
-  const onLearn = () => {
+  const redirectToLearnPage = () => {
     // перенаправляет пользователя на страницу изучения колоды
-    navigate(`${deck.id}${ROUTES.learn}`)
+    navigate(`${deck?.id}${ROUTES.learn}`)
   }
 
   return (
-    <Table.Row className={s.root} key={deck.id}>
+    <Table.Row className={s.root} key={deck?.id}>
       <Table.Cell align={'left'} className={s.name} onClick={redirectToDeckPage}>
         {/* ссылка в строке с картинкой и самой ссылкой именем колоды */}
-        <Button as={Link} className={s.link} to={deck.id} variant={'link'}>
-          <img alt={'Deck cover'} className={s.cover} src={deck.cover ?? defaultCover} />
+        <Button as={Link} className={s.link} to={deck?.id} variant={'link'}>
+          <img alt={'Deck cover'} className={s.cover} src={deck?.cover ?? defaultCover} />
           <Typography as={'h3'} variant={'body2'}>
             {deck.name}
           </Typography>
         </Button>
       </Table.Cell>
       <Table.Cell className={s.count}>{deck.cardsCount}</Table.Cell>
-      <Table.Cell className={s.date}>{new Date(deck.updated).toLocaleDateString()}</Table.Cell>
-      <Table.Cell className={s.createdBy}>{deck.author.name}</Table.Cell>
+      <Table.Cell className={s.date}>{new Date(deck?.updated).toLocaleDateString()}</Table.Cell>
+      <Table.Cell className={s.createdBy}>{deck?.author?.name}</Table.Cell>
       <Table.Cell className={s.cell}>
         <div className={s.controls}>
           {/* Если моя колода */}
@@ -58,26 +58,26 @@ export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
             <>
               {/* "карандашик" - позволяющая изменить параметры колоды */}
               <EditControl
-                cover={deck.cover}
-                id={deck.id}
-                isPrivate={deck.isPrivate}
-                name={deck.name}
+                cover={deck?.cover}
+                id={deck?.id}
+                isPrivate={deck?.isPrivate}
+                name={deck?.name}
               />
               {/* позволяет перейти к изучению колоды */}
               <IconButton
                 disabled={!deck.cardsCount}
                 icon={<Icon height={18} name={'play'} width={18} />}
-                onClick={onLearn}
+                onClick={redirectToLearnPage}
                 small
               />
               {/* позволяющая удалить колоду */}
-              <DeleteControl id={deck.id} name={deck.name} />
+              <DeleteControl id={deck?.id} name={deck?.name} />
             </>
           ) : (
             <IconButton
               disabled={!deck.cardsCount}
               icon={<Icon height={18} name={'play'} width={18} />}
-              onClick={onLearn}
+              onClick={redirectToLearnPage}
               small
             />
           )}

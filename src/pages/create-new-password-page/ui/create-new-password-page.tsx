@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 
 import { useResetPasswordMutation } from '@/features/auth/rtk-api/auth.api'
 import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/features/forms'
-import { handleRequest } from '@/shared/lib'
+import { handleRequestOnServer } from '@/shared/lib'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Card } from '@/shared/ui/card'
 import { Container } from '@/shared/ui/container'
@@ -22,7 +22,7 @@ const CreateNewPasswordPage = () => {
 
   const handleSetCreateNewPasswordSubmit = async ({ password }: CreateNewPasswordFormType) => {
     if (token) {
-      await handleRequest(async () => {
+      await handleRequestOnServer(async () => {
         // отправляем запрос на сервак
         await resetPassword({ password, token }).unwrap()
         navigate(ROUTES.signIn)

@@ -8,7 +8,7 @@ import { useGetCardsQuery } from '@/features/cards/rtk-api/cards.api'
 import { OwnerDeckDropDown, useDeckLocalStateData } from '@/features/deck'
 import { EditMyDeckModal } from '@/features/decks'
 import { useDeleteDeckMutation, useGetDeckQuery } from '@/features/decks/rtk-api'
-import { ROUTES, Sort, handleRequest, useDebounce } from '@/shared/lib'
+import { ROUTES, Sort, handleRequestOnServer, useDebounce } from '@/shared/lib'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
 import { Container } from '@/shared/ui/container'
@@ -82,7 +82,7 @@ const DeckPage = () => {
   // для удаления колоды, которая вызывается при нажатии на кнопку удаления.
   // После удаления перенаправляет пользователя на страницу со списком колод.
   const deleteDeckHandler = async () => {
-    await handleRequest(async () => {
+    await handleRequestOnServer(async () => {
       await deleteDeck({ id: deckId })
       navigate(ROUTES.decks)
     })
