@@ -52,7 +52,7 @@ export const EditMyDeckModal: FC<EditDeckModalProps> = ({
       <DeckForm
         defaultValues={startValues}
         onCancel={() => setOpen(false)}
-        onSubmit={editDeckHandler}
+        onSendDeckFormDataSubmit={editDeckHandler}
       />
     </ModalWindow>
   )

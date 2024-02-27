@@ -60,7 +60,7 @@ const decksSlice = createSlice({
     // Подъредюсеры - или AC:
     clearFilterParams: (state) => {
       state.searchParams.searchName = ''
-      state.searchParams.tabValue = 'all'
+      state.searchParams.tabValue = ''
       state.searchParams.authorId = undefined
       state.searchParams.sortOptions = null
     },

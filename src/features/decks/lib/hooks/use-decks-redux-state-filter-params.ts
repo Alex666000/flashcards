@@ -50,7 +50,7 @@ export const useDecksReduxStateFilterParams = () => {
   }
 
   // устанавливаем в редюсер новый текст что ввел пользователь в инпут
-  const onSetSearchNameChange = useCallback(
+  const handleSetSearchNameChange = useCallback(
     (newSearchName: string) => {
       dispatch(decksActions.setSearchName({ newSearchName }))
     },
@@ -58,7 +58,7 @@ export const useDecksReduxStateFilterParams = () => {
   )
 
   // устанавливаем выбранный Таб юзером
-  const onSetTabValueChange = useCallback(
+  const handleSetTabValueChange = useCallback(
     (newUserTabValue: string) => {
       dispatch(decksActions.resetOnDefaultCurrentPage())
       dispatch(decksActions.setTabsValue({ newUserTabValue }))
@@ -67,7 +67,7 @@ export const useDecksReduxStateFilterParams = () => {
   )
 
   // сеттаем выбранное значение слайдера
-  const onSetSliderValueChange = useCallback(
+  const handleSetSliderValueChange = useCallback(
     (newSliderValue: number[]) => {
       // сьрасываем страницы на 1
       dispatch(decksActions.resetOnDefaultCurrentPage())
@@ -87,13 +87,13 @@ export const useDecksReduxStateFilterParams = () => {
     authorId,
     cardsCount,
     currentPage,
+    handleSetSearchNameChange,
+    handleSetSliderValueChange,
+    handleSetTabValueChange,
     onClearFilterParamsChange,
     onSetCurrentPageChange,
     onSetPageSizeChange,
-    onSetSearchNameChange,
-    onSetSliderValueChange,
     onSetSortChange,
-    onSetTabValueChange,
     searchName,
     setCardsCount,
     sliderValue,

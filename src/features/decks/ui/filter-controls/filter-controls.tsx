@@ -13,10 +13,10 @@ import s from './filter-controls.module.scss'
 
 type Props = {
   authUserId: string // Идентификатор текущего пользователя.
+  onSetSearchNameChange: (newString: string) => void // для обновления значения строки поиска.
+  onSetSliderValueChange: (newValue: number[]) => void // для установки нового значения слайдера
+  onSetTabValueChange: (newTab: string) => void // для выбора вкладки (фильтрация по моим карточкам или всем)
   searchName: string // Строка поиска для фильтрации по названию
-  setSearchName: (newString: string) => void // для обновления значения строки поиска.
-  setSliderValue: (newValue: number[]) => void // для установки нового значения слайдера
-  setTabValue: (newTab: string) => void // для выбора вкладки (фильтрация по моим карточкам или всем)
   sliderMaxValue?: number
   sliderValue: number[] //  Текущее значение слайдера
   tabValue: string // Текущее выбранное значение вкладки
@@ -25,10 +25,10 @@ type Props = {
 export const FilterControls = memo(
   ({
     authUserId,
+    onSetSearchNameChange,
+    onSetSliderValueChange,
+    onSetTabValueChange,
     searchName,
-    setSearchName,
-    setSliderValue,
-    setTabValue,
     sliderMaxValue = 100,
     sliderValue,
     tabValue,
@@ -44,15 +44,15 @@ export const FilterControls = memo(
     // позволяет пользователю очистить все фильтры одним нажатием. При клике на эту кнопку
     // вызывается функция onClearFiltersClick, которая обновляет все значения фильтров
     const onClearFiltersClick = () => {
-      setSliderValue([0, sliderMaxValue])
-      setSearchName('')
-      setTabValue('')
+      onSetSliderValueChange([0, sliderMaxValue])
+      onSetSearchNameChange('')
+      onSetTabValueChange('')
       toast.info('Filters are reset', { containerId: 'common' })
     }
 
     // позволяет очистить текстовое поле
     const clearTextField = () => {
-      setSearchName('')
+      onSetSearchNameChange('')
     }
 
     /* Дебаг jsx консолькой */
@@ -64,7 +64,8 @@ export const FilterControls = memo(
         <TextField
           className={s.textField}
           clearField={clearTextField}
-          onChange={(e) => setSearchName(e.currentTarget.value)}
+          // вызвали колбек что нам передали
+          onChange={(e) => onSetSearchNameChange(e.currentTarget.value)}
           type={'search'}
           value={searchName}
         />
@@ -73,7 +74,7 @@ export const FilterControls = memo(
         <TabSwitcher
           disabled={appStatus === 'loading'}
           label={'Show decks cards'}
-          onValueChange={setTabValue}
+          onValueChange={onSetTabValueChange}
           tabs={tabs}
           value={tabValue}
         />
@@ -83,7 +84,7 @@ export const FilterControls = memo(
           label={'Number of cards'}
           max={sliderMaxValue}
           min={0}
-          onChange={setSliderValue}
+          onChange={onSetSliderValueChange}
           value={sliderValue}
         />
         <Button

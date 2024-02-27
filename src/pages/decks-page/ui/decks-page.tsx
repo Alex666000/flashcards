@@ -19,11 +19,6 @@ import { Typography } from '@/shared/ui/typography'
 
 import s from './decks.module.scss'
 
-/**
- * Компонент - страница всех колод: decks - предоставляет полную функциональность для просмотра
- * списка колод - для применения фильтров к данным и навигации (пагинации) по страницам.
- */
-
 const DecksPage = () => {
   // Состояния поисковых параметров (фильтров) и "ПАГИНАЦИИ":
   // храним в локальном стейте-редакса состояния пагинации
@@ -31,10 +26,10 @@ const DecksPage = () => {
 
   // "КВЕРИ ПАРАМЕТРЫ" - фильтры поиска - параметры поиска "инпут + таб + слайдер" и тд.
   const {
-    onSetSearchNameChange,
-    onSetSliderValueChange,
+    handleSetSearchNameChange,
+    handleSetSliderValueChange,
+    handleSetTabValueChange,
     onSetSortChange,
-    onSetTabValueChange,
     searchName,
     sliderValue,
     sortOptions,
@@ -45,7 +40,6 @@ const DecksPage = () => {
   const sortedString = getSortedString(sortOptions)
 
   // Дебаунс для полей инпута и слайдера - возвращает массив:
-
   const debouncedSearchName = useDebounce(searchName)
   const debouncedSliderValue = useDebounce(sliderValue)
 
@@ -54,19 +48,16 @@ const DecksPage = () => {
 
   // Запрос на сервер за колодами с такими поисковыми параметрами которые взяли из стейта редакса:
   const {
-    // currentData теперь вместо data - тк сделали "пессимистик апдейт" с помощью onQueryStarted
-    // в квери запросе: createDeck в апишке decks.api
     currentData: decksData,
     error,
     isFetching,
     isLoading,
   } = useGetDecksQuery({
-    // authorId берет значение у userId
-    authorId: String(tabValue), // отправляем на сервак значение выбранного на UI - Таба
+    authorId: tabValue, // отправляем на сервак значение выбранного на UI - Таба
     // по id юзера: свой или чужой..
     // т.к возвращаются пагинированные данные - по дефолту приходит первая стр. и на ней 5 элем
     currentPage: currentPage,
-    // Параметры запроса - столько-то decks-колод на странице отобразить
+    // Параметры запроса - столько-то decks на странице отобразить
     itemsPerPage: pageSize,
     // если хотим найти все колоды у которых больше 5 карточек, например от 5-10
     // то передаем: minCardsCount = 5, maxCardsCount=10
@@ -78,15 +69,6 @@ const DecksPage = () => {
 
   const totalCards = decksData?.maxCardsCount // общее кол-во карточек
 
-  /**
-   *  Если текущая стр (currentPage) больше, чем количество страниц, необходимых для отображения
-   *  всех карточек (рассчитываемое как общее количество карточек (totalCards) деленное на количество
-   *  карточек на странице (pageSize)), или изменена вкладка (tabValue), то устанавливается значение
-   *  текущей страницы в 1.
-   *  Это условие гарантирует, что при изменении параметров фильтрации, поиска или размера страницы,
-   *  а также при выборе новой вкладки, текущая страница будет установлена в 1, чтобы пользователь
-   *  всегда начинал просмотр колод с первой страницы.
-   */
   useEffect(() => {
     if ((totalCards && totalCards / pageSize < currentPage) || tabValue) {
       setCurrentPage(1)
@@ -101,7 +83,6 @@ const DecksPage = () => {
     totalCards,
   ])
 
-  // обработка ошибок:
   if (error) {
     const err = error as any
 
@@ -114,8 +95,6 @@ const DecksPage = () => {
 
   const loadingStatus = isLoading || isFetching
 
-  console.log(decksData?.maxCardsCount)
-
   return (
     <>
       {loadingStatus && <LeanerProgress />}
@@ -125,12 +104,11 @@ const DecksPage = () => {
           <ControlForNewDeckHeader />
           {/* инпут + табы + слайдер + кнопка очистки всех фильтров */}
           <FilterControls
-            // берет значения из локального редакса (см.конспект 3 с Валера - и с сервера)
             authUserId={authUserId}
+            onSetSearchNameChange={handleSetSearchNameChange}
+            onSetSliderValueChange={handleSetSliderValueChange}
+            onSetTabValueChange={handleSetTabValueChange}
             searchName={searchName}
-            setSearchName={onSetSearchNameChange}
-            setSliderValue={onSetSliderValueChange}
-            setTabValue={onSetTabValueChange}
             sliderMaxValue={decksData?.maxCardsCount}
             sliderValue={sliderValue}
             tabValue={tabValue}

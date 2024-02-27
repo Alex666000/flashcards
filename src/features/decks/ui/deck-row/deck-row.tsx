@@ -11,6 +11,7 @@ import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
 import { Table } from '@/shared/ui/table'
 import { Typography } from '@/shared/ui/typography'
+import { logDOM } from '@storybook/test'
 
 import s from './deck-row.module.scss'
 
@@ -36,6 +37,8 @@ export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
     // перенаправляет пользователя на страницу изучения колоды
     navigate(`${deck?.id}${ROUTES.learn}`)
   }
+
+  console.log(deck?.name)
 
   return (
     <Table.Row className={s.root} key={deck?.id}>
