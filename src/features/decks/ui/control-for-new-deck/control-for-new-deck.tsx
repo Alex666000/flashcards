@@ -4,7 +4,7 @@ import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
 import { useCreateDeckMutation } from '@/features/decks/rtk-api'
 import { DeckForm } from '@/features/forms'
 import { useAppSelector } from '@/shared/lib'
-import { handleRequest } from '@/shared/lib/utils/handle-request'
+import { handleRequestOnServer } from '@/shared/lib/utils/handle-request-on-server'
 import { Button } from '@/shared/ui/button'
 import { ModalWindow } from '@/shared/ui/modal-window'
 
@@ -33,10 +33,11 @@ export const CreateControlForNewDeck = () => {
 
   // вызывается при отправке формы создания колоды. Она обрабатывает запрос на создание колоды
   // с помощью функции createDeck из createDeckMutation()
-  const handleCreateDeck = async (deckFormData: FormData) => {
+  const handleSendDeckFormDataSubmit = async (deckFormData: FormData) => {
     // Функция, которая принимает логику - колбек, связанную с запросом и его успешным выполнением
-    await handleRequest(async () => {
+    await handleRequestOnServer(async () => {
       await createDeck(deckFormData).unwrap()
+      // после добавления закрываем модалку
       setOpen(false)
     })
   }
@@ -44,9 +45,13 @@ export const CreateControlForNewDeck = () => {
   return (
     <>
       <ModalWindow open={open} setOpen={setOpen} title={'Create new deck'}>
-        {/* форма внутри модального окна для создания новой колоды */}
-        <DeckForm onCancel={() => setOpen(false)} onSubmit={handleCreateDeck} />
+        {/* Модалка открылась и открылась внутри форма внутри для создания новой МОЕЙ колоды */}
+        <DeckForm
+          onCancel={() => setOpen(false)}
+          onSendDeckFormDataSubmit={handleSendDeckFormDataSubmit}
+        />
       </ModalWindow>
+      {/* открываем модалку при нажатии */}
       <Button disabled={appStatus === 'loading'} onClick={() => setOpen(true)}>
         Add New Deck
       </Button>
