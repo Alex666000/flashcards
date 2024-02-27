@@ -49,7 +49,6 @@ const DecksPage = () => {
   const debouncedSearchName = useDebounce(searchName)
   const debouncedSliderValue = useDebounce(sliderValue)
 
-  console.log(debouncedSearchName)
   const { data: userData } = useMeQuery() // me() запрос
   const authUserId = (userData as UserAuthDataResponse).id
 
@@ -114,6 +113,8 @@ const DecksPage = () => {
   }
 
   const loadingStatus = isLoading || isFetching
+
+  console.log(decksData?.maxCardsCount)
 
   return (
     <>
