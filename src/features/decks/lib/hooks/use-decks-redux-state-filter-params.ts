@@ -38,7 +38,7 @@ export const useDecksReduxStateFilterParams = () => {
   const onClearFilterParamsChange = () => {
     dispatch(decksActions.clearFilterParams())
     dispatch(decksActions.setSliderValue({ newSliderValue: [] }))
-    toast.info('Filters reset')
+    toast.info('Filters reset', { containerId: 'common' })
   }
 
   const onSetCurrentPageChange = (newPage: number) => {

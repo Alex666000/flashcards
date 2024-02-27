@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { toast } from 'react-toastify'
 
 import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
 import { useAppSelector } from '@/shared/lib'
@@ -41,23 +42,28 @@ export const FilterControls = memo(
     const appStatus = useAppSelector(appStatusSelector)
 
     // позволяет пользователю очистить все фильтры одним нажатием. При клике на эту кнопку
-    // вызывается функция clearFilterHandler, которая обновляет все значения фильтров
-    const clearFilterHandler = () => {
+    // вызывается функция onClearFiltersClick, которая обновляет все значения фильтров
+    const onClearFiltersClick = () => {
       setSliderValue([0, sliderMaxValue])
       setSearchName('')
       setTabValue('')
+      toast.info('Filters are reset', { containerId: 'common' })
     }
 
     // позволяет очистить текстовое поле
-    const onClearTextField = () => {
+    const clearTextField = () => {
       setSearchName('')
     }
+
+    /* Дебаг jsx консолькой */
+    // console.log(sliderValue)
+    // console.log(sliderMaxValue)
 
     return (
       <div className={s.filter}>
         <TextField
           className={s.textField}
-          clearField={onClearTextField}
+          clearField={clearTextField}
           onChange={(e) => setSearchName(e.currentTarget.value)}
           type={'search'}
           value={searchName}
@@ -84,7 +90,7 @@ export const FilterControls = memo(
           className={s.clearButton}
           // дизейбл кнопки
           disabled={appStatus === 'loading'}
-          onClick={clearFilterHandler}
+          onClick={onClearFiltersClick}
           variant={'secondary'}
         >
           <Icon className={s.icon} name={'trash-bin'} />

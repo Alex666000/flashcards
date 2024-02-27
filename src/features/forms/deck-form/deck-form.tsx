@@ -55,7 +55,7 @@ export const DeckForm = memo(({ defaultValues, onCancel, onSendDeckFormDataSubmi
     if (coverError) {
       setCoverError(null)
     }
-    toast.warning('You deleted cover', { containerId: 'modal' })
+    toast.warning('You deleted cover', { containerId: 'common' })
     setValue('cover', null)
     setDownloaded(null)
   }

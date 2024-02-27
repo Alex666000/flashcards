@@ -44,7 +44,7 @@ export const appSlice = createSlice({
           if (action.type.endsWith('executeMutation/rejected')) {
             if (action.payload?.data) {
               if (action.payload?.data?.message) {
-                toast.error(action?.payload?.data?.message)
+                toast.error(action?.payload?.data?.message, { containerId: 'common' })
                 state.status = 'failed'
 
                 return
@@ -52,11 +52,12 @@ export const appSlice = createSlice({
               toast.error(
                 action.payload?.data?.errorMessages[0].message ||
                   action.payload.data?.errorMessages[0] ||
-                  action.payload.data?.message
+                  action.payload.data?.message,
+                { containerId: 'common' }
               )
               state.status = 'failed'
             } else {
-              toast.error(`🦕${action.payload.error}`)
+              toast.error(`🦕${action.payload.error}`, { containerId: 'common' })
               state.status = 'failed'
 
               return
@@ -74,13 +75,13 @@ export const appSlice = createSlice({
                 return
               }
               if (action?.payload?.data?.message) {
-                toast.error(action?.payload?.data?.message)
+                toast.error(action?.payload?.data?.message, { containerId: 'common' })
                 state.status = 'failed'
 
                 return
               }
             } else {
-              toast.error(`🦕${action?.payload?.error}`)
+              toast.error(`🦕${action?.payload?.error}`, { containerId: 'common' })
               state.status = 'failed'
 
               return

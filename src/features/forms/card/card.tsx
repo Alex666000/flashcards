@@ -66,7 +66,7 @@ export const CardForm: FC<Props> = ({ defaultValues, onCancel, onSubmit }) => {
     const file = watch(name)
 
     if (!success && error?.message) {
-      toast.error(error.message, { containerId: 'modal' })
+      toast.error(error.message, { containerId: 'common' })
       errorData[name].set(error.message)
       resetField(name)
     }
@@ -87,7 +87,7 @@ export const CardForm: FC<Props> = ({ defaultValues, onCancel, onSubmit }) => {
     if (errorData[name].text) {
       errorData[name].set(null)
     }
-    toast.warning('You deleted cover', { containerId: 'modal' })
+    toast.warning('You deleted cover', { containerId: 'common' })
     setValue(name, null)
     previewData[name].set(null)
   }

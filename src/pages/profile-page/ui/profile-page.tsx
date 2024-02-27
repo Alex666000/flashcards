@@ -24,7 +24,7 @@ const ProfilePage = () => {
     await handleRequestOnServer(async () => {
       await onUpdate(data)
       setEditMode(false)
-      toast.success('Your name successfully changed', { containerId: 'common' })
+      toast.success('Your name successfully changed')
     })
   }
 
