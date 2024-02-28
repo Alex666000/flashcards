@@ -1,5 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
+// если с сервера что-то вернулось то это делать с РТК квери а что-то глобальное
+// остальное храним в стейте Редакса
+
 // types
 type PaginationType = {
   currentPage: number

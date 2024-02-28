@@ -1,7 +1,7 @@
 import { FC, memo } from 'react'
 
 import { DeckRow } from '@/features/decks'
-import { DeckData } from '@/features/decks/api/types'
+import { DeckData } from '@/features/decks/api/decks.types'
 import { decksTableColumns } from '@/shared/lib'
 import { Table } from '@/shared/ui/table'
 import { TableHeader, TableHeaderProps } from '@/shared/ui/table-header'

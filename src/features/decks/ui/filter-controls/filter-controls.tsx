@@ -74,6 +74,8 @@ export const FilterControls = memo(
         {/* позволяет выбрать между двумя вкладками: "My cards" (карточки пользователя) */}
         {/* и "All cards" (все карточки). Определяет, какие карточки будут отображены */}
         <TabSwitcher
+          // так дизейблить с РТК не обязательно с глобал стеита: можно isLoading прокинуть
+          // сверху смотри конспект Валера 3 занятие: "дизейблить блокировать кнопку"
           disabled={appStatus === 'loading'}
           label={'Show decks cards'}
           onChange={onSetTabValueChange}
@@ -82,6 +84,8 @@ export const FilterControls = memo(
         />
         {/* предоставляет пользователю возможность выбора числа карточек, которые будут отображены */}
         <Slider
+          // так дизейблить с РТК не обязательно с глобал стеита: можно isLoading прокинуть
+          // сверху смотри конспект Валера 3 занятие: "дизейблить блокировать кнопку"
           disabled={appStatus === 'loading'}
           label={'Number of cards'}
           max={sliderMaxValue}

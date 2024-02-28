@@ -1,4 +1,4 @@
-import { PaginationData } from '@/features/decks/api/types'
+import { PaginationData } from '@/features/decks/api/decks.types'
 
 export type Card = {
   answer: string

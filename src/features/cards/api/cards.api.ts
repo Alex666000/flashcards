@@ -64,6 +64,7 @@ export const cardsAPI = flashCardsAPI.injectEndpoints({
           errorNotification(error)
         }
       },
+      // УРИ параметр часть урла, не путать с квери где квери: ?ключ-значение
       query: ({ packId, ...rest }) => ({
         body: rest,
         method: 'POST',

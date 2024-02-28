@@ -2,7 +2,7 @@ import { FC, memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { DeleteControl, EditControl } from '@/features/decks'
-import { DeckData } from '@/features/decks/api/types'
+import { DeckData } from '@/features/decks/api/decks.types'
 import defaultCover from '@/shared/assets/images/default-image.jpg'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Button } from '@/shared/ui/button'
