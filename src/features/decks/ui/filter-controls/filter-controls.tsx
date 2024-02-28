@@ -18,7 +18,7 @@ type Props = {
   onSetTabValueChange: (newTab: string) => void // для выбора вкладки (фильтрация по моим карточкам или всем)
   searchName: string // Строка поиска для фильтрации по названию
   sliderMaxValue?: number
-  sliderValue: number[] //  Текущее значение слайдера
+  sliderValue: number[] // Текущее значение слайдера
   tabValue: string // Текущее выбранное значение вкладки
 }
 

@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useEffect } from 'react'
 
 import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
@@ -8,11 +8,9 @@ import {
   useDecksReduxStateFilterParams,
   useDecksReduxStatePagination,
 } from '@/features/decks'
-import { selectIsMaxCardsCountInit } from '@/features/decks/model/selectors/page-size-selector'
-import { decksActions } from '@/features/decks/model/slice/decks.slice'
 import { useGetDecksQuery } from '@/features/decks/rtk-api'
 import { ControlForNewDeckHeader } from '@/pages/decks-page/ui/control-for-new-deck-header/control-for-new-deck-header'
-import { getSortedString, useAppDispatch, useAppSelector, useDebounce } from '@/shared/lib'
+import { getSortedString, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
 import { Page } from '@/shared/ui/page'

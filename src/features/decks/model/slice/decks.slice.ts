@@ -7,9 +7,14 @@ type PaginationType = {
   currentPage: number
   pageSize: number
 }
+export type CardsCountType = {
+  max: number | undefined
+  min: number
+}
 
 type SearchParamsType = {
   authorId: string | undefined
+  cardsCount: CardsCountType
   searchName: string
   sliderValue: number[]
   sortOptions: Sort
@@ -32,6 +37,10 @@ const initialState = {
   // Фильтры поиска - квери параметры:
   searchParams: {
     authorId: undefined as string | undefined,
+    cardsCount: {
+      max: undefined,
+      min: 0,
+    } as CardsCountType,
     searchName: '', // поисковое значение в инпуте
     sliderValue: [0, 65], // значения стайдера
     sortOptions: { direction: 'desc', key: 'updated' }, // сортировка
@@ -56,6 +65,9 @@ const decksSlice = createSlice({
     },
     setAuthorId: (state, action: PayloadAction<{ newUserTabValue: string | undefined }>) => {
       state.searchParams.authorId = action.payload.newUserTabValue
+    },
+    setCardsCount: (state, action: PayloadAction<{ cardsCount: CardsCountType }>) => {
+      state.searchParams.cardsCount = action.payload.cardsCount
     },
     setCurrentPage: (state, action: PayloadAction<{ newPage: number }>) => {
       state.pagination.currentPage = action.payload.newPage

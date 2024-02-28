@@ -14,8 +14,8 @@ export const updateDecksQueryData = (state: RootState) => {
     authorId,
     currentPage,
     itemsPerPage: pageSize,
-    maxCardsCount: cardsCount.maxCardsCount,
-    minCardsCount: cardsCount.minCardsCount,
+    maxCardsCount: cardsCount.max,
+    minCardsCount: cardsCount.min,
     name: searchName,
     orderBy: sortedString,
   }

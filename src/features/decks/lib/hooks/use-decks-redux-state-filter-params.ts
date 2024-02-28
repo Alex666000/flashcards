@@ -47,7 +47,7 @@ export const useDecksReduxStateFilterParams = () => {
     dispatch(decksActions.setPageSize({ newPageSize: Number(newPageSize) }))
   }
 
-  // устанавливаем в редюсер новый текст что ввел пользователь в инпут
+  // устанавливаем в редюсер новый ТЕКСТ что ввел пользователь в инпут
   const handleSetSearchNameChange = useCallback(
     (newSearchName: string) => {
       dispatch(decksActions.setSearchName({ newSearchName }))
@@ -70,13 +70,18 @@ export const useDecksReduxStateFilterParams = () => {
     [dispatch, meData, tabValue]
   )
 
-  // сеттаем выбранное значение слайдера
+  // сеттаем выбранное значение СЛАЙДЕРА
   const handleSetSliderValueChange = useCallback(
     (newSliderValue: number[]) => {
       // сьрасываем страницы на 1
       dispatch(decksActions.resetOnDefaultCurrentPage())
       // ставим новые значения слайдера
       dispatch(decksActions.setSliderValue({ newSliderValue }))
+      dispatch(
+        decksActions.setCardsCount({
+          cardsCount: { max: newSliderValue[1], min: newSliderValue[0] },
+        })
+      )
     },
     [dispatch]
   )
