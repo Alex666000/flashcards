@@ -1,9 +1,11 @@
 import { RootState } from '@/app/providers/store/store'
-import { getSortedString, useDebounce } from '@/shared/lib'
+import { getSortedString } from '@/shared/lib'
 
+// вызываем её в decks.api в onQueryStarted для создания и удаления квери запросов:
 export const updateDecksQueryData = (state: RootState) => {
   // из стейта вытягиваем что захотим - надо достать то, что есть в методе
-  // 1 параметра decksAPI.util.updateQueryData( 'getDecks' ) :
+  // 1 параметра decksAPI.util.updateQueryData( 'getDecks' ) - то есть все данные для запроса
+  // за колодами, а именно квери параметры
   const {
     pagination: { currentPage, pageSize },
     searchParams: { authorId, searchName, sliderValue, sortOptions },
@@ -11,15 +13,12 @@ export const updateDecksQueryData = (state: RootState) => {
 
   const sortedString = getSortedString(sortOptions)
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const debouncedSliderValue = useDebounce(sliderValue)
-
   return {
     authorId,
     currentPage,
     itemsPerPage: pageSize,
-    maxCardsCount: debouncedSliderValue[1],
-    minCardsCount: debouncedSliderValue[0],
+    maxCardsCount: sliderValue[1],
+    minCardsCount: sliderValue[0],
     name: searchName,
     orderBy: sortedString,
   }

@@ -13,14 +13,17 @@ export type PaginationProps = {
   className?: string // Дополнительные классы для стилизации
   currentPage: number // Текущая страница
   onSetPageChange: (newPage: number) => void // Колбэк при изменении страницы
-  onSetPageSizeChange: (newPageSize: number) => void // Колбэк при изменении размера страницы: newPageSize
+  onSetPageSizeChange: (newPageSize: number) => void // Колбэк при изменении размера страницы:
+  // newPageSize
   pageSize: number // Размер страницы (количество элементов на странице)
-  siblingCount?: number // количество "соседних" страниц, которые отображаются в пагинации вокруг текущей страницы
+  siblingCount?: number // количество "соседних" страниц, которые отображаются в пагинации вокруг
+  // текущей страницы
   totalCount?: number // Общее количество элементов
 }
 /**
  * Pagination:
- * Использует хук usePagination - для генерации массива, представляющего диапазон страниц для отображения.
+ * Использует хук usePagination - для генерации массива, представляющего диапазон страниц
+ * для отображения.
  * Отображает компонент NavigationBlock для кнопок навигации и блока выбора размера страницы.
  */
 export const Pagination: FC<PaginationProps> = memo(

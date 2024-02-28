@@ -1,14 +1,13 @@
 import { memo, useEffect } from 'react'
 
 import { UserAuthDataResponse } from '@/features/auth'
-import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
+import { useMeQuery } from '@/features/auth/api/auth.api'
 import {
   DecksTable,
   FilterControls,
   useDecksReduxStateFilterParams,
   useDecksReduxStatePagination,
 } from '@/features/decks'
-import { useGetDecksQuery } from '@/features/decks/rtk-api'
 import { ControlForNewDeckHeader } from '@/pages/decks-page/ui/control-for-new-deck-header/control-for-new-deck-header'
 import { getSortedString, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
@@ -18,6 +17,8 @@ import { Pagination } from '@/shared/ui/pagination'
 import { Typography } from '@/shared/ui/typography'
 
 import s from './decks.module.scss'
+
+import { useGetDecksQuery } from '../../../features/decks/api'
 
 const DecksPage = () => {
   // Состояния поисковых параметров (фильтров) и "ПАГИНАЦИИ":
@@ -116,7 +117,8 @@ const DecksPage = () => {
             sliderValue={sliderValue}
             tabValue={tabValue}
           />
-          {/* если колоды пришли с сервера */}
+          {/* если колоды пришли с сервера - оплучаем массив объектов где каждый объект = колода
+          колоды отрисуем в таблице */}
           {decksData?.items && (
             <DecksTable
               authUserId={(meData as UserAuthDataResponse)?.id}

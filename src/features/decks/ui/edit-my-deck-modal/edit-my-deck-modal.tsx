@@ -4,7 +4,7 @@ import { DeckForm } from '@/features/forms/deck-form/deck-form'
 import { handleRequestOnServer } from '@/shared/lib/utils/handle-request-on-server'
 import { ModalWindow } from '@/shared/ui/modal-window'
 
-import { useUpdateDeckMutation } from '../../rtk-api'
+import { useUpdateDeckMutation } from '../../api'
 
 export type EditDeckModalProps = {
   cover: null | string // обложка

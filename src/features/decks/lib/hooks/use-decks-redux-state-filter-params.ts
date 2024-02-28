@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 
-import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
+import { useMeQuery } from '@/features/auth/api/auth.api'
 import {
   authorIdSelector,
   currentPageSelector,

@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useSignUpMutation, util } from '@/features/auth/rtk-api/auth.api'
+import { useSignUpMutation, util } from '@/features/auth/api/auth.api'
 import { RegisterForm, RegisterFormData } from '@/features/forms'
 import { ROUTES, errorNotification, useAppDispatch } from '@/shared/lib'
 import { Page } from '@/shared/ui/page'

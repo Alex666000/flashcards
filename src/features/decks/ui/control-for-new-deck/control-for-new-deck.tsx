@@ -1,12 +1,13 @@
 import { useState } from 'react'
 
 import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
-import { useCreateDeckMutation } from '@/features/decks/rtk-api'
 import { DeckForm } from '@/features/forms'
 import { useAppSelector } from '@/shared/lib'
 import { handleRequestOnServer } from '@/shared/lib/utils/handle-request-on-server'
 import { Button } from '@/shared/ui/button'
 import { ModalWindow } from '@/shared/ui/modal-window'
+
+import { useCreateDeckMutation } from '../../api'
 
 /**
  * Модальное окно: используется для отображения модального окна с формой создания

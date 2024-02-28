@@ -1,8 +1,7 @@
 import { memo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { useGetRandomCardQuery, useRateCardMutation } from '@/features/cards/rtk-api/cards.api'
-import { useGetDeckQuery } from '@/features/decks/rtk-api'
+import { useGetRandomCardQuery, useRateCardMutation } from '@/features/cards/api/cards.api'
 import { RateCardForm, RateType } from '@/features/forms'
 import { handleRequestOnServer } from '@/shared/lib'
 import { BackButton } from '@/shared/ui/back-button'
@@ -12,6 +11,8 @@ import { Container } from '@/shared/ui/container'
 import { Typography } from '@/shared/ui/typography'
 
 import s from './learn-card-page.module.scss'
+
+import { useGetDeckQuery } from '../../../features/decks/api'
 
 /**
  * LearnCardPage - представляет страницу для изучения карточек: cards

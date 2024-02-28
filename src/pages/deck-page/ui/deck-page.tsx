@@ -2,12 +2,11 @@ import { memo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { UserAuthDataResponse } from '@/features/auth'
-import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
+import { useMeQuery } from '@/features/auth/api/auth.api'
 import { CardsTable, CreateCardControl } from '@/features/cards'
-import { useGetCardsQuery } from '@/features/cards/rtk-api/cards.api'
+import { useGetCardsQuery } from '@/features/cards/api/cards.api'
 import { OwnerDeckDropDown, useDeckLocalStateData } from '@/features/deck'
 import { EditMyDeckModal } from '@/features/decks'
-import { useDeleteDeckMutation, useGetDeckQuery } from '@/features/decks/rtk-api'
 import { ROUTES, Sort, handleRequestOnServer, useDebounce } from '@/shared/lib'
 import { BackButton } from '@/shared/ui/back-button'
 import { Button } from '@/shared/ui/button'
@@ -18,6 +17,8 @@ import { TextField } from '@/shared/ui/text-field_'
 import { Typography } from '@/shared/ui/typography'
 
 import s from './deck.module.scss'
+
+import { useDeleteDeckMutation, useGetDeckQuery } from '../../../features/decks/api'
 
 /**
  * DeckPage - функционал для просмотра информации о колоде - deck и ее карточках - cards, включая
@@ -56,6 +57,7 @@ const DeckPage = () => {
   const isMyDeck = authorDeckId === currentAuthUserId
 
   // Запрашиваем карточки, принадлежащие данной колоде
+  // cards - тк заменил в selectFromResult - см ниже
   const { cards, cardsTotalCount } = useGetCardsQuery(
     {
       id: deckId as string,

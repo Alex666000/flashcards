@@ -1,9 +1,8 @@
 import { FC, memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { Deck } from '@/features/decks/rtk-api/types'
-import { DeleteControl } from '@/features/decks/ui/delete-control/delete-control'
-import { EditControl } from '@/features/decks/ui/edit-control/edit-control'
+import { DeleteControl, EditControl } from '@/features/decks'
+import { DeckData } from '@/features/decks/api/types'
 import defaultCover from '@/shared/assets/images/default-image.jpg'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Button } from '@/shared/ui/button'
@@ -11,13 +10,12 @@ import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
 import { Table } from '@/shared/ui/table'
 import { Typography } from '@/shared/ui/typography'
-import { logDOM } from '@storybook/test'
 
 import s from './deck-row.module.scss'
 
 type Props = {
   authUserId: string //  Идентификатор текущего пользователя
-  deck: Deck // Объект с информацией о колоде карточек
+  deck: DeckData // Объект с информацией о колоде карточек
 }
 
 /**
@@ -38,8 +36,7 @@ export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
     navigate(`${deck?.id}${ROUTES.learn}`)
   }
 
-  console.log(deck?.name)
-
+  // console.log(deck?.name)
   return (
     <Table.Row className={s.root} key={deck?.id}>
       <Table.Cell align={'left'} className={s.name} onClick={redirectToDeckPage}>

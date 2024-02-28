@@ -1,8 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 // types
-type InitialStateType = typeof initialState
-
 type PaginationType = {
   currentPage: number
   pageSize: number
@@ -11,7 +9,6 @@ export type CardsCountType = {
   max: number | undefined
   min: number
 }
-
 type SearchParamsType = {
   authorId: string | undefined
   cardsCount: CardsCountType

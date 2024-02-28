@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useResetPasswordMutation } from '@/features/auth/rtk-api/auth.api'
+import { useResetPasswordMutation } from '@/features/auth/api/auth.api'
 import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/features/forms'
 import { handleRequestOnServer } from '@/shared/lib'
 import { ROUTES } from '@/shared/lib/constants/route-path'

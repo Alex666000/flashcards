@@ -1,14 +1,14 @@
 import { FC, memo } from 'react'
 
 import { DeckRow } from '@/features/decks'
-import { Deck } from '@/features/decks/rtk-api/types'
+import { DeckData } from '@/features/decks/api/types'
 import { decksTableColumns } from '@/shared/lib'
 import { Table } from '@/shared/ui/table'
 import { TableHeader, TableHeaderProps } from '@/shared/ui/table-header'
 
 type Props = {
   authUserId: string
-  items: Deck[]
+  items: DeckData[]
 } & Pick<TableHeaderProps, 'onSort' | 'sort'>
 
 export const DecksTable: FC<Props> = memo(({ authUserId, items, ...rest }) => {
@@ -21,7 +21,7 @@ export const DecksTable: FC<Props> = memo(({ authUserId, items, ...rest }) => {
       {/* шапка таблицы - серая с логикой сортировки - decksTableColumns -- определяет вид
       таблицы ее колонки */}
       <TableHeader columns={decksTableColumns} {...rest} />
-      {/* Table.Body - состоит из строк */}
+      {/* Table.Body - состоит из многих строк - в каждой строке колода */}
       <Table.Body>
         {items?.map((deck) => <DeckRow authUserId={authUserId} deck={deck} key={deck?.id} />)}
       </Table.Body>

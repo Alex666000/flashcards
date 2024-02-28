@@ -27,6 +27,13 @@ export const cardsAPI = flashCardsAPI.injectEndpoints({
         url: `v1/cards/${id}`,
       }),
     }),
+    getCardById: builder.query<CardResponseData, string>({
+      query: (id) => ({
+        method: 'GET',
+        url: `v1/cards/${id}`,
+      }),
+      // providesTags: ['cards'],
+    }),
     getCards: builder.query<CardsResponseData, { id: string; params: CardsParams }>({
       providesTags: ['cards'],
       query: ({ id, params }) => ({

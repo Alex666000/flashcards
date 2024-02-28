@@ -5,7 +5,7 @@ import { Dialog } from '@/shared/ui/dialog'
 import { Icon } from '@/shared/ui/icon'
 import { IconButton } from '@/shared/ui/icon-button'
 
-import { useDeleteDeckMutation } from '../../rtk-api'
+import { useDeleteDeckMutation } from '../../api'
 
 type Props = {
   id: string

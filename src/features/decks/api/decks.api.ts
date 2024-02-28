@@ -2,12 +2,13 @@ import { toast } from 'react-toastify'
 
 import { flashCardsAPI } from '@/app/api/flash-cards.api'
 import { RootState } from '@/app/providers/store/store'
-import { updateDecksQueryData } from '@/features/decks/model/utils/updateDeckQueryData'
-import { Deck, DecksResponseData, DecksSearchParams } from '@/features/decks/rtk-api/types'
+import { DeckData, DecksResponseData, DecksSearchParams } from '@/features/decks/api/types'
+
+import { updateDecksQueryData } from '../model/utils/updateDeckQueryData'
 
 const decksAPI = flashCardsAPI.injectEndpoints({
   endpoints: (builder) => ({
-    createDeck: builder.mutation<Deck, FormData>({
+    createDeck: builder.mutation<DeckData, FormData>({
       invalidatesTags: ['decks'],
       // onQueryStarted - это "Пессимистичный апдейт (песимисты - предпологаем что с сервера ничего
       // не придет)"" - тк дожидаемся ответа с сервера: const response = await queryFulfilled
@@ -35,7 +36,7 @@ const decksAPI = flashCardsAPI.injectEndpoints({
         url: `v1/decks`,
       }),
     }),
-    deleteDeck: builder.mutation<Deck, { id: string }>({
+    deleteDeck: builder.mutation<DeckData, { id: string }>({
       invalidatesTags: ['decks'],
       // Оптимистичный апдейт: сначала обновляем данные а потом делаем запрос
       // должны знать какая id что обновлять и на основе id будем фильтровать результат
@@ -71,7 +72,7 @@ const decksAPI = flashCardsAPI.injectEndpoints({
         url: `v1/decks/${id}`,
       }),
     }),
-    getDeck: builder.query<Omit<Deck, 'author'>, { id: string }>({
+    getDeck: builder.query<Omit<DeckData, 'author'>, { id: string }>({
       providesTags: ['deck'],
       query: ({ id }) => ({
         method: 'GET',
@@ -86,7 +87,7 @@ const decksAPI = flashCardsAPI.injectEndpoints({
         url: `v2/decks`,
       }),
     }),
-    updateDeck: builder.mutation<Deck, { data: FormData; id: string }>({
+    updateDeck: builder.mutation<DeckData, { data: FormData; id: string }>({
       invalidatesTags: ['decks', 'deck'],
       query: ({ data, id }) => ({
         body: data,

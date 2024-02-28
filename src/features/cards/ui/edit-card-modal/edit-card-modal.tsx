@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { useUpdateCardMutation } from '@/features/cards/rtk-api/cards.api'
+import { useUpdateCardMutation } from '@/features/cards/api/cards.api'
 import { CardForm } from '@/features/forms/card/card'
 import { handleRequestOnServer } from '@/shared/lib/utils/handle-request-on-server'
 import { ModalWindow } from '@/shared/ui/modal-window'

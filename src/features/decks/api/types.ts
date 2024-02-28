@@ -3,7 +3,7 @@ export type Author = {
   name: string
 }
 
-export type Deck = {
+export type DeckData = {
   author: Author
   cardsCount: number
   cover: null | string
@@ -19,7 +19,7 @@ export type Deck = {
   userId: string
 }
 
-export type Pagination = {
+export type PaginationData = {
   currentPage: number
   itemsPerPage: number
   totalItems: number
@@ -27,9 +27,9 @@ export type Pagination = {
 }
 
 export type DecksResponseData = {
-  items: Deck[]
+  items: DeckData[]
   maxCardsCount: number
-  pagination: Pagination
+  pagination: PaginationData
 }
 
 export type DecksSearchParams = {

@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { LoginBodyArgs } from '@/features/auth'
-import { useLoginMutation, useMeQuery } from '@/features/auth/rtk-api/auth.api'
+import { useLoginMutation, useMeQuery } from '@/features/auth/api/auth.api'
 import { LoginForm } from '@/features/forms'
 import { ROUTES, handleRequestOnServer } from '@/shared/lib'
 import { Page } from '@/shared/ui/page'

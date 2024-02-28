@@ -1,4 +1,4 @@
-import { Pagination } from '../../decks/rtk-api/types'
+import { PaginationData } from '@/features/decks/api/types'
 
 export type Card = {
   answer: string
@@ -18,7 +18,7 @@ export type Card = {
 
 export type CardsResponseData = {
   items: Card[]
-  pagination: Pagination
+  pagination: PaginationData
 }
 
 export type CardsParams = {

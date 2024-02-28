@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useRecoverPasswordMutation } from '@/features/auth/rtk-api/auth.api'
+import { useRecoverPasswordMutation } from '@/features/auth/api/auth.api'
 import { ForgotPasswordForm, ForgotPasswordFormType } from '@/features/forms'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
