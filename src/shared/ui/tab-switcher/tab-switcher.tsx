@@ -8,7 +8,7 @@ import s from './tab-switcher.module.scss'
 
 export type Tab = {
   disabled?: boolean
-  text: string
+  title: string
   value: string
 }
 
@@ -18,8 +18,8 @@ type Props = {
   disabled?: boolean
   fullWidth?: boolean
   label?: string
-  onValueChange: (value: string) => void
-  tabs: Tab[]
+  onChange: (value: string) => void
+  tabsValues: Tab[]
   value: string
 }
 
@@ -31,19 +31,18 @@ export const TabSwitcher = forwardRef<ElementRef<typeof TabsSwitcherRadix.Root>,
       disabled,
       fullWidth,
       label,
-      onValueChange,
-      tabs,
+      onChange,
+      tabsValues,
       value,
       ...rest
     } = props
-    const classes = clsx(s.label, className)
 
     return (
-      <Typography as={'div'} className={classes} variant={'body2'}>
+      <Typography as={'div'} className={clsx(s.label, className)} variant={'body2'}>
         {label}
         <TabsSwitcherRadix.Root
-          className={s.root}
-          onValueChange={onValueChange}
+          className={s.tabsSwitcherRoot}
+          onValueChange={onChange}
           ref={ref}
           value={value}
           {...rest}
@@ -52,14 +51,14 @@ export const TabSwitcher = forwardRef<ElementRef<typeof TabsSwitcherRadix.Root>,
             aria-label={ariaLabel || 'tab switcher'}
             className={clsx(clsx(s.list, disabled && s.disabled))}
           >
-            {tabs?.map((t) => (
+            {tabsValues?.map((t) => (
               <TabsSwitcherRadix.Trigger
                 className={clsx(s.trigger, fullWidth && s.fullWidth, disabled && s.disabled)}
                 disabled={t.disabled}
                 key={t.value}
                 value={t.value}
               >
-                {t.text}
+                {t.title}
               </TabsSwitcherRadix.Trigger>
             ))}
           </TabsSwitcherRadix.List>

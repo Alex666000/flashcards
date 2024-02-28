@@ -11,6 +11,9 @@ type SliderProps = {
   max?: number // Максимальное значение в диапазоне
   min?: number // Минимальное значение в диапазоне
   onChange?: (value: number[]) => void // Функция обратного вызова при изменении значения ползунка
+  // Когда пользователь завершает взаимодействие со слайдером и окончательно устанавливает значение,
+  // вызывается событие onValueCommit, чтобы сообщить о том, что значение слайдера было окончательно зафиксировано
+  onValueCommit?: (value: [number, number]) => void
   step?: number // Шаг изменения значения ползунка
   value: number[] // Текущее значение ползунка (массив из двух чисел - минимальное и максимальное значение ползунка)
 }
@@ -23,7 +26,7 @@ type SliderProps = {
  */
 
 export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, SliderProps>(
-  ({ disabled, label, max, min, onChange, step = 1, value, ...restProps }, ref) => {
+  ({ disabled, label, max, min, onChange, onValueCommit, step = 1, value, ...restProps }, ref) => {
     return (
       <form>
         {/* сложение классов */}
@@ -40,7 +43,9 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, SliderProp
                 disabled={disabled}
                 max={max}
                 min={min}
+                // вызываем колбек onChange что в меня пришел пропсами
                 onValueChange={onChange}
+                onValueCommit={onValueCommit}
                 ref={ref}
                 step={step}
                 value={[value?.[0] ?? 0, value?.[1] ?? max ?? 0]}
@@ -49,10 +54,10 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, SliderProp
                 <SliderRadix.Track className={s.track}>
                   <SliderRadix.Range className={s.range} />
                 </SliderRadix.Track>
-                <SliderRadix.Thumb aria-label={'Volume'} className={s.thumb}>
+                <SliderRadix.Thumb aria-label={'Start'} className={s.thumb}>
                   <div className={s.dot}></div>
                 </SliderRadix.Thumb>
-                <SliderRadix.Thumb aria-label={'Volume'} className={s.thumb}>
+                <SliderRadix.Thumb aria-label={'End'} className={s.thumb}>
                   <div className={s.dot}></div>
                 </SliderRadix.Thumb>
               </SliderRadix.Root>

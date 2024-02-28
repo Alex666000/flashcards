@@ -29,13 +29,15 @@ export const FilterControls = memo(
     onSetSliderValueChange,
     onSetTabValueChange,
     searchName,
-    sliderMaxValue = 100,
+    sliderMaxValue = 65,
     sliderValue,
     tabValue,
   }: Props) => {
-    const tabs: Tab[] = [
-      { text: 'My cards', value: authUserId },
-      { text: 'All cards', value: '' },
+    // чтобы выбирать Табами надо взять id из me() запроса, а именно authUserId = data.id
+    // My помечаем с моим id
+    const options: Tab[] = [
+      { title: 'My cards', value: authUserId },
+      { title: 'All cards', value: '' },
     ]
 
     // для дизейбла кнопки
@@ -74,8 +76,8 @@ export const FilterControls = memo(
         <TabSwitcher
           disabled={appStatus === 'loading'}
           label={'Show decks cards'}
-          onValueChange={onSetTabValueChange}
-          tabs={tabs}
+          onChange={onSetTabValueChange}
+          tabsValues={options}
           value={tabValue}
         />
         {/* предоставляет пользователю возможность выбора числа карточек, которые будут отображены */}

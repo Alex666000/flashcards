@@ -3,11 +3,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 // types
 type InitialStateType = typeof initialState
 
-export type CardsCountType = {
-  maxCardsCount: number | undefined
-  minCardsCount: number
-}
-
 type PaginationType = {
   currentPage: number
   pageSize: number
@@ -15,9 +10,6 @@ type PaginationType = {
 
 type SearchParamsType = {
   authorId: string | undefined
-  cardsCount: CardsCountType
-  currentPage: number
-  itemsPerPage: number
   searchName: string
   sliderValue: number[]
   sortOptions: Sort
@@ -39,16 +31,11 @@ const initialState = {
   } as PaginationType,
   // Фильтры поиска - квери параметры:
   searchParams: {
-    authorId: '',
-    cardsCount: {
-      maxCardsCount: undefined,
-      minCardsCount: 0,
-    } as CardsCountType,
-    itemsPerPage: 0,
-    searchName: '', // поисковое значение в инпуте ++++
-    sliderValue: [0, 100], // значения стайдера ++++
-    sortOptions: { direction: 'desc', key: 'updated' },
-    tabValue: '', // значения табов ++++
+    authorId: undefined as string | undefined,
+    searchName: '', // поисковое значение в инпуте
+    sliderValue: [0, 65], // значения стайдера
+    sortOptions: { direction: 'desc', key: 'updated' }, // сортировка
+    tabValue: '', // значения табов
   } as SearchParamsType,
 }
 
@@ -67,11 +54,8 @@ const decksSlice = createSlice({
     resetOnDefaultCurrentPage: (state) => {
       state.pagination.currentPage = 1
     },
-    setAuthorId: (state, action: PayloadAction<{ authorId: string | undefined }>) => {
-      state.searchParams.authorId = action.payload.authorId
-    },
-    setCardsCount: (state, action: PayloadAction<{ cardsCount: CardsCountType }>) => {
-      state.searchParams.cardsCount = action.payload.cardsCount
+    setAuthorId: (state, action: PayloadAction<{ newUserTabValue: string | undefined }>) => {
+      state.searchParams.authorId = action.payload.newUserTabValue
     },
     setCurrentPage: (state, action: PayloadAction<{ newPage: number }>) => {
       state.pagination.currentPage = action.payload.newPage
@@ -85,7 +69,7 @@ const decksSlice = createSlice({
     setSliderValue: (state, action: PayloadAction<{ newSliderValue: number[] }>) => {
       state.searchParams.sliderValue = action.payload.newSliderValue
     },
-    setSort: (state, action: PayloadAction<{ sortOptions: Sort }>) => {
+    setSortedString: (state, action: PayloadAction<{ sortOptions: Sort }>) => {
       state.searchParams.sortOptions = action.payload.sortOptions
     },
     setTabsValue: (state, action: PayloadAction<{ newUserTabValue: string }>) => {

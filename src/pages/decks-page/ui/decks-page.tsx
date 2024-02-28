@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
@@ -8,9 +8,11 @@ import {
   useDecksReduxStateFilterParams,
   useDecksReduxStatePagination,
 } from '@/features/decks'
+import { selectIsMaxCardsCountInit } from '@/features/decks/model/selectors/page-size-selector'
+import { decksActions } from '@/features/decks/model/slice/decks.slice'
 import { useGetDecksQuery } from '@/features/decks/rtk-api'
 import { ControlForNewDeckHeader } from '@/pages/decks-page/ui/control-for-new-deck-header/control-for-new-deck-header'
-import { getSortedString, useDebounce } from '@/shared/lib'
+import { getSortedString, useAppDispatch, useAppSelector, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
 import { Page } from '@/shared/ui/page'
@@ -26,6 +28,7 @@ const DecksPage = () => {
 
   // "КВЕРИ ПАРАМЕТРЫ" - фильтры поиска - параметры поиска "инпут + таб + слайдер" и тд.
   const {
+    // берем значения из Редакса + (подписка на обновления данных)
     handleSetSearchNameChange,
     handleSetSliderValueChange,
     handleSetTabValueChange,
@@ -43,8 +46,7 @@ const DecksPage = () => {
   const debouncedSearchName = useDebounce(searchName)
   const debouncedSliderValue = useDebounce(sliderValue)
 
-  const { data: userData } = useMeQuery() // me() запрос
-  const authUserId = (userData as UserAuthDataResponse).id
+  const { data: meData } = useMeQuery() // me() запрос
 
   // Запрос на сервер за колодами с такими поисковыми параметрами которые взяли из стейта редакса:
   const {
@@ -66,12 +68,11 @@ const DecksPage = () => {
     name: debouncedSearchName,
     orderBy: sortedString,
   })
-  //   decksId: string
-  //   question?: string
-  //   answer?: string
 
   const totalCards = decksData?.maxCardsCount // общее кол-во карточек
 
+  //  Если текущая стр (currentPage) больше, чем количество страниц, необходимых
+  //  для отображения всех карточек  то устанавливается значение текущей страницы в 1.
   useEffect(() => {
     if ((totalCards && totalCards / pageSize < currentPage) || tabValue) {
       setCurrentPage(1)
@@ -86,6 +87,7 @@ const DecksPage = () => {
     totalCards,
   ])
 
+  // обработка ошибок
   if (error) {
     const err = error as any
 
@@ -107,7 +109,7 @@ const DecksPage = () => {
           <ControlForNewDeckHeader />
           {/* инпут + табы + слайдер + кнопка очистки всех фильтров */}
           <FilterControls
-            authUserId={authUserId}
+            authUserId={(meData as UserAuthDataResponse)?.id}
             onSetSearchNameChange={handleSetSearchNameChange}
             onSetSliderValueChange={handleSetSliderValueChange}
             onSetTabValueChange={handleSetTabValueChange}
@@ -119,7 +121,7 @@ const DecksPage = () => {
           {/* если колоды пришли с сервера */}
           {decksData?.items && (
             <DecksTable
-              authUserId={authUserId}
+              authUserId={(meData as UserAuthDataResponse)?.id}
               items={decksData?.items}
               onSort={onSetSortChange}
               sort={sortOptions}

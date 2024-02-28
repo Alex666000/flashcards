@@ -5,7 +5,6 @@ export const currentPageSelector = (state: RootState) => state.decks.pagination.
 export const searchNameSelector = (state: RootState) => state.decks.searchParams.searchName
 export const sliderValueSelector = (state: RootState) => state.decks.searchParams.sliderValue
 export const tabValueSelector = (state: RootState) => state.decks.searchParams.tabValue
-export const cardsCountSelector = (state: RootState) => state.decks.searchParams.cardsCount
 export const authorIdSelector = (state: RootState) => state.decks.searchParams.authorId
 export const sortOptionsSelector = (state: RootState) => state.decks.searchParams.sortOptions
 /*

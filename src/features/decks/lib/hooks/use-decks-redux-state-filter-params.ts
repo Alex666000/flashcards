@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 
+import { useMeQuery } from '@/features/auth/rtk-api/auth.api'
 import {
   authorIdSelector,
-  cardsCountSelector,
   currentPageSelector,
   searchNameSelector,
   sliderValueSelector,
@@ -18,21 +18,19 @@ import { decksActions } from '../../model/slice/decks.slice'
 export const useDecksReduxStateFilterParams = () => {
   const dispatch = useAppDispatch()
 
+  const { data: meData } = useMeQuery()
+
   const searchName = useAppSelector(searchNameSelector) //
   const tabValue = useAppSelector(tabValueSelector) //
   const sliderValue = useAppSelector(sliderValueSelector) //
-
-  const cardsCount = useAppSelector(cardsCountSelector)
   const authorId = useAppSelector(authorIdSelector)
   const sortOptions = useAppSelector(sortOptionsSelector)
   const currentPage = useAppSelector(currentPageSelector)
-  const sliderValues = useAppSelector(sliderValueSelector)
-  const setCardsCount = useAppSelector(cardsCountSelector)
 
   // устанавливаю сортировку выбранную юзером
   const onSetSortChange = (orderBy: Sort) => {
     // orderBy - с сервера получим
-    dispatch(decksActions.setSort({ sortOptions: orderBy }))
+    dispatch(decksActions.setSortedString({ sortOptions: orderBy }))
   }
 
   const onClearFilterParamsChange = () => {
@@ -62,8 +60,14 @@ export const useDecksReduxStateFilterParams = () => {
     (newUserTabValue: string) => {
       dispatch(decksActions.resetOnDefaultCurrentPage())
       dispatch(decksActions.setTabsValue({ newUserTabValue }))
+      if (meData) {
+        dispatch(decksActions.setAuthorId({ newUserTabValue: meData.id }))
+      }
+      if (tabValue === 'my') {
+        dispatch(decksActions.setAuthorId({ newUserTabValue: undefined }))
+      }
     },
-    [dispatch]
+    [dispatch, meData, tabValue]
   )
 
   // сеттаем выбранное значение слайдера
@@ -73,19 +77,13 @@ export const useDecksReduxStateFilterParams = () => {
       dispatch(decksActions.resetOnDefaultCurrentPage())
       // ставим новые значения слайдера
       dispatch(decksActions.setSliderValue({ newSliderValue }))
-      dispatch(
-        decksActions.setCardsCount({
-          cardsCount: { maxCardsCount: sliderValues[1], minCardsCount: sliderValues[0] },
-        })
-      )
     },
-    [dispatch, sliderValues]
+    [dispatch]
   )
 
   // возвращаем значения чтобы пользоваться на UI
   return {
     authorId,
-    cardsCount,
     currentPage,
     handleSetSearchNameChange,
     handleSetSliderValueChange,
@@ -95,7 +93,6 @@ export const useDecksReduxStateFilterParams = () => {
     onSetPageSizeChange,
     onSetSortChange,
     searchName,
-    setCardsCount,
     sliderValue,
     sortOptions,
     tabValue,

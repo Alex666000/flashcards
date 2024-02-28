@@ -24,7 +24,7 @@ export const Default = {
 
     return (
       <div>
-        <TabSwitcher onValueChange={(value) => setValue(value)} tabs={tabs} value={value} />
+        <TabSwitcher onValueChange={(value) => setValue(value)} tabsValues={tabs} value={value} />
         <p style={{ marginTop: '36px' }}>{value}</p>
       </div>
     )
