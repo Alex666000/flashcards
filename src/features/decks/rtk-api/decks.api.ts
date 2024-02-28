@@ -16,7 +16,6 @@ const decksAPI = flashCardsAPI.injectEndpoints({
       // Оптмимстик и пессимистик: делаются через onQueryStarted но оба чуть по разному
       async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
         const state = getState() as RootState
-
         const response = await queryFulfilled // запрос на сервер createDeck пошел
 
         // диспатчим: 1: название квери которое хотим обновить 'getDecks', 2: аргументы-ключ нашего
