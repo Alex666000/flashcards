@@ -1,91 +1,49 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 // если с сервера что-то вернулось то это делать с РТК квери а что-то глобальное
 // остальное храним в стейте Редакса
 
-// types
-type PaginationType = {
-  currentPage: number
-  pageSize: number
-}
-export type CardsCountType = {
-  max: number | undefined
-  min: number
-}
-type SearchParamsType = {
-  authorId: string | undefined
-  cardsCount: CardsCountType
-  searchName: string
-  sliderValue: number[]
-  sortOptions: Sort
-  tabValue: string
-}
-
-export type Sort = {
-  // сортировка - храним тут чтобы при переходе м/у страницами не сбрасывались значения
-  direction: 'asc' | 'desc'
-  key: string
-} | null
-
-// initialState
 const initialState = {
+  // Фильтры поиска - квери параметры:
+  filter: {
+    searchName: '', // поисковое значение в инпуте
+    sliderValue: [0, 65], // значения стайдера
+    tabValue: '',
+  },
   // Пагинация:
   pagination: {
     currentPage: 1,
     pageSize: 7,
-  } as PaginationType,
-  // Фильтры поиска - квери параметры:
-  searchParams: {
-    authorId: undefined as string | undefined,
-    cardsCount: {
-      max: undefined,
-      min: 0,
-    } as CardsCountType,
-    searchName: '', // поисковое значение в инпуте
-    sliderValue: [0, 65], // значения стайдера
-    sortOptions: { direction: 'desc', key: 'updated' }, // сортировка
-    tabValue: '', // значения табов
-  } as SearchParamsType,
+  },
 }
 
-// slice
 const decksSlice = createSlice({
   initialState,
   name: 'decks',
   reducers: {
-    // Подъредюсеры - или AC:
-    clearFilterParams: (state) => {
-      state.searchParams.searchName = ''
-      state.searchParams.tabValue = ''
-      state.searchParams.authorId = undefined
-      state.searchParams.sortOptions = null
-    },
-    resetOnDefaultCurrentPage: (state) => {
+    clearFilters: (state) => {
+      state.filter.searchName = ''
+      state.filter.sliderValue = [0, 65]
+      state.filter.tabValue = ''
       state.pagination.currentPage = 1
+      state.pagination.pageSize = 7
+      toast.info('Filters are reset', { containerId: 'common' })
     },
-    setAuthorId: (state, action: PayloadAction<{ newUserTabValue: string | undefined }>) => {
-      state.searchParams.authorId = action.payload.newUserTabValue
+    setCurrentPage: (state, action: PayloadAction<{ page: number }>) => {
+      state.pagination.currentPage = action.payload.page
     },
-    setCardsCount: (state, action: PayloadAction<{ cardsCount: CardsCountType }>) => {
-      state.searchParams.cardsCount = action.payload.cardsCount
+    setPageSize: (state, action: PayloadAction<{ pageSize: number }>) => {
+      state.pagination.pageSize = action.payload.pageSize
     },
-    setCurrentPage: (state, action: PayloadAction<{ newPage: number }>) => {
-      state.pagination.currentPage = action.payload.newPage
+    setSearchName: (state, action: PayloadAction<{ search: string }>) => {
+      state.filter.searchName = action.payload.search
     },
-    setPageSize: (state, action: PayloadAction<{ newPageSize: number }>) => {
-      state.pagination.pageSize = action.payload.newPageSize
+    setSliderValue: (state, action: PayloadAction<{ sliderValue: number[] }>) => {
+      state.filter.sliderValue = action.payload.sliderValue
     },
-    setSearchName: (state, action: PayloadAction<{ newSearchName: string }>) => {
-      state.searchParams.searchName = action.payload.newSearchName
-    },
-    setSliderValue: (state, action: PayloadAction<{ newSliderValue: number[] }>) => {
-      state.searchParams.sliderValue = action.payload.newSliderValue
-    },
-    setSortedString: (state, action: PayloadAction<{ sortOptions: Sort }>) => {
-      state.searchParams.sortOptions = action.payload.sortOptions
-    },
-    setTabsValue: (state, action: PayloadAction<{ newUserTabValue: string }>) => {
-      state.searchParams.tabValue = action.payload.newUserTabValue
+    setTabValue: (state, action: PayloadAction<{ tabValue: string }>) => {
+      state.filter.tabValue = action.payload.tabValue
     },
   },
 })

@@ -61,6 +61,9 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
               readOnly={readonly}
               ref={ref}
               type={isPasswordType ? finalType : 'text'}
+              // раз достал value в пропсах его нативно обязательно используем
+              // лучше все сразу доставать не надеяться на rest
+              value={value}
               {...rest}
             />
             {isPasswordType && (

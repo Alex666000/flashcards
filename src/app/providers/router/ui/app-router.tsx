@@ -23,7 +23,7 @@ import { PrivateRoute } from './private-route'
  * AppRouter (всё равно что Pages назвать..)  - отрисовывает все пути проекта
  */
 
-export const AppRouter = memo(() => {
+export const AppRouter = () => {
   return (
     // Loader или LeanerProgress в Suspense - пока страница грузится - "видим крутилку"
     <Suspense fallback={<Loader />}>
@@ -52,7 +52,7 @@ export const AppRouter = memo(() => {
       </Routes>
     </Suspense>
   )
-})
+}
 
 /*
 - квери нужны чтобы ограничить выдачу с бэкенда данных,

@@ -13,9 +13,10 @@ import s from './filter-controls.module.scss'
 
 type Props = {
   authUserId: string // Идентификатор текущего пользователя.
-  onSetSearchNameChange: (newString: string) => void // для обновления значения строки поиска.
-  onSetSliderValueChange: (newValue: number[]) => void // для установки нового значения слайдера
-  onSetTabValueChange: (newTab: string) => void // для выбора вкладки (фильтрация по моим карточкам или всем)
+  onClearFilter?: () => void
+  onSearchNameChange: (newString: string) => void // для обновления значения строки поиска.
+  onSliderValueChange: (newValue: number[]) => void // для установки нового значения слайдера
+  onTabValueChange: (newTab: string) => void // для выбора вкладки (фильтрация по моим карточкам или всем)
   searchName: string // Строка поиска для фильтрации по названию
   sliderMaxValue?: number
   sliderValue: number[] // Текущее значение слайдера
@@ -25,9 +26,10 @@ type Props = {
 export const FilterControls = memo(
   ({
     authUserId,
-    onSetSearchNameChange,
-    onSetSliderValueChange,
-    onSetTabValueChange,
+    onClearFilter,
+    onSearchNameChange,
+    onSliderValueChange,
+    onTabValueChange,
     searchName,
     sliderMaxValue = 65,
     sliderValue,
@@ -43,23 +45,10 @@ export const FilterControls = memo(
     // для дизейбла кнопки
     const appStatus = useAppSelector(appStatusSelector)
 
-    // позволяет пользователю очистить все фильтры одним нажатием. При клике на эту кнопку
-    // вызывается функция onClearFiltersClick, которая обновляет все значения фильтров
-    const onClearFiltersClick = () => {
-      onSetSliderValueChange([0, sliderMaxValue])
-      onSetSearchNameChange('')
-      onSetTabValueChange('')
-      toast.info('Filters are reset', { containerId: 'common' })
-    }
-
-    // позволяет очистить текстовое поле
+    // позволяет очистить текстовое поле "ИНПУТА"
     const clearTextField = () => {
-      onSetSearchNameChange('')
+      onSearchNameChange('')
     }
-
-    /* Дебаг jsx консолькой */
-    // console.log(sliderValue)
-    // console.log(sliderMaxValue)
 
     return (
       <div className={s.filter}>
@@ -67,7 +56,7 @@ export const FilterControls = memo(
           className={s.textField}
           clearField={clearTextField}
           // вызвали колбек что нам передали
-          onChange={(e) => onSetSearchNameChange(e.currentTarget.value)}
+          onChange={(e) => onSearchNameChange(e.currentTarget.value)}
           type={'search'}
           value={searchName}
         />
@@ -78,7 +67,7 @@ export const FilterControls = memo(
           // сверху смотри конспект Валера 3 занятие: "дизейблить блокировать кнопку"
           disabled={appStatus === 'loading'}
           label={'Show decks cards'}
-          onChange={onSetTabValueChange}
+          onChange={onTabValueChange}
           tabsValues={options}
           value={tabValue}
         />
@@ -90,14 +79,14 @@ export const FilterControls = memo(
           label={'Number of cards'}
           max={sliderMaxValue}
           min={0}
-          onChange={onSetSliderValueChange}
+          onChange={onSliderValueChange}
           value={sliderValue}
         />
         <Button
           className={s.clearButton}
           // дизейбл кнопки
           disabled={appStatus === 'loading'}
-          onClick={onClearFiltersClick}
+          onClick={onClearFilter}
           variant={'secondary'}
         >
           <Icon className={s.icon} name={'trash-bin'} />

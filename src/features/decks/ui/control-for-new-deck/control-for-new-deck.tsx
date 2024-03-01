@@ -52,7 +52,8 @@ export const ControlForNewDeck = () => {
           onSendDeckFormDataSubmit={handleSendDeckFormDataSubmit}
         />
       </ModalWindow>
-      {/* открываем модалку при нажатии */}
+      {/* открываем модалку при нажатии - дизеибл кнопки -можно прокинуть от хука РТК isLoading
+       и сделать без селектора см Валера конспект*/}
       <Button disabled={appStatus === 'loading'} onClick={() => setOpen(true)}>
         Add New Deck
       </Button>

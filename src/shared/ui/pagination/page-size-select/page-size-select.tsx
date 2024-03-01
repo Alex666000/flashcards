@@ -4,7 +4,7 @@ import { Select } from '../../select'
 
 type Props = {
   onPageSizeChange: (newPageSize: number) => void
-  pageSize: number // Размер страницы
+  pageSize: number | undefined // Размер страницы
 }
 /**
  * PageSizeSelect - для выбора размера страницы (количества элементов на странице).

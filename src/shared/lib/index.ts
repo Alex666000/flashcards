@@ -1,7 +1,7 @@
 export { classNames } from './classNames-lib/classNames'
 export { appDeploy } from './constants/app-deploy-to-vercel'
 export { deckTableColumns } from './constants/deckTableColumns'
-export { decksTableColumns } from './constants/decksTableColumns'
+export { decksTableColumnsForSort } from './constants/decksTableColumnsForSort'
 export { emailRecoveringTemplate } from './constants/email-recovering-template'
 export { htmlCodeResetPassword } from './constants/html-mail-reset-password'
 export type { RatingValuesType } from './constants/rating-values'

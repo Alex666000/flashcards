@@ -1,15 +1,10 @@
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/api/auth.api'
-import {
-  DecksTable,
-  FilterControls,
-  useDecksReduxStateFilterParams,
-  useDecksReduxStatePagination,
-} from '@/features/decks'
+import { DecksTable, FilterControls, useDecksReduxState } from '@/features/decks'
 import { ControlForNewDeckHeader } from '@/pages/decks-page/ui/control-for-new-deck-header/control-for-new-deck-header'
-import { getSortedString, useDebounce } from '@/shared/lib'
+import { Sort, getSortedString, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
 import { Page } from '@/shared/ui/page'
@@ -21,25 +16,26 @@ import s from './decks.module.scss'
 import { useGetDecksQuery } from '../../../features/decks/api'
 
 const DecksPage = () => {
-  // Состояния поисковых параметров (фильтров) и "ПАГИНАЦИИ":
-  // храним в локальном стейте-редакса состояния пагинации
-  const { currentPage, pageSize, setCurrentPage, setPageSize } = useDecksReduxStatePagination()
-
-  // "КВЕРИ ПАРАМЕТРЫ" - фильтры поиска - параметры поиска "инпут + таб + слайдер" и тд.
+  // "КВЕРИ ПАРАМЕТРЫ + ПАГИНАЦИЯ"
+  // фильтры поиска - параметры поиска "инпут + таб + слайдер" и тд.
   const {
+    clearSearchParamsFilter,
     // берем значения из Редакса + (подписка на обновления данных)
-    handleSetSearchNameChange,
-    handleSetSliderValueChange,
-    handleSetTabValueChange,
-    onSetSortChange,
+    currentPage,
+    pageSize,
     searchName,
+    setCurrentPage,
+    setPageSize,
+    setSearchName,
+    setSliderValue,
+    setTabValue,
     sliderValue,
-    sortOptions,
     tabValue,
-  } = useDecksReduxStateFilterParams()
+  } = useDecksReduxState()
 
+  const [sort, setSort] = useState<Sort>({ direction: 'desc', key: 'updated' })
   // отсортированная строка
-  const sortedString = getSortedString(sortOptions)
+  const sortedString = getSortedString(sort) // const sortedString = sort ? `${sort.key}-${sort.direction}` : undefined
 
   // Дебаунс для полей инпута и слайдера - возвращает массив:
   const debouncedSearchName = useDebounce(searchName)
@@ -52,11 +48,14 @@ const DecksPage = () => {
   // нам удобно хранить в числах а не обязательно все в строку конвертировать - косяк бэка
   // написали квери запрос на бэк идем смотрим нетворк что нам пришло какие данные в Preview
   const {
-    currentData: decksData,
+    // ПОЛУЧАЕМ С СЕРВЕРА:
+    // currentData убрали тк из-за нее лишние перирсовки
+    data: decksData,
     error,
     isFetching,
     isLoading,
   } = useGetDecksQuery({
+    // ОТПРАВЛЯЕМ НА СЕРВЕР КВЕРИ ПАРАМЕТРЫ:
     authorId: tabValue, // отправляем на сервак значение выбранного на UI - Таба
     // по id юзера: свой или чужой..
     // т.к возвращаются пагинированные данные - по дефолту приходит первая стр. и на ней 5 элем
@@ -112,9 +111,10 @@ const DecksPage = () => {
           {/* инпут + табы + слайдер + кнопка очистки всех фильтров */}
           <FilterControls
             authUserId={(meData as UserAuthDataResponse)?.id}
-            onSetSearchNameChange={handleSetSearchNameChange}
-            onSetSliderValueChange={handleSetSliderValueChange}
-            onSetTabValueChange={handleSetTabValueChange}
+            onClearFilter={clearSearchParamsFilter}
+            onSearchNameChange={setSearchName}
+            onSliderValueChange={setSliderValue}
+            onTabValueChange={setTabValue}
             searchName={searchName}
             sliderMaxValue={decksData?.maxCardsCount}
             sliderValue={sliderValue}
@@ -127,8 +127,8 @@ const DecksPage = () => {
             <DecksTable
               authUserId={(meData as UserAuthDataResponse)?.id}
               items={decksData?.items}
-              onSort={onSetSortChange}
-              sort={sortOptions}
+              onSort={setSort}
+              sort={sort}
             />
           )}
           {/* Пагинация - ее значения не кешируется, данные храним в редаксе - Все вещи которые

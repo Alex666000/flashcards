@@ -1,4 +1,4 @@
-export const decksTableColumns = [
+export const decksTableColumnsForSort = [
   {
     key: 'name', // ключ для сортировки
     title: 'Name',
