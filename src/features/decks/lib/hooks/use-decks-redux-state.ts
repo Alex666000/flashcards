@@ -3,11 +3,11 @@ import { useSearchParams } from 'react-router-dom'
 
 import { useMeQuery } from '@/features/auth/api/auth.api'
 import {
-  currentPageSelector,
-  pageSizeSelector,
-  searchNameSelector,
-  sliderValueSelector,
-  tabValueSelector,
+  selectCurrentPage,
+  selectPageSize,
+  selectSearchName,
+  selectSliderValue,
+  selectTabValue,
 } from '@/features/decks'
 import { decksActions } from '@/features/decks/model/slice/decks.slice'
 import { useAppDispatch, useAppSelector } from '@/shared/lib'
@@ -20,11 +20,11 @@ export const useDecks = () => {
   const params = Object.fromEntries(searchParams)
 
   // constants
-  const currentPage = useAppSelector(currentPageSelector)
-  const pageSize = useAppSelector(pageSizeSelector)
-  const searchName = useAppSelector(searchNameSelector)
-  const tabValue = useAppSelector(tabValueSelector)
-  const sliderValue = useAppSelector(sliderValueSelector)
+  const currentPage = useAppSelector(selectCurrentPage)
+  const pageSize = useAppSelector(selectPageSize)
+  const searchName = useAppSelector(selectSearchName)
+  const tabValue = useAppSelector(selectTabValue)
+  const sliderValue = useAppSelector(selectSliderValue)
 
   // handlers
   const setCurrentPage = useCallback((newPage: number) => {

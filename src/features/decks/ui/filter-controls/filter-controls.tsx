@@ -36,13 +36,13 @@ export const FilterControls = memo(
     tabValue,
   }: Props) => {
     // чтобы выбирать Табами надо взять id из me() запроса, а именно authUserId = data.id
-    // My помечаем с моим id
+    // "My" помечаем с моим id
     const options: Tab[] = [
       { title: 'My cards', value: authUserId },
       { title: 'All cards', value: '' },
     ]
 
-    // для дизейбла кнопки
+    // для дизейбла кнопки (убрать для РТК не надо..)
     const appStatus = useAppSelector(appStatusSelector)
 
     // позволяет очистить текстовое поле "ИНПУТА"
@@ -55,7 +55,7 @@ export const FilterControls = memo(
         <TextField
           className={s.textField}
           clearField={clearTextField}
-          // вызвали колбек что нам передали
+          // вызвали колбек onSearchNameChange что нам передали
           onChange={(e) => onSearchNameChange(e.currentTarget.value)}
           type={'search'}
           value={searchName}

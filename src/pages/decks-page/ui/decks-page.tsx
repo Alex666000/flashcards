@@ -28,12 +28,13 @@ const DecksPage = () => {
     setPageSize,
     setSearchName,
     setSliderValue,
+    setSort,
     setTabValue,
     sliderValue,
+    sort,
     tabValue,
   } = useDecksReduxState()
 
-  const [sort, setSort] = useState<Sort>({ direction: 'desc', key: 'updated' })
   // отсортированная строка
   const sortedString = getSortedString(sort) // const sortedString = sort ? `${sort.key}-${sort.direction}` : undefined
 
@@ -78,15 +79,7 @@ const DecksPage = () => {
     if ((totalCards && totalCards / pageSize < currentPage) || tabValue) {
       setCurrentPage(1)
     }
-  }, [
-    currentPage,
-    debouncedSearchName,
-    debouncedSliderValue,
-    pageSize,
-    setCurrentPage,
-    tabValue,
-    totalCards,
-  ])
+  }, [currentPage, debouncedSliderValue, pageSize, setCurrentPage, totalCards])
 
   // обработка ошибок
   if (error) {

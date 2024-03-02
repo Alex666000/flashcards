@@ -5,7 +5,7 @@
  */
 import { useCallback } from 'react'
 
-import { currentPageSelector, pageSizeSelector } from '@/features/decks'
+import { selectCurrentPage, selectPageSize } from '@/features/decks'
 import { useAppDispatch, useAppSelector } from '@/shared/lib'
 
 import { decksActions } from '../../model/slice/decks.slice'
@@ -17,8 +17,8 @@ export const useDecksReduxStatePagination = () => {
 
   // селкторы для "ПАГИНАЦИИ": достают обновленные значения из стейта для перерисовки
   // на UI актуальных данных - подписка на изменения, чтобы отрисовывать актуальные данные всегда
-  const currentPage = useAppSelector(currentPageSelector)
-  const pageSize = useAppSelector(pageSizeSelector)
+  const currentPage = useAppSelector(selectCurrentPage)
+  const pageSize = useAppSelector(selectPageSize)
 
   // диспатчим страницу которую нажал юзер
   // "Все что не делай - в конечном итоге всегда сеттаем.."

@@ -2,7 +2,7 @@ import { FC, memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { DeleteControl, EditControl } from '@/features/decks'
-import { DeckData } from '@/features/decks/api/decks.types'
+import { DeckResponseData } from '@/features/decks/api/decks.types'
 import defaultCover from '@/shared/assets/images/default-image.jpg'
 import { ROUTES } from '@/shared/lib/constants/route-path'
 import { Button } from '@/shared/ui/button'
@@ -15,7 +15,7 @@ import s from './deck-row.module.scss'
 
 type Props = {
   authUserId: string //  Идентификатор текущего пользователя
-  deck: DeckData // Объект с информацией о колоде карточек
+  deck: DeckResponseData // Объект с информацией о колоде карточек
 }
 
 /**

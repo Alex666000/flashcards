@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify'
 
+import { Sort } from '@/shared/lib'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 // если с сервера что-то вернулось то это делать с РТК квери а что-то глобальное
 // остальное храним в стейте Редакса
@@ -16,6 +17,7 @@ const initialState = {
     currentPage: 1,
     pageSize: 7,
   },
+  sort: { direction: 'desc', key: 'updated' } as Sort | undefined,
 }
 
 const decksSlice = createSlice({
@@ -41,6 +43,9 @@ const decksSlice = createSlice({
     },
     setSliderValue: (state, action: PayloadAction<{ sliderValue: number[] }>) => {
       state.filter.sliderValue = action.payload.sliderValue
+    },
+    setSortOptions: (state, action: PayloadAction<{ sort: Sort | undefined }>) => {
+      state.sort = action.payload.sort
     },
     setTabValue: (state, action: PayloadAction<{ tabValue: string }>) => {
       state.filter.tabValue = action.payload.tabValue
