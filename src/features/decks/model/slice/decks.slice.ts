@@ -12,6 +12,7 @@ const initialState = {
     sliderValue: [0, 65], // значения стайдера
     tabValue: '',
   },
+  isMaxCardsCountInit: true, // тоже самое что и pageSize
   // Пагинация:
   pagination: {
     currentPage: 1,

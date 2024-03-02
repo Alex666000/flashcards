@@ -15,7 +15,7 @@ type Props = {
   authUserId: string // Идентификатор текущего пользователя.
   onClearFilter?: () => void
   onSearchNameChange: (newString: string) => void // для обновления значения строки поиска.
-  onSliderValueChange: (newValue: number[]) => void // для установки нового значения слайдера
+  onSliderValueChange: (value: number[]) => void // для установки нового значения слайдера
   onTabValueChange: (newTab: string) => void // для выбора вкладки (фильтрация по моим карточкам или всем)
   searchName: string // Строка поиска для фильтрации по названию
   sliderMaxValue?: number
@@ -72,16 +72,15 @@ export const FilterControls = memo(
           value={tabValue}
         />
         {/* предоставляет пользователю возможность выбора числа карточек, которые будут отображены */}
-        <Slider
-          // так дизейблить с РТК не обязательно с глобал стеита: можно isLoading прокинуть
-          // сверху смотри конспект Валера 3 занятие: "дизейблить блокировать кнопку"
-          disabled={appStatus === 'loading'}
-          label={'Number of cards'}
-          max={sliderMaxValue}
-          min={0}
-          onChange={onSliderValueChange}
-          value={sliderValue}
-        />
+        <div className={s.range}>
+          <Slider
+            label={'Number of cards'}
+            max={sliderMaxValue}
+            min={0}
+            onChange={onSliderValueChange}
+            value={sliderValue}
+          />
+        </div>
         <Button
           className={s.clearButton}
           // дизейбл кнопки

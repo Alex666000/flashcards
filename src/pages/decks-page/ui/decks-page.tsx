@@ -1,10 +1,10 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useEffect } from 'react'
 
 import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/api/auth.api'
 import { DecksTable, FilterControls, useDecksReduxState } from '@/features/decks'
 import { ControlForNewDeckHeader } from '@/pages/decks-page/ui/control-for-new-deck-header/control-for-new-deck-header'
-import { Sort, getSortedString, useDebounce } from '@/shared/lib'
+import { getSortedString, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
 import { Page } from '@/shared/ui/page'
@@ -136,7 +136,7 @@ const DecksPage = () => {
             onSetPageChange={setCurrentPage}
             onSetPageSizeChange={setPageSize}
             pageSize={pageSize}
-            totalCount={decksData?.pagination?.totalItems || 10}
+            totalCount={decksData?.pagination?.totalItems}
           />
         </Container>
       </Page>

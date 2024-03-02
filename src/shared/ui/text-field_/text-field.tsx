@@ -11,10 +11,11 @@ export type TextFieldProps = {
   // чтобы в инпуте справа появился крестик для удаления
   clearField?: () => void
   errorMessage?: string
+  inputTextClassName?: string
   label?: string
   readonly?: boolean
   type?: 'email' | 'password' | 'search' | 'text'
-  value?: string
+  value?: any | string
 } & ComponentPropsWithoutRef<'input'>
 
 type PropsType = TextFieldProps & Omit<ComponentPropsWithoutRef<'input'>, keyof TextFieldProps>
