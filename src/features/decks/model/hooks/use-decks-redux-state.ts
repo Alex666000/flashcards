@@ -32,10 +32,12 @@ export const useDecksReduxState = () => {
   // handlers:
   const setCurrentPage = useCallback(
     (page: number) => {
-      setSearchParams({ ...params, page: page })
+      if (page !== currentPage) {
+        setSearchParams({ ...params, page })
+      }
       dispatch(decksActions.setCurrentPage({ page }))
     },
-    [dispatch, params, setSearchParams]
+    [currentPage, dispatch, params, setSearchParams]
   )
 
   const setPageSize = useCallback(
@@ -93,9 +95,9 @@ export const useDecksReduxState = () => {
     dispatch(decksActions.clearFilters()) // Очищаем параметры фильтрации в Redux
     dispatch(decksActions.setSliderValue({ sliderValue: [0, 65] }))
     setSearchParams({}) // Очищаем все параметры поиска в URL
-  }, [dispatch, params, setSearchParams])
+  }, [dispatch, setSearchParams])
 
-  // в useEffect всегда делать проверку if-ами..
+  // в useEffect всегда делать проверку if
   useEffect(() => {
     // Достаём с урла значения что ранее установили - выше..
     const search = searchParams.get('search') || ''
