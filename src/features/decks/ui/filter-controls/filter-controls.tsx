@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import { toast } from 'react-toastify'
 
 import { appStatusSelector } from '@/app/model/selectors/app-status-selector'
 import { useAppSelector } from '@/shared/lib'
@@ -32,7 +31,7 @@ export const FilterControls = memo(
     onTabValueChange,
     searchName,
     sliderMaxValue = 65,
-    sliderValue,
+    sliderValue = [],
     tabValue,
   }: Props) => {
     // чтобы выбирать Табами надо взять id из me() запроса, а именно authUserId = data.id

@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/api/auth.api'
@@ -60,7 +60,7 @@ const DecksPage = () => {
     authorId: tabValue, // отправляем на сервак значение выбранного на UI - Таба
     // по id юзера: свой или чужой..
     // т.к возвращаются пагинированные данные - по дефолту приходит первая стр. и на ней 5 элем
-    currentPage: currentPage,
+    currentPage: +currentPage,
     // Параметры запроса - столько-то decks на странице отобразить
     itemsPerPage: pageSize,
     // если хотим найти все колоды у которых больше 5 карточек, например от 5-10
@@ -79,7 +79,7 @@ const DecksPage = () => {
     if ((totalCards && totalCards / pageSize < currentPage) || tabValue) {
       setCurrentPage(1)
     }
-  }, [currentPage, debouncedSliderValue, pageSize, setCurrentPage, totalCards])
+  }, [currentPage, pageSize, setCurrentPage, tabValue, totalCards])
 
   // обработка ошибок
   if (error) {
@@ -93,6 +93,8 @@ const DecksPage = () => {
   }
 
   const loadingStatus = isLoading || isFetching
+
+  // console.log('DecksPage')
 
   return (
     <>
@@ -136,7 +138,7 @@ const DecksPage = () => {
             onSetPageChange={setCurrentPage}
             onSetPageSizeChange={setPageSize}
             pageSize={pageSize}
-            totalCount={decksData?.pagination?.totalItems}
+            totalCount={300}
           />
         </Container>
       </Page>
@@ -144,7 +146,7 @@ const DecksPage = () => {
   )
 }
 
-export default memo(DecksPage)
+export default DecksPage
 
 /*
 - квери и ури параметры (не отправляем данные на сервер а отправляем аргументы в урле, аргументы

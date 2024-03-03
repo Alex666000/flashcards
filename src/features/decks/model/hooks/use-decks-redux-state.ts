@@ -9,6 +9,7 @@ import {
   selectSortOptions,
   selectTabValue,
 } from '@/features/decks'
+import { clearLocalStorage } from '@/features/decks/model/hooks/use-clear-local-storage'
 import { decksActions } from '@/features/decks/model/slice/decks.slice'
 import { Sort, useAppDispatch, useAppSelector } from '@/shared/lib'
 import { undefined } from 'zod'
@@ -33,17 +34,19 @@ export const useDecksReduxState = () => {
   const setCurrentPage = useCallback(
     (page: number) => {
       if (page !== currentPage) {
-        setSearchParams({ ...params, page })
+        setSearchParams({ ...params, page: page.toString() })
       }
       dispatch(decksActions.setCurrentPage({ page }))
+      localStorage.setItem('currentPage', JSON.stringify(page))
     },
     [currentPage, dispatch, params, setSearchParams]
   )
 
   const setPageSize = useCallback(
     (pageSize: number) => {
-      setSearchParams({ ...params, pageSize })
+      setSearchParams({ ...params, pageSize: pageSize.toString() })
       dispatch(decksActions.setPageSize({ pageSize }))
+      localStorage.setItem('pageSize', JSON.stringify(pageSize))
     },
     [dispatch, params, setSearchParams]
   )
@@ -53,6 +56,7 @@ export const useDecksReduxState = () => {
     (search: string) => {
       setSearchParams({ ...params, search: search })
       dispatch(decksActions.setSearchName({ search }))
+      localStorage.setItem('searchName', JSON.stringify(search))
     },
     [dispatch, params, setSearchParams]
   )
@@ -63,6 +67,7 @@ export const useDecksReduxState = () => {
       dispatch(decksActions.setSearchName({ search: '' }))
       setSearchParams({ ...params, tabValue })
       dispatch(decksActions.setTabValue({ tabValue }))
+      localStorage.setItem('tabValue', JSON.stringify(tabValue))
     },
     [dispatch, params, setSearchParams]
   )
@@ -72,8 +77,9 @@ export const useDecksReduxState = () => {
     (sliderValue: number[]) => {
       // устанавили значения слайдера в URL - заводим для этого поля: max, min т.к
       // в редаксе мы храним массив sliderValue: [0, 65]
-      setSearchParams({ ...params, max: sliderValue[1], min: sliderValue[0] })
+      setSearchParams({ ...params, max: sliderValue[1].toString(), min: sliderValue[0].toString() })
       dispatch(decksActions.setSliderValue({ sliderValue }))
+      localStorage.setItem('sliderValue', JSON.stringify(sliderValue))
     },
     [dispatch, params, setSearchParams]
   )
@@ -86,6 +92,7 @@ export const useDecksReduxState = () => {
         setSearchParams({ ...params, sort: '' })
       }
       dispatch(decksActions.setSortOptions({ sort }))
+      localStorage.setItem('sortOptions', JSON.stringify(sort))
     },
     [dispatch, params, setSearchParams]
   )
@@ -95,52 +102,38 @@ export const useDecksReduxState = () => {
     dispatch(decksActions.clearFilters()) // Очищаем параметры фильтрации в Redux
     dispatch(decksActions.setSliderValue({ sliderValue: [0, 65] }))
     setSearchParams({}) // Очищаем все параметры поиска в URL
+    // Очищаем с ЛС
+    clearLocalStorage()
   }, [dispatch, setSearchParams])
 
   // в useEffect всегда делать проверку if
   useEffect(() => {
-    // Достаём с урла значения что ранее установили - выше..
-    const search = searchParams.get('search') || ''
-    const page = searchParams.get('page') || ''
-    const sliderValueMin = searchParams.get('min') || ''
-    const sliderValueMax = searchParams.get('max') || ''
-    const tabValue = searchParams.get('tabValue') || ''
-    const pageSize = searchParams.get('pageSize') || ''
-    const sort = searchParams.get('sort') || ''
+    // достаем с урла:
 
-    if (sort) {
-      const [direction, key] = sort.split('_')
+    // достаем из ЛС при загрузке страницы decks-page:
+    const searchNameValue = localStorage.getItem('searchName')
+    const currentPageValue = localStorage.getItem('currentPage')
+    const pageSizeValue = localStorage.getItem('pageSize')
+    const tabValue = localStorage.getItem('tabValue')
+    const sliderValue = localStorage.getItem('sliderValue')
 
-      dispatch(
-        decksActions.setSortOptions({ sort: { direction: direction as 'asc' | 'desc', key } })
-      )
+    // устанавливаем в стейт редакса (Арр) значения что достали с ЛС:
+    if (searchNameValue) {
+      dispatch(decksActions.setSearchName({ search: JSON.parse(searchNameValue) }))
     }
-
-    if (page) {
-      dispatch(decksActions.setCurrentPage({ page: Number(page) ?? null }))
+    if (currentPageValue) {
+      dispatch(decksActions.setCurrentPage({ page: JSON.parse(currentPageValue) }))
     }
-
-    if (pageSize) {
-      dispatch(decksActions.setPageSize({ pageSize: Number(pageSize) ?? null }))
+    if (pageSizeValue) {
+      dispatch(decksActions.setPageSize({ pageSize: JSON.parse(pageSizeValue) }))
     }
-
-    dispatch(decksActions.setSearchName({ search: search ?? '' }))
-
     if (tabValue) {
-      dispatch(decksActions.setTabValue({ tabValue: tabValue ?? '' }))
+      dispatch(decksActions.setTabValue({ tabValue: JSON.parse(tabValue) }))
     }
-
-    const newSliderValue = [
-      sliderValueMin ? Number(sliderValueMin) : 0,
-      sliderValueMax ? Number(sliderValueMax) : 65,
-    ]
-
-    dispatch(
-      decksActions.setSliderValue({
-        sliderValue: newSliderValue,
-      })
-    )
-  }, [dispatch, searchParams])
+    if (sliderValue) {
+      dispatch(decksActions.setSliderValue({ sliderValue: JSON.parse(sliderValue) }))
+    }
+  }, [dispatch])
 
   return {
     clearSearchParamsFilter,

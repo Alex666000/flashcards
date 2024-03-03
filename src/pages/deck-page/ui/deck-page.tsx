@@ -21,7 +21,7 @@ import s from './deck.module.scss'
 import { useDeleteDeckMutation, useGetDeckQuery } from '../../../features/decks/api'
 
 /**
- * DeckPage - функционал для просмотра информации о колоде - deck и ее карточках - cards, включая
+ * DeckPage - для просмотра информации о колоде - deck и ее карточках - cards, включая
  * управление их данными и выполнение действий, таких как редактирование и удаление
  */
 
@@ -30,7 +30,7 @@ const DeckPage = () => {
 
   // для получения данных о текущей странице, id колоды - deckId, размере страницы, параметре поиска
   const { currentPage, deckId, pageSize, searchName, setCurrentPage, setPageSize, setSearchName } =
-    useDeckLocalStateData() // можно через searchParams - см проект flashcards в папке "самые крутые образцы"
+    useDeckLocalStateData()
 
   const debouncedSearchName = useDebounce(searchName)
 
@@ -39,8 +39,8 @@ const DeckPage = () => {
   const sortedString = sort ? `${sort.key}-${sort.direction}` : undefined
 
   // Запрашиваем с сервера информацию о текущем пользователе
-  const { data: currentUserInfoData, isFetching, isLoading } = useMeQuery()
-  const currentAuthUserId = (currentUserInfoData as UserAuthDataResponse)?.id
+  const { data: userData, isFetching, isLoading } = useMeQuery()
+  const currentAuthUserId = (userData as UserAuthDataResponse)?.id
 
   // Запрашиваем с сервера информацию об одной колоде с заданным id: deckId - отправляем на сервер
   // (deckId достали с помощью useParams() из урла в хуке useDeckData() ),
@@ -97,6 +97,7 @@ const DeckPage = () => {
   return (
     <section className={s.deckPageBlock}>
       <Container>
+        {/* Модальное окно (c формой) для редактирования моей колоды */}
         {deckData && (
           <EditMyDeckModal
             cover={deckData.cover}
@@ -107,10 +108,8 @@ const DeckPage = () => {
             setOpen={setEditIsOpen}
           />
         )}
-
         {/* Все публичные колоды */}
         {/* стрелка назад */}
-
         <div className={s.deckHeader}>
           <BackButton />
           <div className={s.top}>
