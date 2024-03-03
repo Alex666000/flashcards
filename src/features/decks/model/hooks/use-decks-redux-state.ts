@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import {
@@ -20,6 +20,8 @@ export const useDecksReduxState = () => {
 
   // searchParams
   const [searchParams, setSearchParams]: [URLSearchParams, Function] = useSearchParams()
+  // eslint-disable-next-line no-undef
+  const [isFirstRender, setIsFirstRender] = useState(true)
   const params = Object.fromEntries(searchParams)
 
   // constants
@@ -108,7 +110,7 @@ export const useDecksReduxState = () => {
 
   // в useEffect всегда делать проверку if
   useEffect(() => {
-    // Достаём с урла значения что ранее установили - выше..
+    // Достаём с урла значения что ранее установили setSearchParams
     const search = searchParams.get('search') || ''
     const page = searchParams.get('page') || ''
     const sliderValueMin = searchParams.get('min') || ''
@@ -136,7 +138,11 @@ export const useDecksReduxState = () => {
     dispatch(decksActions.setSearchName({ search: search ?? '' }))
 
     if (tabValue) {
-      dispatch(decksActions.setTabValue({ tabValue: tabValue ?? '' }))
+      if (!isFirstRender) {
+        dispatch(decksActions.setTabValue({ tabValue: tabValue ?? '' }))
+      } else {
+        setIsFirstRender(false)
+      }
     }
 
     const newSliderValue = [
@@ -171,7 +177,11 @@ export const useDecksReduxState = () => {
       dispatch(decksActions.setPageSize({ pageSize: JSON.parse(pageSizeValue) }))
     }
     if (tabValue) {
-      dispatch(decksActions.setTabValue({ tabValue: JSON.parse(tabValue) }))
+      if (!isFirstRender) {
+        dispatch(decksActions.setTabValue({ tabValue: JSON.parse(tabValue) }))
+      } else {
+        setIsFirstRender(false)
+      }
     }
     if (sliderValue) {
       dispatch(decksActions.setSliderValue({ sliderValue: JSON.parse(sliderValue) }))
