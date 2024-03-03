@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { UserAuthDataResponse } from '@/features/auth'
 import { useMeQuery } from '@/features/auth/api/auth.api'
 import { DecksTable, FilterControls, useDecksReduxState } from '@/features/decks'
-import { ControlForNewDeckHeader } from '@/pages/decks-page/ui/control-for-new-deck-header/control-for-new-deck-header'
 import { getSortedString, useDebounce } from '@/shared/lib'
 import { Container } from '@/shared/ui/container'
 import { LeanerProgress } from '@/shared/ui/loaders-components/loaders'
@@ -14,8 +13,10 @@ import { Typography } from '@/shared/ui/typography'
 import s from './decks.module.scss'
 
 import { useGetDecksQuery } from '../../../features/decks/api'
+import { ControlForNewDeckHeader } from './control-for-new-deck-header/control-for-new-deck-header'
 
 const DecksPage = () => {
+  const [isInitPage, setIsInitPage] = useState(true)
   // "КВЕРИ ПАРАМЕТРЫ + ПАГИНАЦИЯ"
   // фильтры поиска - параметры поиска "инпут + таб + слайдер" и тд.
   const {
@@ -76,10 +77,16 @@ const DecksPage = () => {
   //  Если текущая стр (currentPage) больше, чем количество страниц, необходимых
   //  для отображения всех карточек  то устанавливается значение текущей страницы в 1.
   useEffect(() => {
-    if ((totalCards && totalCards / pageSize < currentPage) || tabValue) {
-      setCurrentPage(1)
+    if (isInitPage) {
+      if ((totalCards && totalCards / pageSize < currentPage) || tabValue) {
+        setCurrentPage(1)
+      }
     }
-  }, [currentPage, pageSize, setCurrentPage, tabValue, totalCards])
+
+    return () => {
+      setIsInitPage(false)
+    }
+  }, [currentPage, isInitPage, pageSize, setCurrentPage, tabValue, totalCards])
 
   // обработка ошибок
   if (error) {
@@ -132,14 +139,16 @@ const DecksPage = () => {
           глобальном стейте, либо в инпуте в серче ввожу и потом после перезагрузки тоже хочу это
           доставать, табы,слайдеров значения - делаем связку редакса и РТК (кэширование данных)
           -- если с сервера что-то вернулось то это делать с РТК квери а что-то глобальное  */}
-          <Pagination
-            className={s.pagination}
-            currentPage={currentPage}
-            onSetPageChange={setCurrentPage}
-            onSetPageSizeChange={setPageSize}
-            pageSize={pageSize}
-            totalCount={300}
-          />
+          {decksData && decksData.items.length ? (
+            <Pagination
+              className={s.pagination}
+              currentPage={currentPage}
+              onSetPageChange={setCurrentPage}
+              onSetPageSizeChange={setPageSize}
+              pageSize={pageSize}
+              totalCount={300}
+            />
+          ) : null}
         </Container>
       </Page>
     </>

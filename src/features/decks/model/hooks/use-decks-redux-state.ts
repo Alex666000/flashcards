@@ -12,16 +12,16 @@ import {
 import { clearLocalStorage } from '@/features/decks/model/hooks/use-clear-local-storage'
 import { decksActions } from '@/features/decks/model/slice/decks.slice'
 import { Sort, useAppDispatch, useAppSelector } from '@/shared/lib'
-import { undefined } from 'zod'
 
-// Логика searchParams (HW15 DZ-auto + тут) + храним бизнес-данные Redux
+// Логика searchParams (HW15 DZ-auto) + храним бизнес-данные Redux
 export const useDecksReduxState = () => {
   const dispatch = useAppDispatch()
 
+  // Флаг для предотвращения лишнего рендера из-за выбранного квери параметра
+  const [isFirstRender, setIsFirstRender] = useState(true)
+
   // searchParams
   const [searchParams, setSearchParams]: [URLSearchParams, Function] = useSearchParams()
-  // eslint-disable-next-line no-undef
-  const [isFirstRender, setIsFirstRender] = useState(true)
   const params = Object.fromEntries(searchParams)
 
   // constants
@@ -138,6 +138,7 @@ export const useDecksReduxState = () => {
     dispatch(decksActions.setSearchName({ search: search ?? '' }))
 
     if (tabValue) {
+      // если не первый рендер, только в этом случае
       if (!isFirstRender) {
         dispatch(decksActions.setTabValue({ tabValue: tabValue ?? '' }))
       } else {
