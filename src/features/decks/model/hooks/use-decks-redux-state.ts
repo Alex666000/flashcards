@@ -108,8 +108,51 @@ export const useDecksReduxState = () => {
 
   // в useEffect всегда делать проверку if
   useEffect(() => {
-    // достаем с урла:
+    // Достаём с урла значения что ранее установили - выше..
+    const search = searchParams.get('search') || ''
+    const page = searchParams.get('page') || ''
+    const sliderValueMin = searchParams.get('min') || ''
+    const sliderValueMax = searchParams.get('max') || ''
+    const tabValue = searchParams.get('tabValue') || ''
+    const pageSize = searchParams.get('pageSize') || ''
+    const sort = searchParams.get('sort') || ''
 
+    if (sort) {
+      const [direction, key] = sort.split('_')
+
+      dispatch(
+        decksActions.setSortOptions({ sort: { direction: direction as 'asc' | 'desc', key } })
+      )
+    }
+
+    if (page) {
+      dispatch(decksActions.setCurrentPage({ page: Number(page) ?? null }))
+    }
+
+    if (pageSize) {
+      dispatch(decksActions.setPageSize({ pageSize: Number(pageSize) ?? null }))
+    }
+
+    dispatch(decksActions.setSearchName({ search: search ?? '' }))
+
+    if (tabValue) {
+      dispatch(decksActions.setTabValue({ tabValue: tabValue ?? '' }))
+    }
+
+    const newSliderValue = [
+      sliderValueMin ? Number(sliderValueMin) : 0,
+      sliderValueMax ? Number(sliderValueMax) : 65,
+    ]
+
+    dispatch(
+      decksActions.setSliderValue({
+        sliderValue: newSliderValue,
+      })
+    )
+  }, [dispatch, searchParams])
+
+  // в useEffect всегда делать проверку c if
+  useEffect(() => {
     // достаем из ЛС при загрузке страницы decks-page:
     const searchNameValue = localStorage.getItem('searchName')
     const currentPageValue = localStorage.getItem('currentPage')
