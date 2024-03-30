@@ -17,6 +17,6 @@ export const Default: Story = {
       alert(JSON.stringify(data))
     }
 
-    return <CreateNewPasswordForm onSubmit={onSubmit} />
+    return <CreateNewPasswordForm onSetCreateNewPasswordSubmit={onSubmit} />
   },
 }

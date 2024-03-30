@@ -1,4 +1,3 @@
-export { useDecksReduxStatePagination } from './lib/hooks/use-decks-redux-state-pagination'
 export { useDecksReduxState } from './model/hooks/use-decks-redux-state'
 export { selectPageSize } from './model/selectors/select-page-size'
 export { selectCurrentPage } from './model/selectors/select-page-size'

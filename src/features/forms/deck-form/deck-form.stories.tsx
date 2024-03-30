@@ -17,6 +17,6 @@ export const Default: Story = {
       alert(JSON.stringify(data))
     }
 
-    return <DeckForm onCancel={() => alert('Cancel')} onSubmit={onSubmit} />
+    return <DeckForm onCancel={() => alert('Cancel')} onSendDeckFormDataSubmit={onSubmit} />
   },
 }

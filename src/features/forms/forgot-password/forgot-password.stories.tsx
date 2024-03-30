@@ -18,6 +18,6 @@ export const Default: Story = {
       alert(JSON.stringify(data))
     }
 
-    return <ForgotPasswordForm onSubmit={onSubmit} />
+    return <ForgotPasswordForm onForgotPasswordFormDataSubmit={onSubmit} />
   },
 }
