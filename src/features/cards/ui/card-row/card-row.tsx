@@ -12,7 +12,7 @@ import s from './card-row.module.scss'
 import defaultImage from '../../../../shared/assets/images/default-image.jpg'
 
 type Props = {
-  card: Card // Объект с информацией о карточке
+  card: Card
   isMyDeck: boolean
 }
 
@@ -38,7 +38,6 @@ export const CardRow: FC<Props> = memo(({ card, isMyDeck }) => {
       {isMyDeck && (
         <Table.Cell className={s.controls}>
           <div className={s.buttons}>
-            {/*позволяющая изменить параметры карточки*/}
             <EditCardControl
               answer={card.answer}
               answerImg={card.answerImg}

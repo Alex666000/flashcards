@@ -15,7 +15,6 @@ import s from './create-new-password-page.module.scss'
 
 const CreateNewPasswordPage = () => {
   const navigate = useNavigate()
-  // с урла достаем токен
   const { token } = useParams<{ token: string }>()
 
   const [resetPassword] = useResetPasswordMutation()
@@ -23,7 +22,6 @@ const CreateNewPasswordPage = () => {
   const handleSetCreateNewPasswordSubmit = async ({ password }: CreateNewPasswordFormType) => {
     if (token) {
       await handleRequestOnServer(async () => {
-        // отправляем запрос на сервак
         await resetPassword({ password, token }).unwrap()
         navigate(ROUTES.signIn)
         toast.success('The password has been changed', { containerId: 'common' })

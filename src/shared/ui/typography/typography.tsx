@@ -29,10 +29,3 @@ export const Typography = <T extends ElementType = 'p'>(
 
   return <Component className={classNames} {...rest} />
 }
-
-/*
-- При верстке на UI: Typography лучше заворачивать в div
-- <Typography className={classes.label} variant={'body2'}> -- body2 - основной текст проекта
-- as?: T // ПРИМЕР: Текст будет ссылкой: <Typography as={Link} to={ROUTES.profile} variant="subtitle1" className={s.name}>Привет!</Typography>
-
- */

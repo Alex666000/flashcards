@@ -6,7 +6,6 @@ import { store } from '@/app/providers/store/store'
 import { createRoot } from 'react-dom/client'
 
 import './app/styles/index.scss'
-// подключаем шрифты и стили в проект
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 
@@ -26,8 +25,3 @@ createRoot(document.getElementById('root') as HTMLElement).render(
     </ErrorBoundary>
   </Provider>
 )
-
-/*
-- Toast - всплавышка уведомление
-- оборачивать браузерами и тд лучше всего в main чтобы не было не предвиденных ошибок
- */

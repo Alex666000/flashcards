@@ -12,9 +12,6 @@ const VerifyEmailPage = () => {
   const { code } = useParams()
   const [verifyMail] = useVerifyMailMutation()
 
-  // т.к есть зависимости эффект за ними следит и при их изменении (обновлении)
-  // отправит снова запрос на сервер для обновления там новых данных и в респонсе
-  // ловим обновленные данные
   useEffect(() => {
     if (code) {
       verifyMail({ code })

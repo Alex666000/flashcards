@@ -1,21 +1,24 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import { useMeQuery } from '@/features/auth/api/auth.api'
 import {
   selectCurrentPage,
   selectPageSize,
   selectSearchName,
   selectSliderValue,
+  selectSortOptions,
   selectTabValue,
 } from '@/features/decks'
+import { clearLocalStorage } from '@/features/decks/model/hooks/use-clear-local-storage'
 import { decksActions } from '@/features/decks/model/slice/decks.slice'
-import { useAppDispatch, useAppSelector } from '@/shared/lib'
+import { Sort, useAppDispatch, useAppSelector } from '@/shared/lib'
 
-export const useDecks = () => {
+export const useDecksReduxState = () => {
   const dispatch = useAppDispatch()
-  const { data: meData } = useMeQuery()
 
+  const [isFirstRender, setIsFirstRender] = useState(true)
+
+  // searchParams
   const [searchParams, setSearchParams]: [URLSearchParams, Function] = useSearchParams()
   const params = Object.fromEntries(searchParams)
 
@@ -25,45 +28,155 @@ export const useDecks = () => {
   const searchName = useAppSelector(selectSearchName)
   const tabValue = useAppSelector(selectTabValue)
   const sliderValue = useAppSelector(selectSliderValue)
+  const sort = useAppSelector(selectSortOptions)
 
-  // handlers
-  const setCurrentPage = useCallback((newPage: number) => {
-    setSearchParams({ ...params, newPage })
-    dispatch(decksActions.setCurrentPage({ newPage }))
-  }, [])
+  // handlers:
+  const setCurrentPage = useCallback(
+    (page: number) => {
+      if (page !== currentPage) {
+        setSearchParams({ ...params, page: page.toString() })
+      }
+      dispatch(decksActions.setCurrentPage({ page }))
+      localStorage.setItem('currentPage', JSON.stringify(page))
+    },
+    [currentPage, dispatch, params, setSearchParams]
+  )
 
-  const setPageSize = useCallback((newPageSize: number) => {
-    setSearchParams({ ...params, newPageSize })
-    dispatch(decksActions.setPageSize({ newPageSize }))
-  }, [])
+  const setPageSize = useCallback(
+    (pageSize: number) => {
+      setSearchParams({ ...params, pageSize: pageSize.toString() })
+      dispatch(decksActions.setPageSize({ pageSize }))
+      localStorage.setItem('pageSize', JSON.stringify(pageSize))
+    },
+    [dispatch, params, setSearchParams]
+  )
 
-  // устанавливаем в редюсер новый ТЕКСТ что ввел пользователь в инпут
-  const setSearchName = useCallback((newSearchName: string) => {
-    setSearchParams({ ...params, newSearchName })
-    dispatch(decksActions.setSearchName({ newSearchName }))
-  }, [])
+  const setSearchName = useCallback(
+    (search: string) => {
+      setSearchParams({ ...params, search: search })
+      dispatch(decksActions.setSearchName({ search }))
+      localStorage.setItem('searchName', JSON.stringify(search))
+    },
+    [dispatch, params, setSearchParams]
+  )
 
-  // устанавливаем выбранный Таб
-  const setTabValue = useCallback((newTabValue: string) => {
-    setSearchParams({ ...params, newTabValue })
-    dispatch(decksActions.setTabValue({ newTabValue }))
-  }, [])
+  const setTabValue = useCallback(
+    (tabValue: string) => {
+      dispatch(decksActions.setSearchName({ search: '' }))
+      setSearchParams({ ...params, tabValue })
+      dispatch(decksActions.setTabValue({ tabValue }))
+      localStorage.setItem('tabValue', JSON.stringify(tabValue))
+    },
+    [dispatch, params, setSearchParams]
+  )
 
-  // сеттаем выбранное значение СЛАЙДЕРА
-  const setSliderValue = useCallback((newSliderValue: number[]) => {
-    setSearchParams({ ...params, newSliderValue })
-    dispatch(decksActions.setSliderValue({ newSliderValue }))
-  }, [])
+  const setSliderValue = useCallback(
+    (sliderValue: number[]) => {
+      setSearchParams({ ...params, max: sliderValue[1].toString(), min: sliderValue[0].toString() })
+      dispatch(decksActions.setSliderValue({ sliderValue }))
+      localStorage.setItem('sliderValue', JSON.stringify(sliderValue))
+    },
+    [dispatch, params, setSearchParams]
+  )
 
-  console.log(searchName)
+  const setSort = useCallback(
+    (sort: Sort | undefined) => {
+      if (sort) {
+        setSearchParams({ ...params, sort: `${sort.direction}_${sort.key}` })
+      } else {
+        setSearchParams({ ...params, sort: '' })
+      }
+      dispatch(decksActions.setSortOptions({ sort }))
+      localStorage.setItem('sortOptions', JSON.stringify(sort))
+    },
+    [dispatch, params, setSearchParams]
+  )
+
+  const clearSearchParamsFilter = useCallback(() => {
+    dispatch(decksActions.clearFilters()) // Очищаем параметры фильтрации в Redux
+    dispatch(decksActions.setSliderValue({ sliderValue: [0, 65] }))
+    setSearchParams({}) // Очищаем все параметры поиска в URL
+    // Очищаем с ЛС
+    clearLocalStorage()
+  }, [dispatch, setSearchParams])
 
   useEffect(() => {
-    const search = searchParams.get('newSearchName') || ''
+    const search = searchParams.get('search') || ''
+    const page = searchParams.get('page') || ''
+    const sliderValueMin = searchParams.get('min') || ''
+    const sliderValueMax = searchParams.get('max') || ''
+    const tabValue = searchParams.get('tabValue') || ''
+    const pageSize = searchParams.get('pageSize') || ''
+    const sort = searchParams.get('sort') || ''
 
-    dispatch(decksActions.setSearchName({ newSearchName: search }))
-  }, [])
+    if (sort) {
+      const [direction, key] = sort.split('_')
+
+      dispatch(
+        decksActions.setSortOptions({ sort: { direction: direction as 'asc' | 'desc', key } })
+      )
+    }
+
+    if (page) {
+      dispatch(decksActions.setCurrentPage({ page: Number(page) ?? null }))
+    }
+
+    if (pageSize) {
+      dispatch(decksActions.setPageSize({ pageSize: Number(pageSize) ?? null }))
+    }
+
+    dispatch(decksActions.setSearchName({ search: search ?? '' }))
+
+    if (tabValue) {
+      if (!isFirstRender) {
+        dispatch(decksActions.setTabValue({ tabValue: tabValue ?? '' }))
+      } else {
+        setIsFirstRender(false)
+      }
+    }
+
+    const newSliderValue = [
+      sliderValueMin ? Number(sliderValueMin) : 0,
+      sliderValueMax ? Number(sliderValueMax) : 65,
+    ]
+
+    dispatch(
+      decksActions.setSliderValue({
+        sliderValue: newSliderValue,
+      })
+    )
+  }, [dispatch, searchParams])
+
+  useEffect(() => {
+    const searchNameValue = localStorage.getItem('searchName')
+    const currentPageValue = localStorage.getItem('currentPage')
+    const pageSizeValue = localStorage.getItem('pageSize')
+    const tabValue = localStorage.getItem('tabValue')
+    const sliderValue = localStorage.getItem('sliderValue')
+
+    if (searchNameValue) {
+      dispatch(decksActions.setSearchName({ search: JSON.parse(searchNameValue) }))
+    }
+    if (currentPageValue) {
+      dispatch(decksActions.setCurrentPage({ page: JSON.parse(currentPageValue) }))
+    }
+    if (pageSizeValue) {
+      dispatch(decksActions.setPageSize({ pageSize: JSON.parse(pageSizeValue) }))
+    }
+    if (tabValue) {
+      if (!isFirstRender) {
+        dispatch(decksActions.setTabValue({ tabValue: JSON.parse(tabValue) }))
+      } else {
+        setIsFirstRender(false)
+      }
+    }
+    if (sliderValue) {
+      dispatch(decksActions.setSliderValue({ sliderValue: JSON.parse(sliderValue) }))
+    }
+  }, [dispatch])
 
   return {
+    clearSearchParamsFilter,
     currentPage,
     pageSize,
     searchName,
@@ -71,8 +184,10 @@ export const useDecks = () => {
     setPageSize,
     setSearchName,
     setSliderValue,
+    setSort,
     setTabValue,
     sliderValue,
+    sort,
     tabValue,
   }
 }

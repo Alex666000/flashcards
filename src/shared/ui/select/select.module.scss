@@ -17,7 +17,6 @@
 .trigger {
   cursor: pointer;
 
-  // @include flex(row, 0, 12px, center, space-between);
   display: flex;
   flex-direction: row;
   gap: 0 12px;

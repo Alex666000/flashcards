@@ -13,8 +13,6 @@ export const useDeckLocalStateData = () => {
   const pageSize = useAppSelector(deckPageSizeSelector)
   const searchName = useAppSelector(deckSearchNameSelector)
 
-  // для извлечения параметров из URL
-  //  извлекает параметр id из URL
   const { id = '' } = useParams<{ id: string }>()
   const deckId = id as string
 

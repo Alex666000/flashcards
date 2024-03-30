@@ -1,4 +1,4 @@
-import { Flex, FlexProps } from '@/shared/ui/stack/flex/Flex'
+import { Flex, FlexProps } from '@/shared/ui/stack/flex/flex'
 
 type VStackProps = Omit<FlexProps, 'flexDirection'>
 

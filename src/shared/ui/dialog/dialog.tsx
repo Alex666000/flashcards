@@ -8,21 +8,15 @@ import { Typography } from '@/shared/ui/typography'
 import s from './dialog.module.scss'
 
 type Props = {
-  buttonText?: string // Текст кнопки подтверждения (по умолчанию "Confirm")
-  description: string // Текстовое описание модалки
-  onConfirm: () => void // Функция обратного вызова при нажатии на кнопку подтверждения
-  open: boolean // Флаг отображения/скрытия окна
-  setOpen: (value: boolean) => void // Функция для изменения значения флага отображения диалога
-  // Когда splitLines установлен в true, функция-хелпер: formatTextBr - будет использоваться для
-  // форматирования текста с переносами строк.
-  splitLines?: boolean // splitLines: Флаг, указывающий на необходимость разбивки текстового описания по строкам
-  title: string // Заголовок диалога
+  buttonText?: string
+  description: string
+  onConfirm: () => void
+  open: boolean
+  setOpen: (value: boolean) => void
+  splitLines?: boolean
+  title: string
 }
-/**
- * Dialog - представляет собой "МОДАЛЬНОЕ" (диалоговое) окно с текстовым описанием, кнопками "Cancel" и "Confirm".
- * Важной особенностью является возможность разбивки текстового описания по строкам с использованием
- * функции formatTextBr для создания переносов строк
- */
+
 export const Dialog: FC<Props> = ({
   buttonText = 'Confirm',
   description = '',
@@ -32,7 +26,6 @@ export const Dialog: FC<Props> = ({
   splitLines,
   title,
 }) => {
-  // Форматируем текстовое описание с переносами строк, если splitLines === true
   const formattedDescription = splitLines ? formatTextBr(description) : description
 
   const onCancel = () => {
@@ -40,7 +33,6 @@ export const Dialog: FC<Props> = ({
   }
 
   return (
-    // Используем компонент ModalWindow для создания диалогового окна
     <ModalWindow open={open} setOpen={setOpen} title={title}>
       <Typography>{formattedDescription}</Typography>
       <div className={s.buttons}>

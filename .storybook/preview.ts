@@ -3,7 +3,6 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 import './../src/app/styles/index.scss'
 
-// preview.ts точка входа сторибука
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },

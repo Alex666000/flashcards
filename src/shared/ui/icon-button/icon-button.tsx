@@ -6,12 +6,9 @@ import s from './icon-button.module.scss'
 
 export type IconButtonProps = {
   icon: ReactNode
-  small?: boolean // Флаг, указывающий, следует ли использовать маленький размер кнопки
+  small?: boolean
 } & Omit<ComponentPropsWithoutRef<'button'>, 'children'>
 
-/**
- - IconButton, предназначенный для отображения кнопки с иконкой
- */
 export const IconButton = forwardRef<ComponentRef<'button'>, IconButtonProps>(
   ({ className, icon, small, ...props }, ref) => {
     const classes = clsx(s.button, small && s.small, className)

@@ -104,8 +104,3 @@ export const appSlice = createSlice({
 })
 
 export const { actions: appActions, reducer: appReducer } = appSlice
-
-/*
-- Селектор достает из инишл стейта значение - особенно при его изменении на новое чтобы в UI
-отрисовать актуальные данные: стейт - подстейт (редюсер) - инишлстейт - свойство + его значение
- */

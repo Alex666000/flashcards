@@ -11,7 +11,3 @@ export const ROUTES = {
   singUp: '/sign-up',
   verifyEmail: '/confirm-email/:code',
 } as const
-
-/*
-Находятся в shared так как родительские слои используют, нельзя хранить в др.слоях
- */

@@ -4,11 +4,9 @@ import { Select } from '../../select'
 
 type Props = {
   onPageSizeChange: (newPageSize: number) => void
-  pageSize: number | undefined // Размер страницы
+  pageSize: number | undefined
 }
-/**
- * PageSizeSelect - для выбора размера страницы (количества элементов на странице).
- */
+
 export const PageSizeSelect: FC<Props> = ({ onPageSizeChange, pageSize }) => {
   const options = [
     { label: '5', value: '5' },

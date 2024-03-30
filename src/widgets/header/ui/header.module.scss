@@ -1,9 +1,7 @@
-// гл.блок размеры + заливка + границы
 .headerBlock {
-  position: fixed; // фиксированная шапка - Header
+  position: fixed;
   z-index: 100;
 
-  // прижали Header к верху экрана на всю ширину
   top: 0;
   right: 0;
   left: 0;
@@ -13,21 +11,16 @@
   background: var(--color-dark-700);
   border-bottom: 1px solid var(--color-dark-500);
 
-  // стили общего контейнера + стили header_container-а:
   .headerContainer {
-    // полсе гл.блока идёт контейнер Арр где будет осн.контент
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    // чтобы высота была никогда не меньше - не хардкодим её
-    // иначе просто не указываем она подстроится под размер контента
     min-height: 60px;
   }
 }
 
 .userNameOrEmail {
-  all: unset; // зануляем все стили кнопки дефолтные
+  all: unset;
 
   cursor: pointer;
 
@@ -36,20 +29,13 @@
   align-items: center;
 
   .name {
-    text-decoration: none; // для удаления стандартного подчеркивания текста, для ссылок.
+    text-decoration: none;
     border-bottom: 2px dashed var(--color-light-100);
-
-    // outline: none;
-
-    // Для людей с проблемами со зрением -- outline: none - никогда не писать,
-    // а писать outline-color: transparent; соблюдать правила "prefers-reduced-motion"
     outline-color: transparent;
     transition: 0.3s;
 
     &:hover {
       color: var(--color-accent-100);
-
-      // цвет нижней грацицы:
       border-bottom-color: var(--color-accent-100);
     }
 
@@ -59,7 +45,6 @@
     }
 
     &:focus-visible {
-      // когда посещена была
       color: var(--color-info-300);
       border-bottom-color: var(--color-info-300);
     }
@@ -67,29 +52,19 @@
 }
 
 .dropdownButton {
-  all: unset; // зануляем все стили кнопки дефолтные кнопки стандартной
+  all: unset;
 
-  cursor: pointer; // значит кликнуть можно - показываем..
-
-  // width: 40px;
-  // height: 40px;
-
+  cursor: pointer;
   border-radius: 50%;
-  outline-color: transparent; // вместо outline: none для слабовидящих..
+  outline-color: transparent;
 
   transition: 0.3s;
 
   &:hover {
-    filter: drop-shadow(0 0 6px var(--color-accent-100)); // тень
+    filter: drop-shadow(0 0 6px var(--color-accent-100));
   }
 
   &:focus-visible {
-    // отвечает за синий кружок когда нажали и ушли на аватарку
     outline: 2px solid var(--color-info-700);
   }
 }
-
-/*
-- один элемент никогда не оборачиваем в div-ку
-- псевдоклассы в этом файле см и в кнопке...
- */

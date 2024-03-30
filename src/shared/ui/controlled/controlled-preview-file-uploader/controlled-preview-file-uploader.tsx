@@ -13,18 +13,13 @@ import { Typography } from '../../typography'
 
 type Props<T extends FieldValues> = {
   control: Control<T>
-  deleteCoverHandler: () => void // Функция для удаления загруженного файла
-  displayInlineError?: boolean // следует ли отображать встроенные сообщения об ошибке
-  errorMessage: null | string // Сообщение об ошибке для отображения в случае проблемы с загрузкой файла
-  extraActions?: () => void // для выполнения дополнительных действий после загрузки файла.
-  name: FieldPath<T> // Имя/путь поля в форме
-  preview: null | string // URL или данные base64 для превью изображения
+  deleteCoverHandler: () => void
+  displayInlineError?: boolean
+  errorMessage: null | string
+  extraActions?: () => void
+  name: FieldPath<T>
+  preview: null | string
 }
-
-/**
- * ControlledPreviewFileUploader: используется для отображения превью загруженного файла,
- * обычно изображения, вместе с элементами управления для удаления файла и загрузки нового
- */
 
 export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Props<T>) => {
   const {
@@ -46,7 +41,6 @@ export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Prop
   }
 
   const deleteHandler = () => {
-    // Функция для удаления загруженного файла
     deleteCoverHandler()
     if (open) {
       setOpen(false)
@@ -63,7 +57,6 @@ export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Prop
       />
       {displayInlineError && errorMessage && (
         <Typography className={s.error} variant={'caption'}>
-          {/*Сообщение об ошибке для отображения в случае проблемы с загрузкой файла*/}
           {errorMessage}
         </Typography>
       )}
@@ -74,12 +67,8 @@ export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Prop
             Delete Cover
           </Button>
         )}
-        {/* обрабатывает функционал загрузки файла, включая отображение элемента выбора файла
-        и инициирование выбора файла
-        - ВНУТРИ input c type='file' */}
         <ControlledFileUploader
           control={control}
-          // extraActions - функция для выполнения дополнительных действий после загрузки файла
           extraActions={extraActions}
           fullWidth={!preview}
           name={name}

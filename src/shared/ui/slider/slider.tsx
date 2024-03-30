@@ -7,29 +7,19 @@ import s from './slider.module.scss'
 
 type SliderProps = {
   disabled?: boolean
-  label?: string // Текстовая метка над ползунком
-  max?: number // Максимальное значение в диапазоне
-  min?: number // Минимальное значение в диапазоне
-  onChange?: (value: number[]) => void // Функция обратного вызова при изменении значения ползунка
-  // Когда пользователь завершает взаимодействие со слайдером и окончательно устанавливает значение,
-  // вызывается событие onValueCommit, чтобы сообщить о том, что значение слайдера было окончательно зафиксировано
+  label?: string
+  max?: number
+  min?: number
+  onChange?: (value: number[]) => void
   onValueCommit?: (value: [number, number]) => void
-  step?: number // Шаг изменения значения ползунка
-  value: number[] // Текущее значение ползунка (массив из двух чисел - минимальное и максимальное значение ползунка)
+  step?: number
+  value: number[]
 }
-/**
- * Компонент Slider - компонент для выбора диапазона значений
- * SliderRadix.Table - обеспечивает основной функционал ползунка.
- * Стили включают трек, диапазон, ползунки и метки.
- * Значения max и min отображаются с помощью компонента Typography и стилизованного контейнера (minMax).
- * При изменении значения ползунка вызывается функция обратного вызова onChange.
- */
 
 export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, SliderProps>(
   ({ disabled, label, max, min, onChange, onValueCommit, step = 1, value, ...restProps }, ref) => {
     return (
       <form>
-        {/* сложение классов */}
         <div className={`${s.container} ${disabled ? s.disabled : ''}`}>
           {/* <div className={clsx(s.container, disabled && s.disabled)}> */}
           <Typography as={'label'} className={s.label} variant={'body2'}>
@@ -43,7 +33,6 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, SliderProp
                 disabled={disabled}
                 max={max}
                 min={min}
-                // вызываем колбек onChange что в меня пришел пропсами
                 onValueChange={onChange}
                 onValueCommit={onValueCommit}
                 ref={ref}

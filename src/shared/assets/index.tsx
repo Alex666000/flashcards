@@ -6,5 +6,6 @@ export { KeyboardArrowRightIcon } from './icons/keyboard-arrow-right-icon'
 export { LogoutIcon } from './icons/logoutIcon'
 export { OpenedEyeIcon } from './icons/openedEyeIcon'
 export { SearchIcon } from './icons/searchIcon'
+
 // illustrations
 export { LogoIcon } from './illustrations/logo-icon'

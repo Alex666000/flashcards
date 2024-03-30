@@ -14,21 +14,11 @@ import s from './learn-card-page.module.scss'
 
 import { useGetDeckQuery } from '../../../features/decks/api'
 
-/**
- * LearnCardPage - представляет страницу для изучения карточек: cards
- * useGetRandomCardQuery() - для получения информации о колоде и случайной карточке соответственно
- * При нажатии на кнопку оценки вызывается функция onSubmit, которая отправляет запрос на оценку
- * карточки. Если запрос успешен, режим оценки устанавливается в false, чтобы скрыть ответ
- * и вернуться к вопросу
- */
 const LearnCardPage = () => {
-  // для управления режимом оценки карточки. Когда пользователь нажимает кнопку "Show Answer",
-  // устанавливается режим оценки (rateMode), который показывает ответ на карточку
   const [rateMode, setRateMode] = useState(false)
 
   const [rateCard] = useRateCardMutation()
 
-  // для получения параметров из URL - получаем id из урла
   const params = useParams()
   const id = params.id as string
   const { currentData: deckData } = useGetDeckQuery({ id })

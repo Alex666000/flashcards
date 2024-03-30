@@ -1,75 +1,74 @@
-// // mixin from Sams-k..
 @use 'sass:selector';
 @use 'sass:list';
 
 @mixin flex($justify: center, $align: center, $direction: null, $wrap: null) {
-    display: flex;
-    flex-flow: $direction $wrap;
-    align-items: $align;
-    justify-content: $justify;
+  display: flex;
+  flex-flow: $direction $wrap;
+  align-items: $align;
+  justify-content: $justify;
 }
 
 @mixin typography($size: null, $weight: null, $line-height: null) {
-    margin: 0;
+  margin: 0;
 
-    @if $size {
-        font-size: var(--font-size-#{$size});
-    }
+  @if $size {
+    font-size: var(--font-size-#{$size});
+  }
 
-    @if $weight {
-        font-weight: var(--font-weight-#{$weight});
-    }
+  @if $weight {
+    font-weight: var(--font-weight-#{$weight});
+  }
 
-    @if $line-height {
-        line-height: var(--line-height-#{$line-height});
-    }
+  @if $line-height {
+    line-height: var(--line-height-#{$line-height});
+  }
 }
 
 @mixin card-container(
-    $isFlex: false,
-    $justify: center,
-    $align: center,
-    $direction: null,
-    $wrap: null
+  $isFlex: false,
+  $justify: center,
+  $align: center,
+  $direction: null,
+  $wrap: null
 ) {
-    max-width: 420px;
-    padding: 30px;
+  max-width: 420px;
+  padding: 30px;
 
-    @if $isFlex {
-        @include flex($justify, $align, $direction, $wrap);
-    }
+  @if $isFlex {
+    @include flex($justify, $align, $direction, $wrap);
+  }
 }
 
 // Code used to reset user-agent styles applied to input with auto inserted credentials
 // Mixin must be used inside a ruleset, not at the top level of the stylesheet.
 // It also produces &Disabled classname for use in the components classes
 @mixin reset-input-autofill(
-    $bg-color,
-    $text-color,
-    $disabled-bg-color: $bg-color,
-    $disabled-text-color: $text-color
+  $bg-color,
+  $text-color,
+  $disabled-bg-color: $bg-color,
+  $disabled-text-color: $text-color
 ) {
-    @if not & {
-        @error 'The reset-input-autofill mixin has been used in the global scope. It is only allowed to be used inside an arbitrary ruselet.';
-    }
+  @if not & {
+    @error 'The reset-input-autofill mixin has been used in the global scope. It is only allowed to be used inside an arbitrary ruselet.';
+  }
 
-    $parent: selector.append(&, ':-webkit-autofill');
-    $parent-disabled: selector.append(&, 'Disabled:-webkit-autofill');
+  $parent: selector.append(&, ':-webkit-autofill');
+  $parent-disabled: selector.append(&, 'Disabled:-webkit-autofill');
 
-    --text-color: #{$text-color};
-    --bg-color: #{$bg-color};
+  --text-color: #{$text-color};
+  --bg-color: #{$bg-color};
 
-    // prettier-ignore
-    @at-root #{$parent, selector.append($parent, ':hover, :focus, :active')} {
+  // prettier-ignore
+  @at-root #{$parent, selector.append($parent, ':hover, :focus, :active')} {
     box-shadow: 0 0 0 4em var(--bg-color) inset !important;
 
     -webkit-text-fill-color: var(--text-color) !important;
   }
 
-    @at-root #{$parent-disabled} {
-        --text-color: #{$disabled-text-color};
-        --bg-color: #{$disabled-bg-color};
-    }
+  @at-root #{$parent-disabled} {
+    --text-color: #{$disabled-text-color};
+    --bg-color: #{$disabled-bg-color};
+  }
 }
 
 $all-form-items: container, title, form, field, input, caption, button, hint, link;
@@ -77,65 +76,65 @@ $all-form-items: container, title, form, field, input, caption, button, hint, li
 // To extend or overwrite the mixin styles,
 // use @extend at-rule with the appropriate placeholder-selector under the mixin invocation
 @mixin form-card($isFlex: true, $items: ()) {
-    %container {
-        @include card-container($isFlex, $justify: null, $direction: column);
+  %container {
+    @include card-container($isFlex, $justify: null, $direction: column);
+  }
+
+  %title {
+    margin-bottom: 24px;
+  }
+
+  %form {
+    @if $isFlex {
+      @include flex($justify: null, $direction: column);
+
+      width: 100%;
+    }
+  }
+
+  %field {
+    @if $isFlex {
+      width: 100%;
     }
 
-    %title {
-        margin-bottom: 24px;
+    margin-bottom: 10px;
+  }
+
+  %input {
+    @include reset-input-autofill(
+      $bg-color: var(--color-dark-700),
+      $text-color: var(--color-light-100),
+      $disabled-text-color: var(--color-dark-300)
+    );
+  }
+
+  %caption {
+    margin-inline: 2px;
+    color: var(--color-light-900);
+  }
+
+  %button {
+    margin-top: 24px;
+  }
+
+  %hint {
+    margin-top: 20px;
+    color: var(--color-light-900);
+  }
+
+  %link {
+    @include typography($size: m, $weight: bold, $line-height: m);
+
+    margin-top: 10px;
+  }
+
+  @each $item in $items {
+    @if not list.index($all-form-items, $item) {
+      @error "#{$item} item is not supported by mixin. List of supported items: #{$all-form-items}";
     }
 
-    %form {
-        @if $isFlex {
-            @include flex($justify: null, $direction: column);
-
-            width: 100%;
-        }
+    .#{$item} {
+      @extend %#{$item} !optional;
     }
-
-    %field {
-        @if $isFlex {
-            width: 100%;
-        }
-
-        margin-bottom: 10px;
-    }
-
-    %input {
-        @include reset-input-autofill(
-            $bg-color: var(--color-dark-700),
-            $text-color: var(--color-light-100),
-            $disabled-text-color: var(--color-dark-300)
-        );
-    }
-
-    %caption {
-        margin-inline: 2px;
-        color: var(--color-light-900);
-    }
-
-    %button {
-        margin-top: 24px;
-    }
-
-    %hint {
-        margin-top: 20px;
-        color: var(--color-light-900);
-    }
-
-    %link {
-        @include typography($size: m, $weight: bold, $line-height: m);
-
-        margin-top: 10px;
-    }
-
-    @each $item in $items {
-        @if not list.index($all-form-items, $item) {
-            @error "#{$item} item is not supported by mixin. List of supported items: #{$all-form-items}";
-        }
-
-        .#{$item} {
-            @extend %#{$item} !optional;
-        }
-    }
+  }
 }

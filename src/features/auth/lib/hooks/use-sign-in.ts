@@ -4,7 +4,6 @@ import { emailSchema, stringSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-// Определение схемы валидации для полей формы: Zod
 const loginSchema = z.object({
   email: emailSchema,
   password: stringSchema,
@@ -13,13 +12,6 @@ const loginSchema = z.object({
 
 export type SignInFormProps = z.infer<typeof loginSchema>
 
-/**
- * useSignIn, использует хук useForm() из react-hook-form для управления состоянием формы.
- * Он предоставляет значения по умолчанию для полей формы и использует Zod resolver (zodResolver)
- для валидации на основе схемы loginSchema.
- * Пользовательский хук useSignIn можно использовать в компоненте React для управления состоянием
- и валидацией формы входа в систему.
- */
 export const useSignIn = () => {
   return useForm<SignInFormProps>({
     defaultValues: {

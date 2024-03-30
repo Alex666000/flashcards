@@ -11,7 +11,6 @@ export const storyBookStore = configureStore({
   },
 })
 
-// декораторы - обертки над историеи с наделением ее доп своиствами
 export const StoreDecorator = (storyFn: () => ReactNode) => {
   return <Provider store={storyBookStore}>{storyFn()}</Provider>
 }

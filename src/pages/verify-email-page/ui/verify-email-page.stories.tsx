@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import { store } from '@/app/providers'
+import { store } from '@/app'
 import { VerifyEmailPage } from '@/pages'
 
 const meta = {

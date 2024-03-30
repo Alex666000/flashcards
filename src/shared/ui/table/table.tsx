@@ -4,19 +4,18 @@ import { clsx } from 'clsx'
 
 import s from './table.module.scss'
 
-// Таблица - кастомный -- не Радикс компонент
 export const Root = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
   ({ className, ...rest }, ref) => {
     return <table className={clsx(s.rootTable, className)} {...rest} ref={ref} />
   }
 )
-// Шапка таблицы
+
 export const Head = forwardRef<ElementRef<'thead'>, ComponentPropsWithoutRef<'thead'>>(
   ({ className, ...rest }, ref) => {
     return <thead className={clsx(s.head, className)} {...rest} ref={ref} />
   }
 )
-// Названия рядов (колонок)
+
 export const HeadCell = forwardRef<ElementRef<'th'>, ComponentPropsWithoutRef<'th'>>(
   ({ children, className, ...rest }, ref) => {
     return (
@@ -26,19 +25,19 @@ export const HeadCell = forwardRef<ElementRef<'th'>, ComponentPropsWithoutRef<'t
     )
   }
 )
-// Основная инфа таблицы - data по которым мапинся...
+
 export const Body = forwardRef<ElementRef<'tbody'>, ComponentPropsWithoutRef<'tbody'>>(
   ({ className, ...rest }, ref) => {
     return <tbody className={clsx(s.body, className)} {...rest} ref={ref} />
   }
 )
-// Ряды - колонки
+
 export const Row = forwardRef<ElementRef<'tr'>, ComponentPropsWithoutRef<'tr'>>(
   ({ className, ...rest }, ref) => {
     return <tr className={clsx(s.row, className)} {...rest} ref={ref} />
   }
 )
-// Ячейка в строках - Сюда выводится информация из таблицы в своих рядах
+
 export const Cell = forwardRef<ElementRef<'td'>, ComponentPropsWithoutRef<'td'>>(
   ({ className, ...rest }, ref) => {
     const classes = clsx(s.cell, className)
@@ -54,30 +53,3 @@ const Empty: FC<ComponentPropsWithoutRef<'div'>> = ({ className, ...rest }) => {
 }
 
 export const Table = { Body, Cell, Empty, Head, HeadCell, Root, Row }
-
-/*
- <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableHeadCell>Name</TableHeadCell>
-                        <TableHeadCell>Cards</TableHeadCell>
-                        <TableHeadCell>Last Updated</TableHeadCell>
-                        <TableHeadCell>Created by</TableHeadCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data?.items.map((deck-form) => {
-                        return (
-                            <TableRow key={deck-form.id}>
-                                <TableCell>{deck-form?.name}</TableCell>
-                                <TableCell>{deck-form?.cardsCount}</TableCell>
-                                <TableCell>
-                                    {new Date(deck-form?.updated).toLocaleDateString()}
-                                </TableCell>
-                                <TableCell>{deck-form?.author?.name}</TableCell>
-                            </TableRow>
-                        )
-                    })}
-                </TableBody>
-            </Table>
- */

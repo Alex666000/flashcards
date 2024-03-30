@@ -94,8 +94,3 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
     )
   }
 )
-
-/*- Radix - ужен для того чтобы делать компоненты которые тяжело стилизовать вручную
- <Typography as={'label'} className={classNames-lib.label} variant={'body2'}> -- это значит:
-- element: label, с классом body2
-*/

@@ -13,7 +13,7 @@ export type DropdownProps = {
   children: ReactNode
   className?: string
   trigger?: ReactNode
-} & ComponentPropsWithoutRef<typeof DropdownMenuRadix.Root> // автоматическая типизация
+} & ComponentPropsWithoutRef<typeof DropdownMenuRadix.Root>
 
 export const DropDown = forwardRef<ElementRef<typeof DropdownMenuRadix.Root>, DropdownProps>(
   ({ align = 'end', children, className, trigger }, ref) => {

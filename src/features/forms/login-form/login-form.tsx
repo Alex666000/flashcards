@@ -18,8 +18,6 @@ type PropsType = {
 }
 
 export const LoginForm: FC<PropsType> = ({ onLoginFormDataSubmit }) => {
-  // обертка над useForm from 'react-hook-form' для валидации (схема валидации внутри)
-  // control -забираем с полей формы то что ввел юзер
   const { control, handleSubmit } = useLoginForm()
   const handleSetLoginFormDataSubmit = handleSubmit((formData) => onLoginFormDataSubmit(formData))
 
@@ -27,7 +25,6 @@ export const LoginForm: FC<PropsType> = ({ onLoginFormDataSubmit }) => {
     <section className={s.loginFormBlock}>
       <Container>
         <Card className={s.loginCard}>
-          {/* h1 - для семантики: 1 h1 должен быть в проекте!!! */}
           <Typography as={'h1'} className={s.title} variant={'large'}>
             Sign In
           </Typography>
@@ -55,7 +52,6 @@ export const LoginForm: FC<PropsType> = ({ onLoginFormDataSubmit }) => {
             <Typography
               as={Link}
               className={s.recoverPasswordLink}
-              // восстановление пароля
               to={ROUTES.recoverPassword}
               variant={'body2'}
             >
@@ -67,7 +63,6 @@ export const LoginForm: FC<PropsType> = ({ onLoginFormDataSubmit }) => {
             <Typography className={s.caption} variant={'body2'}>
               Don&apos;t have an account?
             </Typography>
-            {/*регистрация*/}
             <Typography as={Link} className={s.signUpLink} to={ROUTES.singUp} variant={'link1'}>
               Sign Up
             </Typography>

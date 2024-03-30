@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import { SearchIcon } from '@/shared/assets'
 import { Icon } from '@/shared/ui/icon/icon'
@@ -8,7 +8,6 @@ import { clsx } from 'clsx'
 import s from './text-field.module.scss'
 
 export type TextFieldProps = {
-  // чтобы в инпуте справа появился крестик для удаления
   clearField?: () => void
   errorMessage?: string
   inputTextClassName?: string
@@ -32,19 +31,14 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>((props, ref) =>
     ...rest
   } = props
 
-  // Локальное состояние для отображения пароля
   const [showPassword, setShowPassword] = useState(false)
 
-  // Проверка типа поля на пароль и поиск
   const isPasswordType = type === 'password'
   const isSearchType = type === 'search'
 
-  // Отображение кнопки очистки для поля поиска
   const displayClearButton = isSearchType && clearField && value
-  // Определение окончательного типа в зависимости от отображения пароля
   const finalType = getFinalType(type, showPassword)
 
-  // Обработчик клика для отображения/скрытия пароля
   const passwordHandler = () => setShowPassword((prev) => !prev)
 
   const classes = {
@@ -64,9 +58,7 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>((props, ref) =>
             className={classes.input}
             readOnly={readonly}
             ref={ref}
-            // раз достал value в пропсах его нативно обязательно используем
             type={isPasswordType ? finalType : 'text'}
-            // лучше все сразу доставать не надеяться на rest
             value={value}
             {...rest}
           />
@@ -101,11 +93,7 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>((props, ref) =>
     </div>
   )
 })
-/**
- * getFinalType принимает тип поля ('password', 'search', 'text') и флаг showPassword, указывающий,
- * нужно ли отображать пароль. В зависимости от этих параметров,
- * функция возвращает окончательный тип поля для использования в компоненте input
- */
+
 function getFinalType(type: TextFieldProps['type'], showPassword: boolean) {
   if (type === 'password' && !showPassword) {
     return 'password'
@@ -113,7 +101,3 @@ function getFinalType(type: TextFieldProps['type'], showPassword: boolean) {
 
   return 'text'
 }
-
-/*
-- TextField - как инпут
- */

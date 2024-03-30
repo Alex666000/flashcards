@@ -7,18 +7,11 @@ import s from '../pagination.module.scss'
 import { PaginationProps } from '../pagination'
 
 type Props = {
-  // Массив, представляющий диапазон страниц для отображения
   paginationRange: (number | string)[]
 } & Pick<PaginationProps, 'currentPage' | 'onSetPageChange'> // onPageChange- Функция обратного вызова при изменении страницы
 
-/**
- * NavigationBlock:
- * Отображает кнопки навигации (предыдущая, следующая) и числовые кнопки страниц.
- * Использует компонент NavigateButton для создания кнопок навигации.
- */
 export const NavigationBlock: FC<Props> = ({ currentPage, onSetPageChange, paginationRange }) => {
   return (
-    // кнопки навигации (предыдущая)
     <div className={s.buttons}>
       <NavigateButton
         active={false}
@@ -27,9 +20,6 @@ export const NavigationBlock: FC<Props> = ({ currentPage, onSetPageChange, pagin
       >
         {'❮'}
       </NavigateButton>
-
-      {/*данный участок кода отвечает за создание компонентов "КНОПОК СТРАНИЦ И МНОГОТОЧИЯ"*/}
-      {/*НАВИГАЦИИ, а также за обработку событий клика по этим кнопкам*/}
       {paginationRange.map((btn, index) => {
         const onPageClick = (btn: number) => () => {
           onSetPageChange(btn)
@@ -49,7 +39,6 @@ export const NavigationBlock: FC<Props> = ({ currentPage, onSetPageChange, pagin
           </NavigateButton>
         )
       })}
-      {/* кнопки навигации (следующая) */}
       <NavigateButton
         active={false}
         disabled={currentPage === paginationRange[paginationRange.length - 1]}

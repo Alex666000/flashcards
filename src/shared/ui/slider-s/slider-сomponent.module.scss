@@ -20,7 +20,7 @@
 
   height: 5px;
 
-  background: transparentize(rgb(#8c61ff, 1), 0.5);
+  background: transparent(rgb(#8c61ff, 1), 0.5);
   border-radius: 10px;
 }
 
@@ -29,7 +29,7 @@
   height: 5px;
   background: #8c61ff;
 
-  //background: var(--color-accent-500);
+  // background: var(--color-accent-500);
   border-radius: 10px;
 }
 
@@ -47,13 +47,13 @@
 }
 
 .SliderThumb:hover {
-  //background-color: green;
+  // background-color: green;
 }
 
 .SliderThumb:focus {
   outline: none;
 
-  //box-shadow: 0 0 0 5px black;
+  // box-shadow: 0 0 0 5px black;
 }
 
 .container {
@@ -83,6 +83,7 @@
   display: flex;
   align-items: center;
 }
+
 .disabled {
   opacity: 0.5;
 }

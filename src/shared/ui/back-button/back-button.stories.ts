@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { BrowserRouterDecorator } from '@/shared/config'
 
-import { BackButton } from './'
+import { BackButton } from './back-button'
 
 const meta = {
   component: BackButton,

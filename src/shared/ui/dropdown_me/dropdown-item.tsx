@@ -33,5 +33,4 @@ export const DropdownItem = forwardRef<
     </DropdownMenuRadix.Item>
   )
 })
-// Устанавливаем displayName для облегчения отладки в DevTools
 DropdownItem.displayName = DropdownMenuRadix.Item.displayName

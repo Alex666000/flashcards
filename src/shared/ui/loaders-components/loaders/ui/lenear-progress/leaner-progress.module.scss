@@ -1,4 +1,3 @@
-/* Общий контейнер для индикатора загрузки */
 .linearActivity {
   position: absolute;
   top: 0;
@@ -11,14 +10,12 @@
   background-color: var(--color-accent-100);
 }
 
-/* Контейнер для анимации индикатора загрузки */
 .indeterminate {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-/* Первая полоса анимации */
 .indeterminate::before {
   content: '';
 
@@ -31,7 +28,6 @@
   animation: indeterminate-first 1.5s infinite ease-out;
 }
 
-/* Вторая полоса анимации */
 .indeterminate::after {
   content: '';
 
@@ -44,7 +40,6 @@
   animation: indeterminate-second 1.5s infinite ease-in;
 }
 
-/* Анимация для первой полосы */
 @keyframes indeterminate-first {
   0% {
     left: -100%;
@@ -57,7 +52,6 @@
   }
 }
 
-/* Анимация для второй полосы */
 @keyframes indeterminate-second {
   0% {
     left: -150%;

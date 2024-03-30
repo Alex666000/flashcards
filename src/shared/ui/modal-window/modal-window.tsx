@@ -10,23 +10,11 @@ import * as Dialog from '@radix-ui/react-dialog'
 import s from './modal-window.module.scss'
 
 type Props = {
-  open: boolean //  Флаг, указывающий, открыто ли модальное окно
-  setOpen: (value: boolean) => void // Функция для изменения значения флага открытия модального окна
-  title: string // Заголовок модального окна
-} & PropsWithChildren // Дополнительный тип, который позволяет компоненту принимать и отображать дочерние элементы (children).
+  open: boolean
+  setOpen: (value: boolean) => void
+  title: string
+} & PropsWithChildren
 
-/**
- * Dialog.Table: Основной контейнер для управления состоянием модального окна.
- * Dialog.Portal: Портал для размещения дочерних компонентов за пределами текущей иерархии DOM.
- * Dialog.Overlay: Подложка, затемняющая фон при открытом модальном окне.
- * Dialog.Content: Контент модального окна.
- * Card: компонент карточки, который служит контейнером для стилизации модального окна.
- * Dialog.Title: Заголовок модального окна.
- * Typography: компонент текста, отображающий заголовок.
- * Dialog.Close: Кнопка закрытия модального окна.
- * IconButton: компонент кнопки с иконкой для закрытия.
- * ToastContainer: Контейнер для отображения уведомлений
- */
 export const ModalWindow: FC<Props> = ({ children, open, setOpen, title }) => {
   return (
     <Dialog.Root onOpenChange={setOpen} open={open}>

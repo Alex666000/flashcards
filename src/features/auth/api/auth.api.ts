@@ -16,7 +16,6 @@ export const authAPI = flashCardsAPI.injectEndpoints({
       query: (bodyData) => ({
         body: bodyData,
         method: 'POST',
-        // названия эндпоинтов ничего не имеют общего с названием страниц моих на фронте!!!
         url: '/v1/auth/login',
       }),
     }),
@@ -30,18 +29,17 @@ export const authAPI = flashCardsAPI.injectEndpoints({
     }),
     me: builder.query<UserAuthDataResponse, void>({
       extraOptions: {
-        maxRetries: 0, //  максимальное количество попыток повторных запросов в случае возникновения ошибки
+        maxRetries: 0,
       },
       providesTags: ['me'],
       query: () => {
         return {
           method: 'GET',
-          params: {}, // не передаём
+          params: {},
           url: `v1/auth/me`,
         }
       },
     }),
-    // Востановление пароля - когда его забыл:
     recoverPassword: builder.mutation<void, RecoverPasswordBodyArgs>({
       query: (body) => ({
         body,
@@ -92,7 +90,3 @@ export const {
   useVerifyMailMutation,
   util,
 } = authAPI
-
-/*
-- названия эндпоинтов ничего не имеют общего с названием страниц моих на фронте
- */

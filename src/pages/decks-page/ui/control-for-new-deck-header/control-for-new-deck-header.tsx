@@ -11,8 +11,6 @@ export const ControlForNewDeckHeader = memo(({}) => {
       <Typography as={'h1'} variant={'large'}>
         Decks list
       </Typography>
-      {/* создаем новую одну колоду по нажатию на кнопку: "Add new Deck"
-      внутри есть FormData и input c type='file'*/}
       <ControlForNewDeck />
     </div>
   )

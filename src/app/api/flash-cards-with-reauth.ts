@@ -1,4 +1,3 @@
-// в импорте именно react писать !!!!!
 import {
   type BaseQueryFn,
   type FetchArgs,
@@ -12,7 +11,6 @@ export const baseQuery = fetchBaseQuery({
   credentials: 'include',
 })
 
-// блокировка запросов
 const mutex = new Mutex()
 
 export const baseQueryWithReAuth: BaseQueryFn<
@@ -20,15 +18,12 @@ export const baseQueryWithReAuth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  // wait until the mutex is available without locking it
   await mutex.waitForUnlock()
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
-    // checking whether the mutex is locked
     if (!mutex.isLocked()) {
       const release = await mutex.acquire()
-      // для запроса рефреш токена
       const refreshResult = await baseQuery(
         {
           method: 'POST',

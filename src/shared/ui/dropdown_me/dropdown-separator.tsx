@@ -4,7 +4,6 @@ import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 
 import s from '@/shared/ui/dropdown_me/dropdown.module.scss'
 
-// Раздилитель
 export const DropdownSeparator = forwardRef<
   ElementRef<typeof DropdownMenuRadix.Separator>,
   ComponentPropsWithoutRef<typeof DropdownMenuRadix.Separator>

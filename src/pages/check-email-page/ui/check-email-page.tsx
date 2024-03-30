@@ -10,21 +10,8 @@ import { Typography } from '@/shared/ui/typography'
 
 import s from './check-email-page.module.scss'
 
-/**
- - На UX увидим "Проверьте свой email и кнопку назад"
- */
-
 const CheckEmailPage = () => {
-  // извлекли параметр из url
   const { email } = useParams<{ email: string }>()
-
-  // через useState() можно сделать:
-  // --------------------------------------------------------
-  // const [email, setEmail] = useState('')
-
-  // <Typography className={s.notification} variant={'body2'}>
-  //    We’ve sent an Email with instructions to {email}
-  // </Typography>
 
   return (
     <Page>

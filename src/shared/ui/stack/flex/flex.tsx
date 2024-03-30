@@ -2,22 +2,32 @@ import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
 
 import { Mods, classNames } from '@/shared/lib/classNames-lib/classNames'
 
-import cls from './Flex.module.scss'
+import cls from './flex.module.scss'
 
-export type FlexJustify = 'between' | 'center' | 'end' | 'start'
-export type FlexAlign = 'center' | 'end' | 'start'
+// types
+export type FlexJustifyContent =
+  | 'center'
+  | 'end'
+  | 'spaceAround'
+  | 'spaceBetween'
+  | 'spaceEvenly'
+  | 'start'
+export type FlexAlignItems = 'center' | 'end' | 'start'
 export type FlexDirection = 'column' | 'row'
 export type FlexWrap = 'nowrap' | 'wrap'
 export type FlexGap = '4' | '8' | '16' | '24' | '32'
 
-const justifyClasses: Record<FlexJustify, string> = {
-  between: cls.justifyBetween,
+// mapping types + classes
+const justifyClasses: Record<FlexJustifyContent, string> = {
   center: cls.justifyCenter,
   end: cls.justifyEnd,
+  spaceAround: cls.spaceAround,
+  spaceBetween: cls.spaceBetween,
+  spaceEvenly: cls.spaceEvenly,
   start: cls.justifyStart,
 }
 
-const alignClasses: Record<FlexAlign, string> = {
+const alignClasses: Record<FlexAlignItems, string> = {
   center: cls.alignCenter,
   end: cls.alignEnd,
   start: cls.alignStart,
@@ -36,27 +46,28 @@ const gapClasses: Record<FlexGap, string> = {
   32: cls.gap32,
 }
 
+// props
 type DivProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
 export interface FlexProps extends DivProps {
-  align?: FlexAlign
-  children: ReactNode
+  alignItems?: FlexAlignItems
+  children?: ReactNode
   className?: string
-  direction: FlexDirection
+  flexDirection: FlexDirection
   gap?: FlexGap
-  justify?: FlexJustify
+  justifyContent?: FlexJustifyContent
   max?: boolean
   wrap?: FlexWrap
 }
 
 export const Flex = (props: FlexProps) => {
   const {
-    align = 'center',
+    alignItems = 'center',
     children,
     className,
-    direction = 'row',
+    flexDirection = 'row',
     gap,
-    justify = 'start',
+    justifyContent = 'start',
     max,
     wrap = 'nowrap',
     ...otherProps
@@ -64,9 +75,9 @@ export const Flex = (props: FlexProps) => {
 
   const classes = [
     className,
-    justifyClasses[justify],
-    alignClasses[align],
-    directionClasses[direction],
+    justifyClasses[justifyContent],
+    alignClasses[alignItems],
+    directionClasses[flexDirection],
     cls[wrap],
     gap && gapClasses[gap],
   ]

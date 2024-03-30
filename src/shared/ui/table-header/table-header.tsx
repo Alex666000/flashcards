@@ -27,7 +27,6 @@ export type TableHeaderProps = Omit<
   'children'
 >
 
-// шапка таблицы - серая.. в ней сортировка
 export const TableHeader: FC<TableHeaderProps> = ({ columns, onSort, sort, ...restProps }) => {
   const handleSort = (key: string, sortable?: boolean) => () => {
     if (!onSort || sortable === false) {

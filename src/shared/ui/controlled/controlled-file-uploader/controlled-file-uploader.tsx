@@ -5,8 +5,8 @@ import { ButtonProps } from '@/shared/ui/button'
 import { FileUploader } from '@/shared/ui/file-uploader'
 
 export type ControlledFileUploaderProps<T extends FieldValues> = {
-  control: Control<T> // требуется для управления состоянием ввода
-  extraActions?: () => void //  вызываться после выбора файла
+  control: Control<T>
+  extraActions?: () => void
   name: FieldPath<T>
 } & Omit<ButtonProps, 'onChange' | 'onClick' | 'type'>
 
@@ -16,8 +16,6 @@ export const ControlledFileUploader = <T extends FieldValues>({
   name,
   ...rest
 }: ControlledFileUploaderProps<T>) => {
-  // возвращает field, объект, содержащий функцию onChange, которая должна вызываться
-  // при изменении значения ввода
   const {
     field: { onChange },
   } = useController({
@@ -25,9 +23,6 @@ export const ControlledFileUploader = <T extends FieldValues>({
     name,
   })
 
-  // вызывается при изменении входного файла. Она извлекает файл из события, вызывает функцию
-  // onChange с значением файла, а затем вызывает extraActions,если она предоставлена.
-  // Наконец, она сбрасывает значение входного файла, чтобы очистить выбор
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
 

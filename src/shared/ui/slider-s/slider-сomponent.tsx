@@ -42,7 +42,6 @@ export const SliderComponent = ({
             <TextField
               className={styles.value}
               inputTextClassName={styles.input}
-              // onChange={event => onValueChange(event, 0)}
               onChange={() => {}}
               value={rangeValue![0]}
             />
@@ -70,7 +69,6 @@ export const SliderComponent = ({
             <TextField
               className={styles.value}
               inputTextClassName={styles.input}
-              // onChange={event => onValueChange(event, 1)}
               onChange={() => {}}
               value={rangeValue![1]}
             />

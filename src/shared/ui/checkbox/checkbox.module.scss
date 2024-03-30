@@ -1,95 +1,89 @@
 .header_container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .label {
-    cursor: pointer;
-    display: flex;
-    gap: 2px;
-    align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 2px;
+  align-items: center;
 
-    &.disabled {
-        cursor: initial;
-        color: var(--color-dark-100);
-    }
+  &.disabled {
+    cursor: initial;
+    color: var(--color-dark-100);
+  }
 }
 
 .header {
-    cursor: pointer;
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+
+  background-color: var(--color-dark-900);
+  border: 2px solid var(--color-light-900);
+  border-radius: 2px;
+
+  &:focus-visible {
+    outline-color: transparent;
+  }
+
+  &:disabled {
+    cursor: initial;
+    background-color: var(--color-light-700);
+    border-color: var(--color-dark-100);
+  }
+
+  &:disabled:not([data-state='checked']) {
+    background-color: var(--color-dark-900);
+  }
+
+  span {
     width: 18px;
     height: 18px;
-
-    background-color: var(--color-dark-900);
-    border: 2px solid var(--color-light-900);
-    border-radius: 2px;
-
-    &:focus-visible {
-        outline-color: transparent;
-    }
-
-    &:disabled {
-        cursor: initial;
-        background-color: var(--color-light-700);
-        border-color: var(--color-dark-100);
-    }
-
-    &:disabled:not([data-state='checked']) {
-        background-color: var(--color-dark-900);
-    }
-
-    span {
-        width: 18px;
-        height: 18px;
-    }
+  }
 }
 
 .buttonWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    width: 36px;
-    height: 36px;
+  width: 36px;
+  height: 36px;
 
-    background-color: transparent;
-    border-radius: 50%;
+  background-color: transparent;
+  border-radius: 50%;
 
-    &.disabled {
-        cursor: initial; // убираем курсор-поинтер
-    }
+  &.disabled {
+    cursor: initial;
+  }
 
-    &:focus-within, // псевдокласс, который применяет стили к элементу,когда любой его потомок (например, вложенный элемент) получает фокус
-        // не имеет атрибута data-state со значением 'checked' когда он находится в состоянии :focus-within
-    .header:not([data-state='checked']):focus-within {
-        background-color: var(--color-dark-100);
-    }
+  &:focus-within,
+  .header:not([data-state='checked']):focus-within {
+    background-color: var(--color-dark-100);
+  }
 
-    &:hover:not(.disabled) {
-        background-color: var(--color-dark-500);
-    }
+  &:hover:not(.disabled) {
+    background-color: var(--color-dark-500);
+  }
 
-    &:hover:not(.disabled) .header:not([data-state='checked']) {
-        background-color: var(--color-dark-500);
-    }
+  &:hover:not(.disabled) .header:not([data-state='checked']) {
+    background-color: var(--color-dark-500);
+  }
 
-    &.left {
-        margin-left: -9px;
-    }
+  &.left {
+    margin-left: -9px;
+  }
 }
 
 .indicator {
-    width: 18px;
-    height: 18px;
+  width: 18px;
+  height: 18px;
 }
-
-/*
-- За черный сзади квадрат отвечает root класс и indicator -- или его убрать
-убрав стандартные стили кнопки в none
- */

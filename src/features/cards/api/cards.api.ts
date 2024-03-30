@@ -32,7 +32,6 @@ export const cardsAPI = flashCardsAPI.injectEndpoints({
         method: 'GET',
         url: `v1/cards/${id}`,
       }),
-      // providesTags: ['cards'],
     }),
     getCards: builder.query<CardsResponseData, { id: string; params: CardsParams }>({
       providesTags: ['cards'],
@@ -64,7 +63,6 @@ export const cardsAPI = flashCardsAPI.injectEndpoints({
           errorNotification(error)
         }
       },
-      // УРИ параметр часть урла, не путать с квери где квери: ?ключ-значение
       query: ({ packId, ...rest }) => ({
         body: rest,
         method: 'POST',

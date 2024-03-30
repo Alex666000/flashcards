@@ -11,13 +11,13 @@ export default meta
 export type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { size: 50, userName: 'default' },
+  args: { size: 50, userName: 'Aleksandr' },
 }
 export const WithUserPhoto: Story = {
   args: {
     photoOrImage:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm-P8bA7CjEhkhrfV_4YB-nrGOFRs0gB4OOw&usqp=CAU',
     size: 136,
-    userName: 'planet',
+    userName: 'Planet',
   },
 }

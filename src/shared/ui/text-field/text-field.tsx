@@ -61,7 +61,6 @@ export const TextField = /* @__PURE__ */ forwardRef<HTMLInputElement, TextFieldP
 
     const showError = !!errorMessage && errorMessage.length > 0
 
-    // крестик справа в инпуте при фокусе
     const isShowClearButton = clearField && value?.length! > 0
 
     if (search) {

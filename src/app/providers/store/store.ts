@@ -7,39 +7,18 @@ import { loadingReducer } from '@/shared/ui/loaders-components/loaders/model/sli
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
-// В РТК данные возвращаемые с сервера кешируются, остальные нет: редакса, ЛС, useState()
 export const store = configureStore({
-  // РТК апишка всего проекта - родитель для частных апишек проекта
   middleware: (gDM) => gDM().concat(flashCardsAPI.middleware),
   reducer: {
-    appReducer, // обычный реюсер - для глобального статуса для глобального лоадера
-    [authAPI.reducerPath]: authAPI.reducer, // RTK редюсер
+    appReducer,
+    [authAPI.reducerPath]: authAPI.reducer,
     deck: deckReducer,
     decks: decksReducer,
-    // обычный реюсер
-    // назвали через двоеточие чтобы в селекторе удобно обращаться иначе бы обращались так:
-    // const selectLoading = (state: RootState) => state.loadingReducer.isQueryInProgress
-    loading: loadingReducer, // обычный реюсер
+    loading: loadingReducer,
   },
 })
 
-// Метод setupListeners, подключает слушатели событий фокуса (refetchOnFocus) и повторного подключения (refetchOnReconnect ),
-// чтобы автоматически перезагружать данные при возвращении на страницу или восстановлении подключения
-setupListeners(store.dispatch) // всегда прописываем его
+setupListeners(store.dispatch)
 
-// app common types
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-
-/*
-- gDM -- сокращение: вместо getDefaultMiddleware
-- подключаем обучные редюсеры + РТК - родительский РТК редюсер: flashCardsAPI в middleware
-если появятся еще родительские конкатенируем, см проект RTK Валера - отд папка в конспектах
-
-/* Пагинация - ее значения не кешируется, данные храним в редаксе - Все вещи которые
-не на серваке - храним в стеите редакса: например кликаю на 2 стр. мне надо вторую страницу
-подсветить сначала перед тем как она полетит на сервре - currentPage храним в
-глобальном стейте, либо в инпуте в серче ввожу и потом после перезагрузки тоже хочу это
-доставать, табы,слайдеров значения - делаем связку редакса и РТК (кэширование данных)
-если с сервера что-то вернулось то это делать с РТК квери а что-то глобальное
-*/

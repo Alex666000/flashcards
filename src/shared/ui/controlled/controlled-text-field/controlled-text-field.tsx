@@ -15,7 +15,6 @@ type Props<T extends FieldValues> = {
  */
 
 export const ControlledTextField = <T extends FieldValues>({
-  // control -забираем с полей формы то что ввел юзер
   control,
   name,
   ...rest

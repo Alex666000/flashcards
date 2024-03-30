@@ -5,35 +5,24 @@ import { LogoutIcon } from '@/shared/assets'
 import { Button, ButtonVariant } from './button'
 
 const meta = {
-  // не обязательный параметр
   argTypes: {
     title: {
       control: { type: 'text' },
     },
-    // prop
     variant: {
-      // настраиваем наши контроли - чтобы визуально в интерфейсе сторибука кликать выбирать
       control: { type: 'radio' },
-      // опции пропа variant
       options: ButtonVariant,
     },
   },
-  // компонент который покажем
   component: Button,
-  // все истории и контроли видим в одном файле
   tags: ['autodocs'],
-  // название компонента и где он находится
   title: 'shared/ui/button',
-  // если satisfies горит красным обнови вебшторм
 } satisfies Meta<typeof Button>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-// Истории:
-// type Story - чтобы правильно подсвечивалась типизация аргументов
 export const Primary: Story = {
-  // пропсы компонента - для более сложных компонент делается через функцию render()
   args: {
     children: 'Primary Button',
     disabled: false,
@@ -85,28 +74,15 @@ export const FullWidth: Story = {
 
 export const AsLink: Story = {
   args: {
-    // Тут любой компонент или тэг
-    as: 'a', // ссылка
+    as: 'a',
     children: 'Link that looks like a button',
     href: 'https://google.com',
     variant: 'primary',
   },
 }
-/*
-- Проверка типов у сторибука:
- */
-// export const AsLink: StoryObj<typeof Button<'a'>> = {
-//     args: {
-//         as: 'a',
-//         children: 'Link that looks like a button',
-//         href: 'https://google.com',
-//         variant: 'primary',
-//     },
-// }
 
 export const PrimaryWithIcon: Story = {
   args: {
-    // добавили пропс иконку
     children: (
       <>
         <LogoutIcon />

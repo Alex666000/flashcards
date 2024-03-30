@@ -1,12 +1,12 @@
 .button {
-  all: unset; // зануляем все стили кнопки дефолтные
+  all: unset;
 
-  cursor: pointer; // пальчик..
-  user-select: none; // может ли текст (внутри кнопки..) быть выделен курсором мыши или другими средствами выделения текста.
+  cursor: pointer;
+  user-select: none;
 
   display: inline-flex;
-  gap: 5px; // расстояние от иконки до текста кнопки - отступ между flex элементами
-  align-items: center; // выравнивание flex элементов по вертикали
+  gap: 5px;
+  align-items: center;
   justify-content: center;
 
   padding: 6px 28px;
@@ -15,22 +15,20 @@
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-m);
   text-align: center;
-  text-decoration: none; //  Убирает все украшения текста (нет подчеркивания, перечеркивания и линии над текстом)
+  text-decoration: none;
 
-  background-color: transparent; // устанавливает прозрачный цвет фона для элемента
+  background-color: transparent;
   border: none;
   border-radius: 4px;
 
   transition: all 0.2s ease-in-out;
 
-  // если кнопка с иконкой, то
   > svg {
-    // цвет текста у иконки
     fill: var(--color-light-100);
   }
 
   &:disabled {
-    cursor: not-allowed; // запрещено использование указателя (курсора)
+    cursor: not-allowed;
     opacity: 0.5;
   }
 
@@ -40,7 +38,6 @@
   }
 }
 
-// Основная кнопка
 .primary {
   color: var(--color-light-100);
   background-color: var(--color-accent-500);
@@ -57,7 +54,7 @@
   }
 
   &:disabled {
-    cursor: not-allowed; // запрещено использование указателя (курсора)
+    cursor: not-allowed;
 
     color: var(--color-light-900);
 
@@ -66,15 +63,13 @@
     box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
   }
 
-  // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
   &:focus-visible {
     background: var(--color-accent-500);
-    outline: 2px solid var(--color-info-700); // когда кнопка выделена Tab добавляем обертку -- рамку в 2рх
+    outline: 2px solid var(--color-info-700);
     box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
   }
 }
 
-// Второстепенная кнопка - серая кнопка
 .secondary {
   color: var(--color-light-100);
   background-color: var(--color-dark-300);
@@ -89,21 +84,19 @@
   }
 
   &:disabled {
-    cursor: not-allowed; // запрещено использование указателя (курсора)
+    cursor: not-allowed;
     color: var(--color-light-900);
     opacity: 0.5;
     background-color: var(--color-dark-300);
   }
 
-  // если фокус установлен с клавиатуры по Табу, а не с помощью мыши
   &:focus-visible {
     background: var(--color-dark-300);
-    outline: 2px solid var(--color-info-700); // когда кнопка выделена Tab - добавляем обертку -- рамку в 2рх
+    outline: 2px solid var(--color-info-700);
     box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
   }
 }
 
-// Третичная кнопка - серая
 .tertiary {
   padding: 0.5rem 2.8rem;
   color: var(--color-accent-500);
@@ -120,7 +113,7 @@
   }
 
   &:disabled {
-    cursor: not-allowed; // запрещено использование указателя (курсора)
+    cursor: not-allowed;
 
     color: var(--color-accent-900);
 
@@ -135,7 +128,6 @@
   }
 }
 
-// Ссылка-кнопка
 .link {
   padding: 0.6rem 0;
   font-size: var(--font-size-m);
@@ -162,37 +154,32 @@
     outline: 0.125rem solid var(--color-info-700);
   }
 
-  // позволяет стилизовать ссылки, которые уже были посещены пользователем
   &:visited {
     color: var(--color-accent-700);
     text-decoration: none;
     background-color: transparent;
-    outline-color: transparent; // Для людей с проблемами со зрением -- outline: none - никогда не писать,
-    // а писать outline-color: transparent; соблюдать правила "prefers-reduced-motion"
+    outline-color: transparent;
   }
 
   &:disabled {
-    cursor: not-allowed; // запрещено использование указателя (курсора)
+    cursor: not-allowed;
     color: var(--color-accent-900);
     opacity: 0.5;
   }
 }
 
-// Кнопка на всю ширину
 .fullWidth {
   width: 100%;
   padding: 0.6rem 0;
 }
 
-// Если кнопка svg иконка -- убираем рамки и тд.
 .clear {
   padding: 0;
   background: none;
   border: none;
-  outline-color: transparent; //  для установки цвета контурной обводки, и значение transparent означает, что цвет контурной обводки будет прозрачным (без цвета).
+  outline-color: transparent;
 }
 
-// Кнопка с рамкой но без заднего фона
 .outline {
   color: var(--color-light-100);
   border: 2px solid var(--color-accent-500);
@@ -206,14 +193,13 @@
   }
 
   &:disabled {
-    cursor: not-allowed; // запрещено использование указателя (курсора)
+    cursor: not-allowed;
     color: var(--color-light-900);
     opacity: 0.5;
     background-color: var(--color-accent-900);
   }
 }
 
-// Размеры кнопки
 .m {
   font-size: var(--font-size-m);
 }
@@ -225,8 +211,3 @@
 .xl {
   font-size: var(--font-size-xl);
 }
-
-/*
-- "prefers-reduced-motion" -- для людей с эпилепсией или когда человеку становится плохо на анимации == тошнит
-и они отключают анимации в винде..
- */
