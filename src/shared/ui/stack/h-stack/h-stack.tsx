@@ -1,7 +1,7 @@
 import { Flex, FlexProps } from '@/shared/ui/stack/flex/Flex'
 
-type HStackProps = Omit<FlexProps, 'direction'>
+type HStackProps = Omit<FlexProps, 'flexDirection'>
 
 export const HStack = (props: HStackProps) => {
-  return <Flex direction={'row'} {...props} />
+  return <Flex flexDirection={'row'} {...props} />
 }
