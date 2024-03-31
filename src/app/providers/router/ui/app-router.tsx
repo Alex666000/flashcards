@@ -19,10 +19,6 @@ import { Loader } from '@/shared/ui/loaders-components/loaders'
 
 import { PrivateRoute } from './private-route'
 
-/**
- * AppRouter (всё равно что Pages назвать..)  - отрисовывает все пути проекта
- */
-
 export const AppRouter = () => {
   return (
     <Suspense fallback={<Loader />}>
@@ -33,6 +29,7 @@ export const AppRouter = () => {
         <Route element={<CheckEmailPage />} path={`${ROUTES.checkEmail}/:email`} />
         <Route element={<CreateNewPasswordPage />} path={`${ROUTES.createNewPassword}/:token`} />
         <Route element={<VerifyEmailPage />} path={ROUTES.verifyEmail} />
+
         <Route element={<PrivateRoute />}>
           <Route element={<DecksPage />} index path={'/'} />
           <Route element={<DecksPage />} path={ROUTES.decks} />

@@ -14,13 +14,9 @@ import { Typography } from '@/shared/ui/typography'
 import s from './deck-row.module.scss'
 
 type Props = {
-  authUserId: string //  Идентификатор текущего пользователя
-  deck: DeckResponseData // Объект с информацией о колоде карточек
+  authUserId: string
+  deck: DeckResponseData
 }
-
-/**
- * DeckRow - отображает информацию о колоде: deck, карточек в виде строки в таблице:
- */
 
 export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
   const navigate = useNavigate()
@@ -35,16 +31,13 @@ export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
 
   const redirectToLearnPage = () => {
     if (deck.id) {
-      navigate(`/decks${deck.id}${ROUTES.learn}`)
+      navigate(`/decks/${deck.id}${ROUTES.learn}`)
     }
-    // перенаправляет пользователя на страницу изучения колоды
   }
 
-  // console.log(deck?.name)
   return (
     <Table.Row className={s.root} key={deck?.id}>
       <Table.Cell align={'left'} className={s.name} onClick={redirectToDeckPage}>
-        {/* ссылка в строке с картинкой и самой ссылкой именем колоды */}
         <Button as={Link} className={s.link} to={deck?.id} variant={'link'}>
           <img alt={'Deck cover'} className={s.cover} src={deck?.cover ?? defaultCover} />
           <Typography as={'h3'} variant={'body2'}>
@@ -57,24 +50,20 @@ export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
       <Table.Cell className={s.createdBy}>{deck?.author?.name}</Table.Cell>
       <Table.Cell className={s.cell}>
         <div className={s.controls}>
-          {/* Если моя колода */}
           {isMyDeck ? (
             <>
-              {/* "карандашик" - позволяющая изменить параметры колоды */}
               <EditControl
                 cover={deck?.cover}
                 id={deck?.id}
                 isPrivate={deck?.isPrivate}
                 name={deck?.name}
               />
-              {/* позволяет перейти к изучению колоды */}
               <IconButton
                 disabled={!deck.cardsCount}
                 icon={<Icon height={18} name={'play'} width={18} />}
                 onClick={redirectToLearnPage}
                 small
               />
-              {/* позволяющая удалить колоду */}
               <DeleteControl id={deck?.id} name={deck?.name} />
             </>
           ) : (
