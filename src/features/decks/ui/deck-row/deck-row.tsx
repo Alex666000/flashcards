@@ -28,12 +28,18 @@ export const DeckRow: FC<Props> = memo(({ authUserId, deck }) => {
   const isMyDeck = authUserId === deck?.author.id
 
   const redirectToDeckPage = () => {
-    navigate(`${deck?.id}`)
+    debugger
+
+    if (deck.id) {
+      navigate(`${deck.id}`)
+    }
   }
 
   const redirectToLearnPage = () => {
+    if (deck.id) {
+      navigate(`${deck.id}${ROUTES.learn}`)
+    }
     // перенаправляет пользователя на страницу изучения колоды
-    navigate(`${deck?.id}${ROUTES.learn}`)
   }
 
   // console.log(deck?.name)

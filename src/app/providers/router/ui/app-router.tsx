@@ -33,8 +33,6 @@ export const AppRouter = () => {
         <Route element={<CheckEmailPage />} path={`${ROUTES.checkEmail}/:email`} />
         <Route element={<CreateNewPasswordPage />} path={`${ROUTES.createNewPassword}/:token`} />
         <Route element={<VerifyEmailPage />} path={ROUTES.verifyEmail} />
-        <Route element={<ErrorPage />} path={ROUTES.notFoundPage} />
-        <Route element={<Navigate to={ROUTES.notFoundPage} />} path={'*'} />
         <Route element={<PrivateRoute />}>
           <Route element={<DecksPage />} index path={'/'} />
           <Route element={<DecksPage />} path={ROUTES.decks} />
@@ -42,6 +40,8 @@ export const AppRouter = () => {
           <Route element={<DeckPage />} path={`${ROUTES.decks}/:id`} />
           <Route element={<LearnCardPage />} path={`${ROUTES.decks}/:id${ROUTES.learn}`} />
         </Route>
+        <Route element={<ErrorPage />} path={ROUTES.notFoundPage} />
+        <Route element={<Navigate to={ROUTES.notFoundPage} />} path={'*'} />
       </Routes>
     </Suspense>
   )
