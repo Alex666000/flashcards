@@ -16,6 +16,7 @@ const initialState: AppInitialStateType = {
   status: 'idle',
 }
 
+// AC
 export const addQuestionAC = createAction<string>('app/addQuestion')
 export const addOrderByAC = createAction<string>('app/addOrderByAC')
 
